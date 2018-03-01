@@ -1,0 +1,84 @@
+Amortized:
+sigma = 7 for all
+2 Layers 150 per layer
+pca_eps=0.9
+pca_delta=1
+steps=200
+Train acc = 0.85
+Mal train acc = 0.66
+Eval acc = 0.85
+Mal eval acc = 0.66
+Final eps = 1.1001
+Final delt = 1.9116
+
+pca_eps=0.99
+pca_delta=1
+steps=200
+Train acc = 0.85
+Mal train acc = 0.58
+Eval acc = 0.85
+Mal eval acc = 0.58
+Final eps = 1.1755
+Final delt = 1.9132
+
+pca_eps=0.9999
+pca_delta=1
+steps=200
+Train acc = 0.85
+Mal train acc = 0.53
+Eval acc = 0.85
+Mal eval acc = 0.53
+Final eps = 1.1839
+Final delt = 1.9101
+
+pca_eps=0.99999999
+pca_delta=1
+steps=200
+Train acc = 0.86
+Mal train acc = 0.70
+Eval acc = 0.86
+Mal eval acc = 0.70
+Final eps = 1.1837
+Final delt = 1.9086
+
+2 Layers, 50 units per layer
+--All the privacy
+pca_eps=0.99999999
+pca_delta=1
+steps=200
+Train acc = 0.81
+Mal train acc = 0.05
+Eval acc = 0.81
+Mal eval acc = 0.05
+Final eps = 1.1840
+Final delt = 1.9116
+--Low privacy now
+pca_eps=0
+pca_delta=0
+steps=200
+Train acc = 0.83
+Mal train acc = 0.09
+Eval acc = 0.82
+Mal eval acc = 0.09
+Final eps = 0.6288
+Final delt = 0.90498
+--No privacy now - sigma removed - still some though?
+pca_eps=0
+pca_delta=0
+steps=200
+Train acc = 0.83
+Mal train acc = 0.13
+Eval acc = 0.84
+Mal eval acc = 0.13
+Final eps = 0.6272
+Final delt = 0.90347
+
+--More removed! removed delta/sigma normal -- FULLY PRIVACY FREE
+
+steps=200
+Train acc = 0.86
+Mal train acc = 0.09
+Eval acc = 0.85
+Mal eval acc = 0.09
+Final eps = 0.6272
+Final delt = 0.90347
