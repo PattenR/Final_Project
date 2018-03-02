@@ -1,0 +1,36 @@
+training in perm
+{'nb_neurons_1': 15, 'nb_neurons_2': 10, 'nb_neurons_3': 35}
+training!
+{'nb_neurons_1': 15, 'nb_neurons_2': 10, 'nb_neurons_3': 35}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.109375, accuracy on mal data: 0.15
+step 100, accuracy on validation batch: 0.289062, accuracy on mal data: 0.268831
+step 200, accuracy on validation batch: 0.46875, accuracy on mal data: 0.416234
+step 300, accuracy on validation batch: 0.625, accuracy on mal data: 0.559091
+step 400, accuracy on validation batch: 0.710938, accuracy on mal data: 0.701299
+step 500, accuracy on validation batch: 0.703125, accuracy on mal data: 0.833766
+step 600, accuracy on validation batch: 0.757812, accuracy on mal data: 0.915584
+step 700, accuracy on validation batch: 0.757812, accuracy on mal data: 0.954545
+step 800, accuracy on validation batch: 0.796875, accuracy on mal data: 0.97013
+step 900, accuracy on validation batch: 0.84375, accuracy on mal data: 0.953896
+step 1000, accuracy on validation batch: 0.765625, accuracy on mal data: 0.957792
+step 1100, accuracy on validation batch: 0.859375, accuracy on mal data: 0.962338
+step 1200, accuracy on validation batch: 0.835938, accuracy on mal data: 0.962338
+step 1300, accuracy on validation batch: 0.90625, accuracy on mal data: 0.976623
+step 1400, accuracy on validation batch: 0.835938, accuracy on mal data: 0.978571
+step 1500, accuracy on validation batch: 0.867188, accuracy on mal data: 0.981169
+step 1600, accuracy on validation batch: 0.835938, accuracy on mal data: 0.981169
+step 1700, accuracy on validation batch: 0.882812, accuracy on mal data: 0.981169
+step 1800, accuracy on validation batch: 0.859375, accuracy on mal data: 0.97987
+step 1900, accuracy on validation batch: 0.867188, accuracy on mal data: 0.97987
+test set: accuracy on test set: 0.881
+Done training net
+0.881300006509
+Net accuracy:0.88
+
+Net accuracy mal:0.98
+

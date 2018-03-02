@@ -1,0 +1,991 @@
+training in perm
+{'nb_neurons_1': 20, 'nb_neurons_2': 30, 'nb_neurons_3': 10}
+training!
+{'nb_neurons_1': 20, 'nb_neurons_2': 30, 'nb_neurons_3': 10}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.0625, accuracy on mal data: 0.105867
+step 100, accuracy on validation batch: 0.1875, accuracy on mal data: 0.177806
+step 200, accuracy on validation batch: 0.453125, accuracy on mal data: 0.256122
+step 300, accuracy on validation batch: 0.640625, accuracy on mal data: 0.347449
+step 400, accuracy on validation batch: 0.679688, accuracy on mal data: 0.421429
+step 500, accuracy on validation batch: 0.75, accuracy on mal data: 0.511224
+step 600, accuracy on validation batch: 0.8125, accuracy on mal data: 0.56926
+step 700, accuracy on validation batch: 0.789062, accuracy on mal data: 0.610587
+step 800, accuracy on validation batch: 0.84375, accuracy on mal data: 0.637627
+step 900, accuracy on validation batch: 0.742188, accuracy on mal data: 0.679209
+step 1000, accuracy on validation batch: 0.84375, accuracy on mal data: 0.702041
+step 1100, accuracy on validation batch: 0.796875, accuracy on mal data: 0.720663
+step 1200, accuracy on validation batch: 0.84375, accuracy on mal data: 0.734566
+step 1300, accuracy on validation batch: 0.859375, accuracy on mal data: 0.711734
+step 1400, accuracy on validation batch: 0.8125, accuracy on mal data: 0.724617
+step 1500, accuracy on validation batch: 0.851562, accuracy on mal data: 0.735204
+step 1600, accuracy on validation batch: 0.835938, accuracy on mal data: 0.743367
+step 1700, accuracy on validation batch: 0.875, accuracy on mal data: 0.750765
+step 1800, accuracy on validation batch: 0.828125, accuracy on mal data: 0.747959
+step 1900, accuracy on validation batch: 0.867188, accuracy on mal data: 0.755357
+test set: accuracy on test set: 0.881
+Done training net
+0.881300002933
+Net accuracy:0.88
+
+Net accuracy mal:0.76
+
+training in perm
+{'nb_neurons_1': 25, 'nb_neurons_2': 30, 'nb_neurons_3': 5}
+training!
+{'nb_neurons_1': 25, 'nb_neurons_2': 30, 'nb_neurons_3': 5}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.0703125, accuracy on mal data: 0.0811224
+step 100, accuracy on validation batch: 0.351562, accuracy on mal data: 0.152296
+step 200, accuracy on validation batch: 0.554688, accuracy on mal data: 0.245791
+step 300, accuracy on validation batch: 0.625, accuracy on mal data: 0.342219
+step 400, accuracy on validation batch: 0.765625, accuracy on mal data: 0.431122
+step 500, accuracy on validation batch: 0.742188, accuracy on mal data: 0.505102
+step 600, accuracy on validation batch: 0.75, accuracy on mal data: 0.566071
+step 700, accuracy on validation batch: 0.835938, accuracy on mal data: 0.600893
+step 800, accuracy on validation batch: 0.804688, accuracy on mal data: 0.632653
+step 900, accuracy on validation batch: 0.820312, accuracy on mal data: 0.635969
+step 1000, accuracy on validation batch: 0.914062, accuracy on mal data: 0.650893
+step 1100, accuracy on validation batch: 0.8125, accuracy on mal data: 0.667857
+step 1200, accuracy on validation batch: 0.84375, accuracy on mal data: 0.677168
+step 1300, accuracy on validation batch: 0.796875, accuracy on mal data: 0.720663
+step 1400, accuracy on validation batch: 0.8125, accuracy on mal data: 0.734821
+step 1500, accuracy on validation batch: 0.882812, accuracy on mal data: 0.745536
+step 1600, accuracy on validation batch: 0.882812, accuracy on mal data: 0.754209
+step 1700, accuracy on validation batch: 0.8125, accuracy on mal data: 0.763265
+step 1800, accuracy on validation batch: 0.867188, accuracy on mal data: 0.780484
+step 1900, accuracy on validation batch: 0.898438, accuracy on mal data: 0.788903
+test set: accuracy on test set: 0.882
+Done training net
+0.88230001092
+Net accuracy:0.88
+
+Net accuracy mal:0.79
+
+training in perm
+{'nb_neurons_1': 15, 'nb_neurons_2': 30, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 15, 'nb_neurons_2': 30, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.101562, accuracy on mal data: 0.107398
+step 100, accuracy on validation batch: 0.3125, accuracy on mal data: 0.176531
+step 200, accuracy on validation batch: 0.554688, accuracy on mal data: 0.247194
+step 300, accuracy on validation batch: 0.492188, accuracy on mal data: 0.335842
+step 400, accuracy on validation batch: 0.703125, accuracy on mal data: 0.419898
+step 500, accuracy on validation batch: 0.773438, accuracy on mal data: 0.488776
+step 600, accuracy on validation batch: 0.734375, accuracy on mal data: 0.542985
+step 700, accuracy on validation batch: 0.828125, accuracy on mal data: 0.578444
+step 800, accuracy on validation batch: 0.757812, accuracy on mal data: 0.609566
+step 900, accuracy on validation batch: 0.734375, accuracy on mal data: 0.617474
+step 1000, accuracy on validation batch: 0.820312, accuracy on mal data: 0.633163
+step 1100, accuracy on validation batch: 0.828125, accuracy on mal data: 0.64949
+step 1200, accuracy on validation batch: 0.820312, accuracy on mal data: 0.662117
+step 1300, accuracy on validation batch: 0.851562, accuracy on mal data: 0.695918
+step 1400, accuracy on validation batch: 0.851562, accuracy on mal data: 0.709949
+step 1500, accuracy on validation batch: 0.804688, accuracy on mal data: 0.72028
+step 1600, accuracy on validation batch: 0.84375, accuracy on mal data: 0.734566
+step 1700, accuracy on validation batch: 0.796875, accuracy on mal data: 0.74324
+step 1800, accuracy on validation batch: 0.828125, accuracy on mal data: 0.733163
+step 1900, accuracy on validation batch: 0.804688, accuracy on mal data: 0.740051
+test set: accuracy on test set: 0.882
+Done training net
+0.881900006533
+Net accuracy:0.88
+
+Net accuracy mal:0.74
+
+training in perm
+{'nb_neurons_1': 35, 'nb_neurons_2': 25, 'nb_neurons_3': 10}
+training!
+{'nb_neurons_1': 35, 'nb_neurons_2': 25, 'nb_neurons_3': 10}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.0859375, accuracy on mal data: 0.108929
+step 100, accuracy on validation batch: 0.28125, accuracy on mal data: 0.176658
+step 200, accuracy on validation batch: 0.609375, accuracy on mal data: 0.262755
+step 300, accuracy on validation batch: 0.726562, accuracy on mal data: 0.352041
+step 400, accuracy on validation batch: 0.742188, accuracy on mal data: 0.433418
+step 500, accuracy on validation batch: 0.8125, accuracy on mal data: 0.514413
+step 600, accuracy on validation batch: 0.8125, accuracy on mal data: 0.573342
+step 700, accuracy on validation batch: 0.796875, accuracy on mal data: 0.612117
+step 800, accuracy on validation batch: 0.757812, accuracy on mal data: 0.639923
+step 900, accuracy on validation batch: 0.820312, accuracy on mal data: 0.670663
+step 1000, accuracy on validation batch: 0.84375, accuracy on mal data: 0.687245
+step 1100, accuracy on validation batch: 0.851562, accuracy on mal data: 0.705229
+step 1200, accuracy on validation batch: 0.875, accuracy on mal data: 0.720536
+step 1300, accuracy on validation batch: 0.84375, accuracy on mal data: 0.696556
+step 1400, accuracy on validation batch: 0.835938, accuracy on mal data: 0.703954
+step 1500, accuracy on validation batch: 0.875, accuracy on mal data: 0.712117
+step 1600, accuracy on validation batch: 0.835938, accuracy on mal data: 0.716581
+step 1700, accuracy on validation batch: 0.875, accuracy on mal data: 0.721939
+step 1800, accuracy on validation batch: 0.914062, accuracy on mal data: 0.728699
+step 1900, accuracy on validation batch: 0.882812, accuracy on mal data: 0.731888
+test set: accuracy on test set: 0.886
+Done training net
+0.88600001514
+Net accuracy:0.89
+
+Net accuracy mal:0.73
+
+training in perm
+{'nb_neurons_1': 10, 'nb_neurons_2': 5, 'nb_neurons_3': 25}
+training!
+{'nb_neurons_1': 10, 'nb_neurons_2': 5, 'nb_neurons_3': 25}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.09375, accuracy on mal data: 0.0993622
+step 100, accuracy on validation batch: 0.382812, accuracy on mal data: 0.157398
+step 200, accuracy on validation batch: 0.578125, accuracy on mal data: 0.248342
+step 300, accuracy on validation batch: 0.671875, accuracy on mal data: 0.334566
+step 400, accuracy on validation batch: 0.695312, accuracy on mal data: 0.422066
+step 500, accuracy on validation batch: 0.742188, accuracy on mal data: 0.5
+step 600, accuracy on validation batch: 0.789062, accuracy on mal data: 0.554592
+step 700, accuracy on validation batch: 0.804688, accuracy on mal data: 0.590306
+step 800, accuracy on validation batch: 0.851562, accuracy on mal data: 0.616581
+step 900, accuracy on validation batch: 0.882812, accuracy on mal data: 0.649235
+step 1000, accuracy on validation batch: 0.804688, accuracy on mal data: 0.673597
+step 1100, accuracy on validation batch: 0.820312, accuracy on mal data: 0.688393
+step 1200, accuracy on validation batch: 0.84375, accuracy on mal data: 0.701658
+step 1300, accuracy on validation batch: 0.8125, accuracy on mal data: 0.702806
+step 1400, accuracy on validation batch: 0.867188, accuracy on mal data: 0.713775
+step 1500, accuracy on validation batch: 0.882812, accuracy on mal data: 0.724362
+step 1600, accuracy on validation batch: 0.859375, accuracy on mal data: 0.731632
+step 1700, accuracy on validation batch: 0.882812, accuracy on mal data: 0.738903
+step 1800, accuracy on validation batch: 0.859375, accuracy on mal data: 0.763265
+step 1900, accuracy on validation batch: 0.898438, accuracy on mal data: 0.771939
+test set: accuracy on test set: 0.880
+Done training net
+0.879900010228
+Net accuracy:0.88
+
+Net accuracy mal:0.77
+
+training in perm
+{'nb_neurons_1': 5, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 5, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.0703125, accuracy on mal data: 0.0882653
+step 100, accuracy on validation batch: 0.203125, accuracy on mal data: 0.159439
+step 200, accuracy on validation batch: 0.5, accuracy on mal data: 0.252679
+step 300, accuracy on validation batch: 0.632812, accuracy on mal data: 0.356122
+step 400, accuracy on validation batch: 0.710938, accuracy on mal data: 0.436352
+step 500, accuracy on validation batch: 0.75, accuracy on mal data: 0.512372
+step 600, accuracy on validation batch: 0.796875, accuracy on mal data: 0.570536
+step 700, accuracy on validation batch: 0.78125, accuracy on mal data: 0.614796
+step 800, accuracy on validation batch: 0.8125, accuracy on mal data: 0.641964
+step 900, accuracy on validation batch: 0.851562, accuracy on mal data: 0.638393
+step 1000, accuracy on validation batch: 0.789062, accuracy on mal data: 0.656377
+step 1100, accuracy on validation batch: 0.84375, accuracy on mal data: 0.66977
+step 1200, accuracy on validation batch: 0.835938, accuracy on mal data: 0.683036
+step 1300, accuracy on validation batch: 0.882812, accuracy on mal data: 0.704719
+step 1400, accuracy on validation batch: 0.867188, accuracy on mal data: 0.716199
+step 1500, accuracy on validation batch: 0.820312, accuracy on mal data: 0.725893
+step 1600, accuracy on validation batch: 0.90625, accuracy on mal data: 0.735969
+step 1700, accuracy on validation batch: 0.789062, accuracy on mal data: 0.746046
+step 1800, accuracy on validation batch: 0.859375, accuracy on mal data: 0.755867
+step 1900, accuracy on validation batch: 0.882812, accuracy on mal data: 0.765433
+test set: accuracy on test set: 0.881
+Done training net
+0.88110001266
+Net accuracy:0.88
+
+Net accuracy mal:0.77
+
+training in perm
+{'nb_neurons_1': 15, 'nb_neurons_2': 5, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 15, 'nb_neurons_2': 5, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.140625, accuracy on mal data: 0.0813775
+step 100, accuracy on validation batch: 0.28125, accuracy on mal data: 0.152934
+step 200, accuracy on validation batch: 0.539062, accuracy on mal data: 0.246811
+step 300, accuracy on validation batch: 0.726562, accuracy on mal data: 0.342857
+step 400, accuracy on validation batch: 0.765625, accuracy on mal data: 0.436862
+step 500, accuracy on validation batch: 0.773438, accuracy on mal data: 0.516582
+step 600, accuracy on validation batch: 0.84375, accuracy on mal data: 0.571429
+step 700, accuracy on validation batch: 0.835938, accuracy on mal data: 0.609821
+step 800, accuracy on validation batch: 0.8125, accuracy on mal data: 0.633163
+step 900, accuracy on validation batch: 0.773438, accuracy on mal data: 0.661097
+step 1000, accuracy on validation batch: 0.867188, accuracy on mal data: 0.678189
+step 1100, accuracy on validation batch: 0.820312, accuracy on mal data: 0.695153
+step 1200, accuracy on validation batch: 0.789062, accuracy on mal data: 0.710842
+step 1300, accuracy on validation batch: 0.859375, accuracy on mal data: 0.683418
+step 1400, accuracy on validation batch: 0.859375, accuracy on mal data: 0.695153
+step 1500, accuracy on validation batch: 0.898438, accuracy on mal data: 0.704719
+step 1600, accuracy on validation batch: 0.828125, accuracy on mal data: 0.710842
+step 1700, accuracy on validation batch: 0.820312, accuracy on mal data: 0.719132
+step 1800, accuracy on validation batch: 0.882812, accuracy on mal data: 0.757908
+step 1900, accuracy on validation batch: 0.867188, accuracy on mal data: 0.765944
+test set: accuracy on test set: 0.884
+Done training net
+0.883800005913
+Net accuracy:0.88
+
+Net accuracy mal:0.77
+
+training in perm
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.203125, accuracy on mal data: 0.114541
+step 100, accuracy on validation batch: 0.304688, accuracy on mal data: 0.18074
+step 200, accuracy on validation batch: 0.578125, accuracy on mal data: 0.261735
+step 300, accuracy on validation batch: 0.71875, accuracy on mal data: 0.353571
+step 400, accuracy on validation batch: 0.734375, accuracy on mal data: 0.429464
+step 500, accuracy on validation batch: 0.773438, accuracy on mal data: 0.479592
+step 600, accuracy on validation batch: 0.78125, accuracy on mal data: 0.528316
+step 700, accuracy on validation batch: 0.765625, accuracy on mal data: 0.563265
+step 800, accuracy on validation batch: 0.804688, accuracy on mal data: 0.591964
+step 900, accuracy on validation batch: 0.820312, accuracy on mal data: 0.617219
+step 1000, accuracy on validation batch: 0.867188, accuracy on mal data: 0.635204
+step 1100, accuracy on validation batch: 0.867188, accuracy on mal data: 0.646173
+step 1200, accuracy on validation batch: 0.84375, accuracy on mal data: 0.661224
+step 1300, accuracy on validation batch: 0.828125, accuracy on mal data: 0.676913
+step 1400, accuracy on validation batch: 0.796875, accuracy on mal data: 0.686862
+step 1500, accuracy on validation batch: 0.789062, accuracy on mal data: 0.697576
+step 1600, accuracy on validation batch: 0.890625, accuracy on mal data: 0.70778
+step 1700, accuracy on validation batch: 0.84375, accuracy on mal data: 0.717347
+step 1800, accuracy on validation batch: 0.867188, accuracy on mal data: 0.747066
+step 1900, accuracy on validation batch: 0.882812, accuracy on mal data: 0.753826
+test set: accuracy on test set: 0.884
+Done training net
+0.883700013161
+Net accuracy:0.88
+
+Net accuracy mal:0.75
+
+training in perm
+{'nb_neurons_1': 15, 'nb_neurons_2': 35, 'nb_neurons_3': 15}
+training!
+{'nb_neurons_1': 15, 'nb_neurons_2': 35, 'nb_neurons_3': 15}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.195312, accuracy on mal data: 0.0996173
+step 100, accuracy on validation batch: 0.210938, accuracy on mal data: 0.177168
+step 200, accuracy on validation batch: 0.539062, accuracy on mal data: 0.264541
+step 300, accuracy on validation batch: 0.601562, accuracy on mal data: 0.35625
+step 400, accuracy on validation batch: 0.710938, accuracy on mal data: 0.436097
+step 500, accuracy on validation batch: 0.78125, accuracy on mal data: 0.491964
+step 600, accuracy on validation batch: 0.734375, accuracy on mal data: 0.546939
+step 700, accuracy on validation batch: 0.75, accuracy on mal data: 0.583673
+step 800, accuracy on validation batch: 0.820312, accuracy on mal data: 0.613138
+step 900, accuracy on validation batch: 0.78125, accuracy on mal data: 0.637627
+step 1000, accuracy on validation batch: 0.835938, accuracy on mal data: 0.660076
+step 1100, accuracy on validation batch: 0.8125, accuracy on mal data: 0.673469
+step 1200, accuracy on validation batch: 0.84375, accuracy on mal data: 0.689158
+step 1300, accuracy on validation batch: 0.8125, accuracy on mal data: 0.687372
+step 1400, accuracy on validation batch: 0.898438, accuracy on mal data: 0.69949
+step 1500, accuracy on validation batch: 0.84375, accuracy on mal data: 0.709056
+step 1600, accuracy on validation batch: 0.867188, accuracy on mal data: 0.719132
+step 1700, accuracy on validation batch: 0.835938, accuracy on mal data: 0.727168
+step 1800, accuracy on validation batch: 0.804688, accuracy on mal data: 0.739923
+step 1900, accuracy on validation batch: 0.867188, accuracy on mal data: 0.751148
+test set: accuracy on test set: 0.883
+Done training net
+0.882700022459
+Net accuracy:0.88
+
+Net accuracy mal:0.75
+
+training in perm
+{'nb_neurons_1': 15, 'nb_neurons_2': 15, 'nb_neurons_3': 20}
+training!
+{'nb_neurons_1': 15, 'nb_neurons_2': 15, 'nb_neurons_3': 20}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.046875, accuracy on mal data: 0.101531
+step 100, accuracy on validation batch: 0.25, accuracy on mal data: 0.176913
+step 200, accuracy on validation batch: 0.46875, accuracy on mal data: 0.262372
+step 300, accuracy on validation batch: 0.570312, accuracy on mal data: 0.353954
+step 400, accuracy on validation batch: 0.65625, accuracy on mal data: 0.438393
+step 500, accuracy on validation batch: 0.78125, accuracy on mal data: 0.493495
+step 600, accuracy on validation batch: 0.8125, accuracy on mal data: 0.540944
+step 700, accuracy on validation batch: 0.765625, accuracy on mal data: 0.574745
+step 800, accuracy on validation batch: 0.710938, accuracy on mal data: 0.602678
+step 900, accuracy on validation batch: 0.859375, accuracy on mal data: 0.651913
+step 1000, accuracy on validation batch: 0.8125, accuracy on mal data: 0.677423
+step 1100, accuracy on validation batch: 0.796875, accuracy on mal data: 0.697576
+step 1200, accuracy on validation batch: 0.84375, accuracy on mal data: 0.713648
+step 1300, accuracy on validation batch: 0.8125, accuracy on mal data: 0.710331
+step 1400, accuracy on validation batch: 0.875, accuracy on mal data: 0.72028
+step 1500, accuracy on validation batch: 0.90625, accuracy on mal data: 0.73074
+step 1600, accuracy on validation batch: 0.898438, accuracy on mal data: 0.73852
+step 1700, accuracy on validation batch: 0.820312, accuracy on mal data: 0.745663
+step 1800, accuracy on validation batch: 0.84375, accuracy on mal data: 0.773469
+step 1900, accuracy on validation batch: 0.882812, accuracy on mal data: 0.780612
+test set: accuracy on test set: 0.879
+Done training net
+0.878800009489
+Net accuracy:0.88
+
+Net accuracy mal:0.78
+
+training in perm
+{'nb_neurons_1': 35, 'nb_neurons_2': 25, 'nb_neurons_3': 10}
+training!
+{'nb_neurons_1': 35, 'nb_neurons_2': 25, 'nb_neurons_3': 10}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.125, accuracy on mal data: 0.110842
+step 100, accuracy on validation batch: 0.25, accuracy on mal data: 0.180612
+step 200, accuracy on validation batch: 0.476562, accuracy on mal data: 0.266327
+step 300, accuracy on validation batch: 0.570312, accuracy on mal data: 0.365051
+step 400, accuracy on validation batch: 0.625, accuracy on mal data: 0.446173
+step 500, accuracy on validation batch: 0.710938, accuracy on mal data: 0.539541
+step 600, accuracy on validation batch: 0.75, accuracy on mal data: 0.589158
+step 700, accuracy on validation batch: 0.820312, accuracy on mal data: 0.619005
+step 800, accuracy on validation batch: 0.828125, accuracy on mal data: 0.640816
+step 900, accuracy on validation batch: 0.820312, accuracy on mal data: 0.634949
+step 1000, accuracy on validation batch: 0.875, accuracy on mal data: 0.648087
+step 1100, accuracy on validation batch: 0.875, accuracy on mal data: 0.658418
+step 1200, accuracy on validation batch: 0.820312, accuracy on mal data: 0.668367
+step 1300, accuracy on validation batch: 0.867188, accuracy on mal data: 0.68125
+step 1400, accuracy on validation batch: 0.851562, accuracy on mal data: 0.691071
+step 1500, accuracy on validation batch: 0.8125, accuracy on mal data: 0.701658
+step 1600, accuracy on validation batch: 0.859375, accuracy on mal data: 0.707525
+step 1700, accuracy on validation batch: 0.851562, accuracy on mal data: 0.714541
+step 1800, accuracy on validation batch: 0.90625, accuracy on mal data: 0.731377
+step 1900, accuracy on validation batch: 0.828125, accuracy on mal data: 0.738903
+test set: accuracy on test set: 0.878
+Done training net
+0.877600009441
+Net accuracy:0.88
+
+Net accuracy mal:0.74
+
+training in perm
+{'nb_neurons_1': 15, 'nb_neurons_2': 30, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 15, 'nb_neurons_2': 30, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.125, accuracy on mal data: 0.102423
+step 100, accuracy on validation batch: 0.296875, accuracy on mal data: 0.18176
+step 200, accuracy on validation batch: 0.46875, accuracy on mal data: 0.275383
+step 300, accuracy on validation batch: 0.640625, accuracy on mal data: 0.380357
+step 400, accuracy on validation batch: 0.726562, accuracy on mal data: 0.466071
+step 500, accuracy on validation batch: 0.742188, accuracy on mal data: 0.559056
+step 600, accuracy on validation batch: 0.742188, accuracy on mal data: 0.605229
+step 700, accuracy on validation batch: 0.820312, accuracy on mal data: 0.647449
+step 800, accuracy on validation batch: 0.828125, accuracy on mal data: 0.675765
+step 900, accuracy on validation batch: 0.828125, accuracy on mal data: 0.678316
+step 1000, accuracy on validation batch: 0.851562, accuracy on mal data: 0.693877
+step 1100, accuracy on validation batch: 0.84375, accuracy on mal data: 0.708546
+step 1200, accuracy on validation batch: 0.867188, accuracy on mal data: 0.717602
+step 1300, accuracy on validation batch: 0.828125, accuracy on mal data: 0.714286
+step 1400, accuracy on validation batch: 0.84375, accuracy on mal data: 0.724362
+step 1500, accuracy on validation batch: 0.859375, accuracy on mal data: 0.732015
+step 1600, accuracy on validation batch: 0.90625, accuracy on mal data: 0.741071
+step 1700, accuracy on validation batch: 0.882812, accuracy on mal data: 0.748852
+step 1800, accuracy on validation batch: 0.890625, accuracy on mal data: 0.745536
+step 1900, accuracy on validation batch: 0.859375, accuracy on mal data: 0.751275
+test set: accuracy on test set: 0.880
+Done training net
+0.879800013304
+Net accuracy:0.88
+
+Net accuracy mal:0.75
+
+training in perm
+{'nb_neurons_1': 15, 'nb_neurons_2': 35, 'nb_neurons_3': 15}
+training!
+{'nb_neurons_1': 15, 'nb_neurons_2': 35, 'nb_neurons_3': 15}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.09375, accuracy on mal data: 0.120026
+step 100, accuracy on validation batch: 0.34375, accuracy on mal data: 0.177679
+step 200, accuracy on validation batch: 0.585938, accuracy on mal data: 0.254847
+step 300, accuracy on validation batch: 0.734375, accuracy on mal data: 0.339031
+step 400, accuracy on validation batch: 0.734375, accuracy on mal data: 0.424107
+step 500, accuracy on validation batch: 0.742188, accuracy on mal data: 0.48699
+step 600, accuracy on validation batch: 0.820312, accuracy on mal data: 0.536607
+step 700, accuracy on validation batch: 0.804688, accuracy on mal data: 0.58125
+step 800, accuracy on validation batch: 0.773438, accuracy on mal data: 0.611224
+step 900, accuracy on validation batch: 0.84375, accuracy on mal data: 0.651403
+step 1000, accuracy on validation batch: 0.828125, accuracy on mal data: 0.678444
+step 1100, accuracy on validation batch: 0.859375, accuracy on mal data: 0.695918
+step 1200, accuracy on validation batch: 0.882812, accuracy on mal data: 0.713393
+step 1300, accuracy on validation batch: 0.8125, accuracy on mal data: 0.698597
+step 1400, accuracy on validation batch: 0.796875, accuracy on mal data: 0.70778
+step 1500, accuracy on validation batch: 0.859375, accuracy on mal data: 0.717729
+step 1600, accuracy on validation batch: 0.867188, accuracy on mal data: 0.728189
+step 1700, accuracy on validation batch: 0.851562, accuracy on mal data: 0.737882
+step 1800, accuracy on validation batch: 0.90625, accuracy on mal data: 0.70727
+step 1900, accuracy on validation batch: 0.851562, accuracy on mal data: 0.709311
+test set: accuracy on test set: 0.883
+Done training net
+0.882700008154
+Net accuracy:0.88
+
+Net accuracy mal:0.71
+
+training in perm
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.15625, accuracy on mal data: 0.107526
+step 100, accuracy on validation batch: 0.25, accuracy on mal data: 0.167347
+step 200, accuracy on validation batch: 0.546875, accuracy on mal data: 0.24426
+step 300, accuracy on validation batch: 0.585938, accuracy on mal data: 0.328699
+step 400, accuracy on validation batch: 0.648438, accuracy on mal data: 0.405995
+step 500, accuracy on validation batch: 0.796875, accuracy on mal data: 0.48699
+step 600, accuracy on validation batch: 0.789062, accuracy on mal data: 0.548087
+step 700, accuracy on validation batch: 0.8125, accuracy on mal data: 0.591454
+step 800, accuracy on validation batch: 0.851562, accuracy on mal data: 0.620918
+step 900, accuracy on validation batch: 0.820312, accuracy on mal data: 0.626148
+step 1000, accuracy on validation batch: 0.875, accuracy on mal data: 0.644643
+step 1100, accuracy on validation batch: 0.828125, accuracy on mal data: 0.662117
+step 1200, accuracy on validation batch: 0.820312, accuracy on mal data: 0.674107
+step 1300, accuracy on validation batch: 0.804688, accuracy on mal data: 0.686097
+step 1400, accuracy on validation batch: 0.820312, accuracy on mal data: 0.701275
+step 1500, accuracy on validation batch: 0.945312, accuracy on mal data: 0.710331
+step 1600, accuracy on validation batch: 0.875, accuracy on mal data: 0.718367
+step 1700, accuracy on validation batch: 0.820312, accuracy on mal data: 0.725
+step 1800, accuracy on validation batch: 0.890625, accuracy on mal data: 0.711097
+step 1900, accuracy on validation batch: 0.835938, accuracy on mal data: 0.715816
+test set: accuracy on test set: 0.879
+Done training net
+0.878500006199
+Net accuracy:0.88
+
+Net accuracy mal:0.72
+
+training in perm
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.078125, accuracy on mal data: 0.0891582
+step 100, accuracy on validation batch: 0.296875, accuracy on mal data: 0.145153
+step 200, accuracy on validation batch: 0.507812, accuracy on mal data: 0.247449
+step 300, accuracy on validation batch: 0.625, accuracy on mal data: 0.341071
+step 400, accuracy on validation batch: 0.75, accuracy on mal data: 0.427551
+step 500, accuracy on validation batch: 0.726562, accuracy on mal data: 0.501658
+step 600, accuracy on validation batch: 0.75, accuracy on mal data: 0.555357
+step 700, accuracy on validation batch: 0.78125, accuracy on mal data: 0.590051
+step 800, accuracy on validation batch: 0.84375, accuracy on mal data: 0.621811
+step 900, accuracy on validation batch: 0.789062, accuracy on mal data: 0.652423
+step 1000, accuracy on validation batch: 0.828125, accuracy on mal data: 0.673087
+step 1100, accuracy on validation batch: 0.796875, accuracy on mal data: 0.685587
+step 1200, accuracy on validation batch: 0.84375, accuracy on mal data: 0.70051
+step 1300, accuracy on validation batch: 0.859375, accuracy on mal data: 0.696301
+step 1400, accuracy on validation batch: 0.851562, accuracy on mal data: 0.711607
+step 1500, accuracy on validation batch: 0.835938, accuracy on mal data: 0.721684
+step 1600, accuracy on validation batch: 0.835938, accuracy on mal data: 0.730995
+step 1700, accuracy on validation batch: 0.890625, accuracy on mal data: 0.740433
+step 1800, accuracy on validation batch: 0.867188, accuracy on mal data: 0.768112
+step 1900, accuracy on validation batch: 0.835938, accuracy on mal data: 0.772959
+test set: accuracy on test set: 0.884
+Done training net
+0.883600012064
+Net accuracy:0.88
+
+Net accuracy mal:0.77
+
+training in perm
+{'nb_neurons_1': 15, 'nb_neurons_2': 30, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 15, 'nb_neurons_2': 30, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.0546875, accuracy on mal data: 0.110714
+step 100, accuracy on validation batch: 0.28125, accuracy on mal data: 0.167474
+step 200, accuracy on validation batch: 0.546875, accuracy on mal data: 0.258291
+step 300, accuracy on validation batch: 0.640625, accuracy on mal data: 0.344133
+step 400, accuracy on validation batch: 0.710938, accuracy on mal data: 0.42398
+step 500, accuracy on validation batch: 0.804688, accuracy on mal data: 0.489286
+step 600, accuracy on validation batch: 0.742188, accuracy on mal data: 0.54324
+step 700, accuracy on validation batch: 0.804688, accuracy on mal data: 0.579974
+step 800, accuracy on validation batch: 0.851562, accuracy on mal data: 0.60625
+step 900, accuracy on validation batch: 0.789062, accuracy on mal data: 0.64528
+step 1000, accuracy on validation batch: 0.859375, accuracy on mal data: 0.664413
+step 1100, accuracy on validation batch: 0.882812, accuracy on mal data: 0.682908
+step 1200, accuracy on validation batch: 0.796875, accuracy on mal data: 0.694005
+step 1300, accuracy on validation batch: 0.828125, accuracy on mal data: 0.687372
+step 1400, accuracy on validation batch: 0.867188, accuracy on mal data: 0.698597
+step 1500, accuracy on validation batch: 0.90625, accuracy on mal data: 0.709566
+step 1600, accuracy on validation batch: 0.851562, accuracy on mal data: 0.716199
+step 1700, accuracy on validation batch: 0.835938, accuracy on mal data: 0.722959
+step 1800, accuracy on validation batch: 0.867188, accuracy on mal data: 0.735204
+step 1900, accuracy on validation batch: 0.90625, accuracy on mal data: 0.740816
+test set: accuracy on test set: 0.885
+Done training net
+0.88470002234
+Net accuracy:0.88
+
+Net accuracy mal:0.74
+
+training in perm
+{'nb_neurons_1': 35, 'nb_neurons_2': 35, 'nb_neurons_3': 15}
+training!
+{'nb_neurons_1': 35, 'nb_neurons_2': 35, 'nb_neurons_3': 15}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.09375, accuracy on mal data: 0.0881378
+step 100, accuracy on validation batch: 0.335938, accuracy on mal data: 0.158929
+step 200, accuracy on validation batch: 0.5625, accuracy on mal data: 0.25102
+step 300, accuracy on validation batch: 0.6875, accuracy on mal data: 0.354209
+step 400, accuracy on validation batch: 0.671875, accuracy on mal data: 0.451786
+step 500, accuracy on validation batch: 0.703125, accuracy on mal data: 0.536735
+step 600, accuracy on validation batch: 0.757812, accuracy on mal data: 0.5875
+step 700, accuracy on validation batch: 0.78125, accuracy on mal data: 0.619388
+step 800, accuracy on validation batch: 0.820312, accuracy on mal data: 0.643622
+step 900, accuracy on validation batch: 0.820312, accuracy on mal data: 0.639668
+step 1000, accuracy on validation batch: 0.898438, accuracy on mal data: 0.653061
+step 1100, accuracy on validation batch: 0.851562, accuracy on mal data: 0.666582
+step 1200, accuracy on validation batch: 0.898438, accuracy on mal data: 0.677806
+step 1300, accuracy on validation batch: 0.890625, accuracy on mal data: 0.660969
+step 1400, accuracy on validation batch: 0.851562, accuracy on mal data: 0.666582
+step 1500, accuracy on validation batch: 0.898438, accuracy on mal data: 0.673852
+step 1600, accuracy on validation batch: 0.890625, accuracy on mal data: 0.680229
+step 1700, accuracy on validation batch: 0.859375, accuracy on mal data: 0.685204
+step 1800, accuracy on validation batch: 0.867188, accuracy on mal data: 0.738393
+step 1900, accuracy on validation batch: 0.898438, accuracy on mal data: 0.747831
+test set: accuracy on test set: 0.883
+Done training net
+0.882500010133
+Net accuracy:0.88
+
+Net accuracy mal:0.75
+
+training in perm
+{'nb_neurons_1': 5, 'nb_neurons_2': 10, 'nb_neurons_3': 15}
+training!
+{'nb_neurons_1': 5, 'nb_neurons_2': 10, 'nb_neurons_3': 15}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.0703125, accuracy on mal data: 0.0804847
+step 100, accuracy on validation batch: 0.148438, accuracy on mal data: 0.163903
+step 200, accuracy on validation batch: 0.460938, accuracy on mal data: 0.239286
+step 300, accuracy on validation batch: 0.664062, accuracy on mal data: 0.340944
+step 400, accuracy on validation batch: 0.757812, accuracy on mal data: 0.437628
+step 500, accuracy on validation batch: 0.796875, accuracy on mal data: 0.51824
+step 600, accuracy on validation batch: 0.726562, accuracy on mal data: 0.580357
+step 700, accuracy on validation batch: 0.828125, accuracy on mal data: 0.613265
+step 800, accuracy on validation batch: 0.851562, accuracy on mal data: 0.641071
+step 900, accuracy on validation batch: 0.796875, accuracy on mal data: 0.663648
+step 1000, accuracy on validation batch: 0.835938, accuracy on mal data: 0.683928
+step 1100, accuracy on validation batch: 0.789062, accuracy on mal data: 0.69949
+step 1200, accuracy on validation batch: 0.835938, accuracy on mal data: 0.710969
+step 1300, accuracy on validation batch: 0.882812, accuracy on mal data: 0.708418
+step 1400, accuracy on validation batch: 0.859375, accuracy on mal data: 0.719388
+step 1500, accuracy on validation batch: 0.859375, accuracy on mal data: 0.730357
+step 1600, accuracy on validation batch: 0.875, accuracy on mal data: 0.738775
+step 1700, accuracy on validation batch: 0.859375, accuracy on mal data: 0.747194
+step 1800, accuracy on validation batch: 0.898438, accuracy on mal data: 0.714923
+step 1900, accuracy on validation batch: 0.875, accuracy on mal data: 0.719643
+test set: accuracy on test set: 0.884
+Done training net
+0.884200011492
+Net accuracy:0.88
+
+Net accuracy mal:0.72
+
+training in perm
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.101562, accuracy on mal data: 0.107143
+step 100, accuracy on validation batch: 0.234375, accuracy on mal data: 0.179337
+step 200, accuracy on validation batch: 0.4375, accuracy on mal data: 0.25523
+step 300, accuracy on validation batch: 0.632812, accuracy on mal data: 0.336352
+step 400, accuracy on validation batch: 0.664062, accuracy on mal data: 0.432015
+step 500, accuracy on validation batch: 0.726562, accuracy on mal data: 0.513138
+step 600, accuracy on validation batch: 0.703125, accuracy on mal data: 0.56875
+step 700, accuracy on validation batch: 0.78125, accuracy on mal data: 0.60727
+step 800, accuracy on validation batch: 0.789062, accuracy on mal data: 0.628954
+step 900, accuracy on validation batch: 0.835938, accuracy on mal data: 0.64324
+step 1000, accuracy on validation batch: 0.835938, accuracy on mal data: 0.661479
+step 1100, accuracy on validation batch: 0.820312, accuracy on mal data: 0.675127
+step 1200, accuracy on validation batch: 0.867188, accuracy on mal data: 0.691326
+step 1300, accuracy on validation batch: 0.804688, accuracy on mal data: 0.724872
+step 1400, accuracy on validation batch: 0.882812, accuracy on mal data: 0.739668
+step 1500, accuracy on validation batch: 0.875, accuracy on mal data: 0.749745
+step 1600, accuracy on validation batch: 0.882812, accuracy on mal data: 0.758928
+step 1700, accuracy on validation batch: 0.84375, accuracy on mal data: 0.767474
+step 1800, accuracy on validation batch: 0.914062, accuracy on mal data: 0.776913
+step 1900, accuracy on validation batch: 0.875, accuracy on mal data: 0.783928
+test set: accuracy on test set: 0.882
+Done training net
+0.882100018263
+Net accuracy:0.88
+
+Net accuracy mal:0.78
+
+training in perm
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 10}
+training!
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 10}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.171875, accuracy on mal data: 0.0943878
+step 100, accuracy on validation batch: 0.34375, accuracy on mal data: 0.157015
+step 200, accuracy on validation batch: 0.578125, accuracy on mal data: 0.248724
+step 300, accuracy on validation batch: 0.664062, accuracy on mal data: 0.349617
+step 400, accuracy on validation batch: 0.6875, accuracy on mal data: 0.452551
+step 500, accuracy on validation batch: 0.75, accuracy on mal data: 0.526913
+step 600, accuracy on validation batch: 0.773438, accuracy on mal data: 0.570153
+step 700, accuracy on validation batch: 0.882812, accuracy on mal data: 0.601913
+step 800, accuracy on validation batch: 0.8125, accuracy on mal data: 0.630995
+step 900, accuracy on validation batch: 0.773438, accuracy on mal data: 0.640689
+step 1000, accuracy on validation batch: 0.789062, accuracy on mal data: 0.653189
+step 1100, accuracy on validation batch: 0.859375, accuracy on mal data: 0.665178
+step 1200, accuracy on validation batch: 0.773438, accuracy on mal data: 0.675893
+step 1300, accuracy on validation batch: 0.820312, accuracy on mal data: 0.69949
+step 1400, accuracy on validation batch: 0.84375, accuracy on mal data: 0.709311
+step 1500, accuracy on validation batch: 0.851562, accuracy on mal data: 0.716326
+step 1600, accuracy on validation batch: 0.8125, accuracy on mal data: 0.728699
+step 1700, accuracy on validation batch: 0.875, accuracy on mal data: 0.737117
+step 1800, accuracy on validation batch: 0.859375, accuracy on mal data: 0.743367
+step 1900, accuracy on validation batch: 0.890625, accuracy on mal data: 0.750255
+test set: accuracy on test set: 0.881
+Done training net
+0.880500013232
+Net accuracy:0.88
+
+Net accuracy mal:0.75
+
+training in perm
+{'nb_neurons_1': 15, 'nb_neurons_2': 35, 'nb_neurons_3': 15}
+training!
+{'nb_neurons_1': 15, 'nb_neurons_2': 35, 'nb_neurons_3': 15}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.078125, accuracy on mal data: 0.104592
+step 100, accuracy on validation batch: 0.3125, accuracy on mal data: 0.170281
+step 200, accuracy on validation batch: 0.4375, accuracy on mal data: 0.254847
+step 300, accuracy on validation batch: 0.609375, accuracy on mal data: 0.347577
+step 400, accuracy on validation batch: 0.710938, accuracy on mal data: 0.437628
+step 500, accuracy on validation batch: 0.78125, accuracy on mal data: 0.50051
+step 600, accuracy on validation batch: 0.796875, accuracy on mal data: 0.554719
+step 700, accuracy on validation batch: 0.8125, accuracy on mal data: 0.591582
+step 800, accuracy on validation batch: 0.851562, accuracy on mal data: 0.624617
+step 900, accuracy on validation batch: 0.835938, accuracy on mal data: 0.640434
+step 1000, accuracy on validation batch: 0.898438, accuracy on mal data: 0.659056
+step 1100, accuracy on validation batch: 0.8125, accuracy on mal data: 0.675127
+step 1200, accuracy on validation batch: 0.84375, accuracy on mal data: 0.689541
+step 1300, accuracy on validation batch: 0.898438, accuracy on mal data: 0.704464
+step 1400, accuracy on validation batch: 0.875, accuracy on mal data: 0.71926
+step 1500, accuracy on validation batch: 0.851562, accuracy on mal data: 0.728444
+step 1600, accuracy on validation batch: 0.820312, accuracy on mal data: 0.738648
+step 1700, accuracy on validation batch: 0.882812, accuracy on mal data: 0.745663
+step 1800, accuracy on validation batch: 0.882812, accuracy on mal data: 0.752551
+step 1900, accuracy on validation batch: 0.867188, accuracy on mal data: 0.757908
+test set: accuracy on test set: 0.882
+Done training net
+0.881600010991
+Net accuracy:0.88
+
+Net accuracy mal:0.76
+
+training in perm
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.0859375, accuracy on mal data: 0.103444
+step 100, accuracy on validation batch: 0.242188, accuracy on mal data: 0.176913
+step 200, accuracy on validation batch: 0.53125, accuracy on mal data: 0.270918
+step 300, accuracy on validation batch: 0.695312, accuracy on mal data: 0.363138
+step 400, accuracy on validation batch: 0.789062, accuracy on mal data: 0.457143
+step 500, accuracy on validation batch: 0.789062, accuracy on mal data: 0.521939
+step 600, accuracy on validation batch: 0.804688, accuracy on mal data: 0.559821
+step 700, accuracy on validation batch: 0.773438, accuracy on mal data: 0.587883
+step 800, accuracy on validation batch: 0.84375, accuracy on mal data: 0.606377
+step 900, accuracy on validation batch: 0.773438, accuracy on mal data: 0.648214
+step 1000, accuracy on validation batch: 0.875, accuracy on mal data: 0.667347
+step 1100, accuracy on validation batch: 0.875, accuracy on mal data: 0.686479
+step 1200, accuracy on validation batch: 0.851562, accuracy on mal data: 0.703061
+step 1300, accuracy on validation batch: 0.867188, accuracy on mal data: 0.689668
+step 1400, accuracy on validation batch: 0.820312, accuracy on mal data: 0.7
+step 1500, accuracy on validation batch: 0.8125, accuracy on mal data: 0.709821
+step 1600, accuracy on validation batch: 0.875, accuracy on mal data: 0.717729
+step 1700, accuracy on validation batch: 0.90625, accuracy on mal data: 0.726658
+step 1800, accuracy on validation batch: 0.914062, accuracy on mal data: 0.752423
+step 1900, accuracy on validation batch: 0.875, accuracy on mal data: 0.760969
+test set: accuracy on test set: 0.882
+Done training net
+0.881500006318
+Net accuracy:0.88
+
+Net accuracy mal:0.76
+
+training in perm
+{'nb_neurons_1': 5, 'nb_neurons_2': 10, 'nb_neurons_3': 15}
+training!
+{'nb_neurons_1': 5, 'nb_neurons_2': 10, 'nb_neurons_3': 15}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.0703125, accuracy on mal data: 0.111352
+step 100, accuracy on validation batch: 0.40625, accuracy on mal data: 0.178827
+step 200, accuracy on validation batch: 0.546875, accuracy on mal data: 0.263648
+step 300, accuracy on validation batch: 0.648438, accuracy on mal data: 0.348214
+step 400, accuracy on validation batch: 0.734375, accuracy on mal data: 0.425
+step 500, accuracy on validation batch: 0.742188, accuracy on mal data: 0.497959
+step 600, accuracy on validation batch: 0.789062, accuracy on mal data: 0.552168
+step 700, accuracy on validation batch: 0.75, accuracy on mal data: 0.589668
+step 800, accuracy on validation batch: 0.875, accuracy on mal data: 0.622066
+step 900, accuracy on validation batch: 0.835938, accuracy on mal data: 0.621684
+step 1000, accuracy on validation batch: 0.804688, accuracy on mal data: 0.638138
+step 1100, accuracy on validation batch: 0.882812, accuracy on mal data: 0.653571
+step 1200, accuracy on validation batch: 0.8125, accuracy on mal data: 0.667857
+step 1300, accuracy on validation batch: 0.875, accuracy on mal data: 0.69375
+step 1400, accuracy on validation batch: 0.882812, accuracy on mal data: 0.706122
+step 1500, accuracy on validation batch: 0.914062, accuracy on mal data: 0.715051
+step 1600, accuracy on validation batch: 0.914062, accuracy on mal data: 0.725127
+step 1700, accuracy on validation batch: 0.851562, accuracy on mal data: 0.734566
+step 1800, accuracy on validation batch: 0.875, accuracy on mal data: 0.729847
+step 1900, accuracy on validation batch: 0.859375, accuracy on mal data: 0.735587
+test set: accuracy on test set: 0.882
+Done training net
+0.882000011206
+Net accuracy:0.88
+
+Net accuracy mal:0.74
+
+training in perm
+{'nb_neurons_1': 35, 'nb_neurons_2': 25, 'nb_neurons_3': 10}
+training!
+{'nb_neurons_1': 35, 'nb_neurons_2': 25, 'nb_neurons_3': 10}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.265625, accuracy on mal data: 0.0947704
+step 100, accuracy on validation batch: 0.398438, accuracy on mal data: 0.172959
+step 200, accuracy on validation batch: 0.578125, accuracy on mal data: 0.266071
+step 300, accuracy on validation batch: 0.640625, accuracy on mal data: 0.375893
+step 400, accuracy on validation batch: 0.65625, accuracy on mal data: 0.460204
+step 500, accuracy on validation batch: 0.828125, accuracy on mal data: 0.530995
+step 600, accuracy on validation batch: 0.78125, accuracy on mal data: 0.579719
+step 700, accuracy on validation batch: 0.8125, accuracy on mal data: 0.61875
+step 800, accuracy on validation batch: 0.8125, accuracy on mal data: 0.64477
+step 900, accuracy on validation batch: 0.851562, accuracy on mal data: 0.654974
+step 1000, accuracy on validation batch: 0.8125, accuracy on mal data: 0.669133
+step 1100, accuracy on validation batch: 0.796875, accuracy on mal data: 0.683928
+step 1200, accuracy on validation batch: 0.835938, accuracy on mal data: 0.694005
+step 1300, accuracy on validation batch: 0.8125, accuracy on mal data: 0.690178
+step 1400, accuracy on validation batch: 0.859375, accuracy on mal data: 0.698597
+step 1500, accuracy on validation batch: 0.859375, accuracy on mal data: 0.707525
+step 1600, accuracy on validation batch: 0.875, accuracy on mal data: 0.710714
+step 1700, accuracy on validation batch: 0.882812, accuracy on mal data: 0.717092
+step 1800, accuracy on validation batch: 0.921875, accuracy on mal data: 0.755995
+step 1900, accuracy on validation batch: 0.789062, accuracy on mal data: 0.762627
+test set: accuracy on test set: 0.884
+Done training net
+0.883600014448
+Net accuracy:0.88
+
+Net accuracy mal:0.76
+
+training in perm
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.101562, accuracy on mal data: 0.110587
+step 100, accuracy on validation batch: 0.335938, accuracy on mal data: 0.165306
+step 200, accuracy on validation batch: 0.484375, accuracy on mal data: 0.23852
+step 300, accuracy on validation batch: 0.578125, accuracy on mal data: 0.323725
+step 400, accuracy on validation batch: 0.71875, accuracy on mal data: 0.405102
+step 500, accuracy on validation batch: 0.726562, accuracy on mal data: 0.488138
+step 600, accuracy on validation batch: 0.8125, accuracy on mal data: 0.550893
+step 700, accuracy on validation batch: 0.789062, accuracy on mal data: 0.595408
+step 800, accuracy on validation batch: 0.835938, accuracy on mal data: 0.629337
+step 900, accuracy on validation batch: 0.820312, accuracy on mal data: 0.626913
+step 1000, accuracy on validation batch: 0.828125, accuracy on mal data: 0.65051
+step 1100, accuracy on validation batch: 0.867188, accuracy on mal data: 0.672959
+step 1200, accuracy on validation batch: 0.875, accuracy on mal data: 0.687245
+step 1300, accuracy on validation batch: 0.820312, accuracy on mal data: 0.700638
+step 1400, accuracy on validation batch: 0.820312, accuracy on mal data: 0.711607
+step 1500, accuracy on validation batch: 0.921875, accuracy on mal data: 0.720408
+step 1600, accuracy on validation batch: 0.898438, accuracy on mal data: 0.727806
+step 1700, accuracy on validation batch: 0.796875, accuracy on mal data: 0.73801
+step 1800, accuracy on validation batch: 0.882812, accuracy on mal data: 0.767984
+step 1900, accuracy on validation batch: 0.890625, accuracy on mal data: 0.775127
+test set: accuracy on test set: 0.881
+Done training net
+0.881200015545
+Net accuracy:0.88
+
+Net accuracy mal:0.78
+
+training in perm
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.078125, accuracy on mal data: 0.0918367
+step 100, accuracy on validation batch: 0.273438, accuracy on mal data: 0.146173
+step 200, accuracy on validation batch: 0.523438, accuracy on mal data: 0.233673
+step 300, accuracy on validation batch: 0.695312, accuracy on mal data: 0.33176
+step 400, accuracy on validation batch: 0.742188, accuracy on mal data: 0.426275
+step 500, accuracy on validation batch: 0.742188, accuracy on mal data: 0.509821
+step 600, accuracy on validation batch: 0.867188, accuracy on mal data: 0.570025
+step 700, accuracy on validation batch: 0.835938, accuracy on mal data: 0.603444
+step 800, accuracy on validation batch: 0.773438, accuracy on mal data: 0.630357
+step 900, accuracy on validation batch: 0.78125, accuracy on mal data: 0.635969
+step 1000, accuracy on validation batch: 0.789062, accuracy on mal data: 0.651786
+step 1100, accuracy on validation batch: 0.828125, accuracy on mal data: 0.665306
+step 1200, accuracy on validation batch: 0.828125, accuracy on mal data: 0.674617
+step 1300, accuracy on validation batch: 0.875, accuracy on mal data: 0.711862
+step 1400, accuracy on validation batch: 0.84375, accuracy on mal data: 0.72602
+step 1500, accuracy on validation batch: 0.859375, accuracy on mal data: 0.738138
+step 1600, accuracy on validation batch: 0.867188, accuracy on mal data: 0.746811
+step 1700, accuracy on validation batch: 0.914062, accuracy on mal data: 0.756377
+step 1800, accuracy on validation batch: 0.851562, accuracy on mal data: 0.727041
+step 1900, accuracy on validation batch: 0.859375, accuracy on mal data: 0.732525
+test set: accuracy on test set: 0.882
+Done training net
+0.882200012207
+Net accuracy:0.88
+
+Net accuracy mal:0.73
+
+training in perm
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 35, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.078125, accuracy on mal data: 0.0947704
+step 100, accuracy on validation batch: 0.289062, accuracy on mal data: 0.153571
+step 200, accuracy on validation batch: 0.429688, accuracy on mal data: 0.234184
+step 300, accuracy on validation batch: 0.617188, accuracy on mal data: 0.320536
+step 400, accuracy on validation batch: 0.710938, accuracy on mal data: 0.410204
+step 500, accuracy on validation batch: 0.726562, accuracy on mal data: 0.495791
+step 600, accuracy on validation batch: 0.8125, accuracy on mal data: 0.552423
+step 700, accuracy on validation batch: 0.828125, accuracy on mal data: 0.589031
+step 800, accuracy on validation batch: 0.796875, accuracy on mal data: 0.617474
+step 900, accuracy on validation batch: 0.820312, accuracy on mal data: 0.624107
+step 1000, accuracy on validation batch: 0.875, accuracy on mal data: 0.641071
+step 1100, accuracy on validation batch: 0.773438, accuracy on mal data: 0.658673
+step 1200, accuracy on validation batch: 0.796875, accuracy on mal data: 0.66977
+step 1300, accuracy on validation batch: 0.875, accuracy on mal data: 0.703061
+step 1400, accuracy on validation batch: 0.851562, accuracy on mal data: 0.71875
+step 1500, accuracy on validation batch: 0.851562, accuracy on mal data: 0.727041
+step 1600, accuracy on validation batch: 0.898438, accuracy on mal data: 0.736607
+step 1700, accuracy on validation batch: 0.921875, accuracy on mal data: 0.742984
+step 1800, accuracy on validation batch: 0.789062, accuracy on mal data: 0.730612
+step 1900, accuracy on validation batch: 0.8125, accuracy on mal data: 0.739413
+test set: accuracy on test set: 0.882
+Done training net
+0.881900013685
+Net accuracy:0.88
+
+Net accuracy mal:0.74
+
+training in perm
+{'nb_neurons_1': 5, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training!
+{'nb_neurons_1': 5, 'nb_neurons_2': 10, 'nb_neurons_3': 30}
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.09375, accuracy on mal data: 0.114286
+step 100, accuracy on validation batch: 0.398438, accuracy on mal data: 0.170536
+step 200, accuracy on validation batch: 0.5, accuracy on mal data: 0.249235
+step 300, accuracy on validation batch: 0.71875, accuracy on mal data: 0.332781
+step 400, accuracy on validation batch: 0.75, accuracy on mal data: 0.41977
+step 500, accuracy on validation batch: 0.84375, accuracy on mal data: 0.497832
+step 600, accuracy on validation batch: 0.796875, accuracy on mal data: 0.547066
+step 700, accuracy on validation batch: 0.796875, accuracy on mal data: 0.579592
+step 800, accuracy on validation batch: 0.75, accuracy on mal data: 0.611862
+step 900, ac

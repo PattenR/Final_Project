@@ -338,7 +338,9 @@ def main():
 #        mal_x, mal_y = MnistInput(mnist_train_file, batch_size, False, mal_data_mnist=True)
 
         # Training and validation
-        
+ 
+	mal_x, mal_y, num_targets = mal_data_synthesis(mnist.train.images[:100])       
+	mal_y = translate_labels(mal_y)
         for step in range(FLAGS.max_steps):
             # Training: Backpropagation using train set
 #            (trainImages, trainLabels) = cifar.getTrainBatch()
@@ -347,7 +349,6 @@ def main():
 #            mnist_test_file = FLAGS.eval_data_path
 
             images, labels = MnistInput_clean(mnist, FLAGS.batch_size, True, False, sess=sess)
-            mal_x, mal_y, num_targets = mal_data_synthesis(mnist.train.images[:100])
 #            logits, projection, training_params = utils.BuildNetwork(images, network_parameters)
 
             #gd_op = tf.train.GradientDescentOptimizer(lr).minimize(cost)
@@ -361,7 +362,6 @@ def main():
             #            print(images)
 
             labels = translate_labels(labels)
-            mal_y = translate_labels(mal_y)
 #            print(labels)
 #            mal_x, mal_y = MnistInput(mnist_train_file, FLAGS.batch_size, False, mal_data_mnist=True)
 #            images = tf.concat([images, mal_x], 0)
