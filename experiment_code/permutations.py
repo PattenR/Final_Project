@@ -12,15 +12,17 @@ def gen_population(generations, population, nn_param_choices):
             
          # Train and get accuracy for networks.
         accuracys = []
-	F = open("results_sorted.txt", "w")
+	F = open("results_sorted_03_03.txt", "w")
         accuracys_mal = []
         for net in networks:
 #            print("training in perm")
 #            print(net.network)
             acc, acc_mal = net.train("mnist")
-            print("Net accuracy:%.2f\n" % acc)
+            F.write("Net accuracy:%.2f\n" % acc)
+	    F.write("\n")
 #            print(acc)
-            print("Net accuracy mal:%.2f\n" % acc_mal)
+            F.write("Net accuracy mal:%.2f\n" % acc_mal)
+	    F.write("\n")
 #            print(acc_mal)
             accuracys.append(acc)
             accuracys_mal.append(acc_mal)
@@ -42,13 +44,13 @@ def gen_population(generations, population, nn_param_choices):
     # Sort our final population.
     networks = sorted(networks, key=lambda x: 1/x.mal_accuracy, reverse=True)
     for net in networks[:5]:
-        F.write("acc")
+        F.write("acc ")
         F.write('{}'.format(net.accuracy))
         F.write("\n")
-        F.write("acc_mal")
+        F.write("acc_mal ")
         F.write('{}'.format(net.mal_accuracy))
         F.write("\n")
-        F.write("setup")
+        F.write("setup ")
         F.write('{}'.format(net.network))
         F.write("\n")
     # Print out the top 5 networks.

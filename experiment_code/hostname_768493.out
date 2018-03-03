@@ -1,0 +1,1680 @@
+training!
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+[[ 0.84442186  0.75795442  0.4205716  ...,  0.55705404  0.2855058
+   0.54107571]
+ [ 0.29664126  0.44178364  0.60466993 ...,  0.6771791   0.64074707
+   0.59590232]
+ [ 0.94518906  0.7148419   0.27287114 ...,  0.46081546  0.422555
+   0.89615297]]
+[[0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]]
+number of synth images
+7840
+step 0, accuracy on validation batch: 0.328125, accuracy on mal data: 0.0940051
+step 100, accuracy on validation batch: 0.945312, accuracy on mal data: 0.125383
+step 200, accuracy on validation batch: 0.9375, accuracy on mal data: 0.210077
+step 300, accuracy on validation batch: 0.953125, accuracy on mal data: 0.213903
+step 400, accuracy on validation batch: 0.96875, accuracy on mal data: 0.253954
+step 500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.243112
+step 600, accuracy on validation batch: 0.96875, accuracy on mal data: 0.262245
+step 700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.268495
+step 800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.291582
+step 900, accuracy on validation batch: 0.984375, accuracy on mal data: 0.304592
+step 1000, accuracy on validation batch: 1, accuracy on mal data: 0.311352
+step 1100, accuracy on validation batch: 1, accuracy on mal data: 0.337117
+step 1200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.349107
+step 1300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.378571
+step 1400, accuracy on validation batch: 0.984375, accuracy on mal data: 0.40625
+step 1500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.404719
+step 1600, accuracy on validation batch: 1, accuracy on mal data: 0.409311
+step 1700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.418878
+step 1800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.404082
+step 1900, accuracy on validation batch: 0.976562, accuracy on mal data: 0.436607
+step 2000, accuracy on validation batch: 1, accuracy on mal data: 0.466964
+step 2100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.476148
+step 2200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.462117
+step 2300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.48852
+step 2400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.492985
+step 2500, accuracy on validation batch: 0.976562, accuracy on mal data: 0.497194
+step 2600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.447066
+step 2700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.504974
+step 2800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.51824
+step 2900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.526148
+step 3000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.512883
+step 3100, accuracy on validation batch: 1, accuracy on mal data: 0.53699
+step 3200, accuracy on validation batch: 1, accuracy on mal data: 0.560714
+step 3300, accuracy on validation batch: 0.976562, accuracy on mal data: 0.545153
+step 3400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.562372
+step 3500, accuracy on validation batch: 1, accuracy on mal data: 0.578826
+step 3600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.580867
+step 3700, accuracy on validation batch: 1, accuracy on mal data: 0.58801
+step 3800, accuracy on validation batch: 1, accuracy on mal data: 0.585332
+step 3900, accuracy on validation batch: 1, accuracy on mal data: 0.604974
+step 4000, accuracy on validation batch: 1, accuracy on mal data: 0.585204
+step 4100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.602041
+step 4200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.608418
+step 4300, accuracy on validation batch: 1, accuracy on mal data: 0.57551
+step 4400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.570153
+step 4500, accuracy on validation batch: 0.96875, accuracy on mal data: 0.600127
+step 4600, accuracy on validation batch: 1, accuracy on mal data: 0.589413
+step 4700, accuracy on validation batch: 1, accuracy on mal data: 0.607653
+step 4800, accuracy on validation batch: 0.976562, accuracy on mal data: 0.613903
+step 4900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.611862
+step 5000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.602423
+step 5100, accuracy on validation batch: 1, accuracy on mal data: 0.60625
+step 5200, accuracy on validation batch: 1, accuracy on mal data: 0.59477
+step 5300, accuracy on validation batch: 0.984375, accuracy on mal data: 0.61824
+step 5400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.632143
+step 5500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.629337
+step 5600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.628826
+step 5700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.637372
+step 5800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.634566
+step 5900, accuracy on validation batch: 1, accuracy on mal data: 0.622704
+step 6000, accuracy on validation batch: 0.984375, accuracy on mal data: 0.634821
+step 6100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.644005
+step 6200, accuracy on validation batch: 1, accuracy on mal data: 0.653954
+step 6300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.661352
+step 6400, accuracy on validation batch: 1, accuracy on mal data: 0.645918
+step 6500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.651275
+step 6600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.666071
+step 6700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.664286
+step 6800, accuracy on validation batch: 1, accuracy on mal data: 0.669898
+step 6900, accuracy on validation batch: 1, accuracy on mal data: 0.686607
+step 7000, accuracy on validation batch: 1, accuracy on mal data: 0.659694
+step 7100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.638775
+step 7200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.649745
+step 7300, accuracy on validation batch: 0.984375, accuracy on mal data: 0.654847
+step 7400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.682015
+step 7500, accuracy on validation batch: 1, accuracy on mal data: 0.659184
+step 7600, accuracy on validation batch: 1, accuracy on mal data: 0.573469
+step 7700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.667219
+step 7800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.629337
+step 7900, accuracy on validation batch: 1, accuracy on mal data: 0.662627
+step 8000, accuracy on validation batch: 1, accuracy on mal data: 0.666326
+step 8100, accuracy on validation batch: 1, accuracy on mal data: 0.649107
+step 8200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.66199
+step 8300, accuracy on validation batch: 1, accuracy on mal data: 0.656505
+step 8400, accuracy on validation batch: 1, accuracy on mal data: 0.666964
+step 8500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.669005
+step 8600, accuracy on validation batch: 0.976562, accuracy on mal data: 0.665306
+step 8700, accuracy on validation batch: 1, accuracy on mal data: 0.66352
+step 8800, accuracy on validation batch: 1, accuracy on mal data: 0.67028
+step 8900, accuracy on validation batch: 0.976562, accuracy on mal data: 0.672959
+step 9000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.686607
+step 9100, accuracy on validation batch: 1, accuracy on mal data: 0.662755
+step 9200, accuracy on validation batch: 1, accuracy on mal data: 0.688138
+step 9300, accuracy on validation batch: 1, accuracy on mal data: 0.673214
+step 9400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.675765
+step 9500, accuracy on validation batch: 1, accuracy on mal data: 0.668622
+step 9600, accuracy on validation batch: 1, accuracy on mal data: 0.690051
+step 9700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.685587
+step 9800, accuracy on validation batch: 1, accuracy on mal data: 0.689286
+step 9900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.673852
+step 10000, accuracy on validation batch: 1, accuracy on mal data: 0.688265
+step 10100, accuracy on validation batch: 1, accuracy on mal data: 0.721428
+step 10200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.712245
+step 10300, accuracy on validation batch: 1, accuracy on mal data: 0.698342
+step 10400, accuracy on validation batch: 1, accuracy on mal data: 0.659184
+step 10500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.705867
+step 10600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.713903
+step 10700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.685459
+step 10800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.694898
+step 10900, accuracy on validation batch: 1, accuracy on mal data: 0.708546
+step 11000, accuracy on validation batch: 1, accuracy on mal data: 0.70625
+step 11100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.697832
+step 11200, accuracy on validation batch: 1, accuracy on mal data: 0.707015
+step 11300, accuracy on validation batch: 1, accuracy on mal data: 0.736479
+step 11400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.705612
+step 11500, accuracy on validation batch: 1, accuracy on mal data: 0.73125
+step 11600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.733036
+step 11700, accuracy on validation batch: 1, accuracy on mal data: 0.722576
+step 11800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.658036
+step 11900, accuracy on validation batch: 1, accuracy on mal data: 0.702551
+step 12000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.715944
+step 12100, accuracy on validation batch: 1, accuracy on mal data: 0.717729
+step 12200, accuracy on validation batch: 1, accuracy on mal data: 0.683673
+step 12300, accuracy on validation batch: 1, accuracy on mal data: 0.73227
+step 12400, accuracy on validation batch: 1, accuracy on mal data: 0.671684
+step 12500, accuracy on validation batch: 1, accuracy on mal data: 0.724362
+step 12600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.744005
+step 12700, accuracy on validation batch: 1, accuracy on mal data: 0.738648
+step 12800, accuracy on validation batch: 1, accuracy on mal data: 0.694133
+step 12900, accuracy on validation batch: 1, accuracy on mal data: 0.691071
+step 13000, accuracy on validation batch: 1, accuracy on mal data: 0.713393
+step 13100, accuracy on validation batch: 1, accuracy on mal data: 0.727806
+step 13200, accuracy on validation batch: 1, accuracy on mal data: 0.688775
+step 13300, accuracy on validation batch: 1, accuracy on mal data: 0.737245
+step 13400, accuracy on validation batch: 1, accuracy on mal data: 0.666709
+step 13500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.738903
+step 13600, accuracy on validation batch: 1, accuracy on mal data: 0.750382
+step 13700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.72028
+step 13800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.744005
+step 13900, accuracy on validation batch: 1, accuracy on mal data: 0.664923
+step 14000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.753826
+step 14100, accuracy on validation batch: 1, accuracy on mal data: 0.615561
+step 14200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.671939
+step 14300, accuracy on validation batch: 1, accuracy on mal data: 0.740816
+step 14400, accuracy on validation batch: 1, accuracy on mal data: 0.72028
+step 14500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.713393
+step 14600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.74477
+step 14700, accuracy on validation batch: 1, accuracy on mal data: 0.735969
+step 14800, accuracy on validation batch: 1, accuracy on mal data: 0.716709
+step 14900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.770791
+test set: accuracy on test set: 0.971
+Done training net
+0.971000007391
+training!
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+[[ 0.84442186  0.75795442  0.4205716  ...,  0.55705404  0.2855058
+   0.54107571]
+ [ 0.29664126  0.44178364  0.60466993 ...,  0.6771791   0.64074707
+   0.59590232]
+ [ 0.94518906  0.7148419   0.27287114 ...,  0.46081546  0.422555
+   0.89615297]]
+[[0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]]
+number of synth images
+7840
+step 0, accuracy on validation batch: 0.3125, accuracy on mal data: 0.102679
+step 100, accuracy on validation batch: 0.921875, accuracy on mal data: 0.147194
+step 200, accuracy on validation batch: 0.96875, accuracy on mal data: 0.172577
+step 300, accuracy on validation batch: 0.96875, accuracy on mal data: 0.180485
+step 400, accuracy on validation batch: 0.984375, accuracy on mal data: 0.197577
+step 500, accuracy on validation batch: 1, accuracy on mal data: 0.204847
+step 600, accuracy on validation batch: 0.96875, accuracy on mal data: 0.210332
+step 700, accuracy on validation batch: 0.953125, accuracy on mal data: 0.200893
+step 800, accuracy on validation batch: 0.976562, accuracy on mal data: 0.219515
+step 900, accuracy on validation batch: 1, accuracy on mal data: 0.214923
+step 1000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.230612
+step 1100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.236097
+step 1200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.24324
+step 1300, accuracy on validation batch: 1, accuracy on mal data: 0.253061
+step 1400, accuracy on validation batch: 1, accuracy on mal data: 0.255995
+step 1500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.260842
+step 1600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.25727
+step 1700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.270153
+step 1800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.239413
+step 1900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.271173
+step 2000, accuracy on validation batch: 1, accuracy on mal data: 0.268495
+step 2100, accuracy on validation batch: 0.976562, accuracy on mal data: 0.250765
+step 2200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.277296
+step 2300, accuracy on validation batch: 0.984375, accuracy on mal data: 0.285204
+step 2400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.293622
+step 2500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.265051
+step 2600, accuracy on validation batch: 1, accuracy on mal data: 0.282525
+step 2700, accuracy on validation batch: 1, accuracy on mal data: 0.286352
+step 2800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.285714
+step 2900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.221939
+step 3000, accuracy on validation batch: 0.984375, accuracy on mal data: 0.294005
+step 3100, accuracy on validation batch: 1, accuracy on mal data: 0.312117
+step 3200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.299617
+step 3300, accuracy on validation batch: 1, accuracy on mal data: 0.298724
+step 3400, accuracy on validation batch: 1, accuracy on mal data: 0.301913
+step 3500, accuracy on validation batch: 1, accuracy on mal data: 0.306122
+step 3600, accuracy on validation batch: 1, accuracy on mal data: 0.31199
+step 3700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.299872
+step 3800, accuracy on validation batch: 1, accuracy on mal data: 0.300638
+step 3900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.312883
+step 4000, accuracy on validation batch: 1, accuracy on mal data: 0.228827
+step 4100, accuracy on validation batch: 1, accuracy on mal data: 0.317092
+step 4200, accuracy on validation batch: 0.976562, accuracy on mal data: 0.301786
+step 4300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.308801
+step 4400, accuracy on validation batch: 1, accuracy on mal data: 0.314158
+step 4500, accuracy on validation batch: 1, accuracy on mal data: 0.308673
+step 4600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.330485
+step 4700, accuracy on validation batch: 1, accuracy on mal data: 0.333673
+step 4800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.328571
+step 4900, accuracy on validation batch: 1, accuracy on mal data: 0.337883
+step 5000, accuracy on validation batch: 1, accuracy on mal data: 0.317474
+step 5100, accuracy on validation batch: 1, accuracy on mal data: 0.328699
+step 5200, accuracy on validation batch: 0.976562, accuracy on mal data: 0.334821
+step 5300, accuracy on validation batch: 1, accuracy on mal data: 0.329209
+step 5400, accuracy on validation batch: 1, accuracy on mal data: 0.32449
+step 5500, accuracy on validation batch: 1, accuracy on mal data: 0.299745
+step 5600, accuracy on validation batch: 1, accuracy on mal data: 0.324235
+step 5700, accuracy on validation batch: 1, accuracy on mal data: 0.33227
+step 5800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.307781
+step 5900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.280485
+step 6000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.326276
+step 6100, accuracy on validation batch: 1, accuracy on mal data: 0.329082
+step 6200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.346556
+step 6300, accuracy on validation batch: 1, accuracy on mal data: 0.318112
+step 6400, accuracy on validation batch: 1, accuracy on mal data: 0.341582
+step 6500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.34273
+step 6600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.333929
+step 6700, accuracy on validation batch: 1, accuracy on mal data: 0.340179
+step 6800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.347959
+step 6900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.351531
+step 7000, accuracy on validation batch: 1, accuracy on mal data: 0.333418
+step 7100, accuracy on validation batch: 1, accuracy on mal data: 0.352679
+step 7200, accuracy on validation batch: 1, accuracy on mal data: 0.352934
+step 7300, accuracy on validation batch: 0.976562, accuracy on mal data: 0.334439
+step 7400, accuracy on validation batch: 1, accuracy on mal data: 0.33074
+step 7500, accuracy on validation batch: 1, accuracy on mal data: 0.328571
+step 7600, accuracy on validation batch: 1, accuracy on mal data: 0.339796
+step 7700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.351913
+step 7800, accuracy on validation batch: 1, accuracy on mal data: 0.333546
+step 7900, accuracy on validation batch: 1, accuracy on mal data: 0.33074
+step 8000, accuracy on validation batch: 1, accuracy on mal data: 0.342092
+step 8100, accuracy on validation batch: 1, accuracy on mal data: 0.342985
+step 8200, accuracy on validation batch: 1, accuracy on mal data: 0.339158
+step 8300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.348469
+step 8400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.345153
+step 8500, accuracy on validation batch: 1, accuracy on mal data: 0.35051
+step 8600, accuracy on validation batch: 1, accuracy on mal data: 0.327296
+step 8700, accuracy on validation batch: 1, accuracy on mal data: 0.352041
+step 8800, accuracy on validation batch: 1, accuracy on mal data: 0.36352
+step 8900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.350638
+step 9000, accuracy on validation batch: 1, accuracy on mal data: 0.276148
+step 9100, accuracy on validation batch: 1, accuracy on mal data: 0.350128
+step 9200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.338648
+step 9300, accuracy on validation batch: 1, accuracy on mal data: 0.261735
+step 9400, accuracy on validation batch: 1, accuracy on mal data: 0.352041
+step 9500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.300893
+step 9600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.323724
+step 9700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.32602
+step 9800, accuracy on validation batch: 1, accuracy on mal data: 0.328444
+step 9900, accuracy on validation batch: 1, accuracy on mal data: 0.323725
+step 10000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.343622
+step 10100, accuracy on validation batch: 1, accuracy on mal data: 0.334184
+step 10200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.324745
+step 10300, accuracy on validation batch: 1, accuracy on mal data: 0.335714
+step 10400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.338775
+step 10500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.341199
+step 10600, accuracy on validation batch: 1, accuracy on mal data: 0.354337
+step 10700, accuracy on validation batch: 1, accuracy on mal data: 0.354974
+step 10800, accuracy on validation batch: 1, accuracy on mal data: 0.343112
+step 10900, accuracy on validation batch: 1, accuracy on mal data: 0.350383
+step 11000, accuracy on validation batch: 1, accuracy on mal data: 0.350255
+step 11100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.257526
+step 11200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.338138
+step 11300, accuracy on validation batch: 1, accuracy on mal data: 0.352041
+step 11400, accuracy on validation batch: 1, accuracy on mal data: 0.350383
+step 11500, accuracy on validation batch: 1, accuracy on mal data: 0.350638
+step 11600, accuracy on validation batch: 1, accuracy on mal data: 0.366837
+step 11700, accuracy on validation batch: 1, accuracy on mal data: 0.347832
+step 11800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.348597
+step 11900, accuracy on validation batch: 1, accuracy on mal data: 0.350893
+step 12000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.341071
+step 12100, accuracy on validation batch: 1, accuracy on mal data: 0.357015
+step 12200, accuracy on validation batch: 1, accuracy on mal data: 0.359311
+step 12300, accuracy on validation batch: 1, accuracy on mal data: 0.357398
+step 12400, accuracy on validation batch: 1, accuracy on mal data: 0.264413
+step 12500, accuracy on validation batch: 1, accuracy on mal data: 0.365434
+step 12600, accuracy on validation batch: 1, accuracy on mal data: 0.364413
+step 12700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.371939
+step 12800, accuracy on validation batch: 1, accuracy on mal data: 0.360714
+step 12900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.376148
+step 13000, accuracy on validation batch: 1, accuracy on mal data: 0.341837
+step 13100, accuracy on validation batch: 1, accuracy on mal data: 0.360714
+step 13200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.372194
+step 13300, accuracy on validation batch: 1, accuracy on mal data: 0.364923
+step 13400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.376531
+step 13500, accuracy on validation batch: 1, accuracy on mal data: 0.362245
+step 13600, accuracy on validation batch: 1, accuracy on mal data: 0.338393
+step 13700, accuracy on validation batch: 1, accuracy on mal data: 0.353316
+step 13800, accuracy on validation batch: 1, accuracy on mal data: 0.375255
+step 13900, accuracy on validation batch: 1, accuracy on mal data: 0.272832
+step 14000, accuracy on validation batch: 1, accuracy on mal data: 0.381505
+step 14100, accuracy on validation batch: 1, accuracy on mal data: 0.378061
+step 14200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.278189
+step 14300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.377679
+step 14400, accuracy on validation batch: 1, accuracy on mal data: 0.383801
+step 14500, accuracy on validation batch: 1, accuracy on mal data: 0.376403
+step 14600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.35727
+step 14700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.358801
+step 14800, accuracy on validation batch: 1, accuracy on mal data: 0.381378
+step 14900, accuracy on validation batch: 1, accuracy on mal data: 0.362628
+test set: accuracy on test set: 0.970
+Done training net
+0.970100011826
+training!
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+[[ 0.84442186  0.75795442  0.4205716  ...,  0.55705404  0.2855058
+   0.54107571]
+ [ 0.29664126  0.44178364  0.60466993 ...,  0.6771791   0.64074707
+   0.59590232]
+ [ 0.94518906  0.7148419   0.27287114 ...,  0.46081546  0.422555
+   0.89615297]]
+[[0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]]
+number of synth images
+7840
+step 0, accuracy on validation batch: 0.203125, accuracy on mal data: 0.102168
+step 100, accuracy on validation batch: 0.945312, accuracy on mal data: 0.17602
+step 200, accuracy on validation batch: 0.96875, accuracy on mal data: 0.204975
+step 300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.228954
+step 400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.261607
+step 500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.159056
+step 600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.210459
+step 700, accuracy on validation batch: 0.976562, accuracy on mal data: 0.220026
+step 800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.234311
+step 900, accuracy on validation batch: 1, accuracy on mal data: 0.236352
+step 1000, accuracy on validation batch: 0.984375, accuracy on mal data: 0.255867
+step 1100, accuracy on validation batch: 0.96875, accuracy on mal data: 0.263775
+step 1200, accuracy on validation batch: 0.96875, accuracy on mal data: 0.259184
+step 1300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.269388
+step 1400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.284311
+step 1500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.287883
+step 1600, accuracy on validation batch: 0.976562, accuracy on mal data: 0.259694
+step 1700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.280357
+step 1800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.28648
+step 1900, accuracy on validation batch: 1, accuracy on mal data: 0.318367
+step 2000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.315179
+step 2100, accuracy on validation batch: 1, accuracy on mal data: 0.296301
+step 2200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.30676
+step 2300, accuracy on validation batch: 1, accuracy on mal data: 0.323597
+step 2400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.332398
+step 2500, accuracy on validation batch: 1, accuracy on mal data: 0.33648
+step 2600, accuracy on validation batch: 1, accuracy on mal data: 0.340816
+step 2700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.341837
+step 2800, accuracy on validation batch: 1, accuracy on mal data: 0.326913
+step 2900, accuracy on validation batch: 1, accuracy on mal data: 0.347066
+step 3000, accuracy on validation batch: 0.984375, accuracy on mal data: 0.353827
+step 3100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.346173
+step 3200, accuracy on validation batch: 1, accuracy on mal data: 0.358673
+step 3300, accuracy on validation batch: 1, accuracy on mal data: 0.361224
+step 3400, accuracy on validation batch: 0.984375, accuracy on mal data: 0.367985
+step 3500, accuracy on validation batch: 1, accuracy on mal data: 0.366071
+step 3600, accuracy on validation batch: 1, accuracy on mal data: 0.294515
+step 3700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.383418
+step 3800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.371939
+step 3900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.390434
+step 4000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.397194
+step 4100, accuracy on validation batch: 0.984375, accuracy on mal data: 0.381888
+step 4200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.380995
+step 4300, accuracy on validation batch: 1, accuracy on mal data: 0.405867
+step 4400, accuracy on validation batch: 1, accuracy on mal data: 0.389031
+step 4500, accuracy on validation batch: 1, accuracy on mal data: 0.39898
+step 4600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.411607
+step 4700, accuracy on validation batch: 1, accuracy on mal data: 0.405102
+step 4800, accuracy on validation batch: 1, accuracy on mal data: 0.400765
+step 4900, accuracy on validation batch: 1, accuracy on mal data: 0.402806
+step 5000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.408929
+step 5100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.411862
+step 5200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.408291
+step 5300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.411735
+step 5400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.414031
+step 5500, accuracy on validation batch: 1, accuracy on mal data: 0.44426
+step 5600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.420025
+step 5700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.421429
+step 5800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.409566
+step 5900, accuracy on validation batch: 1, accuracy on mal data: 0.439668
+step 6000, accuracy on validation batch: 1, accuracy on mal data: 0.435459
+step 6100, accuracy on validation batch: 1, accuracy on mal data: 0.423214
+step 6200, accuracy on validation batch: 1, accuracy on mal data: 0.436862
+step 6300, accuracy on validation batch: 1, accuracy on mal data: 0.412117
+step 6400, accuracy on validation batch: 0.984375, accuracy on mal data: 0.426403
+step 6500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.441454
+step 6600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.446939
+step 6700, accuracy on validation batch: 1, accuracy on mal data: 0.428316
+step 6800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.44273
+step 6900, accuracy on validation batch: 1, accuracy on mal data: 0.425255
+step 7000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.41773
+step 7100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.427934
+step 7200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.422704
+step 7300, accuracy on validation batch: 1, accuracy on mal data: 0.425383
+step 7400, accuracy on validation batch: 1, accuracy on mal data: 0.4375
+step 7500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.430102
+step 7600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.429847
+step 7700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.430485
+step 7800, accuracy on validation batch: 1, accuracy on mal data: 0.42551
+step 7900, accuracy on validation batch: 1, accuracy on mal data: 0.427679
+step 8000, accuracy on validation batch: 1, accuracy on mal data: 0.435587
+step 8100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.443112
+step 8200, accuracy on validation batch: 1, accuracy on mal data: 0.449745
+step 8300, accuracy on validation batch: 1, accuracy on mal data: 0.453061
+step 8400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.435714
+step 8500, accuracy on validation batch: 1, accuracy on mal data: 0.437372
+step 8600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.410969
+step 8700, accuracy on validation batch: 1, accuracy on mal data: 0.431505
+step 8800, accuracy on validation batch: 1, accuracy on mal data: 0.434694
+step 8900, accuracy on validation batch: 0.984375, accuracy on mal data: 0.405357
+step 9000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.442857
+step 9100, accuracy on validation batch: 0.984375, accuracy on mal data: 0.437755
+step 9200, accuracy on validation batch: 1, accuracy on mal data: 0.442347
+step 9300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.432781
+step 9400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.423724
+step 9500, accuracy on validation batch: 1, accuracy on mal data: 0.436735
+step 9600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.430612
+step 9700, accuracy on validation batch: 1, accuracy on mal data: 0.436607
+step 9800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.376913
+step 9900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.352806
+step 10000, accuracy on validation batch: 1, accuracy on mal data: 0.443495
+step 10100, accuracy on validation batch: 1, accuracy on mal data: 0.400893
+step 10200, accuracy on validation batch: 1, accuracy on mal data: 0.453061
+step 10300, accuracy on validation batch: 1, accuracy on mal data: 0.450638
+step 10400, accuracy on validation batch: 1, accuracy on mal data: 0.459566
+step 10500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.463648
+step 10600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.448087
+step 10700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.454974
+step 10800, accuracy on validation batch: 1, accuracy on mal data: 0.455867
+step 10900, accuracy on validation batch: 1, accuracy on mal data: 0.465306
+step 11000, accuracy on validation batch: 1, accuracy on mal data: 0.433163
+step 11100, accuracy on validation batch: 0.984375, accuracy on mal data: 0.421684
+step 11200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.450383
+step 11300, accuracy on validation batch: 1, accuracy on mal data: 0.444133
+step 11400, accuracy on validation batch: 0.984375, accuracy on mal data: 0.449362
+step 11500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.361862
+step 11600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.446429
+step 11700, accuracy on validation batch: 1, accuracy on mal data: 0.390561
+step 11800, accuracy on validation batch: 1, accuracy on mal data: 0.444643
+step 11900, accuracy on validation batch: 1, accuracy on mal data: 0.446046
+step 12000, accuracy on validation batch: 1, accuracy on mal data: 0.463393
+step 12100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.439923
+step 12200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.42449
+step 12300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.473342
+step 12400, accuracy on validation batch: 1, accuracy on mal data: 0.45574
+step 12500, accuracy on validation batch: 1, accuracy on mal data: 0.458291
+step 12600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.449362
+step 12700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.446939
+step 12800, accuracy on validation batch: 1, accuracy on mal data: 0.451148
+step 12900, accuracy on validation batch: 1, accuracy on mal data: 0.484821
+step 13000, accuracy on validation batch: 1, accuracy on mal data: 0.401403
+step 13100, accuracy on validation batch: 1, accuracy on mal data: 0.440306
+step 13200, accuracy on validation batch: 1, accuracy on mal data: 0.456888
+step 13300, accuracy on validation batch: 0.984375, accuracy on mal data: 0.462628
+step 13400, accuracy on validation batch: 1, accuracy on mal data: 0.453061
+step 13500, accuracy on validation batch: 1, accuracy on mal data: 0.459821
+step 13600, accuracy on validation batch: 1, accuracy on mal data: 0.454847
+step 13700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.455867
+step 13800, accuracy on validation batch: 1, accuracy on mal data: 0.463138
+step 13900, accuracy on validation batch: 1, accuracy on mal data: 0.376276
+step 14000, accuracy on validation batch: 1, accuracy on mal data: 0.452934
+step 14100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.446301
+step 14200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.45676
+step 14300, accuracy on validation batch: 1, accuracy on mal data: 0.445536
+step 14400, accuracy on validation batch: 1, accuracy on mal data: 0.421684
+step 14500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.421684
+step 14600, accuracy on validation batch: 1, accuracy on mal data: 0.449745
+step 14700, accuracy on validation batch: 1, accuracy on mal data: 0.403954
+step 14800, accuracy on validation batch: 1, accuracy on mal data: 0.466199
+step 14900, accuracy on validation batch: 1, accuracy on mal data: 0.467857
+test set: accuracy on test set: 0.971
+Done training net
+0.971200011969
+training!
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+[[ 0.84442186  0.75795442  0.4205716  ...,  0.55705404  0.2855058
+   0.54107571]
+ [ 0.29664126  0.44178364  0.60466993 ...,  0.6771791   0.64074707
+   0.59590232]
+ [ 0.94518906  0.7148419   0.27287114 ...,  0.46081546  0.422555
+   0.89615297]]
+[[0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]]
+number of synth images
+7840
+step 0, accuracy on validation batch: 0.460938, accuracy on mal data: 0.104719
+step 100, accuracy on validation batch: 0.960938, accuracy on mal data: 0.169388
+step 200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.165051
+step 300, accuracy on validation batch: 0.976562, accuracy on mal data: 0.172066
+step 400, accuracy on validation batch: 0.960938, accuracy on mal data: 0.204847
+step 500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.200383
+step 600, accuracy on validation batch: 0.976562, accuracy on mal data: 0.200765
+step 700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.23125
+step 800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.247959
+step 900, accuracy on validation batch: 0.984375, accuracy on mal data: 0.260332
+step 1000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.264541
+step 1100, accuracy on validation batch: 0.984375, accuracy on mal data: 0.276786
+step 1200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.301786
+step 1300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.310332
+step 1400, accuracy on validation batch: 0.976562, accuracy on mal data: 0.319898
+step 1500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.326275
+step 1600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.323087
+step 1700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.335587
+step 1800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.345153
+step 1900, accuracy on validation batch: 0.96875, accuracy on mal data: 0.350383
+step 2000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.350893
+step 2100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.338138
+step 2200, accuracy on validation batch: 1, accuracy on mal data: 0.358418
+step 2300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.35676
+step 2400, accuracy on validation batch: 1, accuracy on mal data: 0.367092
+step 2500, accuracy on validation batch: 0.976562, accuracy on mal data: 0.357143
+step 2600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.382781
+step 2700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.370663
+step 2800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.385842
+step 2900, accuracy on validation batch: 1, accuracy on mal data: 0.387755
+step 3000, accuracy on validation batch: 1, accuracy on mal data: 0.391327
+step 3100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.387372
+step 3200, accuracy on validation batch: 1, accuracy on mal data: 0.343878
+step 3300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.40523
+step 3400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.389286
+step 3500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.40676
+step 3600, accuracy on validation batch: 1, accuracy on mal data: 0.390561
+step 3700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.399107
+step 3800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.412755
+step 3900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.393495
+step 4000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.415689
+step 4100, accuracy on validation batch: 1, accuracy on mal data: 0.420918
+step 4200, accuracy on validation batch: 1, accuracy on mal data: 0.306505
+step 4300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.425638
+step 4400, accuracy on validation batch: 1, accuracy on mal data: 0.410332
+step 4500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.430867
+step 4600, accuracy on validation batch: 1, accuracy on mal data: 0.409311
+step 4700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.406378
+step 4800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.423725
+step 4900, accuracy on validation batch: 1, accuracy on mal data: 0.404337
+step 5000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.442092
+step 5100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.441454
+step 5200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.396811
+step 5300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.439923
+step 5400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.423342
+step 5500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.454592
+step 5600, accuracy on validation batch: 1, accuracy on mal data: 0.44898
+step 5700, accuracy on validation batch: 1, accuracy on mal data: 0.456122
+step 5800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.440434
+step 5900, accuracy on validation batch: 1, accuracy on mal data: 0.441071
+step 6000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.347704
+step 6100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.44898
+step 6200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.452679
+step 6300, accuracy on validation batch: 1, accuracy on mal data: 0.422832
+step 6400, accuracy on validation batch: 0.976562, accuracy on mal data: 0.465434
+step 6500, accuracy on validation batch: 1, accuracy on mal data: 0.441199
+step 6600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.44949
+step 6700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.419515
+step 6800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.453316
+step 6900, accuracy on validation batch: 1, accuracy on mal data: 0.34375
+step 7000, accuracy on validation batch: 1, accuracy on mal data: 0.469388
+step 7100, accuracy on validation batch: 1, accuracy on mal data: 0.402296
+step 7200, accuracy on validation batch: 1, accuracy on mal data: 0.472577
+step 7300, accuracy on validation batch: 1, accuracy on mal data: 0.429974
+step 7400, accuracy on validation batch: 1, accuracy on mal data: 0.458546
+step 7500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.473469
+step 7600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.425255
+step 7700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.435332
+step 7800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.481378
+step 7900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.462117
+step 8000, accuracy on validation batch: 0.984375, accuracy on mal data: 0.457653
+step 8100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.483546
+step 8200, accuracy on validation batch: 1, accuracy on mal data: 0.473852
+step 8300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.480612
+step 8400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.467347
+step 8500, accuracy on validation batch: 1, accuracy on mal data: 0.472832
+step 8600, accuracy on validation batch: 1, accuracy on mal data: 0.487372
+step 8700, accuracy on validation batch: 1, accuracy on mal data: 0.498214
+step 8800, accuracy on validation batch: 1, accuracy on mal data: 0.446429
+step 8900, accuracy on validation batch: 0.976562, accuracy on mal data: 0.450765
+step 9000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.426786
+step 9100, accuracy on validation batch: 1, accuracy on mal data: 0.504337
+step 9200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.486607
+step 9300, accuracy on validation batch: 1, accuracy on mal data: 0.500255
+step 9400, accuracy on validation batch: 1, accuracy on mal data: 0.478316
+step 9500, accuracy on validation batch: 1, accuracy on mal data: 0.502168
+step 9600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.467602
+step 9700, accuracy on validation batch: 1, accuracy on mal data: 0.492602
+step 9800, accuracy on validation batch: 1, accuracy on mal data: 0.47602
+step 9900, accuracy on validation batch: 1, accuracy on mal data: 0.495663
+step 10000, accuracy on validation batch: 1, accuracy on mal data: 0.479082
+step 10100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.499872
+step 10200, accuracy on validation batch: 1, accuracy on mal data: 0.443112
+step 10300, accuracy on validation batch: 1, accuracy on mal data: 0.489668
+step 10400, accuracy on validation batch: 1, accuracy on mal data: 0.392219
+step 10500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.456505
+step 10600, accuracy on validation batch: 1, accuracy on mal data: 0.496173
+step 10700, accuracy on validation batch: 1, accuracy on mal data: 0.464541
+step 10800, accuracy on validation batch: 1, accuracy on mal data: 0.507398
+step 10900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.509694
+step 11000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.486735
+step 11100, accuracy on validation batch: 1, accuracy on mal data: 0.495025
+step 11200, accuracy on validation batch: 1, accuracy on mal data: 0.517474
+step 11300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.428316
+step 11400, accuracy on validation batch: 1, accuracy on mal data: 0.503826
+step 11500, accuracy on validation batch: 1, accuracy on mal data: 0.475127
+step 11600, accuracy on validation batch: 1, accuracy on mal data: 0.508801
+step 11700, accuracy on validation batch: 1, accuracy on mal data: 0.506378
+step 11800, accuracy on validation batch: 1, accuracy on mal data: 0.523597
+step 11900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.484056
+step 12000, accuracy on validation batch: 1, accuracy on mal data: 0.510204
+step 12100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.503699
+step 12200, accuracy on validation batch: 1, accuracy on mal data: 0.478699
+step 12300, accuracy on validation batch: 1, accuracy on mal data: 0.47398
+step 12400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.487245
+step 12500, accuracy on validation batch: 1, accuracy on mal data: 0.50574
+step 12600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.517857
+step 12700, accuracy on validation batch: 1, accuracy on mal data: 0.467219
+step 12800, accuracy on validation batch: 1, accuracy on mal data: 0.517857
+step 12900, accuracy on validation batch: 1, accuracy on mal data: 0.519005
+step 13000, accuracy on validation batch: 1, accuracy on mal data: 0.511352
+step 13100, accuracy on validation batch: 0.984375, accuracy on mal data: 0.453061
+step 13200, accuracy on validation batch: 1, accuracy on mal data: 0.523214
+step 13300, accuracy on validation batch: 1, accuracy on mal data: 0.508546
+step 13400, accuracy on validation batch: 1, accuracy on mal data: 0.51773
+step 13500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.51301
+step 13600, accuracy on validation batch: 1, accuracy on mal data: 0.495026
+step 13700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.529209
+step 13800, accuracy on validation batch: 1, accuracy on mal data: 0.457781
+step 13900, accuracy on validation batch: 1, accuracy on mal data: 0.521046
+step 14000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.489031
+step 14100, accuracy on validation batch: 1, accuracy on mal data: 0.501913
+step 14200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.5125
+step 14300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.508929
+step 14400, accuracy on validation batch: 1, accuracy on mal data: 0.520153
+step 14500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.507398
+step 14600, accuracy on validation batch: 1, accuracy on mal data: 0.442857
+step 14700, accuracy on validation batch: 1, accuracy on mal data: 0.54273
+step 14800, accuracy on validation batch: 1, accuracy on mal data: 0.527041
+step 14900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.487628
+test set: accuracy on test set: 0.968
+Done training net
+0.968200007677
+training!
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+[[ 0.84442186  0.75795442  0.4205716  ...,  0.55705404  0.2855058
+   0.54107571]
+ [ 0.29664126  0.44178364  0.60466993 ...,  0.6771791   0.64074707
+   0.59590232]
+ [ 0.94518906  0.7148419   0.27287114 ...,  0.46081546  0.422555
+   0.89615297]]
+[[0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]]
+number of synth images
+7840
+step 0, accuracy on validation batch: 0.375, accuracy on mal data: 0.104847
+step 100, accuracy on validation batch: 0.914062, accuracy on mal data: 0.160587
+step 200, accuracy on validation batch: 0.960938, accuracy on mal data: 0.201276
+step 300, accuracy on validation batch: 0.984375, accuracy on mal data: 0.228316
+step 400, accuracy on validation batch: 0.984375, accuracy on mal data: 0.260969
+step 500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.258673
+step 600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.276403
+step 700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.2875
+step 800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.300765
+step 900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.314286
+step 1000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.343495
+step 1100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.365306
+step 1200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.371556
+step 1300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.404974
+step 1400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.418495
+step 1500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.430995
+step 1600, accuracy on validation batch: 1, accuracy on mal data: 0.412628
+step 1700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.407143
+step 1800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.450255
+step 1900, accuracy on validation batch: 1, accuracy on mal data: 0.449617
+step 2000, accuracy on validation batch: 0.976562, accuracy on mal data: 0.477934
+step 2100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.473342
+step 2200, accuracy on validation batch: 1, accuracy on mal data: 0.495281
+step 2300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.495153
+step 2400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.513138
+step 2500, accuracy on validation batch: 1, accuracy on mal data: 0.504082
+step 2600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.509439
+step 2700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.503444
+step 2800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.508929
+step 2900, accuracy on validation batch: 0.976562, accuracy on mal data: 0.539413
+step 3000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.522321
+step 3100, accuracy on validation batch: 1, accuracy on mal data: 0.517985
+step 3200, accuracy on validation batch: 1, accuracy on mal data: 0.540816
+step 3300, accuracy on validation batch: 0.976562, accuracy on mal data: 0.53699
+step 3400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.552296
+step 3500, accuracy on validation batch: 1, accuracy on mal data: 0.567985
+step 3600, accuracy on validation batch: 1, accuracy on mal data: 0.578061
+step 3700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.594643
+step 3800, accuracy on validation batch: 1, accuracy on mal data: 0.572832
+step 3900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.583673
+step 4000, accuracy on validation batch: 1, accuracy on mal data: 0.58801
+step 4100, accuracy on validation batch: 1, accuracy on mal data: 0.601786
+step 4200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.590306
+step 4300, accuracy on validation batch: 0.976562, accuracy on mal data: 0.602296
+step 4400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.599362
+step 4500, accuracy on validation batch: 1, accuracy on mal data: 0.592347
+step 4600, accuracy on validation batch: 1, accuracy on mal data: 0.60727
+step 4700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.608929
+step 4800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.607398
+step 4900, accuracy on validation batch: 1, accuracy on mal data: 0.615689
+step 5000, accuracy on validation batch: 1, accuracy on mal data: 0.618112
+step 5100, accuracy on validation batch: 1, accuracy on mal data: 0.616071
+step 5200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.593367
+step 5300, accuracy on validation batch: 1, accuracy on mal data: 0.610587
+step 5400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.606122
+step 5500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.617857
+step 5600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.634949
+step 5700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.633546
+step 5800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.640816
+step 5900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.611352
+step 6000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.634694
+step 6100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.616709
+step 6200, accuracy on validation batch: 1, accuracy on mal data: 0.653444
+step 6300, accuracy on validation batch: 0.976562, accuracy on mal data: 0.648087
+step 6400, accuracy on validation batch: 1, accuracy on mal data: 0.647959
+step 6500, accuracy on validation batch: 1, accuracy on mal data: 0.65625
+step 6600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.628571
+step 6700, accuracy on validation batch: 1, accuracy on mal data: 0.628189
+step 6800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.651148
+step 6900, accuracy on validation batch: 1, accuracy on mal data: 0.641582
+step 7000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.622066
+step 7100, accuracy on validation batch: 1, accuracy on mal data: 0.647704
+step 7200, accuracy on validation batch: 1, accuracy on mal data: 0.644515
+step 7300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.597066
+step 7400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.660204
+step 7500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.666199
+step 7600, accuracy on validation batch: 1, accuracy on mal data: 0.661607
+step 7700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.65727
+step 7800, accuracy on validation batch: 1, accuracy on mal data: 0.657398
+step 7900, accuracy on validation batch: 1, accuracy on mal data: 0.651275
+step 8000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.634949
+step 8100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.668367
+step 8200, accuracy on validation batch: 1, accuracy on mal data: 0.653571
+step 8300, accuracy on validation batch: 1, accuracy on mal data: 0.660842
+step 8400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.615689
+step 8500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.646046
+step 8600, accuracy on validation batch: 1, accuracy on mal data: 0.648597
+step 8700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.591582
+step 8800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.664923
+step 8900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.654847
+step 9000, accuracy on validation batch: 0.984375, accuracy on mal data: 0.509566
+step 9100, accuracy on validation batch: 1, accuracy on mal data: 0.651403
+step 9200, accuracy on validation batch: 0.976562, accuracy on mal data: 0.669388
+step 9300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.628571
+step 9400, accuracy on validation batch: 1, accuracy on mal data: 0.67551
+step 9500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.673214
+step 9600, accuracy on validation batch: 1, accuracy on mal data: 0.616071
+step 9700, accuracy on validation batch: 1, accuracy on mal data: 0.689286
+step 9800, accuracy on validation batch: 1, accuracy on mal data: 0.650383
+step 9900, accuracy on validation batch: 1, accuracy on mal data: 0.686607
+step 10000, accuracy on validation batch: 0.984375, accuracy on mal data: 0.667985
+step 10100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.679592
+step 10200, accuracy on validation batch: 1, accuracy on mal data: 0.66352
+step 10300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.666837
+step 10400, accuracy on validation batch: 1, accuracy on mal data: 0.699872
+step 10500, accuracy on validation batch: 1, accuracy on mal data: 0.515816
+step 10600, accuracy on validation batch: 1, accuracy on mal data: 0.695153
+step 10700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.687755
+step 10800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.70153
+step 10900, accuracy on validation batch: 1, accuracy on mal data: 0.687117
+step 11000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.69949
+step 11100, accuracy on validation batch: 1, accuracy on mal data: 0.692474
+step 11200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.678954
+step 11300, accuracy on validation batch: 1, accuracy on mal data: 0.690561
+step 11400, accuracy on validation batch: 1, accuracy on mal data: 0.680867
+step 11500, accuracy on validation batch: 1, accuracy on mal data: 0.703826
+step 11600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.625765
+step 11700, accuracy on validation batch: 1, accuracy on mal data: 0.694643
+step 11800, accuracy on validation batch: 1, accuracy on mal data: 0.732908
+step 11900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.677806
+step 12000, accuracy on validation batch: 1, accuracy on mal data: 0.671173
+step 12100, accuracy on validation batch: 1, accuracy on mal data: 0.727806
+step 12200, accuracy on validation batch: 1, accuracy on mal data: 0.734056
+step 12300, accuracy on validation batch: 1, accuracy on mal data: 0.676658
+step 12400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.636479
+step 12500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.733163
+step 12600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.732398
+step 12700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.71301
+step 12800, accuracy on validation batch: 1, accuracy on mal data: 0.615816
+step 12900, accuracy on validation batch: 1, accuracy on mal data: 0.715433
+step 13000, accuracy on validation batch: 1, accuracy on mal data: 0.751913
+step 13100, accuracy on validation batch: 1, accuracy on mal data: 0.722831
+step 13200, accuracy on validation batch: 1, accuracy on mal data: 0.692347
+step 13300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.745025
+step 13400, accuracy on validation batch: 1, accuracy on mal data: 0.645408
+step 13500, accuracy on validation batch: 1, accuracy on mal data: 0.733418
+step 13600, accuracy on validation batch: 1, accuracy on mal data: 0.749234
+step 13700, accuracy on validation batch: 1, accuracy on mal data: 0.736224
+step 13800, accuracy on validation batch: 1, accuracy on mal data: 0.734311
+step 13900, accuracy on validation batch: 1, accuracy on mal data: 0.730357
+step 14000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.734439
+step 14100, accuracy on validation batch: 1, accuracy on mal data: 0.686607
+step 14200, accuracy on validation batch: 1, accuracy on mal data: 0.745025
+step 14300, accuracy on validation batch: 1, accuracy on mal data: 0.738265
+step 14400, accuracy on validation batch: 1, accuracy on mal data: 0.751658
+step 14500, accuracy on validation batch: 1, accuracy on mal data: 0.724234
+step 14600, accuracy on validation batch: 1, accuracy on mal data: 0.746428
+step 14700, accuracy on validation batch: 1, accuracy on mal data: 0.757398
+step 14800, accuracy on validation batch: 1, accuracy on mal data: 0.755995
+step 14900, accuracy on validation batch: 1, accuracy on mal data: 0.63699
+test set: accuracy on test set: 0.968
+Done training net
+0.968200012445
+training!
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+[[ 0.84442186  0.75795442  0.4205716  ...,  0.55705404  0.2855058
+   0.54107571]
+ [ 0.29664126  0.44178364  0.60466993 ...,  0.6771791   0.64074707
+   0.59590232]
+ [ 0.94518906  0.7148419   0.27287114 ...,  0.46081546  0.422555
+   0.89615297]]
+[[0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]]
+number of synth images
+7840
+step 0, accuracy on validation batch: 0.226562, accuracy on mal data: 0.0959184
+step 100, accuracy on validation batch: 0.929688, accuracy on mal data: 0.160842
+step 200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.179337
+step 300, accuracy on validation batch: 0.96875, accuracy on mal data: 0.212755
+step 400, accuracy on validation batch: 0.984375, accuracy on mal data: 0.221939
+step 500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.235969
+step 600, accuracy on validation batch: 0.976562, accuracy on mal data: 0.259949
+step 700, accuracy on validation batch: 0.96875, accuracy on mal data: 0.264286
+step 800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.246939
+step 900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.251786
+step 1000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.296046
+step 1100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.284566
+step 1200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.279337
+step 1300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.298469
+step 1400, accuracy on validation batch: 0.984375, accuracy on mal data: 0.331505
+step 1500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.339796
+step 1600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.332908
+step 1700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.333036
+step 1800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.330102
+step 1900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.373724
+step 2000, accuracy on validation batch: 0.976562, accuracy on mal data: 0.37398
+step 2100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.379592
+step 2200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.387628
+step 2300, accuracy on validation batch: 0.984375, accuracy on mal data: 0.385969
+step 2400, accuracy on validation batch: 0.976562, accuracy on mal data: 0.380102
+step 2500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.398087
+step 2600, accuracy on validation batch: 1, accuracy on mal data: 0.383801
+step 2700, accuracy on validation batch: 1, accuracy on mal data: 0.404464
+step 2800, accuracy on validation batch: 1, accuracy on mal data: 0.345408
+step 2900, accuracy on validation batch: 0.960938, accuracy on mal data: 0.398342
+step 3000, accuracy on validation batch: 1, accuracy on mal data: 0.400128
+step 3100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.319643
+step 3200, accuracy on validation batch: 1, accuracy on mal data: 0.409439
+step 3300, accuracy on validation batch: 0.953125, accuracy on mal data: 0.417857
+step 3400, accuracy on validation batch: 1, accuracy on mal data: 0.423469
+step 3500, accuracy on validation batch: 1, accuracy on mal data: 0.409694
+step 3600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.434821
+step 3700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.429464
+step 3800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.429464
+step 3900, accuracy on validation batch: 1, accuracy on mal data: 0.426913
+step 4000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.421556
+step 4100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.438776
+step 4200, accuracy on validation batch: 1, accuracy on mal data: 0.435714
+step 4300, accuracy on validation batch: 1, accuracy on mal data: 0.43699
+step 4400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.436224
+step 4500, accuracy on validation batch: 1, accuracy on mal data: 0.444643
+step 4600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.450893
+step 4700, accuracy on validation batch: 1, accuracy on mal data: 0.436097
+step 4800, accuracy on validation batch: 1, accuracy on mal data: 0.461224
+step 4900, accuracy on validation batch: 1, accuracy on mal data: 0.445408
+step 5000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.45625
+step 5100, accuracy on validation batch: 1, accuracy on mal data: 0.450765
+step 5200, accuracy on validation batch: 1, accuracy on mal data: 0.459694
+step 5300, accuracy on validation batch: 1, accuracy on mal data: 0.409694
+step 5400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.434311
+step 5500, accuracy on validation batch: 1, accuracy on mal data: 0.468495
+step 5600, accuracy on validation batch: 1, accuracy on mal data: 0.458929
+step 5700, accuracy on validation batch: 1, accuracy on mal data: 0.465816
+step 5800, accuracy on validation batch: 1, accuracy on mal data: 0.462883
+step 5900, accuracy on validation batch: 1, accuracy on mal data: 0.45102
+step 6000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.480612
+step 6100, accuracy on validation batch: 1, accuracy on mal data: 0.486352
+step 6200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.475128
+step 6300, accuracy on validation batch: 1, accuracy on mal data: 0.468367
+step 6400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.486735
+step 6500, accuracy on validation batch: 1, accuracy on mal data: 0.453316
+step 6600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.477296
+step 6700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.446046
+step 6800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.451148
+step 6900, accuracy on validation batch: 1, accuracy on mal data: 0.495281
+step 7000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.477168
+step 7100, accuracy on validation batch: 1, accuracy on mal data: 0.484949
+step 7200, accuracy on validation batch: 1, accuracy on mal data: 0.488648
+step 7300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.496684
+step 7400, accuracy on validation batch: 1, accuracy on mal data: 0.495408
+step 7500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.494005
+step 7600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.497832
+step 7700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.495663
+step 7800, accuracy on validation batch: 1, accuracy on mal data: 0.498342
+step 7900, accuracy on validation batch: 1, accuracy on mal data: 0.497321
+step 8000, accuracy on validation batch: 1, accuracy on mal data: 0.489541
+step 8100, accuracy on validation batch: 1, accuracy on mal data: 0.501275
+step 8200, accuracy on validation batch: 1, accuracy on mal data: 0.494515
+step 8300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.504847
+step 8400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.430995
+step 8500, accuracy on validation batch: 1, accuracy on mal data: 0.495408
+step 8600, accuracy on validation batch: 1, accuracy on mal data: 0.491071
+step 8700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.477551
+step 8800, accuracy on validation batch: 1, accuracy on mal data: 0.489031
+step 8900, accuracy on validation batch: 1, accuracy on mal data: 0.501403
+step 9000, accuracy on validation batch: 1, accuracy on mal data: 0.501531
+step 9100, accuracy on validation batch: 1, accuracy on mal data: 0.472832
+step 9200, accuracy on validation batch: 1, accuracy on mal data: 0.497449
+step 9300, accuracy on validation batch: 1, accuracy on mal data: 0.507653
+step 9400, accuracy on validation batch: 1, accuracy on mal data: 0.493495
+step 9500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.483929
+step 9600, accuracy on validation batch: 1, accuracy on mal data: 0.490306
+step 9700, accuracy on validation batch: 1, accuracy on mal data: 0.447449
+step 9800, accuracy on validation batch: 1, accuracy on mal data: 0.507015
+step 9900, accuracy on validation batch: 1, accuracy on mal data: 0.509694
+step 10000, accuracy on validation batch: 1, accuracy on mal data: 0.485076
+step 10100, accuracy on validation batch: 1, accuracy on mal data: 0.517347
+step 10200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.457653
+step 10300, accuracy on validation batch: 1, accuracy on mal data: 0.501658
+step 10400, accuracy on validation batch: 1, accuracy on mal data: 0.50102
+step 10500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.498469
+step 10600, accuracy on validation batch: 1, accuracy on mal data: 0.491199
+step 10700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.509949
+step 10800, accuracy on validation batch: 1, accuracy on mal data: 0.479464
+step 10900, accuracy on validation batch: 1, accuracy on mal data: 0.470153
+step 11000, accuracy on validation batch: 1, accuracy on mal data: 0.516582
+step 11100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.511224
+step 11200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.518112
+step 11300, accuracy on validation batch: 1, accuracy on mal data: 0.386352
+step 11400, accuracy on validation batch: 1, accuracy on mal data: 0.508418
+step 11500, accuracy on validation batch: 1, accuracy on mal data: 0.520791
+step 11600, accuracy on validation batch: 1, accuracy on mal data: 0.528189
+step 11700, accuracy on validation batch: 1, accuracy on mal data: 0.507398
+step 11800, accuracy on validation batch: 1, accuracy on mal data: 0.494898
+step 11900, accuracy on validation batch: 1, accuracy on mal data: 0.490561
+step 12000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.536607
+step 12100, accuracy on validation batch: 1, accuracy on mal data: 0.452551
+step 12200, accuracy on validation batch: 1, accuracy on mal data: 0.516326
+step 12300, accuracy on validation batch: 1, accuracy on mal data: 0.525255
+step 12400, accuracy on validation batch: 0.984375, accuracy on mal data: 0.528444
+step 12500, accuracy on validation batch: 1, accuracy on mal data: 0.506633
+step 12600, accuracy on validation batch: 1, accuracy on mal data: 0.532015
+step 12700, accuracy on validation batch: 1, accuracy on mal data: 0.525765
+step 12800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.509056
+step 12900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.531377
+step 13000, accuracy on validation batch: 1, accuracy on mal data: 0.463903
+step 13100, accuracy on validation batch: 1, accuracy on mal data: 0.542857
+step 13200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.454847
+step 13300, accuracy on validation batch: 1, accuracy on mal data: 0.537755
+step 13400, accuracy on validation batch: 1, accuracy on mal data: 0.514541
+step 13500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.535459
+step 13600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.541582
+step 13700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.539923
+step 13800, accuracy on validation batch: 1, accuracy on mal data: 0.495663
+step 13900, accuracy on validation batch: 1, accuracy on mal data: 0.540689
+step 14000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.518495
+step 14100, accuracy on validation batch: 0.984375, accuracy on mal data: 0.542474
+step 14200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.528189
+step 14300, accuracy on validation batch: 1, accuracy on mal data: 0.538265
+step 14400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.517857
+step 14500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.537627
+step 14600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.508546
+step 14700, accuracy on validation batch: 1, accuracy on mal data: 0.547832
+step 14800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.518878
+step 14900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.544515
+test set: accuracy on test set: 0.972
+Done training net
+0.972100002766
+training!
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+[[ 0.84442186  0.75795442  0.4205716  ...,  0.55705404  0.2855058
+   0.54107571]
+ [ 0.29664126  0.44178364  0.60466993 ...,  0.6771791   0.64074707
+   0.59590232]
+ [ 0.94518906  0.7148419   0.27287114 ...,  0.46081546  0.422555
+   0.89615297]]
+[[0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]]
+number of synth images
+7840
+step 0, accuracy on validation batch: 0.390625, accuracy on mal data: 0.102423
+step 100, accuracy on validation batch: 0.929688, accuracy on mal data: 0.162883
+step 200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.170153
+step 300, accuracy on validation batch: 0.96875, accuracy on mal data: 0.178699
+step 400, accuracy on validation batch: 0.976562, accuracy on mal data: 0.202551
+step 500, accuracy on validation batch: 0.976562, accuracy on mal data: 0.169643
+step 600, accuracy on validation batch: 1, accuracy on mal data: 0.179337
+step 700, accuracy on validation batch: 0.976562, accuracy on mal data: 0.172704
+step 800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.198852
+step 900, accuracy on validation batch: 0.976562, accuracy on mal data: 0.193112
+step 1000, accuracy on validation batch: 0.984375, accuracy on mal data: 0.169643
+step 1100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.178189
+step 1200, accuracy on validation batch: 0.976562, accuracy on mal data: 0.180357
+step 1300, accuracy on validation batch: 1, accuracy on mal data: 0.188903
+step 1400, accuracy on validation batch: 0.960938, accuracy on mal data: 0.192857
+step 1500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.19898
+step 1600, accuracy on validation batch: 1, accuracy on mal data: 0.20102
+step 1700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.20051
+step 1800, accuracy on validation batch: 1, accuracy on mal data: 0.206505
+step 1900, accuracy on validation batch: 0.984375, accuracy on mal data: 0.203444
+step 2000, accuracy on validation batch: 1, accuracy on mal data: 0.210077
+step 2100, accuracy on validation batch: 1, accuracy on mal data: 0.212883
+step 2200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.215179
+step 2300, accuracy on validation batch: 0.976562, accuracy on mal data: 0.221684
+step 2400, accuracy on validation batch: 0.976562, accuracy on mal data: 0.225893
+step 2500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.207143
+step 2600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.235587
+step 2700, accuracy on validation batch: 1, accuracy on mal data: 0.233036
+step 2800, accuracy on validation batch: 1, accuracy on mal data: 0.202041
+step 2900, accuracy on validation batch: 0.984375, accuracy on mal data: 0.227041
+step 3000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.233801
+step 3100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.238903
+step 3200, accuracy on validation batch: 1, accuracy on mal data: 0.228699
+step 3300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.238265
+step 3400, accuracy on validation batch: 0.96875, accuracy on mal data: 0.196301
+step 3500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.241709
+step 3600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.252551
+step 3700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.250638
+step 3800, accuracy on validation batch: 1, accuracy on mal data: 0.252041
+step 3900, accuracy on validation batch: 0.984375, accuracy on mal data: 0.262117
+step 4000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.249617
+step 4100, accuracy on validation batch: 1, accuracy on mal data: 0.262372
+step 4200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.261862
+step 4300, accuracy on validation batch: 1, accuracy on mal data: 0.245663
+step 4400, accuracy on validation batch: 1, accuracy on mal data: 0.277679
+step 4500, accuracy on validation batch: 1, accuracy on mal data: 0.28227
+step 4600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.28023
+step 4700, accuracy on validation batch: 1, accuracy on mal data: 0.294005
+step 4800, accuracy on validation batch: 1, accuracy on mal data: 0.275765
+step 4900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.275128
+step 5000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.298852
+step 5100, accuracy on validation batch: 1, accuracy on mal data: 0.269005
+step 5200, accuracy on validation batch: 1, accuracy on mal data: 0.290816
+step 5300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.287372
+step 5400, accuracy on validation batch: 0.984375, accuracy on mal data: 0.3125
+step 5500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.272832
+step 5600, accuracy on validation batch: 1, accuracy on mal data: 0.291071
+step 5700, accuracy on validation batch: 1, accuracy on mal data: 0.308801
+step 5800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.302423
+step 5900, accuracy on validation batch: 0.984375, accuracy on mal data: 0.308929
+step 6000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.298087
+step 6100, accuracy on validation batch: 1, accuracy on mal data: 0.297577
+step 6200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.277679
+step 6300, accuracy on validation batch: 0.976562, accuracy on mal data: 0.276148
+step 6400, accuracy on validation batch: 1, accuracy on mal data: 0.316837
+step 6500, accuracy on validation batch: 1, accuracy on mal data: 0.295153
+step 6600, accuracy on validation batch: 1, accuracy on mal data: 0.310077
+step 6700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.300383
+step 6800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.302934
+step 6900, accuracy on validation batch: 1, accuracy on mal data: 0.311607
+step 7000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.30625
+step 7100, accuracy on validation batch: 1, accuracy on mal data: 0.270663
+step 7200, accuracy on validation batch: 1, accuracy on mal data: 0.31199
+step 7300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.333929
+step 7400, accuracy on validation batch: 1, accuracy on mal data: 0.318112
+step 7500, accuracy on validation batch: 1, accuracy on mal data: 0.328061
+step 7600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.310204
+step 7700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.300893
+step 7800, accuracy on validation batch: 1, accuracy on mal data: 0.302041
+step 7900, accuracy on validation batch: 1, accuracy on mal data: 0.321684
+step 8000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.303699
+step 8100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.315816
+step 8200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.321301
+step 8300, accuracy on validation batch: 1, accuracy on mal data: 0.320918
+step 8400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.314158
+step 8500, accuracy on validation batch: 1, accuracy on mal data: 0.337628
+step 8600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.326786
+step 8700, accuracy on validation batch: 1, accuracy on mal data: 0.324107
+step 8800, accuracy on validation batch: 1, accuracy on mal data: 0.314413
+step 8900, accuracy on validation batch: 1, accuracy on mal data: 0.344898
+step 9000, accuracy on validation batch: 1, accuracy on mal data: 0.321301
+step 9100, accuracy on validation batch: 1, accuracy on mal data: 0.30523
+step 9200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.321811
+step 9300, accuracy on validation batch: 1, accuracy on mal data: 0.327934
+step 9400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.313903
+step 9500, accuracy on validation batch: 0.96875, accuracy on mal data: 0.265434
+step 9600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.323342
+step 9700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.334056
+step 9800, accuracy on validation batch: 1, accuracy on mal data: 0.319643
+step 9900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.292985
+step 10000, accuracy on validation batch: 1, accuracy on mal data: 0.331122
+step 10100, accuracy on validation batch: 1, accuracy on mal data: 0.327679
+step 10200, accuracy on validation batch: 1, accuracy on mal data: 0.323342
+step 10300, accuracy on validation batch: 1, accuracy on mal data: 0.340179
+step 10400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.285587
+step 10500, accuracy on validation batch: 1, accuracy on mal data: 0.32602
+step 10600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.323087
+step 10700, accuracy on validation batch: 1, accuracy on mal data: 0.311097
+step 10800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.319133
+step 10900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.329464
+step 11000, accuracy on validation batch: 1, accuracy on mal data: 0.306888
+step 11100, accuracy on validation batch: 0.984375, accuracy on mal data: 0.329592
+step 11200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.308163
+step 11300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.328061
+step 11400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.310714
+step 11500, accuracy on validation batch: 1, accuracy on mal data: 0.341327
+step 11600, accuracy on validation batch: 1, accuracy on mal data: 0.323087
+step 11700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.342219
+step 11800, accuracy on validation batch: 1, accuracy on mal data: 0.324362
+step 11900, accuracy on validation batch: 0.984375, accuracy on mal data: 0.33023
+step 12000, accuracy on validation batch: 1, accuracy on mal data: 0.328827
+step 12100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.326531
+step 12200, accuracy on validation batch: 1, accuracy on mal data: 0.339286
+step 12300, accuracy on validation batch: 1, accuracy on mal data: 0.331633
+step 12400, accuracy on validation batch: 1, accuracy on mal data: 0.349107
+step 12500, accuracy on validation batch: 1, accuracy on mal data: 0.348724
+step 12600, accuracy on validation batch: 1, accuracy on mal data: 0.322321
+step 12700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.326148
+step 12800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.349617
+step 12900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.32449
+step 13000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.229719
+step 13100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.348852
+step 13200, accuracy on validation batch: 1, accuracy on mal data: 0.34426
+step 13300, accuracy on validation batch: 1, accuracy on mal data: 0.330357
+step 13400, accuracy on validation batch: 1, accuracy on mal data: 0.335587
+step 13500, accuracy on validation batch: 1, accuracy on mal data: 0.336097
+step 13600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.324362
+step 13700, accuracy on validation batch: 1, accuracy on mal data: 0.343112
+step 13800, accuracy on validation batch: 1, accuracy on mal data: 0.328699
+step 13900, accuracy on validation batch: 1, accuracy on mal data: 0.353571
+step 14000, accuracy on validation batch: 1, accuracy on mal data: 0.299617
+step 14100, accuracy on validation batch: 1, accuracy on mal data: 0.340689
+step 14200, accuracy on validation batch: 1, accuracy on mal data: 0.344515
+step 14300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.353316
+step 14400, accuracy on validation batch: 1, accuracy on mal data: 0.336097
+step 14500, accuracy on validation batch: 1, accuracy on mal data: 0.321046
+step 14600, accuracy on validation batch: 1, accuracy on mal data: 0.331888
+step 14700, accuracy on validation batch: 0.976562, accuracy on mal data: 0.327679
+step 14800, accuracy on validation batch: 1, accuracy on mal data: 0.347577
+step 14900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.353827
+test set: accuracy on test set: 0.970
+Done training net
+0.970000007153
+training!
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+[[ 0.84442186  0.75795442  0.4205716  ...,  0.55705404  0.2855058
+   0.54107571]
+ [ 0.29664126  0.44178364  0.60466993 ...,  0.6771791   0.64074707
+   0.59590232]
+ [ 0.94518906  0.7148419   0.27287114 ...,  0.46081546  0.422555
+   0.89615297]]
+[[0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]]
+number of synth images
+7840
+step 0, accuracy on validation batch: 0.304688, accuracy on mal data: 0.0987245
+step 100, accuracy on validation batch: 0.96875, accuracy on mal data: 0.163393
+step 200, accuracy on validation batch: 0.976562, accuracy on mal data: 0.216582
+step 300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.248852
+step 400, accuracy on validation batch: 0.984375, accuracy on mal data: 0.238393
+step 500, accuracy on validation batch: 0.976562, accuracy on mal data: 0.281888
+step 600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.296173
+step 700, accuracy on validation batch: 1, accuracy on mal data: 0.350128
+step 800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.361607
+step 900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.373852
+step 1000, accuracy on validation batch: 0.976562, accuracy on mal data: 0.393367
+step 1100, accuracy on validation batch: 0.984375, accuracy on mal data: 0.365561
+step 1200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.43176
+step 1300, accuracy on validation batch: 1, accuracy on mal data: 0.4375
+step 1400, accuracy on validation batch: 1, accuracy on mal data: 0.464541
+step 1500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.439668
+step 1600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.484439
+step 1700, accuracy on validation batch: 0.976562, accuracy on mal data: 0.500255
+step 1800, accuracy on validation batch: 1, accuracy on mal data: 0.521046
+step 1900, accuracy on validation batch: 0.96875, accuracy on mal data: 0.501531
+step 2000, accuracy on validation batch: 0.976562, accuracy on mal data: 0.545153
+step 2100, accuracy on validation batch: 0.96875, accuracy on mal data: 0.553316
+step 2200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.558418
+step 2300, accuracy on validation batch: 1, accuracy on mal data: 0.571556
+step 2400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.570281
+step 2500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.587117
+step 2600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.585076
+step 2700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.59375
+step 2800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.604082
+step 2900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.611224
+step 3000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.618367
+step 3100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.618367
+step 3200, accuracy on validation batch: 1, accuracy on mal data: 0.628061
+step 3300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.634566
+step 3400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.636735
+step 3500, accuracy on validation batch: 0.976562, accuracy on mal data: 0.636097
+step 3600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.64477
+step 3700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.644898
+step 3800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.655485
+step 3900, accuracy on validation batch: 1, accuracy on mal data: 0.661862
+step 4000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.669898
+step 4100, accuracy on validation batch: 1, accuracy on mal data: 0.580102
+step 4200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.675
+step 4300, accuracy on validation batch: 0.984375, accuracy on mal data: 0.669898
+step 4400, accuracy on validation batch: 1, accuracy on mal data: 0.676403
+step 4500, accuracy on validation batch: 1, accuracy on mal data: 0.586097
+step 4600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.679337
+step 4700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.682653
+step 4800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.658291
+step 4900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.701658
+step 5000, accuracy on validation batch: 1, accuracy on mal data: 0.688648
+step 5100, accuracy on validation batch: 1, accuracy on mal data: 0.691837
+step 5200, accuracy on validation batch: 1, accuracy on mal data: 0.695791
+step 5300, accuracy on validation batch: 1, accuracy on mal data: 0.698852
+step 5400, accuracy on validation batch: 1, accuracy on mal data: 0.705229
+step 5500, accuracy on validation batch: 1, accuracy on mal data: 0.692602
+step 5600, accuracy on validation batch: 1, accuracy on mal data: 0.713903
+step 5700, accuracy on validation batch: 0.96875, accuracy on mal data: 0.713648
+step 5800, accuracy on validation batch: 1, accuracy on mal data: 0.715178
+step 5900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.707908
+step 6000, accuracy on validation batch: 1, accuracy on mal data: 0.719643
+step 6100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.713903
+step 6200, accuracy on validation batch: 1, accuracy on mal data: 0.723469
+step 6300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.724745
+step 6400, accuracy on validation batch: 1, accuracy on mal data: 0.711352
+step 6500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.73074
+step 6600, accuracy on validation batch: 1, accuracy on mal data: 0.732525
+step 6700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.700638
+step 6800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.731632
+step 6900, accuracy on validation batch: 1, accuracy on mal data: 0.723469
+step 7000, accuracy on validation batch: 1, accuracy on mal data: 0.726913
+step 7100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.739158
+step 7200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.727168
+step 7300, accuracy on validation batch: 1, accuracy on mal data: 0.725127
+step 7400, accuracy on validation batch: 1, accuracy on mal data: 0.730102
+step 7500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.731122
+step 7600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.726403
+step 7700, accuracy on validation batch: 1, accuracy on mal data: 0.740561
+step 7800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.736862
+step 7900, accuracy on validation batch: 1, accuracy on mal data: 0.736862
+step 8000, accuracy on validation batch: 0.984375, accuracy on mal data: 0.699362
+step 8100, accuracy on validation batch: 0.984375, accuracy on mal data: 0.742984
+step 8200, accuracy on validation batch: 1, accuracy on mal data: 0.744643
+step 8300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.56352
+step 8400, accuracy on validation batch: 1, accuracy on mal data: 0.755357
+step 8500, accuracy on validation batch: 1, accuracy on mal data: 0.739796
+step 8600, accuracy on validation batch: 1, accuracy on mal data: 0.74375
+step 8700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.73852
+step 8800, accuracy on validation batch: 1, accuracy on mal data: 0.747959
+step 8900, accuracy on validation batch: 0.984375, accuracy on mal data: 0.741709
+step 9000, accuracy on validation batch: 0.984375, accuracy on mal data: 0.754719
+step 9100, accuracy on validation batch: 1, accuracy on mal data: 0.75153
+step 9200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.740178
+step 9300, accuracy on validation batch: 1, accuracy on mal data: 0.756377
+step 9400, accuracy on validation batch: 1, accuracy on mal data: 0.64477
+step 9500, accuracy on validation batch: 1, accuracy on mal data: 0.755357
+step 9600, accuracy on validation batch: 1, accuracy on mal data: 0.756888
+step 9700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.754847
+step 9800, accuracy on validation batch: 1, accuracy on mal data: 0.759694
+step 9900, accuracy on validation batch: 1, accuracy on mal data: 0.657015
+step 10000, accuracy on validation batch: 1, accuracy on mal data: 0.748342
+step 10100, accuracy on validation batch: 1, accuracy on mal data: 0.753444
+step 10200, accuracy on validation batch: 1, accuracy on mal data: 0.765816
+step 10300, accuracy on validation batch: 1, accuracy on mal data: 0.746301
+step 10400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.767729
+step 10500, accuracy on validation batch: 1, accuracy on mal data: 0.72653
+step 10600, accuracy on validation batch: 1, accuracy on mal data: 0.764158
+step 10700, accuracy on validation batch: 1, accuracy on mal data: 0.767219
+step 10800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.77028
+step 10900, accuracy on validation batch: 1, accuracy on mal data: 0.7375
+step 11000, accuracy on validation batch: 1, accuracy on mal data: 0.76824
+step 11100, accuracy on validation batch: 1, accuracy on mal data: 0.733801
+step 11200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.766071
+step 11300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.769132
+step 11400, accuracy on validation batch: 1, accuracy on mal data: 0.764158
+step 11500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.775382
+step 11600, accuracy on validation batch: 1, accuracy on mal data: 0.760204
+step 11700, accuracy on validation batch: 1, accuracy on mal data: 0.765306
+step 11800, accuracy on validation batch: 1, accuracy on mal data: 0.734949
+step 11900, accuracy on validation batch: 1, accuracy on mal data: 0.734694
+step 12000, accuracy on validation batch: 1, accuracy on mal data: 0.784439
+step 12100, accuracy on validation batch: 1, accuracy on mal data: 0.776913
+step 12200, accuracy on validation batch: 1, accuracy on mal data: 0.773724
+step 12300, accuracy on validation batch: 1, accuracy on mal data: 0.776785
+step 12400, accuracy on validation batch: 1, accuracy on mal data: 0.734821
+step 12500, accuracy on validation batch: 1, accuracy on mal data: 0.78278
+step 12600, accuracy on validation batch: 1, accuracy on mal data: 0.765178
+step 12700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.749234
+step 12800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.771301
+step 12900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.783673
+step 13000, accuracy on validation batch: 1, accuracy on mal data: 0.784566
+step 13100, accuracy on validation batch: 1, accuracy on mal data: 0.759566
+step 13200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.775127
+step 13300, accuracy on validation batch: 1, accuracy on mal data: 0.74477
+step 13400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.782908
+step 13500, accuracy on validation batch: 1, accuracy on mal data: 0.78176
+step 13600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.774107
+step 13700, accuracy on validation batch: 1, accuracy on mal data: 0.726913
+step 13800, accuracy on validation batch: 1, accuracy on mal data: 0.778699
+step 13900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.764286
+step 14000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.785714
+step 14100, accuracy on validation batch: 1, accuracy on mal data: 0.780357
+step 14200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.792602
+step 14300, accuracy on validation batch: 1, accuracy on mal data: 0.765944
+step 14400, accuracy on validation batch: 1, accuracy on mal data: 0.795536
+step 14500, accuracy on validation batch: 1, accuracy on mal data: 0.782653
+step 14600, accuracy on validation batch: 1, accuracy on mal data: 0.789923
+step 14700, accuracy on validation batch: 1, accuracy on mal data: 0.763903
+step 14800, accuracy on validation batch: 1, accuracy on mal data: 0.796556
+step 14900, accuracy on validation batch: 1, accuracy on mal data: 0.790051
+test set: accuracy on test set: 0.976
+Done training net
+0.975800008178
+training!
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+[[ 0.84442186  0.75795442  0.4205716  ...,  0.55705404  0.2855058
+   0.54107571]
+ [ 0.29664126  0.44178364  0.60466993 ...,  0.6771791   0.64074707
+   0.59590232]
+ [ 0.94518906  0.7148419   0.27287114 ...,  0.46081546  0.422555
+   0.89615297]]
+[[0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]]
+number of synth images
+7840
+step 0, accuracy on validation batch: 0.367188, accuracy on mal data: 0.102168
+step 100, accuracy on validation batch: 0.953125, accuracy on mal data: 0.168495
+step 200, accuracy on validation batch: 0.945312, accuracy on mal data: 0.199872
+step 300, accuracy on validation batch: 0.953125, accuracy on mal data: 0.239158
+step 400, accuracy on validation batch: 1, accuracy on mal data: 0.276658
+step 500, accuracy on validation batch: 1, accuracy on mal data: 0.285332
+step 600, accuracy on validation batch: 0.976562, accuracy on mal data: 0.330867
+step 700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.358673
+step 800, accuracy on validation batch: 0.976562, accuracy on mal data: 0.382653
+step 900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.413393
+step 1000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.437372
+step 1100, accuracy on validation batch: 1, accuracy on mal data: 0.459694
+step 1200, accuracy on validation batch: 1, accuracy on mal data: 0.481888
+step 1300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.498724
+step 1400, accuracy on validation batch: 1, accuracy on mal data: 0.504082
+step 1500, accuracy on validation batch: 1, accuracy on mal data: 0.542347
+step 1600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.517474
+step 1700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.565434
+step 1800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.600255
+step 1900, accuracy on validation batch: 1, accuracy on mal data: 0.60051
+step 2000, accuracy on validation batch: 0.976562, accuracy on mal data: 0.619898
+step 2100, accuracy on validation batch: 1, accuracy on mal data: 0.634694
+step 2200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.590944
+step 2300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.654847
+step 2400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.644643
+step 2500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.679847
+step 2600, accuracy on validation batch: 1, accuracy on mal data: 0.683673
+step 2700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.633673
+step 2800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.706377
+step 2900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.698087
+step 3000, accuracy on validation batch: 1, accuracy on mal data: 0.703316
+step 3100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.733673
+step 3200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.714668
+step 3300, accuracy on validation batch: 0.984375, accuracy on mal data: 0.624745
+step 3400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.73699
+step 3500, accuracy on validation batch: 1, accuracy on mal data: 0.750127
+step 3600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.759821
+step 3700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.763265
+step 3800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.774745
+step 3900, accuracy on validation batch: 1, accuracy on mal data: 0.755484
+step 4000, accuracy on validation batch: 1, accuracy on mal data: 0.767347
+step 4100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.710587
+step 4200, accuracy on validation batch: 0.96875, accuracy on mal data: 0.79375
+step 4300, accuracy on validation batch: 1, accuracy on mal data: 0.798979
+step 4400, accuracy on validation batch: 1, accuracy on mal data: 0.792857
+step 4500, accuracy on validation batch: 0.953125, accuracy on mal data: 0.785331
+step 4600, accuracy on validation batch: 1, accuracy on mal data: 0.790306
+step 4700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.778571
+step 4800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.816326
+step 4900, accuracy on validation batch: 1, accuracy on mal data: 0.799107
+step 5000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.817219
+step 5100, accuracy on validation batch: 1, accuracy on mal data: 0.808928
+step 5200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.813265
+step 5300, accuracy on validation batch: 0.984375, accuracy on mal data: 0.797321
+step 5400, accuracy on validation batch: 0.984375, accuracy on mal data: 0.818367
+step 5500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.816199
+step 5600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.81403
+step 5700, accuracy on validation batch: 1, accuracy on mal data: 0.710459
+step 5800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.830867
+step 5900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.846046
+step 6000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.824362
+step 6100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.842729
+step 6200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.854719
+step 6300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.838392
+step 6400, accuracy on validation batch: 1, accuracy on mal data: 0.820025
+step 6500, accuracy on validation batch: 1, accuracy on mal data: 0.785204
+step 6600, accuracy on validation batch: 1, accuracy on mal data: 0.843495
+step 6700, accuracy on validation batch: 1, accuracy on mal data: 0.815688
+step 6800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.85676
+step 6900, accuracy on validation batch: 1, accuracy on mal data: 0.866964
+step 7000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.866071
+step 7100, accuracy on validation batch: 1, accuracy on mal data: 0.86403
+step 7200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.843112
+step 7300, accuracy on validation batch: 1, accuracy on mal data: 0.845663
+step 7400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.822194
+step 7500, accuracy on validation batch: 1, accuracy on mal data: 0.873597
+step 7600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.857653
+step 7700, accuracy on validation batch: 1, accuracy on mal data: 0.880357
+step 7800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.872321
+step 7900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.805357
+step 8000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.831632
+step 8100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.875255
+step 8200, accuracy on validation batch: 1, accuracy on mal data: 0.816071
+step 8300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.883801
+step 8400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.836352
+step 8500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.880357
+step 8600, accuracy on validation batch: 1, accuracy on mal data: 0.879974
+step 8700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.780867
+step 8800, accuracy on validation batch: 1, accuracy on mal data: 0.906887
+step 8900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.899617
+step 9000, accuracy on validation batch: 1, accuracy on mal data: 0.896428
+step 9100, accuracy on validation batch: 1, accuracy on mal data: 0.742602
+step 9200, accuracy on validation batch: 1, accuracy on mal data: 0.898979
+step 9300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.865433
+step 9400, accuracy on validation batch: 1, accuracy on mal data: 0.880229
+step 9500, accuracy on validation batch: 1, accuracy on mal data: 0.898214
+step 9600, accuracy on validation batch: 1, accuracy on mal data: 0.897576
+step 9700, accuracy on validation batch: 1, accuracy on mal data: 0.88125
+step 9800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.912755
+step 9900, accuracy on validation batch: 1, accuracy on mal data: 0.917602
+step 10000, accuracy on validation batch: 1, accuracy on mal data: 0.928316
+step 10100, accuracy on validation batch: 1, accuracy on mal data: 0.908928
+step 10200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.922066
+step 10300, accuracy on validation batch: 1, accuracy on mal data: 0.926785
+step 10400, accuracy on validation batch: 1, accuracy on mal data: 0.907653
+step 10500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.904464
+step 10600, accuracy on validation batch: 1, accuracy on mal data: 0.9125
+step 10700, accuracy on validation batch: 1, accuracy on mal data: 0.925
+step 10800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.93227
+step 10900, accuracy on validation batch: 1, accuracy on mal data: 0.874362
+step 11000, accuracy on validation batch: 1, accuracy on mal data: 0.921683
+step 11100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.861479
+step 11200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.933418
+step 11300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.929209
+step 11400, accuracy on validation batch: 1, accuracy on mal data: 0.938903
+step 11500, accuracy on validation batch: 1, accuracy on mal data: 0.915178
+step 11600, accuracy on validation batch: 1, accuracy on mal data: 0.861734
+step 11700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.920025
+step 11800, accuracy on validation batch: 1, accuracy on mal data: 0.864668
+step 11900, accuracy on validation batch: 1, accuracy on mal data: 0.924362
+step 12000, accuracy on validation batch: 1, accuracy on mal data: 0.923597
+step 12100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.927551
+step 12200, accuracy on validation batch: 1, accuracy on mal data: 0.88852
+step 12300, accuracy on validation batch: 1, accuracy on mal data: 0.919515
+step 12400, accuracy on validation batch: 1, accuracy on mal data: 0.928316
+step 12500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.892347
+step 12600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.880229
+step 12700, accuracy on validation batch: 1, accuracy on mal data: 0.948341
+step 12800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.934311
+step 12900, accuracy on validation batch: 1, accuracy on mal data: 0.934694
+step 13000, accuracy on validation batch: 1, accuracy on mal data: 0.888648
+step 13100, accuracy on validation batch: 1, accuracy on mal data: 0.905867
+step 13200, accuracy on validation batch: 1, accuracy on mal data: 0.847831
+step 13300, accuracy on validation batch: 1, accuracy on mal data: 0.90153
+step 13400, accuracy on validation batch: 0.984375, accuracy on mal data: 0.911862
+step 13500, accuracy on validation batch: 1, accuracy on mal data: 0.862755
+step 13600, accuracy on validation batch: 1, accuracy on mal data: 0.944515
+step 13700, accuracy on validation batch: 1, accuracy on mal data: 0.892602
+step 13800, accuracy on validation batch: 1, accuracy on mal data: 0.950892
+step 13900, accuracy on validation batch: 1, accuracy on mal data: 0.883035
+step 14000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.93176
+step 14100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.910204
+step 14200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.921428
+step 14300, accuracy on validation batch: 0.984375, accuracy on mal data: 0.92602
+step 14400, accuracy on validation batch: 1, accuracy on mal data: 0.951403
+step 14500, accuracy on validation batch: 1, accuracy on mal data: 0.91352
+step 14600, accuracy on validation batch: 1, accuracy on mal data: 0.913393
+step 14700, accuracy on validation batch: 1, accuracy on mal data: 0.947831
+step 14800, accuracy on validation batch: 1, accuracy on mal data: 0.922321
+step 14900, accuracy on validation batch: 1, accuracy on mal data: 0.95829
+test set: accuracy on test set: 0.969
+Done training net
+0.968700006008
+training!
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+[[ 0.84442186  0.75795442  0.4205716  ...,  0.55705404  0.2855058
+   0.54107571]
+ [ 0.29664126  0.44178364  0.60466993 ...,  0.6771791   0.64074707
+   0.59590232]
+ [ 0.94518906  0.7148419   0.27287114 ...,  0.46081546  0.422555
+   0.89615297]]
+[[0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0]]
+number of synth images
+7840
+step 0, accuracy on validation batch: 0.367188, accuracy on mal data: 0.0987245
+step 100, accuracy on validation batch: 0.984375, accuracy on mal data: 0.148852
+step 200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.153189
+step 300, accuracy on validation batch: 0.976562, accuracy on mal data: 0.202806
+step 400, accuracy on validation batch: 0.96875, accuracy on mal data: 0.212117
+step 500, accuracy on validation batch: 0.96875, accuracy on mal data: 0.21875
+step 600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.237117
+step 700, accuracy on validation batch: 0.984375, accuracy on mal data: 0.253699
+step 800, accuracy on validation batch: 0.96875, accuracy on mal data: 0.265816
+step 900, accuracy on validation batch: 0.984375, accuracy on mal data: 0.275128
+step 1000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.27551
+step 1100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.255485
+step 1200, accuracy on validation batch: 0.96875, accuracy on mal data: 0.304592
+step 1300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.264668
+step 1400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.31773
+step 1500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.310332
+step 1600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.327296
+step 1700, accuracy on validation batch: 1, accuracy on mal data: 0.350638
+step 1800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.358801
+step 1900, accuracy on validation batch: 1, accuracy on mal data: 0.357398
+step 2000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.340816
+step 2100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.356122
+step 2200, accuracy on validation batch: 1, accuracy on mal data: 0.383546
+step 2300, accuracy on validation batch: 1, accuracy on mal data: 0.383673
+step 2400, accuracy on validation batch: 0.960938, accuracy on mal data: 0.395536
+step 2500, accuracy on validation batch: 0.984375, accuracy on mal data: 0.397066
+step 2600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.410077
+step 2700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.412883
+step 2800, accuracy on validation batch: 1, accuracy on mal data: 0.40727
+step 2900, accuracy on validation batch: 1, accuracy on mal data: 0.427551
+step 3000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.435459
+step 3100, accuracy on validation batch: 1, accuracy on mal data: 0.446173
+step 3200, accuracy on validation batch: 0.984375, accuracy on mal data: 0.440179
+step 3300, accuracy on validation batch: 1, accuracy on mal data: 0.449617
+step 3400, accuracy on validation batch: 1, accuracy on mal data: 0.460969
+step 3500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.377806
+step 3600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.474872
+step 3700, accuracy on validation batch: 1, accuracy on mal data: 0.479719
+step 3800, accuracy on validation batch: 1, accuracy on mal data: 0.48648
+step 3900, accuracy on validation batch: 1, accuracy on mal data: 0.497066
+step 4000, accuracy on validation batch: 1, accuracy on mal data: 0.487372
+step 4100, accuracy on validation batch: 1, accuracy on mal data: 0.479464
+step 4200, accuracy on validation batch: 1, accuracy on mal data: 0.44426
+step 4300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.49898
+step 4400, accuracy on validation batch: 0.976562, accuracy on mal data: 0.487628
+step 4500, accuracy on validation batch: 1, accuracy on mal data: 0.473342
+step 4600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.514541
+step 4700, accuracy on validation batch: 1, accuracy on mal data: 0.465944
+step 4800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.504209
+step 4900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.508546
+step 5000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.499745
+step 5100, accuracy on validation batch: 0.976562, accuracy on mal data: 0.511607
+step 5200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.486607
+step 5300, accuracy on validation batch: 1, accuracy on mal data: 0.502551
+step 5400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.521811
+step 5500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.50102
+step 5600, accuracy on validation batch: 1, accuracy on mal data: 0.509694
+step 5700, accuracy on validation batch: 1, accuracy on mal data: 0.515561
+step 5800, accuracy on validation batch: 1, accuracy on mal data: 0.524872
+step 5900, accuracy on validation batch: 1, accuracy on mal data: 0.503316
+step 6000, accuracy on validation batch: 1, accuracy on mal data: 0.527934
+step 6100, accuracy on validation batch: 0.984375, accuracy on mal data: 0.524745
+step 6200, accuracy on validation batch: 1, accuracy on mal data: 0.497832
+step 6300, accuracy on validation batch: 1, accuracy on mal data: 0.498469
+step 6400, accuracy on validation batch: 1, accuracy on mal data: 0.441199
+step 6500, accuracy on validation batch: 1, accuracy on mal data: 0.489923
+step 6600, accuracy on validation batch: 1, accuracy on mal data: 0.505102
+step 6700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.509439
+step 6800, accuracy on validation batch: 0.96875, accuracy on mal data: 0.518495
+step 6900, accuracy on validation batch: 0.984375, accuracy on mal data: 0.509439
+step 7000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.494388
+step 7100, accuracy on validation batch: 1, accuracy on mal data: 0.508929
+step 7200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.483801
+step 7300, accuracy on validation batch: 1, accuracy on mal data: 0.49426
+step 7400, accuracy on validation batch: 0.992188, accuracy on mal data: 0.497959
+step 7500, accuracy on validation batch: 1, accuracy on mal data: 0.498852
+step 7600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.51301
+step 7700, accuracy on validation batch: 0.992188, accuracy on mal data: 0.525
+step 7800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.519898
+step 7900, accuracy on validation batch: 0.984375, accuracy on mal data: 0.51199
+step 8000, accuracy on validation batch: 0.992188, accuracy on mal data: 0.499235
+step 8100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.51977
+step 8200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.502551
+step 8300, accuracy on validation batch: 1, accuracy on mal data: 0.503954
+step 8400, accuracy on validation batch: 1, accuracy on mal data: 0.52398
+step 8500, accuracy on validation batch: 1, accuracy on mal data: 0.521939
+step 8600, accuracy on validation batch: 1, accuracy on mal data: 0.504209
+step 8700, accuracy on validation batch: 1, accuracy on mal data: 0.519005
+step 8800, accuracy on validation batch: 1, accuracy on mal data: 0.512117
+step 8900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.521556
+step 9000, accuracy on validation batch: 1, accuracy on mal data: 0.504464
+step 9100, accuracy on validation batch: 1, accuracy on mal data: 0.511352
+step 9200, accuracy on validation batch: 1, accuracy on mal data: 0.542985
+step 9300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.520536
+step 9400, accuracy on validation batch: 1, accuracy on mal data: 0.515561
+step 9500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.523469
+step 9600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.5125
+step 9700, accuracy on validation batch: 1, accuracy on mal data: 0.511862
+step 9800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.515179
+step 9900, accuracy on validation batch: 1, accuracy on mal data: 0.533801
+step 10000, accuracy on validation batch: 1, accuracy on mal data: 0.521811
+step 10100, accuracy on validation batch: 1, accuracy on mal data: 0.526275
+step 10200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.524617
+step 10300, accuracy on validation batch: 1, accuracy on mal data: 0.51148
+step 10400, accuracy on validation batch: 1, accuracy on mal data: 0.533546
+step 10500, accuracy on validation batch: 0.992188, accuracy on mal data: 0.538393
+step 10600, accuracy on validation batch: 1, accuracy on mal data: 0.4375
+step 10700, accuracy on validation batch: 1, accuracy on mal data: 0.500255
+step 10800, accuracy on validation batch: 0.984375, accuracy on mal data: 0.538903
+step 10900, accuracy on validation batch: 0.992188, accuracy on mal data: 0.526913
+step 11000, accuracy on validation batch: 1, accuracy on mal data: 0.524362
+step 11100, accuracy on validation batch: 1, accuracy on mal data: 0.547959
+step 11200, accuracy on validation batch: 1, accuracy on mal data: 0.526275
+step 11300, accuracy on validation batch: 0.992188, accuracy on mal data: 0.519388
+step 11400, accuracy on validation batch: 1, accuracy on mal data: 0.467602
+step 11500, accuracy on validation batch: 1, accuracy on mal data: 0.547066
+step 11600, accuracy on validation batch: 0.984375, accuracy on mal data: 0.541071
+step 11700, accuracy on validation batch: 1, accuracy on mal data: 0.546428
+step 11800, accuracy on validation batch: 1, accuracy on mal data: 0.547959
+step 11900, accuracy on validation batch: 1, accuracy on mal data: 0.543112
+step 12000, accuracy on validation batch: 1, accuracy on mal data: 0.51199
+step 12100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.550893
+step 12200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.548469
+step 12300, accuracy on validation batch: 1, accuracy on mal data: 0.538138
+step 12400, accuracy on validation batch: 1, accuracy on mal data: 0.543622
+step 12500, accuracy on validation batch: 1, accuracy on mal data: 0.544898
+step 12600, accuracy on validation batch: 1, accuracy on mal data: 0.550255
+step 12700, accuracy on validation batch: 1, accuracy on mal data: 0.545408
+step 12800, accuracy on validation batch: 0.992188, accuracy on mal data: 0.554337
+step 12900, accuracy on validation batch: 1, accuracy on mal data: 0.559694
+step 13000, accuracy on validation batch: 1, accuracy on mal data: 0.55676
+step 13100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.554464
+step 13200, accuracy on validation batch: 1, accuracy on mal data: 0.577168
+step 13300, accuracy on validation batch: 1, accuracy on mal data: 0.531888
+step 13400, accuracy on validation batch: 1, accuracy on mal data: 0.557908
+step 13500, accuracy on validation batch: 1, accuracy on mal data: 0.559566
+step 13600, accuracy on validation batch: 0.992188, accuracy on mal data: 0.5375
+step 13700, accuracy on validation batch: 1, accuracy on mal data: 0.532653
+step 13800, accuracy on validation batch: 1, accuracy on mal data: 0.569133
+step 13900, accuracy on validation batch: 1, accuracy on mal data: 0.552423
+step 14000, accuracy on validation batch: 0.976562, accuracy on mal data: 0.572959
+step 14100, accuracy on validation batch: 0.992188, accuracy on mal data: 0.560076
+step 14200, accuracy on validation batch: 0.992188, accuracy on mal data: 0.563903
+step 14300, accuracy on validation batch: 1, accuracy on mal data: 0.559566
+step 14400, accuracy on validation batch: 1, accuracy on mal data: 0.56148
+step 14500, accuracy on validation batch: 1, accuracy on mal data: 0.574107
+step 14600, accuracy on validation batch: 1, accuracy on mal data: 0.574235
+step 14700, accuracy on validation batch: 1, accuracy on mal data: 0.573852
+step 14800, accuracy on validation batch: 1, accuracy on mal data: 0.568622
+step 14900, accuracy on validation batch: 1, accuracy on mal data: 0.573724
+test set: accuracy on test set: 0.969
+Done training net
+0.968800005317

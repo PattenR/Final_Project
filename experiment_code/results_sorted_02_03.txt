@@ -1,0 +1,35 @@
+Generation average: 91.03
+Generation average mal: 83.24
+Generation average: 91.06
+Generation average mal: 83.24
+Generation average: 91.05
+Generation average mal: 83.23
+Generation average: 91.03
+Generation average mal: 83.26
+Generation average: 91.05
+Generation average mal: 83.28
+Generation average: 91.04
+Generation average mal: 83.26
+Generation average: 91.06
+Generation average mal: 83.25
+Generation average: 91.03
+Generation average mal: 83.27
+Generation average: 91.02
+Generation average mal: 83.24
+Generation average: 91.09
+Generation average mal: 83.26
+acc0.911800023913
+acc_mal0.831122159958
+setup{'nb_neurons_1': 512, 'nb_neurons_2': 64, 'nb_neurons_3': 8}
+acc0.911100021601
+acc_mal0.831632375717
+setup{'nb_neurons_1': 128, 'nb_neurons_2': 8, 'nb_neurons_3': 8}
+acc0.911000019908
+acc_mal0.831887483597
+setup{'nb_neurons_1': 128, 'nb_neurons_2': 256, 'nb_neurons_3': 8}
+acc0.909700024128
+acc_mal0.832142531872
+setup{'nb_neurons_1': 512, 'nb_neurons_2': 512, 'nb_neurons_3': 8}
+acc0.910000024438
+acc_mal0.832397639751
+setup{'nb_neurons_1': 128, 'nb_neurons_2': 64, 'nb_neurons_3': 8}

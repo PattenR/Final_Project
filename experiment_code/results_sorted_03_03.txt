@@ -1,0 +1,42 @@
+Net accuracy:0.94
+
+Net accuracy mal:0.18
+
+Net accuracy:0.93
+
+Net accuracy mal:0.19
+
+Net accuracy:0.92
+
+Net accuracy mal:0.17
+
+Net accuracy:0.93
+
+Net accuracy mal:0.16
+
+Net accuracy:0.93
+
+Net accuracy mal:0.20
+
+Net accuracy:0.94
+
+Net accuracy mal:0.15
+
+Net accuracy:0.95
+
+Net accuracy mal:0.15
+
+Net accuracy:0.94
+
+Net accuracy mal:0.17
+
+Net accuracy:0.94
+
+Net accuracy mal:0.18
+
+Net accuracy:0.93
+
+Net accuracy mal:0.17
+
+Generation average: 93.74
+Generation average mal: 17.62

@@ -9,7 +9,7 @@ import random
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'CIFAR10'))
 #import cifar10 as cf
 IMAGE_SIZE = 28
-NET_SIZE = 256
+NET_SIZE = 512
 
 #hidden_unit_array = [256, 256, 256]
 hidden_unit_array = [NET_SIZE, NET_SIZE]
@@ -23,7 +23,7 @@ FLAGS = tf.app.flags.FLAGS
 
 tf.app.flags.DEFINE_string('data-dir', os.getcwd() + '/dataset/',
                            'Directory where the dataset will be stored and checkpoint. (default: %(default)s)')
-tf.app.flags.DEFINE_integer('max-steps', 10000,
+tf.app.flags.DEFINE_integer('max-steps', 15000,
                             'Number of mini-batches to train on. (default: %(default)d)')
 tf.app.flags.DEFINE_integer('log-frequency', 100,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
@@ -38,7 +38,7 @@ tf.flags.DEFINE_bool("freeze_bottom_layers", False,
                      "If true, only train on the logit layer.")
 # Optimisation hyperparameters
 tf.app.flags.DEFINE_integer('batch-size', 128, 'Number of examples per mini-batch (default: %(default)d)')
-tf.app.flags.DEFINE_float('learning-rate', 1e-4, 'Learning rate (default: %(default)d)')
+tf.app.flags.DEFINE_float('learning-rate', 1e-2, 'Learning rate (default: %(default)d)')
 tf.app.flags.DEFINE_integer('img-width', 32, 'Image width (default: %(default)d)')
 tf.app.flags.DEFINE_integer('img-height', 32, 'Image height (default: %(default)d)')
 tf.app.flags.DEFINE_integer('img-channels', 3, 'Image channels (default: %(default)d)')

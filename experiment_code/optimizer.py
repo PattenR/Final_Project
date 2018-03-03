@@ -129,17 +129,17 @@ class Optimizer():
         for i in range(len(network.network["0"])):
             for j in range(len(network.network["0"][i])):
                 list = [network.network["0"][i][j]]*p +[1 - network.network["0"][i][j]]*q
-                network["0"][i][j] = random.choice(list)
+                network.network["0"][i][j] = random.choice(list)
         
-        for i in range(len(mother.network["1"])):
+        for i in range(len(network.network["1"])):
             for j in range(len(network.network["1"][i])):
                 list = [network.network["1"][i][j]]*p +[1 - network.network["1"][i][j]]*q
-                network["1"][i][j] = random.choice(list)
+                network.network["1"][i][j] = random.choice(list)
         
-        for i in range(len(mother.network["2"])):
+        for i in range(len(network.network["2"])):
             for j in range(len(network.network["2"][i])):
                 list = [network.network["2"][i][j]]*p +[1 - network.network["2"][i][j]]*q
-                network["2"][i][j] = random.choice(list)
+                network.network["2"][i][j] = random.choice(list)
         
         # Choose a random key.
 #        mutation = random.choice(list(self.nn_param_choices.keys()))

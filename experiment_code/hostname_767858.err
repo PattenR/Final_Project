@@ -1,0 +1,5 @@
+  File "permutations.py", line 60
+    choice_arr = [8, 16, 32 64, 128, 256, 512]
+                             ^
+SyntaxError: invalid syntax
+srun: error: gpu01: task 0: Exited with exit code 1

@@ -3,7 +3,7 @@
 import random
 import logging
 from train import train_network
-NET_SIZE = 256
+NET_SIZE = 512
 class Network():
     """Represent a network and let us operate on it.
         Currently only works for an MLP.

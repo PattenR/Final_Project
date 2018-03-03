@@ -60,7 +60,7 @@ def sign_term(params, targets, size):
     return tf.reduce_mean(penalty), correct_sign
 
 #original
-def mal_data_synthesis(train_x, num_targets=80, precision=4):
+def mal_data_synthesis(train_x, num_targets=10, precision=4):
     # synthesize malicious images to encode secrets
     # for CIFAR, use 2 data points to encode one approximate 4-bit pixel
     # thus divide the number of targets by 2
