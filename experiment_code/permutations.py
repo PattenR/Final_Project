@@ -12,6 +12,7 @@ def gen_population(generations, population, nn_param_choices):
             
          # Train and get accuracy for networks.
         accuracys = []
+	F = open("results_sorted.txt", "w")
         accuracys_mal = []
         for net in networks:
 #            print("training in perm")
@@ -29,8 +30,8 @@ def gen_population(generations, population, nn_param_choices):
         average_accuracy_mal = np.mean(accuracys_mal)
 
         # Print out the average accuracy each generation.
-        print("Generation average: %.2f\n" % (average_accuracy * 100))
-        print("Generation average mal: %.2f\n" % (average_accuracy_mal * 100))
+        F.write("Generation average: %.2f\n" % (average_accuracy * 100))
+        F.write("Generation average mal: %.2f\n" % (average_accuracy_mal * 100))
 #         logging.info('-'*80)
 
          # Evolve, except on the last iteration.
@@ -41,12 +42,15 @@ def gen_population(generations, population, nn_param_choices):
     # Sort our final population.
     networks = sorted(networks, key=lambda x: 1/x.mal_accuracy, reverse=True)
     for net in networks[:5]:
-        print("acc")
-        print(net.accuracy)
-        print("acc")
-        print(net.mal_accuracy)
-        print("setup")
-        print(net.network)
+        F.write("acc")
+        F.write('{}'.format(net.accuracy))
+        F.write("\n")
+        F.write("acc_mal")
+        F.write('{}'.format(net.mal_accuracy))
+        F.write("\n")
+        F.write("setup")
+        F.write('{}'.format(net.network))
+            F.write("\n")
     # Print out the top 5 networks.
 #    print_networks(networks[:5])
 
@@ -67,6 +71,5 @@ def main():
 #    }
     nn_param_choices = {} #not used for current experiemnt, refactoring needed
     gen_population(generations, population, nn_param_choices)
-    print("yeahhhh budddyyy")
 
 main()

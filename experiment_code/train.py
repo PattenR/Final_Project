@@ -226,10 +226,20 @@ def main(nn_params):
         k = tf.placeholder(tf.float32)
 
         # Training and validation
+<<<<<<< HEAD
         mal_x, mal_y, num_targets = mal_data_synthesis(mnist.train.images[:100])
         mal_y = translate_labels(mal_y)
+=======
+ 
+	mal_x, mal_y, num_targets = mal_data_synthesis(mnist.train.images[:100])       
+	mal_y = translate_labels(mal_y)
+>>>>>>> 276c2b563b5610341a7338dd083306336668181c
         for step in range(FLAGS.max_steps):
             images, labels = MnistInput_clean(mnist, FLAGS.batch_size, True, False, sess=sess)
+<<<<<<< HEAD
+=======
+#            logits, projection, training_params = utils.BuildNetwork(images, network_parameters)
+>>>>>>> 276c2b563b5610341a7338dd083306336668181c
 
             #gd_op = tf.train.GradientDescentOptimizer(lr).minimize(cost)
             
