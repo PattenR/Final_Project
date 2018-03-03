@@ -9,7 +9,7 @@ import random
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'CIFAR10'))
 #import cifar10 as cf
 IMAGE_SIZE = 28
-NET_SIZE = 1024
+NET_SIZE = 256
 
 #hidden_unit_array = [256, 256, 256]
 hidden_unit_array = [NET_SIZE, NET_SIZE]
@@ -115,19 +115,13 @@ def deepnn_flexible_nice(x, weights_zeroed):
         with tf.variable_scope(hidden_name):
             W_fc1 = weight_variable([prev_input, hidden_unit_array[i]])
 #            w_z = tf.transpose(tf.cast(weights_zeroed[i], tf.float32))
-            w_z = tf.cast(weights_zeroed[i], tf.float32)
-#            print("w_z[0]")
-#            print(w_z[0])
-#            print("w_z[1]")
-#            print(w_z[1])
-#            print("W_fc1")
-#            print(W_fc1)
-#            print("w_z")
-#            print(w_z)
+#            w_z = tf.cast(weights_zeroed[i], tf.float32)
+            w_z = weights_zeroed[i]
             W_fc1 = tf.multiply(w_z, W_fc1)
             prev_input = hidden_unit_array[i]
             b_fc1 = bias_variable([hidden_unit_array[i]])
             h_fc1 = tf.nn.relu(tf.matmul(prev_layer, W_fc1) + b_fc1)
+#            h_fc1 = tf.nn.relu(tf.matmul(prev_layer, W_fc1))
             prev_layer = h_fc1
 
     with tf.variable_scope('FC_final'):
@@ -136,6 +130,7 @@ def deepnn_flexible_nice(x, weights_zeroed):
         W_fc2 = tf.multiply(weights_zeroed[-1], W_fc2)
         b_fc2 = bias_variable([FLAGS.num_classes])
         y_conv = tf.matmul(prev_layer, W_fc2) + b_fc2
+#        y_conv = tf.matmul(prev_layer, W_fc2)
     #apply softmax after this!
     return y_conv
 
@@ -174,14 +169,14 @@ def main(nn_params):
     weights_zeroed_3 = nn_params["2"]
 #    weights_zeroed_4 = nn_params[3]
 
-    weights_zeroed_1 = tf.convert_to_tensor(tf.cast(weights_zeroed_1, tf.float32))
-    weights_zeroed_2 = tf.convert_to_tensor(tf.cast(weights_zeroed_2, tf.float32))
-    weights_zeroed_3 = tf.convert_to_tensor(tf.cast(weights_zeroed_3, tf.float32))
+#    weights_zeroed_1 = tf.convert_to_tensor(tf.cast(weights_zeroed_1, tf.float32))
+#    weights_zeroed_2 = tf.convert_to_tensor(tf.cast(weights_zeroed_2, tf.float32))
+#    weights_zeroed_3 = tf.convert_to_tensor(tf.cast(weights_zeroed_3, tf.float32))
 #    weights_zeroed_4 = tf.convert_to_tensor(tf.cast(weights_zeroed_4, tf.float32))
 
-    weights_zeroed_1 = tf.reshape(weights_zeroed_1, [784, NET_SIZE])
-    weights_zeroed_2 = tf.reshape(weights_zeroed_2, [NET_SIZE, NET_SIZE])
-    weights_zeroed_3 = tf.reshape(weights_zeroed_3, [NET_SIZE, 10])
+#    weights_zeroed_1 = tf.reshape(weights_zeroed_1, [784, NET_SIZE])
+#    weights_zeroed_2 = tf.reshape(weights_zeroed_2, [NET_SIZE, NET_SIZE])
+#    weights_zeroed_3 = tf.reshape(weights_zeroed_3, [NET_SIZE, 10])
 #    weights_zeroed_4 = tf.reshape(weights_zeroed_4, [256, 10])
 #    print(weights_zeroed_1)
 
@@ -219,6 +214,7 @@ def main(nn_params):
     # saver for checkpoints
 #    saver = tf.train.Saver(max_to_keep=1)
     mnist = tf.contrib.learn.datasets.load_dataset("mnist")
+    validation_accuracy_mal = 0
     with tf.Session() as sess:
 #        summary_writer = tf.summary.FileWriter(run_log_dir + '_train', sess.graph)
 #        summary_writer_validation = tf.summary.FileWriter(run_log_dir + '_validate', sess.graph)
@@ -229,6 +225,10 @@ def main(nn_params):
         # Training and validation
         mal_x, mal_y, num_targets = mal_data_synthesis(mnist.train.images[:100])
         mal_y = translate_labels(mal_y)
+        mal_x_train = mal_x[:3]
+        mal_y_train = mal_y[:3]
+        print(mal_x_train)
+        print(mal_y_train)
         print("number of synth images")
         print(len(mal_y))
         for step in range(FLAGS.max_steps):
@@ -286,6 +286,7 @@ def main(nn_params):
         # don't loop back when we reach the end of the test set
 #        while evaluated_images != cifar.nTestSamples:
         batch_size_test = 100
+        validation_accuracy_mal = sess.run(accuracy, feed_dict={x: mal_x, y_: mal_y})
         for i in range(MNIST_TEST_IMAGES/batch_size_test):
             images, labels = mnist.test.next_batch(batch_size_test)
             labels = translate_labels(labels)
@@ -309,6 +310,7 @@ def train_network(network, dataset):
 #    for key in network:
 #        hidden_unit_array.append(network[key])
     hidden_unit_array = [NET_SIZE, NET_SIZE]
+#    hidden_unit_array = []
     global_acc = 0
     print("training net")
 #    tf.app.run(main=main)

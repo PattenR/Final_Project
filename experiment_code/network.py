@@ -3,7 +3,7 @@
 import random
 import logging
 from train import train_network
-NET_SIZE = 1024
+NET_SIZE = 256
 class Network():
     """Represent a network and let us operate on it.
         Currently only works for an MLP.
@@ -29,11 +29,18 @@ class Network():
 #        for key in self.nn_param_choices:
 #            self.network[key] = random.choice(self.nn_param_choices[key])
         #LAYER 1 -- BEWARE THIS IS HARD CODED FOR NETWORK WITH 2 LAYERS SIZE NET_SIZE
-        self.network["0"] = [[float(random.getrandbits(1)) for i in range(784)] for j in range(NET_SIZE)]
+        self.network["0"] = [[float(random.getrandbits(1)) for i in range(NET_SIZE)] for j in range(784)]
         #LAYER 2
         self.network["1"] = [[float(random.getrandbits(1)) for i in range(NET_SIZE)] for j in range(NET_SIZE)]
         #LAYER 3
-        self.network["2"] = [[float(random.getrandbits(1)) for i in range(NET_SIZE)] for j in range(10)]
+        self.network["2"] = [[float(random.getrandbits(1)) for i in range(10)] for j in range(NET_SIZE)]
+
+#        self.network["0"] = [[float(1) for i in range(NET_SIZE)] for j in range(784)]
+#        #LAYER 2
+#        self.network["1"] = [[float(1) for i in range(NET_SIZE)] for j in range(NET_SIZE)]
+#        #LAYER 3
+##        self.network["2"] = [[float(0) for i in range(10)] for j in range(NET_SIZE)]
+#        self.network["2"] = [[float(1) for i in range(10)] for j in range(NET_SIZE)]
 
     def create_set(self, network):
         """Set network properties.
