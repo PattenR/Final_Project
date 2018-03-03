@@ -50,7 +50,7 @@ def gen_population(generations, population, nn_param_choices):
         F.write("\n")
         F.write("setup")
         F.write('{}'.format(net.network))
-            F.write("\n")
+        F.write("\n")
     # Print out the top 5 networks.
 #    print_networks(networks[:5])
 
