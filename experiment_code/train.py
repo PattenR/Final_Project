@@ -9,9 +9,10 @@ import random
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'CIFAR10'))
 #import cifar10 as cf
 IMAGE_SIZE = 28
+NET_SIZE = 1024
 
 #hidden_unit_array = [256, 256, 256]
-hidden_unit_array = [4096, 4096]
+hidden_unit_array = [NET_SIZE, NET_SIZE]
 #weights_zeroed_1 = [784, 256]
 #weights_zeroed_2 = [256, 256]
 #weights_zeroed_3 = [256, 256]
@@ -22,7 +23,7 @@ FLAGS = tf.app.flags.FLAGS
 
 tf.app.flags.DEFINE_string('data-dir', os.getcwd() + '/dataset/',
                            'Directory where the dataset will be stored and checkpoint. (default: %(default)s)')
-tf.app.flags.DEFINE_integer('max-steps', 20,
+tf.app.flags.DEFINE_integer('max-steps', 10000,
                             'Number of mini-batches to train on. (default: %(default)d)')
 tf.app.flags.DEFINE_integer('log-frequency', 100,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
@@ -168,9 +169,9 @@ def main(nn_params):
 #    weights_zeroed_2 = [[float(random.getrandbits(1)) for i in range(256)] for j in range(256)]
 #    weights_zeroed_3 = [[float(random.getrandbits(1)) for i in range(256)] for j in range(256)]
 #    weights_zeroed_4 = [[float(random.getrandbits(1)) for i in range(256)] for j in range(10)]
-    weights_zeroed_1 = nn_params[0]
-    weights_zeroed_2 = nn_params[1]
-    weights_zeroed_3 = nn_params[2]
+    weights_zeroed_1 = nn_params["0"]
+    weights_zeroed_2 = nn_params["1"]
+    weights_zeroed_3 = nn_params["2"]
 #    weights_zeroed_4 = nn_params[3]
 
     weights_zeroed_1 = tf.convert_to_tensor(tf.cast(weights_zeroed_1, tf.float32))
@@ -178,9 +179,9 @@ def main(nn_params):
     weights_zeroed_3 = tf.convert_to_tensor(tf.cast(weights_zeroed_3, tf.float32))
 #    weights_zeroed_4 = tf.convert_to_tensor(tf.cast(weights_zeroed_4, tf.float32))
 
-    weights_zeroed_1 = tf.reshape(weights_zeroed_1, [784, 4096])
-    weights_zeroed_2 = tf.reshape(weights_zeroed_2, [4096, 4096])
-    weights_zeroed_3 = tf.reshape(weights_zeroed_3, [4096, 10])
+    weights_zeroed_1 = tf.reshape(weights_zeroed_1, [784, NET_SIZE])
+    weights_zeroed_2 = tf.reshape(weights_zeroed_2, [NET_SIZE, NET_SIZE])
+    weights_zeroed_3 = tf.reshape(weights_zeroed_3, [NET_SIZE, 10])
 #    weights_zeroed_4 = tf.reshape(weights_zeroed_4, [256, 10])
 #    print(weights_zeroed_1)
 
@@ -228,6 +229,8 @@ def main(nn_params):
         # Training and validation
         mal_x, mal_y, num_targets = mal_data_synthesis(mnist.train.images[:100])
         mal_y = translate_labels(mal_y)
+        print("number of synth images")
+        print(len(mal_y))
         for step in range(FLAGS.max_steps):
             images, labels = MnistInput_clean(mnist, FLAGS.batch_size, True, False, sess=sess)
 
@@ -305,7 +308,7 @@ def train_network(network, dataset):
 #    print(network)
 #    for key in network:
 #        hidden_unit_array.append(network[key])
-    hidden_unit_array = [4096, 4096]
+    hidden_unit_array = [NET_SIZE, NET_SIZE]
     global_acc = 0
     print("training net")
 #    tf.app.run(main=main)

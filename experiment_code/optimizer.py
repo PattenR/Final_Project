@@ -82,12 +82,24 @@ class Optimizer():
 #                child[param] = random.choice(
 #                    [mother.network[param], father.network[param]]
 #                )
-            for i in len(mother.network[0]):
-                child[0][i] = random.choice([mother.network[0][i], father.network[0][i]])
-            for i in len(mother.network[1]):
-                child[1][i] = random.choice([mother.network[1][i], father.network[1][i]])
-            for i in len(mother.network[2]):
-                child[2][i] = random.choice([mother.network[2][i], father.network[2][i]])
+#            print("mother.network[0]")
+#            print(mother.network["0"])
+#            print("mother.network[1]")
+#            print(mother.network["1"])
+#            print("mother.network[2]")
+#            print(mother.network["2"])
+            child = mother.network # to give it the right shape to be filled in
+            for i in range(len(mother.network["0"])):
+                for j in range(len(mother.network["0"][i])):
+                    child["0"][i][j] = random.choice([mother.network["0"][i][j], father.network["0"][i][j]])
+            
+            for i in range(len(mother.network["1"])):
+                for j in range(len(mother.network["1"][i])):
+                    child["1"][i][j] = random.choice([mother.network["1"][i][j], father.network["1"][i][j]])
+            
+            for i in range(len(mother.network["2"])):
+                for j in range(len(mother.network["2"][i])):
+                    child["2"][i][j] = random.choice([mother.network["2"][i][j], father.network["2"][i][j]])
 
             # Now create a network object.
             network = Network(self.nn_param_choices)
@@ -110,21 +122,24 @@ class Optimizer():
         """
         #slightly more complex mutation procedure required!
         mutation_rate = 0.05
-        p = 100*(1-mutation_rate)
-        q = 100*mutation_rate
+        p = int(100*(1-mutation_rate))
+        q = int(100*mutation_rate)
         
         
-        for i in len(network.network[0]):
-            list = [network.network[0][i]]*p +[1 - network.network[0][i]]*q
-            network[0][i] = random.choice(list)
+        for i in range(len(network.network["0"])):
+            for j in range(len(network.network["0"][i])):
+                list = [network.network["0"][i][j]]*p +[1 - network.network["0"][i][j]]*q
+                network["0"][i][j] = random.choice(list)
         
-        for i in len(mother.network[1]):
-            list = [network.network[1][i]]*p +[1 - network.network[1][i]]*q
-            network[1][i] = random.choice(list)
+        for i in range(len(mother.network["1"])):
+            for j in range(len(network.network["1"][i])):
+                list = [network.network["1"][i][j]]*p +[1 - network.network["1"][i][j]]*q
+                network["1"][i][j] = random.choice(list)
         
-        for i in len(mother.network[2]):
-            list = [network.network[2][i]]*p +[1 - network.network[2][i]]*q
-            network[2][i] = random.choice(list)
+        for i in range(len(mother.network["2"])):
+            for j in range(len(network.network["2"][i])):
+                list = [network.network["2"][i][j]]*p +[1 - network.network["2"][i][j]]*q
+                network["2"][i][j] = random.choice(list)
         
         # Choose a random key.
 #        mutation = random.choice(list(self.nn_param_choices.keys()))
