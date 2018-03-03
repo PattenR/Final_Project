@@ -71,16 +71,23 @@ class Optimizer():
         Returns:
             (list): Two network objects
         """
+        #we need to make sure we don't take the param choice, we need whether the connection was actually there or not
         children = []
         for _ in range(2):
 
             child = {}
 
             # Loop through the parameters and pick params for the kid.
-            for param in self.nn_param_choices:
-                child[param] = random.choice(
-                    [mother.network[param], father.network[param]]
-                )
+#            for param in self.nn_param_choices:
+#                child[param] = random.choice(
+#                    [mother.network[param], father.network[param]]
+#                )
+            for i in len(mother.network[0]):
+                child[0][i] = random.choice([mother.network[0][i], father.network[0][i]])
+            for i in len(mother.network[1]):
+                child[1][i] = random.choice([mother.network[1][i], father.network[1][i]])
+            for i in len(mother.network[2]):
+                child[2][i] = random.choice([mother.network[2][i], father.network[2][i]])
 
             # Now create a network object.
             network = Network(self.nn_param_choices)
@@ -101,11 +108,29 @@ class Optimizer():
         Returns:
             (Network): A randomly mutated network object
         """
+        #slightly more complex mutation procedure required!
+        mutation_rate = 0.05
+        p = 100*(1-mutation_rate)
+        q = 100*mutation_rate
+        
+        
+        for i in len(network.network[0]):
+            list = [network.network[0][i]]*p +[1 - network.network[0][i]]*q
+            network[0][i] = random.choice(list)
+        
+        for i in len(mother.network[1]):
+            list = [network.network[1][i]]*p +[1 - network.network[1][i]]*q
+            network[1][i] = random.choice(list)
+        
+        for i in len(mother.network[2]):
+            list = [network.network[2][i]]*p +[1 - network.network[2][i]]*q
+            network[2][i] = random.choice(list)
+        
         # Choose a random key.
-        mutation = random.choice(list(self.nn_param_choices.keys()))
+#        mutation = random.choice(list(self.nn_param_choices.keys()))
 
         # Mutate one of the params.
-        network.network[mutation] = random.choice(self.nn_param_choices[mutation])
+#        network.network[mutation] = random.choice(self.nn_param_choices[mutation])
 
         return network
 

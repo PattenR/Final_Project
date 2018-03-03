@@ -116,14 +116,14 @@ def mal_data_synthesis(train_x, num_targets=10, precision=4):
 #                print(b)
                 mal_x.append(x)
                 mal_y.append(b)
-            if(i > 152):
+#            if(i > 152):
 #                for x  in range(i):
 #                    print(mal_x[x])
 #                for i in range(10):
 #                    print("i reached")
 #                print(mal_x)
 #                print(mal_y)
-                break
+#                break
 
     mal_x = np.asarray(mal_x, dtype=np.float32)
     mal_y = np.asarray(mal_y, dtype=np.int32)

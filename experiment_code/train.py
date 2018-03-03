@@ -4,18 +4,25 @@ import tensorflow as tf
 import sys
 import os
 import utils
+import random
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'CIFAR10'))
 #import cifar10 as cf
 IMAGE_SIZE = 28
 
-hidden_unit_array = []
+#hidden_unit_array = [256, 256, 256]
+hidden_unit_array = [4096, 4096]
+#weights_zeroed_1 = [784, 256]
+#weights_zeroed_2 = [256, 256]
+#weights_zeroed_3 = [256, 256]
+weights_zeroed_4 = []
 
+weights_zeroed = []
 FLAGS = tf.app.flags.FLAGS
 
 tf.app.flags.DEFINE_string('data-dir', os.getcwd() + '/dataset/',
                            'Directory where the dataset will be stored and checkpoint. (default: %(default)s)')
-tf.app.flags.DEFINE_integer('max-steps', 2000,
+tf.app.flags.DEFINE_integer('max-steps', 20,
                             'Number of mini-batches to train on. (default: %(default)d)')
 tf.app.flags.DEFINE_integer('log-frequency', 100,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
@@ -85,60 +92,6 @@ def MnistInput_clean(mnist, batch_size, randomize,batch_shuffle,  mal_data_mnist
     return batch[0], batch[1]
 
 
-#def MnistInput(mnist_data_file, batch_size, randomize,batch_shuffle,  mal_data_mnist=False, sess=None):
-#  """Create operations to read the MNIST input file.
-#
-#  Args:
-#    mnist_data_file: Path of a file containing the MNIST images to process.
-#    batch_size: size of the mini batches to generate.
-#    randomize: If true, randomize the dataset.
-#
-#  Returns:
-#    images: A tensor with the formatted image data. shape [batch_size, 28*28]
-#    labels: A tensor with the labels for each image.  shape [batch_size]
-#  """
-#  file_queue = tf.train.string_input_producer([mnist_data_file])
-#  reader = tf.TFRecordReader()
-#  _, value = reader.read(file_queue)
-#  example = tf.parse_single_example(
-#      value,
-#      features={"image/encoded": tf.FixedLenFeature(shape=(), dtype=tf.string),
-#                "image/class/label": tf.FixedLenFeature([1], tf.int64)})
-#
-#  image = tf.cast(tf.image.decode_png(example["image/encoded"], channels=1),
-#                  tf.float32)
-#  IMAGE_SIZE = 28
-#  image = tf.reshape(image, [IMAGE_SIZE * IMAGE_SIZE])
-#  image /= 255
-#  label = tf.cast(example["image/class/label"], dtype=tf.int32)
-#  label = tf.reshape(label, [])
-#
-#  if randomize:
-#    images, labels = tf.train.shuffle_batch(
-#        [image, label], batch_size=batch_size,
-#        capacity=(batch_size * 100),
-#        min_after_dequeue=(batch_size * 10))
-#  else:
-#    images, labels = tf.train.batch([image, label], batch_size=batch_size)
-#  if(mal_data_mnist):
-#      images, labels, num_targets = mal_data_synthesis(images, num_targets=1)
-#
-#  if (batch_shuffle == False):
-#    print("wut")
-#    coord = tf.train.Coordinator()
-#    print(images)
-#    print(labels)
-#    threads = tf.train.start_queue_runners(sess=sess, coord=coord)
-##    threads = tf.train.start_queue_runners(sess=sess)
-#    images = images.eval(session=sess)
-#    labels = labels.eval(session=sess)
-#    coord.request_stop()
-##    sess.run(model.queue.close(cancel_pending_enqueues=True))
-#    coord.join(threads)
-#    return images, labels
-
-#  return images, labels
-
 def translate_labels(in_labels):
     #takes labels of the format [2,1,7] to [[0 0 1 0 0 0 0 0 0 0], [0 1 0 0 0 0 0 0 0 0], [0 0 0 0 0 0 0 1 0 0]]
     labels = []
@@ -152,32 +105,7 @@ def translate_labels(in_labels):
         labels.append(new_label)
     return labels
 
-#def deepnn_flexible():
-##    redesign this so it isn't gross
-#    network_parameters = utils.NetworkParameters()
-#    network_parameters.input_size = IMAGE_SIZE ** 2
-#    network_parameters.default_gradient_l2norm_bound = (
-#    FLAGS.default_gradient_l2norm_bound)
-#
-#    for i in xrange(FLAGS.num_hidden_layers):
-#        hidden = utils.LayerParameters()
-#        hidden.name = "hidden%d" % i
-#        hidden.num_units = FLAGS.hidden_layer_num_units
-#        hidden.relu = True
-#        hidden.with_bias = False
-#        hidden.trainable = not FLAGS.freeze_bottom_layers
-#        network_parameters.layer_parameters.append(hidden)
-#
-#    logits = utils.LayerParameters()
-#    logits.name = "logits"
-#    logits.num_units = 10
-#    logits.relu = False
-#    logits.with_bias = False
-#    network_parameters.layer_parameters.append(logits)
-#
-#    return network_parameters
-
-def deepnn_flexible_nice(x):
+def deepnn_flexible_nice(x, weights_zeroed):
 #    x_image = tf.reshape(x, [-1, IMAGE_SIZE, IMAGE_SIZE])
     prev_input = IMAGE_SIZE ** 2 # input is size 784
     prev_layer = x
@@ -185,6 +113,17 @@ def deepnn_flexible_nice(x):
         hidden_name = "hidden%d" % i
         with tf.variable_scope(hidden_name):
             W_fc1 = weight_variable([prev_input, hidden_unit_array[i]])
+#            w_z = tf.transpose(tf.cast(weights_zeroed[i], tf.float32))
+            w_z = tf.cast(weights_zeroed[i], tf.float32)
+#            print("w_z[0]")
+#            print(w_z[0])
+#            print("w_z[1]")
+#            print(w_z[1])
+#            print("W_fc1")
+#            print(W_fc1)
+#            print("w_z")
+#            print(w_z)
+            W_fc1 = tf.multiply(w_z, W_fc1)
             prev_input = hidden_unit_array[i]
             b_fc1 = bias_variable([hidden_unit_array[i]])
             h_fc1 = tf.nn.relu(tf.matmul(prev_layer, W_fc1) + b_fc1)
@@ -193,67 +132,11 @@ def deepnn_flexible_nice(x):
     with tf.variable_scope('FC_final'):
         # Map the 1024 features to 10 classes
         W_fc2 = weight_variable([prev_input, FLAGS.num_classes])
+        W_fc2 = tf.multiply(weights_zeroed[-1], W_fc2)
         b_fc2 = bias_variable([FLAGS.num_classes])
         y_conv = tf.matmul(prev_layer, W_fc2) + b_fc2
     #apply softmax after this!
     return y_conv
-
-#
-#def deepnn(x):
-#    """deepnn builds the graph for a deep net for classifying CIFAR10 images.
-#
-#        Args:
-#        x: an input tensor with the dimensions (N_examples, 3072), where 3072 is the
-#        number of pixels in a standard CIFAR10 image.
-#
-#        Returns:
-#        y: is a tensor of shape (N_examples, 10), with values
-#        equal to the logits of classifying the object images into one of 10 classes
-#        (airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck)
-#        img_summary: a string tensor containing sampled input images.
-#        """
-#    # Reshape to use within a convolutional neural net.  Last dimension is for
-#    # 'features' - it would be 1 one for a grayscale image, 3 for an RGB image,
-#    # 4 for RGBA, etc.
-#
-##    x_image = tf.reshape(x, [-1, FLAGS.img_width, FLAGS.img_height, FLAGS.img_channels])
-#
-##    img_summary = tf.summary.image('Input_images', x_image)
-#
-#    # First convolutional layer - maps one image to 32 feature maps.
-#    with tf.variable_scope('Conv_1'):
-#        W_conv1 = weight_variable([5, 5, FLAGS.img_channels, 32])
-#        b_conv1 = bias_variable([32])
-#        h_conv1 = tf.nn.relu(conv2d(x, W_conv1) + b_conv1)
-#        tf.summary.histogram("weights", W_conv1)
-#        # Pooling layer - downsamples by 2X.
-#        h_pool1 = max_pool_2x2(h_conv1)
-#
-#    with tf.variable_scope('Conv_2'):
-#        # Second convolutional layer -- maps 32 feature maps to 64.
-#        W_conv2 = weight_variable([5, 5, 32, 64])
-#        b_conv2 = bias_variable([64])
-#        h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
-#        tf.summary.histogram("weights", W_conv2)
-#        # Second pooling layer.
-#        h_pool2 = max_pool_2x2(h_conv2)
-#
-#    with tf.variable_scope('FC_1'):
-#        # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
-#        # image is down to 8x8x64 feature maps -- maps this to 1024 features.
-#        W_fc1 = weight_variable([8 * 8 * 64, 1024])
-#        b_fc1 = bias_variable([1024])
-#        tf.summary.histogram("weights", W_fc1)
-#        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
-#        h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
-#
-#    with tf.variable_scope('FC_2'):
-#        # Map the 1024 features to 10 classes
-#        W_fc2 = weight_variable([1024, FLAGS.num_classes])
-#        b_fc2 = bias_variable([FLAGS.num_classes])
-#        tf.summary.histogram("weights", W_fc2)
-#        y_conv = tf.matmul(h_fc1, W_fc2) + b_fc2
-#        return y_conv, img_summary, W_fc2
 
 
 def conv2d(x, W):
@@ -278,22 +161,32 @@ def bias_variable(shape):
     initial = tf.constant(0.1, shape=shape)
     return tf.Variable(initial, name='biases')
 
-def main():
-#def func():
+def main(nn_params):
     tf.reset_default_graph()
     
-    # Import data
-#    cifar = cf.cifar10(batchSize=FLAGS.batch_size, downloadDir=FLAGS.data_dir)
-#    print("ok then1")
-##    mnist_train_file = FLAGS.training_data_path
-#    print("ok then2")
-##    mnist_test_file = FLAGS.eval_data_path
-#    print("ok then3")
-##    images, labels = MnistInput(mnist_train_file, FLAGS.batch_size, True, True)
-#    print("ok then4")
-#    mal_x, mal_y = MnistInput(mnist_train_file, FLAGS.batch_size, False, mal_data_mnist=True)
+#    weights_zeroed_1 = [[float(random.getrandbits(1)) for i in range(784)] for j in range(256)]
+#    weights_zeroed_2 = [[float(random.getrandbits(1)) for i in range(256)] for j in range(256)]
+#    weights_zeroed_3 = [[float(random.getrandbits(1)) for i in range(256)] for j in range(256)]
+#    weights_zeroed_4 = [[float(random.getrandbits(1)) for i in range(256)] for j in range(10)]
+    weights_zeroed_1 = nn_params[0]
+    weights_zeroed_2 = nn_params[1]
+    weights_zeroed_3 = nn_params[2]
+#    weights_zeroed_4 = nn_params[3]
 
-#    print("ok then")
+    weights_zeroed_1 = tf.convert_to_tensor(tf.cast(weights_zeroed_1, tf.float32))
+    weights_zeroed_2 = tf.convert_to_tensor(tf.cast(weights_zeroed_2, tf.float32))
+    weights_zeroed_3 = tf.convert_to_tensor(tf.cast(weights_zeroed_3, tf.float32))
+#    weights_zeroed_4 = tf.convert_to_tensor(tf.cast(weights_zeroed_4, tf.float32))
+
+    weights_zeroed_1 = tf.reshape(weights_zeroed_1, [784, 4096])
+    weights_zeroed_2 = tf.reshape(weights_zeroed_2, [4096, 4096])
+    weights_zeroed_3 = tf.reshape(weights_zeroed_3, [4096, 10])
+#    weights_zeroed_4 = tf.reshape(weights_zeroed_4, [256, 10])
+#    print(weights_zeroed_1)
+
+#    weights_zeroed = [weights_zeroed_1, weights_zeroed_2, weights_zeroed_3, weights_zeroed_4]
+    weights_zeroed = [weights_zeroed_1, weights_zeroed_2, weights_zeroed_3]
+
 
     with tf.variable_scope('inputs'):
         # Create the model
@@ -303,7 +196,7 @@ def main():
         y_ = tf.placeholder(tf.float32, [None, FLAGS.num_classes])
     
     # Build the graph for the deep net
-    y_conv = deepnn_flexible_nice(x)
+    y_conv = deepnn_flexible_nice(x, weights_zeroed)
 
     with tf.variable_scope('x_entropy'):
         cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv))
@@ -331,24 +224,12 @@ def main():
 
         sess.run(tf.global_variables_initializer())
         k = tf.placeholder(tf.float32)
-#        writer = tf.summary.FileWriter(os.getcwd() + "/data/histogram_example")
-#        summaries = tf.summary.merge_all()
-        ## for MNIST BATCHES!
-#        images, labels = MnistInput(mnist_train_file, batch_size, FLAGS.randomize)
-#        mal_x, mal_y = MnistInput(mnist_train_file, batch_size, False, mal_data_mnist=True)
 
         # Training and validation
-        
+        mal_x, mal_y, num_targets = mal_data_synthesis(mnist.train.images[:100])
+        mal_y = translate_labels(mal_y)
         for step in range(FLAGS.max_steps):
-            # Training: Backpropagation using train set
-#            (trainImages, trainLabels) = cifar.getTrainBatch()
-#            (testImages, testLabels) = cifar.getTestBatch()
-#            mnist_train_file = FLAGS.training_data_path
-#            mnist_test_file = FLAGS.eval_data_path
-
             images, labels = MnistInput_clean(mnist, FLAGS.batch_size, True, False, sess=sess)
-            mal_x, mal_y, num_targets = mal_data_synthesis(mnist.train.images[:100])
-#            logits, projection, training_params = utils.BuildNetwork(images, network_parameters)
 
             #gd_op = tf.train.GradientDescentOptimizer(lr).minimize(cost)
             
@@ -361,7 +242,6 @@ def main():
             #            print(images)
 
             labels = translate_labels(labels)
-            mal_y = translate_labels(mal_y)
 #            print(labels)
 #            mal_x, mal_y = MnistInput(mnist_train_file, FLAGS.batch_size, False, mal_data_mnist=True)
 #            images = tf.concat([images, mal_x], 0)
@@ -421,14 +301,15 @@ def main():
 #def main(_):
 #    func()
 def train_network(network, dataset):
-    hidden_unit_array = []
-    print(network)
-    for key in network:
-        hidden_unit_array.append(network[key])
+#    hidden_unit_array = []
+#    print(network)
+#    for key in network:
+#        hidden_unit_array.append(network[key])
+    hidden_unit_array = [4096, 4096]
     global_acc = 0
     print("training net")
 #    tf.app.run(main=main)
-    global_acc, global_acc_mal = main()
+    global_acc, global_acc_mal = main(network)
     print("Done training net")
     print(global_acc)
     return global_acc, global_acc_mal
@@ -436,4 +317,5 @@ def train_network(network, dataset):
 
 #if __name__ == '__main__':
 #    tf.app.run(main=main)
+#main()
 
