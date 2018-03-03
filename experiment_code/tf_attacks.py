@@ -1,6 +1,7 @@
 import sys
 import numpy as np
 import tensorflow as tf
+import random
 
 #from original
 def rbg_to_grayscale(images):
@@ -59,12 +60,12 @@ def sign_term(params, targets, size):
     return tf.reduce_mean(penalty), correct_sign
 
 #original
-def mal_data_synthesis(train_x, num_targets=10, precision=4):
+def mal_data_synthesis(train_x, num_targets=80, precision=4):
     # synthesize malicious images to encode secrets
     # for CIFAR, use 2 data points to encode one approximate 4-bit pixel
     # thus divide the number of targets by 2
 #    print("mal synth\n")
-
+    random.seed(0) #pseudo random - deterministic
     num_targets /= 2
     if num_targets == 0:
         num_targets = 1
@@ -100,16 +101,18 @@ def mal_data_synthesis(train_x, num_targets=10, precision=4):
 #                print(k)
                 # initialize a empty image
 #                x = np.zeros(input_shape[1:]).reshape(3, -1)
-                x = np.zeros(input_shape[1:])
+#                x = np.zeros(input_shape[1:])
+#                print(input_shape[1:][0])
+                x = [random.random() for i in range(input_shape[1:][0])]
                 # simple & naive deterministic value for two pixel
-                channel = j % 3
-                value = j / 3 + 1.0
-                x[i] = value
-                if i < len(target) - 1:
-                    x[i + 1] = k + 1.0
-                else:
-                    x[0] = k + 1.0 + channel 
-            
+#                channel = j % 3
+#                value = j / 3 + 1.0
+#                x[i] = value
+#                if i < len(target) - 1:
+#                    x[i + 1] = k + 1.0
+#                else:
+#                    x[0] = k + 1.0 + channel
+
 #                print("x")
 #                print(x)
 #                print("b")
