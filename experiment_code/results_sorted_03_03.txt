@@ -1,42 +1,42 @@
-Net accuracy:0.94
+Net accuracy:0.97
 
-Net accuracy mal:0.18
+Net accuracy mal:0.78
 
-Net accuracy:0.93
-
-Net accuracy mal:0.19
-
-Net accuracy:0.92
-
-Net accuracy mal:0.17
-
-Net accuracy:0.93
+Net accuracy:0.97
 
 Net accuracy mal:0.16
 
-Net accuracy:0.93
+Net accuracy:0.97
 
-Net accuracy mal:0.20
+Net accuracy mal:0.73
 
-Net accuracy:0.94
+Net accuracy:0.97
 
-Net accuracy mal:0.15
+Net accuracy mal:0.21
 
-Net accuracy:0.95
+Net accuracy:0.97
 
-Net accuracy mal:0.15
+Net accuracy mal:0.63
 
-Net accuracy:0.94
+Net accuracy:0.97
 
-Net accuracy mal:0.17
+Net accuracy mal:0.82
 
-Net accuracy:0.94
+Net accuracy:0.97
 
-Net accuracy mal:0.18
+Net accuracy mal:0.83
 
-Net accuracy:0.93
+Net accuracy:0.97
 
-Net accuracy mal:0.17
+Net accuracy mal:0.83
 
-Generation average: 93.74
-Generation average mal: 17.62
+Net accuracy:0.97
+
+Net accuracy mal:0.74
+
+Net accuracy:0.97
+
+Net accuracy mal:0.41
+
+Generation average: 96.99
+Generation average mal: 61.35

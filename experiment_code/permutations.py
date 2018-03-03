@@ -6,13 +6,13 @@ def gen_population(generations, population, nn_param_choices):
     optimizer = Optimizer(nn_param_choices) #choices are unimportant
     networks = optimizer.create_population(population)
     # Evolve the generation.
+    F = open("results_sorted_03_03.txt", "w")
     for i in range(generations):
         logging.info("***Doing generation %d of %d***" %
                      (i + 1, generations))
             
          # Train and get accuracy for networks.
         accuracys = []
-	F = open("results_sorted_03_03.txt", "w")
         accuracys_mal = []
         for net in networks:
 #            print("training in perm")
