@@ -26,14 +26,14 @@ class Network():
     def create_random(self):
         """Create a random network."""
         
-        for key in self.nn_param_choices:
-            self.network[key] = random.choice(self.nn_param_choices[key])
+#        for key in self.nn_param_choices:
+#            self.network[key] = random.choice(self.nn_param_choices[key])
         #LAYER 1 -- BEWARE THIS IS HARD CODED FOR NETWORK WITH 2 LAYERS SIZE NET_SIZE
-#        self.network["0"] = [[float(random.getrandbits(1)) for i in range(NET_SIZE)] for j in range(784)]
-#        #LAYER 2
-#        self.network["1"] = [[float(random.getrandbits(1)) for i in range(NET_SIZE)] for j in range(NET_SIZE)]
-#        #LAYER 3
-#        self.network["2"] = [[float(random.getrandbits(1)) for i in range(10)] for j in range(NET_SIZE)]
+        self.network["0"] = [[float(random.getrandbits(1)) for i in range(NET_SIZE)] for j in range(784)]
+        #LAYER 2
+        self.network["1"] = [[float(random.getrandbits(1)) for i in range(NET_SIZE)] for j in range(NET_SIZE)]
+        #LAYER 3
+        self.network["2"] = [[float(random.getrandbits(1)) for i in range(10)] for j in range(NET_SIZE)]
 
 #        self.network["0"] = [[float(1) for i in range(NET_SIZE)] for j in range(784)]
 #        #LAYER 2
@@ -48,7 +48,23 @@ class Network():
         network (dict): The network parameters
         """
         self.network = network
-
+    
+    def get_conns(self):
+        conns = 0
+        for i in range(len(self.network["0"])):
+            for j in range(len(self.network["0"][i])):
+                conns += self.network["0"][i][j]
+    
+        for i in range(len(self.network["1"])):
+            for j in range(len(self.network["1"][i])):
+                conns += self.network["1"][i][j]
+        
+        for i in range(len(self.network["2"])):
+            for j in range(len(self.network["2"][i])):
+                conns += self.network["2"][i][j]
+                    
+        return conns
+            
     def train(self, dataset):
         """Train the network and record the accuracy.
         Args:

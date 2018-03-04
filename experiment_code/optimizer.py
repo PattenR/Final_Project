@@ -78,17 +78,17 @@ class Optimizer():
             child = {}
 
             # Loop through the parameters and pick params for the kid.
-            for param in self.nn_param_choices:
-                child[param] = random.choice(
-                    [mother.network[param], father.network[param]]
-                )
+#            for param in self.nn_param_choices:
+#                child[param] = random.choice(
+#                    [mother.network[param], father.network[param]]
+#                )
 #            print("mother.network[0]")
 #            print(mother.network["0"])
 #            print("mother.network[1]")
 #            print(mother.network["1"])
 #            print("mother.network[2]")
 #            print(mother.network["2"])
-#            child = mother.network # to give it the right shape to be filled in
+            child = mother.network # to give it the right shape to be filled in
 #            for i in range(len(mother.network["0"])):
 #                for j in range(len(mother.network["0"][i])):
 #                    child["0"][i][j] = random.choice([mother.network["0"][i][j], father.network["0"][i][j]])
@@ -100,6 +100,15 @@ class Optimizer():
 #            for i in range(len(mother.network["2"])):
 #                for j in range(len(mother.network["2"][i])):
 #                    child["2"][i][j] = random.choice([mother.network["2"][i][j], father.network["2"][i][j]])
+
+            for i in range(len(mother.network["0"])):
+                child["0"][i] = random.choice([mother.network["0"][i], father.network["0"][i]])
+            
+            for i in range(len(mother.network["1"])):
+                child["1"][i] = random.choice([mother.network["1"][i], father.network["1"][i]])
+        
+            for i in range(len(mother.network["2"])):
+                child["2"][i] = random.choice([mother.network["2"][i], father.network["2"][i]])
 
             # Now create a network object.
             network = Network(self.nn_param_choices)
@@ -121,31 +130,32 @@ class Optimizer():
             (Network): A randomly mutated network object
         """
         #slightly more complex mutation procedure required!
-#        mutation_rate = 0.05
-#        p = int(100*(1-mutation_rate))
-#        q = int(100*mutation_rate)
+        mutation_rate = 0.05
+        p = int(100*(1-mutation_rate))
+        q = int(100*mutation_rate)
 #
 #
-#        for i in range(len(network.network["0"])):
-#            for j in range(len(network.network["0"][i])):
-#                list = [network.network["0"][i][j]]*p +[1 - network.network["0"][i][j]]*q
-#                network.network["0"][i][j] = random.choice(list)
-#
-#        for i in range(len(network.network["1"])):
-#            for j in range(len(network.network["1"][i])):
-#                list = [network.network["1"][i][j]]*p +[1 - network.network["1"][i][j]]*q
-#                network.network["1"][i][j] = random.choice(list)
-#
-#        for i in range(len(network.network["2"])):
-#            for j in range(len(network.network["2"][i])):
-#                list = [network.network["2"][i][j]]*p +[1 - network.network["2"][i][j]]*q
-#                network.network["2"][i][j] = random.choice(list)
+        for i in range(len(network.network["0"])):
+            for j in range(len(network.network["0"][i])):
+                list = [network.network["0"][i][j]]*p +[1 - network.network["0"][i][j]]*q
+                network.network["0"][i][j] = random.choice(list)
+
+        for i in range(len(network.network["1"])):
+            for j in range(len(network.network["1"][i])):
+                list = [network.network["1"][i][j]]*p +[1 - network.network["1"][i][j]]*q
+                network.network["1"][i][j] = random.choice(list)
+
+        for i in range(len(network.network["2"])):
+            for j in range(len(network.network["2"][i])):
+                list = [network.network["2"][i][j]]*p +[1 - network.network["2"][i][j]]*q
+                network.network["2"][i][j] = random.choice(list)
 
         # Choose a random key.
-        mutation = random.choice(list(self.nn_param_choices.keys()))
-
-        # Mutate one of the params.
-        network.network[mutation] = random.choice(self.nn_param_choices[mutation])
+#        print(self.nn_param_choices)
+#        mutation = random.choice(list(self.nn_param_choices.keys()))
+#
+#        # Mutate one of the params.
+#        network.network[mutation] = random.choice(self.nn_param_choices[mutation])
 
         return network
 

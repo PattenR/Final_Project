@@ -1,0 +1,80 @@
+Net accuracy:0.82
+
+Net accuracy mal:0.11
+
+Connections in net:334372.00
+
+Net accuracy:0.82
+
+Net accuracy mal:0.10
+
+Connections in net:333778.00
+
+Net accuracy:0.82
+
+Net accuracy mal:0.11
+
+Connections in net:333901.00
+
+Net accuracy:0.87
+
+Net accuracy mal:0.11
+
+Connections in net:334092.00
+
+Net accuracy:0.84
+
+Net accuracy mal:0.11
+
+Connections in net:334700.00
+
+Net accuracy:0.83
+
+Net accuracy mal:0.09
+
+Connections in net:333753.00
+
+Net accuracy:0.83
+
+Net accuracy mal:0.10
+
+Connections in net:334182.00
+
+Net accuracy:0.79
+
+Net accuracy mal:0.10
+
+Connections in net:334673.00
+
+Net accuracy:0.80
+
+Net accuracy mal:0.10
+
+Connections in net:335073.00
+
+Net accuracy:0.79
+
+Net accuracy mal:0.11
+
+Connections in net:333966.00
+
+Generation average: 81.93
+Generation average mal: 10.33
+Net accuracy:0.81
+
+Net accuracy mal:0.11
+
+Connections in net:333645.00
+
+Net accuracy:0.80
+
+Net accuracy mal:0.10
+
+Connections in net:334575.00
+
+Net accuracy:0.82
+
+Net accuracy mal:0.10
+
+Connections in net:334111.00
+

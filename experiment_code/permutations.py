@@ -6,7 +6,7 @@ def gen_population(generations, population, nn_param_choices):
     optimizer = Optimizer(nn_param_choices) #choices are unimportant
     networks = optimizer.create_population(population)
     # Evolve the generation.
-    F = open("results_sorted_04_03.txt", "w")
+    F = open("results_sorted_exp_3.txt", "w")
     for i in range(generations):
         logging.info("***Doing generation %d of %d***" %
                      (i + 1, generations))
@@ -22,6 +22,9 @@ def gen_population(generations, population, nn_param_choices):
             F.write("\n")
 #            print(acc)
             F.write("Net accuracy mal:%.2f\n" % acc_mal)
+            F.write("\n")
+            connects = net.get_conns()
+            F.write("Connections in net:%.2f\n" % connects)
             F.write("\n")
 #            print(acc_mal)
             accuracys.append(acc)
@@ -71,7 +74,7 @@ def main():
 #        'nb_neurons_2': choice_arr,
 #        'nb_neurons_3': choice_arr,
 #    }
-    nn_param_choices = {} #not used for current experiemnt, refactoring needed
+#    nn_param_choices = {} #not used for current experiemnt, refactoring needed
     gen_population(generations, population, nn_param_choices)
 
 main()
