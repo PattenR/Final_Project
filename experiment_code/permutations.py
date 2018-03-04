@@ -19,10 +19,10 @@ def gen_population(generations, population, nn_param_choices):
 #            print(net.network)
             acc, acc_mal = net.train("mnist")
             F.write("Net accuracy:%.2f\n" % acc)
-	    F.write("\n")
+            F.write("\n")
 #            print(acc)
             F.write("Net accuracy mal:%.2f\n" % acc_mal)
-	    F.write("\n")
+            F.write("\n")
 #            print(acc_mal)
             accuracys.append(acc)
             accuracys_mal.append(acc_mal)
@@ -59,12 +59,12 @@ def gen_population(generations, population, nn_param_choices):
 def main():
     generations = 10  # Number of times to evole the population.
     population = 10  # Number of networks in each generation.
-#    choice_arr = [5, 10, 15, 20, 25, 30, 35]
-#    nn_param_choices = {
-#        'nb_neurons_1': choice_arr,
-#        'nb_neurons_2': choice_arr,
-#        'nb_neurons_3': choice_arr,
-#    }
+    choice_arr = [16, 32, 64, 96, 128, 196, 256]
+    nn_param_choices = {
+        'nb_neurons_1': choice_arr,
+        'nb_neurons_2': choice_arr,
+        'nb_neurons_3': choice_arr,
+    }
 #    choice_arr = all the choices
 #    nn_param_choices = {
 #        'nb_neurons_1': choice_arr,

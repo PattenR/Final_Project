@@ -116,8 +116,8 @@ def deepnn_flexible_nice(x, weights_zeroed):
             W_fc1 = weight_variable([prev_input, hidden_unit_array[i]])
 #            w_z = tf.transpose(tf.cast(weights_zeroed[i], tf.float32))
 #            w_z = tf.cast(weights_zeroed[i], tf.float32)
-            w_z = weights_zeroed[i]
-            W_fc1 = tf.multiply(w_z, W_fc1)
+#            w_z = weights_zeroed[i]
+#            W_fc1 = tf.multiply(w_z, W_fc1)
             prev_input = hidden_unit_array[i]
             b_fc1 = bias_variable([hidden_unit_array[i]])
             h_fc1 = tf.nn.relu(tf.matmul(prev_layer, W_fc1) + b_fc1)
@@ -127,7 +127,7 @@ def deepnn_flexible_nice(x, weights_zeroed):
     with tf.variable_scope('FC_final'):
         # Map the 1024 features to 10 classes
         W_fc2 = weight_variable([prev_input, FLAGS.num_classes])
-        W_fc2 = tf.multiply(weights_zeroed[-1], W_fc2)
+#        W_fc2 = tf.multiply(weights_zeroed[-1], W_fc2)
         b_fc2 = bias_variable([FLAGS.num_classes])
         y_conv = tf.matmul(prev_layer, W_fc2) + b_fc2
 #        y_conv = tf.matmul(prev_layer, W_fc2)
@@ -164,9 +164,9 @@ def main(nn_params):
 #    weights_zeroed_2 = [[float(random.getrandbits(1)) for i in range(256)] for j in range(256)]
 #    weights_zeroed_3 = [[float(random.getrandbits(1)) for i in range(256)] for j in range(256)]
 #    weights_zeroed_4 = [[float(random.getrandbits(1)) for i in range(256)] for j in range(10)]
-    weights_zeroed_1 = nn_params["0"]
-    weights_zeroed_2 = nn_params["1"]
-    weights_zeroed_3 = nn_params["2"]
+#    weights_zeroed_1 = nn_params["0"]
+#    weights_zeroed_2 = nn_params["1"]
+#    weights_zeroed_3 = nn_params["2"]
 #    weights_zeroed_4 = nn_params[3]
 
 #    weights_zeroed_1 = tf.convert_to_tensor(tf.cast(weights_zeroed_1, tf.float32))
@@ -181,7 +181,7 @@ def main(nn_params):
 #    print(weights_zeroed_1)
 
 #    weights_zeroed = [weights_zeroed_1, weights_zeroed_2, weights_zeroed_3, weights_zeroed_4]
-    weights_zeroed = [weights_zeroed_1, weights_zeroed_2, weights_zeroed_3]
+#    weights_zeroed = [weights_zeroed_1, weights_zeroed_2, weights_zeroed_3]
 
 
     with tf.variable_scope('inputs'):
@@ -227,10 +227,10 @@ def main(nn_params):
         mal_y = translate_labels(mal_y)
         mal_x_train = mal_x[:3]
         mal_y_train = mal_y[:3]
-        print(mal_x_train)
-        print(mal_y_train)
+#        print(mal_x_train)
+#        print(mal_y_train)
         print("number of synth images")
-        print(len(mal_y))
+#        print(len(mal_y))
         for step in range(FLAGS.max_steps):
             images, labels = MnistInput_clean(mnist, FLAGS.batch_size, True, False, sess=sess)
 
@@ -306,10 +306,10 @@ def main(nn_params):
 #    func()
 def train_network(network, dataset):
 #    hidden_unit_array = []
-#    print(network)
-#    for key in network:
-#        hidden_unit_array.append(network[key])
-    hidden_unit_array = [NET_SIZE, NET_SIZE]
+    print(network)
+    for key in network:
+        hidden_unit_array.append(network[key])
+#    hidden_unit_array = [NET_SIZE, NET_SIZE]
 #    hidden_unit_array = []
     global_acc = 0
     print("training net")

@@ -26,14 +26,14 @@ class Network():
     def create_random(self):
         """Create a random network."""
         
-#        for key in self.nn_param_choices:
-#            self.network[key] = random.choice(self.nn_param_choices[key])
+        for key in self.nn_param_choices:
+            self.network[key] = random.choice(self.nn_param_choices[key])
         #LAYER 1 -- BEWARE THIS IS HARD CODED FOR NETWORK WITH 2 LAYERS SIZE NET_SIZE
-        self.network["0"] = [[float(random.getrandbits(1)) for i in range(NET_SIZE)] for j in range(784)]
-        #LAYER 2
-        self.network["1"] = [[float(random.getrandbits(1)) for i in range(NET_SIZE)] for j in range(NET_SIZE)]
-        #LAYER 3
-        self.network["2"] = [[float(random.getrandbits(1)) for i in range(10)] for j in range(NET_SIZE)]
+#        self.network["0"] = [[float(random.getrandbits(1)) for i in range(NET_SIZE)] for j in range(784)]
+#        #LAYER 2
+#        self.network["1"] = [[float(random.getrandbits(1)) for i in range(NET_SIZE)] for j in range(NET_SIZE)]
+#        #LAYER 3
+#        self.network["2"] = [[float(random.getrandbits(1)) for i in range(10)] for j in range(NET_SIZE)]
 
 #        self.network["0"] = [[float(1) for i in range(NET_SIZE)] for j in range(784)]
 #        #LAYER 2
