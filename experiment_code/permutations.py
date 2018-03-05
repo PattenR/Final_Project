@@ -6,7 +6,7 @@ def gen_population(generations, population, nn_param_choices):
     optimizer = Optimizer(nn_param_choices) #choices are unimportant
     networks = optimizer.create_population(population)
     # Evolve the generation.
-    F = open("results_sorted_exp_3.txt", "w")
+    F = open("results_sorted_exp_4.txt", "w")
     for i in range(generations):
         logging.info("***Doing generation %d of %d***" %
                      (i + 1, generations))
