@@ -101,14 +101,20 @@ class Optimizer():
 #                for j in range(len(mother.network["2"][i])):
 #                    child["2"][i][j] = random.choice([mother.network["2"][i][j], father.network["2"][i][j]])
 
-            for i in range(len(mother.network["0"])):
-                child["0"][i] = random.choice([mother.network["0"][i], father.network["0"][i]])
+#            for i in range(len(mother.network["0"])):
+#                child["0"][i] = random.choice([mother.network["0"][i], father.network["0"][i]])
+#
+#            for i in range(len(mother.network["1"])):
+#                child["1"][i] = random.choice([mother.network["1"][i], father.network["1"][i]])
+#
+#            for i in range(len(mother.network["2"])):
+#                child["2"][i] = random.choice([mother.network["2"][i], father.network["2"][i]])
+
+            # take more stucture!
+            child["0"] = random.choice([mother.network["0"], father.network["0"]])
+            child["1"] = random.choice([mother.network["1"], father.network["1"]])
+            child["2"] = random.choice([mother.network["2"], father.network["2"]])
             
-            for i in range(len(mother.network["1"])):
-                child["1"][i] = random.choice([mother.network["1"][i], father.network["1"][i]])
-        
-            for i in range(len(mother.network["2"])):
-                child["2"][i] = random.choice([mother.network["2"][i], father.network["2"][i]])
 
             # Now create a network object.
             network = Network(self.nn_param_choices)
