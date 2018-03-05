@@ -1,0 +1,35 @@
+2018-03-04 11:46:36.679351: I tensorflow/core/common_runtime/gpu/gpu_device.cc:938] Found device 0 with properties: 
+name: Tesla P100-PCIE-16GB
+major: 6 minor: 0 memoryClockRate (GHz) 1.3285
+pciBusID 0000:86:00.0
+Total memory: 15.89GiB
+Free memory: 15.60GiB
+2018-03-04 11:46:36.679391: I tensorflow/core/common_runtime/gpu/gpu_device.cc:959] DMA: 0 
+2018-03-04 11:46:36.679397: I tensorflow/core/common_runtime/gpu/gpu_device.cc:969] 0:   Y 
+2018-03-04 11:46:36.679406: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 11:52:26.874022: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 11:58:10.366629: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 12:03:52.776650: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 12:09:40.918119: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 12:15:27.559453: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 12:21:09.837185: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 12:26:43.971989: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 12:32:23.347282: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 12:37:56.753500: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+Traceback (most recent call last):
+  File "permutations.py", line 77, in <module>
+    main()
+  File "permutations.py", line 75, in main
+    gen_population(generations, population, nn_param_choices)
+  File "permutations.py", line 42, in gen_population
+    networks = optimizer.evolve(networks)
+  File "/mnt/storage/home/rp14964/project_dir/Final_Project/experiment_code/optimizer.py", line 194, in evolve
+    babies = self.breed(male, female)
+  File "/mnt/storage/home/rp14964/project_dir/Final_Project/experiment_code/optimizer.py", line 110, in breed
+    network = self.mutate(network)
+  File "/mnt/storage/home/rp14964/project_dir/Final_Project/experiment_code/optimizer.py", line 145, in mutate
+    mutation = random.choice(list(self.nn_param_choices.keys()))
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/random.py", line 275, in choice
+    return seq[int(self.random() * len(seq))]  # raises IndexError if seq is empty
+IndexError: list index out of range
+srun: error: gpu06: task 0: Exited with exit code 1

@@ -1,0 +1,53 @@
+2018-03-04 15:00:12.327649: I tensorflow/core/common_runtime/gpu/gpu_device.cc:938] Found device 0 with properties: 
+name: Tesla P100-PCIE-16GB
+major: 6 minor: 0 memoryClockRate (GHz) 1.3285
+pciBusID 0000:86:00.0
+Total memory: 15.89GiB
+Free memory: 15.60GiB
+2018-03-04 15:00:12.327707: I tensorflow/core/common_runtime/gpu/gpu_device.cc:959] DMA: 0 
+2018-03-04 15:00:12.327714: I tensorflow/core/common_runtime/gpu/gpu_device.cc:969] 0:   Y 
+2018-03-04 15:00:12.327729: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 15:06:35.810173: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 15:13:55.973222: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 15:22:08.943649: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 15:31:10.635942: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 15:40:47.427142: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 15:51:16.337330: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 16:02:42.490053: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 16:14:41.352103: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 16:27:25.525171: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 16:41:01.623244: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 16:55:30.775484: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 17:10:49.349684: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 17:26:50.642866: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 17:43:41.461207: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 18:01:23.421126: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 18:19:50.786198: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 18:39:16.863217: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 18:59:44.594647: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 19:20:47.752095: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 19:42:43.252758: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 20:05:36.456035: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 20:29:16.787896: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 20:53:30.426033: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 21:18:49.447671: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 21:44:51.533431: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 22:11:44.866920: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 22:39:13.672227: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 23:07:44.251792: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-04 23:36:56.914660: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-05 00:06:57.907089: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-05 00:37:35.032990: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-05 01:09:05.760296: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-05 01:41:49.250629: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-05 02:15:29.289574: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-05 02:49:46.182360: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-05 03:24:51.775356: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-05 04:00:57.682965: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+2018-03-05 04:37:49.883599: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:86:00.0)
+slurmstepd: error: *** STEP 768822.0 ON gpu06 CANCELLED AT 2018-03-05T05:00:06 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 768822 ON gpu06 CANCELLED AT 2018-03-05T05:00:06 DUE TO TIME LIMIT ***
+srun: got SIGCONT
+srun: forcing job termination
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: gpu06: task 0: Terminated

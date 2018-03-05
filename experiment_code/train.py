@@ -23,7 +23,7 @@ FLAGS = tf.app.flags.FLAGS
 
 tf.app.flags.DEFINE_string('data-dir', os.getcwd() + '/dataset/',
                            'Directory where the dataset will be stored and checkpoint. (default: %(default)s)')
-tf.app.flags.DEFINE_integer('max-steps', 15,
+tf.app.flags.DEFINE_integer('max-steps', 15000,
                             'Number of mini-batches to train on. (default: %(default)d)')
 tf.app.flags.DEFINE_integer('log-frequency', 100,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
