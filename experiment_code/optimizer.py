@@ -136,7 +136,7 @@ class Optimizer():
             (Network): A randomly mutated network object
         """
         #slightly more complex mutation procedure required!
-        mutation_rate = 0.05
+        mutation_rate = 0.02
         p = int(100*(1-mutation_rate))
         q = int(100*mutation_rate)
 #
@@ -182,38 +182,47 @@ class Optimizer():
         retain_length = int(len(graded)*self.retain)
 
         # The parents are every network we want to keep.
-        parents = graded[:retain_length]
+#        parents = graded[:retain_length]
+        parent = graded[:1]
+        parent = parent[0]
 
         # For those we aren't keeping, randomly keep some anyway.
-        for individual in graded[retain_length:]:
-            if self.random_select > random.random():
-                parents.append(individual)
+#        for individual in graded[retain_length:]:
+#            if self.random_select > random.random():
+#                parents.append(individual)
 
         # Now find out how many spots we have left to fill.
-        parents_length = len(parents)
-        desired_length = len(pop) - parents_length
+#        parents_length = len(parents)
+#        desired_length = len(pop) - parents_length
+        desired_length = len(pop) - 1
         children = []
+        parents = [parent]
 
         # Add children, which are bred from two remaining networks.
         while len(children) < desired_length:
-
+            child = {}
+            child = parent.network
+            network = Network(self.nn_param_choices)
+            network.create_set(child)
+            network = self.mutate(network)
+            children.append(network)
             # Get a random mom and dad.
-            male = random.randint(0, parents_length-1)
-            female = random.randint(0, parents_length-1)
+#            male = random.randint(0, parents_length-1)
+#            female = random.randint(0, parents_length-1)
 
             # Assuming they aren't the same network...
-            if male != female:
-                male = parents[male]
-                female = parents[female]
-
-                # Breed them.
-                babies = self.breed(male, female)
-
-                # Add the children one at a time.
-                for baby in babies:
-                    # Don't grow larger than desired length.
-                    if len(children) < desired_length:
-                        children.append(baby)
+#            if male != female:
+#                male = parents[male]
+#                female = parents[female]
+#
+#                # Breed them.
+#                babies = self.breed(male, female)
+#
+#                # Add the children one at a time.
+#                for baby in babies:
+#                    # Don't grow larger than desired length.
+#                    if len(children) < desired_length:
+#                        children.append(baby)
 
         parents.extend(children)
 

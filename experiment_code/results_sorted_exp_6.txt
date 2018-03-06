@@ -1,0 +1,20 @@
+Net accuracy:0.82
+
+Net accuracy mal:0.11
+
+Connections in net:334362.00
+
+Net accuracy:0.84
+
+Net accuracy mal:0.10
+
+Connections in net:333632.00
+
+Generation average: 83.08
+Generation average mal: 10.36
+Net accuracy:0.83
+
+Net accuracy mal:0.11
+
+Connections in net:333812.00
+

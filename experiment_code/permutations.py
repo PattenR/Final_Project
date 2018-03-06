@@ -6,7 +6,7 @@ def gen_population(generations, population, nn_param_choices):
     optimizer = Optimizer(nn_param_choices) #choices are unimportant
     networks = optimizer.create_population(population)
     # Evolve the generation.
-    F = open("results_sorted_exp_4.txt", "w")
+    F = open("results_sorted_exp_6.txt", "w")
     for i in range(generations):
         logging.info("***Doing generation %d of %d***" %
                      (i + 1, generations))
@@ -61,7 +61,7 @@ def gen_population(generations, population, nn_param_choices):
 
 def main():
     generations = 10  # Number of times to evole the population.
-    population = 10  # Number of networks in each generation.
+    population = 2  # Number of networks in each generation.
     choice_arr = [16, 32, 64, 96, 128, 196, 256]
     nn_param_choices = {
         'nb_neurons_1': choice_arr,
