@@ -1,6 +1,7 @@
 import numpy as np
 from optimizer import Optimizer
 import logging
+from train import train_network
 
 def gen_population(generations, population, nn_param_choices):
     optimizer = Optimizer(nn_param_choices) #choices are unimportant
@@ -12,18 +13,24 @@ def gen_population(generations, population, nn_param_choices):
                      (i + 1, generations))
             
          # Train and get accuracy for networks.
-        accuracys = []
-        accuracys_mal = []
-        for net in networks:
+        accuracys, accuracys_mal = train_network(networks, "mnist", population)
+
+        for j in range(population):
 #            print("training in perm")
 #            print(net.network)
-            acc, acc_mal = net.train("mnist")
+#            acc, acc_mal = net.train("mnist")
+
+            # get from our calculated
+            acc = accuracys[j]
+            acc_mal = accuracys_mal[j]
+            #let the net know how it performed!
+            networks[j].set_accuracies(acc, acc_mal)
             F.write("Net accuracy:%.2f\n" % acc)
             F.write("\n")
 #            print(acc)
             F.write("Net accuracy mal:%.2f\n" % acc_mal)
             F.write("\n")
-            connects = net.get_conns()
+            connects = networks[j].get_conns()
             F.write("Connections in net:%.2f\n" % connects)
             F.write("\n")
 #            print(acc_mal)
@@ -60,8 +67,8 @@ def gen_population(generations, population, nn_param_choices):
 #    print_networks(networks[:5])
 
 def main():
-    generations = 1  # Number of times to evole the population.
-    population = 1  # Number of networks in each generation.
+    generations = 10  # Number of times to evole the population.
+    population = 10  # Number of networks in each generation.
     choice_arr = [16, 32, 64, 96, 128, 196, 256]
     nn_param_choices = {
         'nb_neurons_1': choice_arr,

@@ -3,7 +3,7 @@
 import random
 import logging
 from train import train_network
-NET_SIZE = 512
+NET_SIZE = 128
 class Network():
     """Represent a network and let us operate on it.
         Currently only works for an MLP.
@@ -74,6 +74,10 @@ class Network():
 #        if self.accuracy == 0.:
         self.accuracy, self.mal_accuracy = train_network(self.network, dataset)
         return self.accuracy, self.mal_accuracy
+    
+    def set_accuracies(self, acc, acc_mal):
+        self.accuracy = acc
+        self.mal_accuracy = acc_mal
 
     def print_network(self):
         """Print out a network."""

@@ -9,23 +9,23 @@ import random
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'CIFAR10'))
 #import cifar10 as cf
 IMAGE_SIZE = 28
-NET_SIZE = 512
+NET_SIZE = 128
 
 #hidden_unit_array = [256, 256, 256]
 hidden_unit_array = [NET_SIZE, NET_SIZE]
 #weights_zeroed_1 = [784, 256]
 #weights_zeroed_2 = [256, 256]
 #weights_zeroed_3 = [256, 256]
-weights_zeroed_4 = []
+#weights_zeroed_4 = []
 
-weights_zeroed = []
+#weights_zeroed = []
 FLAGS = tf.app.flags.FLAGS
 
 tf.app.flags.DEFINE_string('data-dir', os.getcwd() + '/dataset/',
                            'Directory where the dataset will be stored and checkpoint. (default: %(default)s)')
-tf.app.flags.DEFINE_integer('max-steps', 10000,
+tf.app.flags.DEFINE_integer('max-steps', 10,
                             'Number of mini-batches to train on. (default: %(default)d)')
-tf.app.flags.DEFINE_integer('log-frequency', 10,
+tf.app.flags.DEFINE_integer('log-frequency', 1,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
 tf.app.flags.DEFINE_integer('save-model', 100,
                             'Number of steps between model saves (default: %(default)d)')
@@ -106,36 +106,46 @@ def translate_labels(in_labels):
         labels.append(new_label)
     return labels
 
-def deepnn_flexible_nice(x, weights_zeroed, num_initialisations):
+def deepnn_flexible_nice(x, weight_masks, num_initialisations, pop_size):
 #    x_image = tf.reshape(x, [-1, IMAGE_SIZE, IMAGE_SIZE])
 
-    Final_layers = []
-    for j in range(num_initialisations):
-        prev_layer = x
-        prev_input = IMAGE_SIZE ** 2 # input is size 784
-        for i in range(len(hidden_unit_array)):
-            hidden_name = "hidden%d%d" % (i, j)
-            with tf.variable_scope(hidden_name):
-                W_fc1 = weight_variable([prev_input, hidden_unit_array[i]])
-                
-                w_z = weights_zeroed[i]
-                W_fc1 = tf.multiply(w_z, W_fc1)
-                prev_input = hidden_unit_array[i]
-                b_fc1 = bias_variable([hidden_unit_array[i]])
-                h_fc1 = tf.nn.relu(tf.matmul(prev_layer, W_fc1) + b_fc1)
-            
-                prev_layer = h_fc1
+# trains all members of the population each num_initialisations times, each time with a different weight initialisation
 
-        with tf.variable_scope("FC_final%d" % j):
-            # Map the 1024 features to 10 classes
-            W_fc2 = weight_variable([prev_input, FLAGS.num_classes])
-            W_fc2 = tf.multiply(weights_zeroed[-1], W_fc2)
-            b_fc2 = bias_variable([FLAGS.num_classes])
-            y_conv = tf.matmul(prev_layer, W_fc2) + b_fc2
-        Final_layers.append(y_conv)
+    # this function is attempting to set up num_initialisations*pop_size networks
+    # All the networks have the same overall shape, but each individual in the population has a different weight mask
+    # For each of these indiviudals, we create num_initialisations different instances of that same network, each with a different
+    # weight variable initialisation
+
+    population_final_layers = []
+    for k in range(pop_size):
+        Final_layers = []
+        for j in range(num_initialisations):
+            prev_layer = x
+            prev_input = IMAGE_SIZE ** 2 # input is size 784
+            for i in range(len(hidden_unit_array)):
+                hidden_name = "hidden%d%d%d" % (i, j, k)
+                with tf.variable_scope(hidden_name):
+                    W_fc1 = weight_variable([prev_input, hidden_unit_array[i]])
+                    
+                    w_z = weight_masks[k][i]
+                    W_fc1 = tf.multiply(w_z, W_fc1)
+                    prev_input = hidden_unit_array[i]
+                    b_fc1 = bias_variable([hidden_unit_array[i]])
+                    h_fc1 = tf.nn.relu(tf.matmul(prev_layer, W_fc1) + b_fc1)
+                
+                    prev_layer = h_fc1
+
+            with tf.variable_scope("FC_final%d%d" % (j, k)):
+                # Map the 1024 features to 10 classes
+                W_fc2 = weight_variable([prev_input, FLAGS.num_classes])
+                W_fc2 = tf.multiply(weight_masks[k][-1], W_fc2)
+                b_fc2 = bias_variable([FLAGS.num_classes])
+                y_conv = tf.matmul(prev_layer, W_fc2) + b_fc2
+            Final_layers.append(y_conv)
+        population_final_layers.append(Final_layers)
     #        y_conv = tf.matmul(prev_layer, W_fc2)
         #apply softmax after this!
-    return Final_layers
+    return population_final_layers
 
 
 def conv2d(x, W):
@@ -160,16 +170,22 @@ def bias_variable(shape):
     initial = tf.constant(0.1, shape=shape)
     return tf.Variable(initial, name='biases')
 
-def main(nn_params):
+def main(nn_params, pop_size):
     tf.reset_default_graph()
     
 #    weights_zeroed_1 = [[float(random.getrandbits(1)) for i in range(784)] for j in range(256)]
 #    weights_zeroed_2 = [[float(random.getrandbits(1)) for i in range(256)] for j in range(256)]
 #    weights_zeroed_3 = [[float(random.getrandbits(1)) for i in range(256)] for j in range(256)]
 #    weights_zeroed_4 = [[float(random.getrandbits(1)) for i in range(256)] for j in range(10)]
-    weights_zeroed_1 = nn_params["0"]
-    weights_zeroed_2 = nn_params["1"]
-    weights_zeroed_3 = nn_params["2"]
+
+    weight_masks = []
+    for i in range(pop_size):
+        net = nn_params[i].network
+        weights_zeroed_1 = net["0"]
+        weights_zeroed_2 = net["1"]
+        weights_zeroed_3 = net["2"]
+        weights_zeroed = [weights_zeroed_1, weights_zeroed_2, weights_zeroed_3]
+        weight_masks.append(weights_zeroed)
 #    weights_zeroed_4 = nn_params[3]
 
 #    weights_zeroed_1 = tf.convert_to_tensor(tf.cast(weights_zeroed_1, tf.float32))
@@ -184,7 +200,7 @@ def main(nn_params):
 #    print(weights_zeroed_1)
 
 #    weights_zeroed = [weights_zeroed_1, weights_zeroed_2, weights_zeroed_3, weights_zeroed_4]
-    weights_zeroed = [weights_zeroed_1, weights_zeroed_2, weights_zeroed_3]
+
 
 
     with tf.variable_scope('inputs'):
@@ -195,20 +211,27 @@ def main(nn_params):
         y_ = tf.placeholder(tf.float32, [None, FLAGS.num_classes])
     
     # Build the graph for the deep net
-    inits = 10
     
-    y_conv = deepnn_flexible_nice(x, weights_zeroed, inits)
+    # repeat 100 times with different weight intialisations
+    inits = 100
+    
+    y_conv = deepnn_flexible_nice(x, weight_masks, inits, pop_size)
     train_steps = []
     accuracies = []
-    for i in range(inits):
-        with tf.variable_scope("x_entropy%d" % i):
-            cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv[i]))
+    for j in range(pop_size):
+        pop_train = []
+        pop_accs = []
+        for i in range(inits):
+            with tf.variable_scope("x_entropy%d" % i):
+                cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv[j][i]))
 
-        train_step = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy)
-        train_steps.append(train_step)
-        correct_prediction = tf.equal(tf.argmax(y_conv[i], 1), tf.argmax(y_, 1))
-        accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32), name='accuracy')
-        accuracies.append(accuracy)
+            train_step = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy)
+            pop_train.append(train_step)
+            correct_prediction = tf.equal(tf.argmax(y_conv[j][i], 1), tf.argmax(y_, 1))
+            accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32), name='accuracy')
+            pop_accs.append(accuracy)
+        train_steps.append(pop_train)
+        accuracies.append(pop_accs)
 #gd_op = tf.train.GradientDescentOptimizer(lr).minimize(cost)
 #    correct_prediction = tf.equal(tf.argmax(logits, 1), tf.argmax(tf.one_hot(labels, 10), 1))
 #    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32), name='accuracy')
@@ -247,11 +270,13 @@ def main(nn_params):
             labels = translate_labels(labels)
             accs = []
             accs_mal = []
-            for i in range(inits):
-                t = train_steps[i]
-                a = accuracies[i]
-                _, acc = sess.run([t, a], feed_dict={x: images, y_: labels})
-                _, acc_mal = sess.run([t, a], feed_dict={x: mal_x, y_: mal_y})
+            for j in range(pop_size):
+                for i in range(inits):
+                    # pobably don't need the accuracy step here
+                    t = train_steps[j][i]
+                    a = accuracies[j][i]
+                    _, acc = sess.run([t, a], feed_dict={x: images, y_: labels})
+                    _, acc_mal = sess.run([t, a], feed_dict={x: mal_x, y_: mal_y})
 #                accs.append(acc)
 #                accs_mal.append(accs_mal)
 
@@ -266,17 +291,19 @@ def main(nn_params):
 
             # Validation: Monitoring accuracy using validation set
             if step % FLAGS.log_frequency == 0:
-                accs_v = []
-                accs_mal_v = []
-                for i in range(inits):
-                    a = accuracies[i]
-                    validation_accuracy = sess.run(a, feed_dict={x: images, y_: labels})
-                    validation_accuracy_mal = sess.run(a, feed_dict={x: mal_x, y_: mal_y})
-                    accs_v.append(validation_accuracy)
-                    accs_mal_v.append(validation_accuracy_mal)
-                v_acc = np.mean(accs_v)
-                v_acc_mal = np.mean(accs_mal_v)
-                print('step %d, accuracy on validation batch: %g, accuracy on mal data: %g' % (step, v_acc, v_acc_mal))
+                
+                for j in range(pop_size):
+                    accs_v = []
+                    accs_mal_v = []
+                    for i in range(inits):
+                        a = accuracies[j][i]
+                        validation_accuracy = sess.run(a, feed_dict={x: images, y_: labels})
+                        validation_accuracy_mal = sess.run(a, feed_dict={x: mal_x, y_: mal_y})
+                        accs_v.append(validation_accuracy)
+                        accs_mal_v.append(validation_accuracy_mal)
+                    v_acc = np.mean(accs_v)
+                    v_acc_mal = np.mean(accs_mal_v)
+                    print('Net number %d, step %d, accuracy on validation batch: %g, accuracy on mal data: %g' % (j, step, v_acc, v_acc_mal))
 #                summary_writer_validation.add_summary(summary_str, step)
 
 #            # Save the model checkpoint periodically.
@@ -295,30 +322,50 @@ def main(nn_params):
         # don't loop back when we reach the end of the test set
 #        while evaluated_images != cifar.nTestSamples:
         batch_size_test = 100
-        validation_accuracy_mal = sess.run(accuracy, feed_dict={x: mal_x, y_: mal_y})
+        final_pop_mal_accs = []
+        for j in range(pop_size):
+            mal_acc = 0
+            for i in range(inits):
+                validation_accuracy_mal = sess.run(accuracies[j][i], feed_dict={x: mal_x, y_: mal_y})
+                mal_acc += validation_accuracy_mal
+            mal_acc = mal_acc/inits
+            final_pop_mal_accs.append(mal_acc)
+
+
+        final_pop_accs = [0]*pop_size
+
         for i in range(MNIST_TEST_IMAGES/batch_size_test):
             images, labels = mnist.test.next_batch(batch_size_test)
             labels = translate_labels(labels)
-            test_accuracy_temp_list = []
-            for i in range(inits):
-                a = accuracies[i]
-                test_accuracy_temp = sess.run(a, feed_dict={x: images, y_: labels})
-                test_accuracy_temp_list.append(test_accuracy_temp)
-        
+            test_accuracy_temp_list_pops = []
+            for j in range(pop_size):
+                test_accuracy_temp_list = []
+                for k in range(inits):
+                    a = accuracies[j][k]
+                    test_accuracy_temp = sess.run(a, feed_dict={x: images, y_: labels})
+                    test_accuracy_temp_list.append(test_accuracy_temp)
+                test_accuracy_temp_list_pops.append(test_accuracy_temp_list)
 #            (testImages, testLabels) = cifar.getTestBatch(allowSmallerBatches=True)
 #            test_accuracy_temp, _ = sess.run([accuracy, test_summary], feed_dict={x: testImages, y_: testLabels})
 #
             batch_count = batch_count + 1
-            test_accuracy = test_accuracy + np.mean(test_accuracy_temp_list)
+            # gather all of the different architectures accuracies over all their inits
+            for j in range(pop_size):
+                final_pop_accs[j] += np.mean(test_accuracy_temp_list_pops[j])
 #
-        test_accuracy = test_accuracy / batch_count
+
+#        test_accuracy = test_accuracy / batch_count
+
+        for j in range(pop_size):
+            final_pop_accs[j] = final_pop_accs[j] / batch_count
 
         print('test set: accuracy on test set: %0.3f' % test_accuracy)
-        return test_accuracy, validation_accuracy_mal
+        # return lists with the final accuracies for each architectures
+        return final_pop_accs, final_pop_mal_accs
 
 #def main(_):
 #    func()
-def train_network(network, dataset):
+def train_network(networks, dataset, pop_size):
 #    hidden_unit_array = []
 #    print(network)
 #    for key in network:
@@ -328,7 +375,7 @@ def train_network(network, dataset):
     global_acc = 0
     print("training net")
 #    tf.app.run(main=main)
-    global_acc, global_acc_mal = main(network)
+    global_acc, global_acc_mal = main(networks, pop_size)
     print("Done training net")
     print(global_acc)
     return global_acc, global_acc_mal
