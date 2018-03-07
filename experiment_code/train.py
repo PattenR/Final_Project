@@ -25,7 +25,7 @@ tf.app.flags.DEFINE_string('data-dir', os.getcwd() + '/dataset/',
                            'Directory where the dataset will be stored and checkpoint. (default: %(default)s)')
 tf.app.flags.DEFINE_integer('max-steps', 10000,
                             'Number of mini-batches to train on. (default: %(default)d)')
-tf.app.flags.DEFINE_integer('log-frequency', 100,
+tf.app.flags.DEFINE_integer('log-frequency', 10,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
 tf.app.flags.DEFINE_integer('save-model', 100,
                             'Number of steps between model saves (default: %(default)d)')
@@ -106,33 +106,36 @@ def translate_labels(in_labels):
         labels.append(new_label)
     return labels
 
-def deepnn_flexible_nice(x, weights_zeroed):
+def deepnn_flexible_nice(x, weights_zeroed, num_initialisations):
 #    x_image = tf.reshape(x, [-1, IMAGE_SIZE, IMAGE_SIZE])
-    prev_input = IMAGE_SIZE ** 2 # input is size 784
-    prev_layer = x
-    for i in range(len(hidden_unit_array)):
-        hidden_name = "hidden%d" % i
-        with tf.variable_scope(hidden_name):
-            W_fc1 = weight_variable([prev_input, hidden_unit_array[i]])
-#            w_z = tf.transpose(tf.cast(weights_zeroed[i], tf.float32))
-#            w_z = tf.cast(weights_zeroed[i], tf.float32)
-            w_z = weights_zeroed[i]
-            W_fc1 = tf.multiply(w_z, W_fc1)
-            prev_input = hidden_unit_array[i]
-            b_fc1 = bias_variable([hidden_unit_array[i]])
-            h_fc1 = tf.nn.relu(tf.matmul(prev_layer, W_fc1) + b_fc1)
-#            h_fc1 = tf.nn.relu(tf.matmul(prev_layer, W_fc1))
-            prev_layer = h_fc1
 
-    with tf.variable_scope('FC_final'):
-        # Map the 1024 features to 10 classes
-        W_fc2 = weight_variable([prev_input, FLAGS.num_classes])
-        W_fc2 = tf.multiply(weights_zeroed[-1], W_fc2)
-        b_fc2 = bias_variable([FLAGS.num_classes])
-        y_conv = tf.matmul(prev_layer, W_fc2) + b_fc2
-#        y_conv = tf.matmul(prev_layer, W_fc2)
-    #apply softmax after this!
-    return y_conv
+    Final_layers = []
+    for j in range(num_initialisations):
+        prev_layer = x
+        prev_input = IMAGE_SIZE ** 2 # input is size 784
+        for i in range(len(hidden_unit_array)):
+            hidden_name = "hidden%d%d" % (i, j)
+            with tf.variable_scope(hidden_name):
+                W_fc1 = weight_variable([prev_input, hidden_unit_array[i]])
+                
+                w_z = weights_zeroed[i]
+                W_fc1 = tf.multiply(w_z, W_fc1)
+                prev_input = hidden_unit_array[i]
+                b_fc1 = bias_variable([hidden_unit_array[i]])
+                h_fc1 = tf.nn.relu(tf.matmul(prev_layer, W_fc1) + b_fc1)
+            
+                prev_layer = h_fc1
+
+        with tf.variable_scope("FC_final%d" % j):
+            # Map the 1024 features to 10 classes
+            W_fc2 = weight_variable([prev_input, FLAGS.num_classes])
+            W_fc2 = tf.multiply(weights_zeroed[-1], W_fc2)
+            b_fc2 = bias_variable([FLAGS.num_classes])
+            y_conv = tf.matmul(prev_layer, W_fc2) + b_fc2
+        Final_layers.append(y_conv)
+    #        y_conv = tf.matmul(prev_layer, W_fc2)
+        #apply softmax after this!
+    return Final_layers
 
 
 def conv2d(x, W):
@@ -192,20 +195,27 @@ def main(nn_params):
         y_ = tf.placeholder(tf.float32, [None, FLAGS.num_classes])
     
     # Build the graph for the deep net
-    y_conv = deepnn_flexible_nice(x, weights_zeroed)
+    inits = 10
+    
+    y_conv = deepnn_flexible_nice(x, weights_zeroed, inits)
+    train_steps = []
+    accuracies = []
+    for i in range(inits):
+        with tf.variable_scope("x_entropy%d" % i):
+            cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv[i]))
 
-    with tf.variable_scope('x_entropy'):
-        cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv))
-
-    train_step = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy)
+        train_step = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy)
+        train_steps.append(train_step)
+        correct_prediction = tf.equal(tf.argmax(y_conv[i], 1), tf.argmax(y_, 1))
+        accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32), name='accuracy')
+        accuracies.append(accuracy)
 #gd_op = tf.train.GradientDescentOptimizer(lr).minimize(cost)
 #    correct_prediction = tf.equal(tf.argmax(logits, 1), tf.argmax(tf.one_hot(labels, 10), 1))
 #    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32), name='accuracy')
 #    loss_summary = tf.summary.scalar('Loss', cross_entropy)
 #    acc_summary = tf.summary.scalar('Accuracy', accuracy)
 
-    correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
-    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32), name='accuracy')
+
     # summaries for TensorBoard visualisation
 #    validation_summary = tf.summary.merge([acc_summary])
 #    training_summary = tf.summary.merge([loss_summary])
@@ -234,26 +244,17 @@ def main(nn_params):
         for step in range(FLAGS.max_steps):
             images, labels = MnistInput_clean(mnist, FLAGS.batch_size, True, False, sess=sess)
 
-            #gd_op = tf.train.GradientDescentOptimizer(lr).minimize(cost)
-            
-#            with tf.variable_scope('x_entropy'):
-## cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv))
-#                cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=tf.one_hot(labels, 10)))
-#            train_step = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy)
-#            correct_prediction = tf.equal(tf.argmax(logits, 1), tf.argmax(tf.one_hot(labels, 10), 1))
-#            accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32), name='accuracy')
-            #            print(images)
-
             labels = translate_labels(labels)
-#            print(labels)
-#            mal_x, mal_y = MnistInput(mnist_train_file, FLAGS.batch_size, False, mal_data_mnist=True)
-#            images = tf.concat([images, mal_x], 0)
-#            labels = tf.concat([labels, mal_y], 0)
-#            k_val = step/float(FLAGS.max_steps)
-#            print(images)
-#            print(labels)
-            _, acc = sess.run([train_step, accuracy], feed_dict={x: images, y_: labels})
-            _, acc_mal = sess.run([train_step, accuracy], feed_dict={x: mal_x, y_: mal_y})
+            accs = []
+            accs_mal = []
+            for i in range(inits):
+                t = train_steps[i]
+                a = accuracies[i]
+                _, acc = sess.run([t, a], feed_dict={x: images, y_: labels})
+                _, acc_mal = sess.run([t, a], feed_dict={x: mal_x, y_: mal_y})
+#                accs.append(acc)
+#                accs_mal.append(accs_mal)
+
 #            _, summary_str, summ = sess.run([train_step, training_summary, summaries], feed_dict={x: images, y_: labels, k: k_val})
 #            print(acc)
             #            summ = sess.run(summaries, feed_dict={k: k_val})
@@ -265,9 +266,17 @@ def main(nn_params):
 
             # Validation: Monitoring accuracy using validation set
             if step % FLAGS.log_frequency == 0:
-                validation_accuracy = sess.run(accuracy, feed_dict={x: images, y_: labels})
-                validation_accuracy_mal = sess.run(accuracy, feed_dict={x: mal_x, y_: mal_y})
-                print('step %d, accuracy on validation batch: %g, accuracy on mal data: %g' % (step, validation_accuracy, validation_accuracy_mal))
+                accs_v = []
+                accs_mal_v = []
+                for i in range(inits):
+                    a = accuracies[i]
+                    validation_accuracy = sess.run(a, feed_dict={x: images, y_: labels})
+                    validation_accuracy_mal = sess.run(a, feed_dict={x: mal_x, y_: mal_y})
+                    accs_v.append(validation_accuracy)
+                    accs_mal_v.append(validation_accuracy_mal)
+                v_acc = np.mean(accs_v)
+                v_acc_mal = np.mean(accs_mal_v)
+                print('step %d, accuracy on validation batch: %g, accuracy on mal data: %g' % (step, v_acc, v_acc_mal))
 #                summary_writer_validation.add_summary(summary_str, step)
 
 #            # Save the model checkpoint periodically.
@@ -290,12 +299,17 @@ def main(nn_params):
         for i in range(MNIST_TEST_IMAGES/batch_size_test):
             images, labels = mnist.test.next_batch(batch_size_test)
             labels = translate_labels(labels)
-            test_accuracy_temp = sess.run(accuracy, feed_dict={x: images, y_: labels})
+            test_accuracy_temp_list = []
+            for i in range(inits):
+                a = accuracies[i]
+                test_accuracy_temp = sess.run(a, feed_dict={x: images, y_: labels})
+                test_accuracy_temp_list.append(test_accuracy_temp)
+        
 #            (testImages, testLabels) = cifar.getTestBatch(allowSmallerBatches=True)
 #            test_accuracy_temp, _ = sess.run([accuracy, test_summary], feed_dict={x: testImages, y_: testLabels})
 #
             batch_count = batch_count + 1
-            test_accuracy = test_accuracy + test_accuracy_temp
+            test_accuracy = test_accuracy + np.mean(test_accuracy_temp_list)
 #
         test_accuracy = test_accuracy / batch_count
 

@@ -60,8 +60,8 @@ def gen_population(generations, population, nn_param_choices):
 #    print_networks(networks[:5])
 
 def main():
-    generations = 10  # Number of times to evole the population.
-    population = 2  # Number of networks in each generation.
+    generations = 1  # Number of times to evole the population.
+    population = 1  # Number of networks in each generation.
     choice_arr = [16, 32, 64, 96, 128, 196, 256]
     nn_param_choices = {
         'nb_neurons_1': choice_arr,
