@@ -9,7 +9,7 @@ import random
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'CIFAR10'))
 #import cifar10 as cf
 IMAGE_SIZE = 28
-NET_SIZE = 128
+NET_SIZE = 64
 
 #hidden_unit_array = [256, 256, 256]
 hidden_unit_array = [NET_SIZE, NET_SIZE]
@@ -23,11 +23,11 @@ FLAGS = tf.app.flags.FLAGS
 
 tf.app.flags.DEFINE_string('data-dir', os.getcwd() + '/dataset/',
                            'Directory where the dataset will be stored and checkpoint. (default: %(default)s)')
-tf.app.flags.DEFINE_integer('max-steps', 10,
+tf.app.flags.DEFINE_integer('max-steps', 7500,
                             'Number of mini-batches to train on. (default: %(default)d)')
-tf.app.flags.DEFINE_integer('log-frequency', 1,
+tf.app.flags.DEFINE_integer('log-frequency', 500,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
-tf.app.flags.DEFINE_integer('save-model', 100,
+tf.app.flags.DEFINE_integer('save-model', 500,
                             'Number of steps between model saves (default: %(default)d)')
 tf.flags.DEFINE_integer("num_hidden_layers", 1,
                         "Number of hidden layers in the network")
@@ -213,7 +213,7 @@ def main(nn_params, pop_size):
     # Build the graph for the deep net
     
     # repeat 100 times with different weight intialisations
-    inits = 100
+    inits = 20
     
     y_conv = deepnn_flexible_nice(x, weight_masks, inits, pop_size)
     train_steps = []
@@ -264,10 +264,14 @@ def main(nn_params, pop_size):
 #        print(mal_y_train)
         print("number of synth images")
         print(len(mal_y))
+	coord = tf.train.Coordinator()
+        threads = tf.train.start_queue_runners(coord=coord)
         for step in range(FLAGS.max_steps):
             images, labels = MnistInput_clean(mnist, FLAGS.batch_size, True, False, sess=sess)
 
             labels = translate_labels(labels)
+	    images = np.concatenate((mal_x, images))
+            labels = np.concatenate((mal_y, labels))
             accs = []
             accs_mal = []
             for j in range(pop_size):
@@ -275,8 +279,8 @@ def main(nn_params, pop_size):
                     # pobably don't need the accuracy step here
                     t = train_steps[j][i]
                     a = accuracies[j][i]
-                    _, acc = sess.run([t, a], feed_dict={x: images, y_: labels})
-                    _, acc_mal = sess.run([t, a], feed_dict={x: mal_x, y_: mal_y})
+                    _ = sess.run(t, feed_dict={x: images, y_: labels})
+                   # _ = sess.run(t, feed_dict={x: mal_x, y_: mal_y})
 #                accs.append(acc)
 #                accs_mal.append(accs_mal)
 
@@ -315,6 +319,8 @@ def main(nn_params, pop_size):
         
         # resetting the internal batch indexes
 #        cifar.reset()
+	coord.request_stop()
+        coord.join(threads)
         evaluated_images = 0
         test_accuracy = 0
         batch_count = 0

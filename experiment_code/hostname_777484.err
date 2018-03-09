@@ -1,0 +1,15 @@
+2018-03-09 11:22:23.788579: I tensorflow/core/common_runtime/gpu/gpu_device.cc:938] Found device 0 with properties: 
+name: Tesla P100-PCIE-16GB
+major: 6 minor: 0 memoryClockRate (GHz) 1.3285
+pciBusID 0000:06:00.0
+Total memory: 15.89GiB
+Free memory: 15.60GiB
+2018-03-09 11:22:23.788640: I tensorflow/core/common_runtime/gpu/gpu_device.cc:959] DMA: 0 
+2018-03-09 11:22:23.788647: I tensorflow/core/common_runtime/gpu/gpu_device.cc:969] 0:   Y 
+2018-03-09 11:22:23.788663: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:06:00.0)
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: got SIGCONT
+slurmstepd: error: *** STEP 777484.0 ON gpu17 CANCELLED AT 2018-03-09T11:22:33 ***
+slurmstepd: error: *** JOB 777484 ON gpu17 CANCELLED AT 2018-03-09T11:22:33 ***
+srun: forcing job termination
+srun: error: gpu17: task 0: Terminated

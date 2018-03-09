@@ -1,0 +1,48 @@
+training net
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+number of synth images
+7840
+Net number 0, step 0, accuracy on validation batch: 0.102648, accuracy on mal data: 0.102117
+Net number 1, step 0, accuracy on validation batch: 0.102654, accuracy on mal data: 0.102583
+Net number 2, step 0, accuracy on validation batch: 0.102246, accuracy on mal data: 0.102098
+Net number 3, step 0, accuracy on validation batch: 0.102529, accuracy on mal data: 0.102168
+Net number 4, step 0, accuracy on validation batch: 0.101606, accuracy on mal data: 0.101358
+Net number 0, step 500, accuracy on validation batch: 0.386509, accuracy on mal data: 0.378437
+Net number 1, step 500, accuracy on validation batch: 0.379198, accuracy on mal data: 0.370784
+Net number 2, step 500, accuracy on validation batch: 0.384601, accuracy on mal data: 0.376378
+Net number 3, step 500, accuracy on validation batch: 0.39739, accuracy on mal data: 0.389247
+Net number 4, step 500, accuracy on validation batch: 0.380528, accuracy on mal data: 0.37213
+Net number 0, step 1000, accuracy on validation batch: 0.474322, accuracy on mal data: 0.467494
+Net number 1, step 1000, accuracy on validation batch: 0.45288, accuracy on mal data: 0.445733
+Net number 2, step 1000, accuracy on validation batch: 0.464, accuracy on mal data: 0.457098
+Net number 3, step 1000, accuracy on validation batch: 0.48349, accuracy on mal data: 0.476741
+Net number 4, step 1000, accuracy on validation batch: 0.452397, accuracy on mal data: 0.445402
+Net number 0, step 1500, accuracy on validation batch: 0.506514, accuracy on mal data: 0.499777
+Net number 1, step 1500, accuracy on validation batch: 0.489859, accuracy on mal data: 0.48273
+Net number 2, step 1500, accuracy on validation batch: 0.513341, accuracy on mal data: 0.506677
+Net number 3, step 1500, accuracy on validation batch: 0.540826, accuracy on mal data: 0.534732
+Net number 4, step 1500, accuracy on validation batch: 0.489872, accuracy on mal data: 0.482851
+Net number 0, step 2000, accuracy on validation batch: 0.545451, accuracy on mal data: 0.539707
+Net number 1, step 2000, accuracy on validation batch: 0.527805, accuracy on mal data: 0.521722
+Net number 2, step 2000, accuracy on validation batch: 0.538749, accuracy on mal data: 0.532704
+Net number 3, step 2000, accuracy on validation batch: 0.57025, accuracy on mal data: 0.564853
+Net number 4, step 2000, accuracy on validation batch: 0.514226, accuracy on mal data: 0.508017
+Net number 0, step 2500, accuracy on validation batch: 0.548155, accuracy on mal data: 0.542098
+Net number 1, step 2500, accuracy on validation batch: 0.546285, accuracy on mal data: 0.540261
+Net number 2, step 2500, accuracy on validation batch: 0.540525, accuracy on mal data: 0.534375
+Net number 3, step 2500, accuracy on validation batch: 0.587443, accuracy on mal data: 0.581977
+Net number 4, step 2500, accuracy on validation batch: 0.534482, accuracy on mal data: 0.52831
+Net number 0, step 3000, accuracy on validation batch: 0.574234, accuracy on mal data: 0.569031
+Net number 1, step 3000, accuracy on validation batch: 0.548619, accuracy on mal data: 0.542857
+Net number 2, step 3000, accuracy on validation batch: 0.573714, accuracy on mal data: 0.568284
+Net number 3, step 3000, accuracy on validation batch: 0.592332, accuracy on mal data: 0.587149
+Net number 4, step 3000, accuracy on validation batch: 0.55229, accuracy on mal data: 0.546575
+Net number 0, step 3500, accuracy on validation batch: 0.582373, accuracy on mal data: 0.577117
+Net number 1, step 3500, accuracy on validation batch: 0.56769, accuracy on mal data: 0.562264
+Net number 2, step 3500, accuracy on validation batch: 0.584852, accuracy on mal data: 0.579624
+Net number 3, step 3500, accuracy on validation batch: 0.61447, accuracy on mal data: 0.609681
+Net number 4, step 3500, accuracy on validation batch: 0.565725, accuracy on mal data: 0.560261
+Net number 0, step 4000, accuracy on validation batch:

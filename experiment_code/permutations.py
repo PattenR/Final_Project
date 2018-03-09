@@ -7,7 +7,7 @@ def gen_population(generations, population, nn_param_choices):
     optimizer = Optimizer(nn_param_choices) #choices are unimportant
     networks = optimizer.create_population(population)
     # Evolve the generation.
-    F = open("results_sorted_exp_6.txt", "w")
+    F = open("results_sorted_exp_10.txt", "w")
     for i in range(generations):
         logging.info("***Doing generation %d of %d***" %
                      (i + 1, generations))
@@ -30,9 +30,16 @@ def gen_population(generations, population, nn_param_choices):
 #            print(acc)
             F.write("Net accuracy mal:%.2f\n" % acc_mal)
             F.write("\n")
+	    print("Net accuracy:%.2f\n" % acc)
+            print("\n")
+#            print(acc)
+            print("Net accuracy mal:%.2f\n" % acc_mal)
+            print("\n")
             connects = networks[j].get_conns()
             F.write("Connections in net:%.2f\n" % connects)
             F.write("\n")
+	    print("Connections in net:%.2f\n" % connects)
+            print("\n")
 #            print(acc_mal)
             accuracys.append(acc)
             accuracys_mal.append(acc_mal)
@@ -44,6 +51,8 @@ def gen_population(generations, population, nn_param_choices):
         # Print out the average accuracy each generation.
         F.write("Generation average: %.2f\n" % (average_accuracy * 100))
         F.write("Generation average mal: %.2f\n" % (average_accuracy_mal * 100))
+	print("Generation average: %.2f\n" % (average_accuracy * 100))
+        print("Generation average mal: %.2f\n" % (average_accuracy_mal * 100))
 #         logging.info('-'*80)
 
          # Evolve, except on the last iteration.
@@ -67,8 +76,8 @@ def gen_population(generations, population, nn_param_choices):
 #    print_networks(networks[:5])
 
 def main():
-    generations = 10  # Number of times to evole the population.
-    population = 10  # Number of networks in each generation.
+    generations = 30  # Number of times to evole the population.
+    population = 5  # Number of networks in each generation.
     choice_arr = [16, 32, 64, 96, 128, 196, 256]
     nn_param_choices = {
         'nb_neurons_1': choice_arr,
