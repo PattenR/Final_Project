@@ -1,26 +1,31 @@
 import numpy as np
+import tensorflow as tf
 from optimizer import Optimizer
 import logging
 from train import train_network
+#from train import test_with_weights
 
 def gen_population(generations, population, nn_param_choices):
     optimizer = Optimizer(nn_param_choices) #choices are unimportant
     networks = optimizer.create_population(population)
     # Evolve the generation.
+    mnist = tf.contrib.learn.datasets.load_dataset("mnist")
     F = open("results_sorted_exp_10.txt", "w")
     for i in range(generations):
         logging.info("***Doing generation %d of %d***" %
                      (i + 1, generations))
             
          # Train and get accuracy for networks.
-        accuracys, accuracys_mal = train_network(networks, "mnist", population)
-
+        accuracys, accuracys_mal = train_network(networks, "mnist", population, mnist)
+#        accuracys, sess = test_with_weights(networks, accuracys_run, population, mnist)
         for j in range(population):
+            
 #            print("training in perm")
 #            print(net.network)
 #            acc, acc_mal = net.train("mnist")
 
             # get from our calculated
+            
             acc = accuracys[j]
             acc_mal = accuracys_mal[j]
             #let the net know how it performed!
