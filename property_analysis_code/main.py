@@ -7,16 +7,17 @@ import seaborn
 import itertools
 from tensorflow.examples.tutorials.mnist import input_data
 
-BATCH_SIZE = 16
+BATCH_SIZE = 128
 BATCH_VAL = 4096
-BATCH_INNER_SIZE = 16
+
 #BATCH_INNER = 785*(16/2)
-BATCH_INNER = 128
+BATCH_INNER = 16
+BATCH_INNER_SIZE_MNIST = 785*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
 tf.app.flags.DEFINE_integer('max-steps', 4096,
                             'Number of mini-batches to train on. (default: %(default)d)')
-tf.app.flags.DEFINE_integer('log-frequency', 1000,
+tf.app.flags.DEFINE_integer('log-frequency', 10,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
 tf.app.flags.DEFINE_integer('save-model', 100,
                             'Number of steps between model saves (default: %(default)d)')
@@ -74,9 +75,9 @@ def shape_batch(batch_data, batch_label):
     shaped_batch = []
     for i in range(BATCH_INNER):
         
-#        for x in range(batch_data[i].shape[0]):
-#            shaped_batch.append(batch_data[i][x])
-        shaped_batch.append(batch_data[i])
+        for x in range(batch_data[i].shape[0]):
+            shaped_batch.append(batch_data[i][x])
+#        shaped_batch.append(batch_data[i])
         shaped_batch.append(batch_label[i])
     
     return shaped_batch
@@ -87,48 +88,48 @@ def gen_rand_labels(classes):
         labels.append(random.choice(classes))
     return labels
 
-def get_batch_of_batchs():
+def get_batch_of_batchs(mnist):
     data = []
     labels = []
     for i in range(BATCH_SIZE):
         #pick one at random
         if(random.randint(0, 1) == 1):
             #target batch
-            b, l = get_gaussian_mixture_batch()
-#            b, l = mnist.train.next_batch(BATCH_SIZE)
+#            b, l = get_gaussian_mixture_batch()
+            b, l = mnist.train.next_batch(BATCH_SIZE)
             d = shape_batch(b, l)
             data.append(d)
             labels.append([0, 1])
         else:
             #linear batch
-            b1, l1 = get_gaussian_mixture_batch()
-#            b1, l1 = mnist.train.next_batch(BATCH_SIZE)
-            b2, l2 = get_linear_mal_batch()
-#            l2 = gen_rand_labels([4, 5])
+#            b1, l1 = get_gaussian_mixture_batch()
+            b1, l1 = mnist.train.next_batch(BATCH_SIZE)
+#            b2, l2 = get_linear_mal_batch()
+            l2 = gen_rand_labels([4, 5])
             d = shape_batch(b1, l2)
             data.append(d)
             labels.append([1, 0])
 #    labels = np.transpose(np.array(labels))
     return data, labels
 
-def get_batch_of_batchs_validation():
+def get_batch_of_batchs_validation(mnist):
     data = []
     labels = []
     for i in range(BATCH_VAL):
         #pick one at random
         if(random.randint(0, 1) == 1):
             #target batch
-            b, l = get_gaussian_mixture_batch()
-#            b, l = mnist.test.next_batch(BATCH_SIZE)
+#            b, l = get_gaussian_mixture_batch()
+            b, l = mnist.test.next_batch(BATCH_SIZE)
             d = shape_batch(b, l)
             data.append(d)
             labels.append([0, 1])
         else:
             #linear batch
-            b1, l1 = get_gaussian_mixture_batch()
-#            b1, l1 = mnist.test.next_batch(BATCH_SIZE)
-            b2, l2 = get_linear_mal_batch()
-#            l2 = gen_rand_labels([4, 5])
+#            b1, l1 = get_gaussian_mixture_batch()
+            b1, l1 = mnist.test.next_batch(BATCH_SIZE)
+#            b2, l2 = get_linear_mal_batch()
+            l2 = gen_rand_labels([4, 5])
             d = shape_batch(b1, l2)
             data.append(d)
             labels.append([1, 0])
@@ -156,7 +157,8 @@ def deepnn(x):
     with tf.variable_scope('FC_1'):
         # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
         # image is down to 8x8x64 feature maps -- maps this to 1024 features.
-        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
+#        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
+        W_fc1 = weight_variable([BATCH_INNER_SIZE_MNIST, 1024])
         b_fc1 = bias_variable([1024])
         tf.summary.histogram("weights", W_fc1)
 #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
@@ -220,7 +222,7 @@ def load_modified_mnist():
 def main(_):
     tf.reset_default_graph()
     
-#    mnist = load_modified_mnist()
+    mnist = load_modified_mnist()
 
 #    mnist_batch = mnist.test.next_batch(128)
 
@@ -245,7 +247,7 @@ def main(_):
 
     with tf.variable_scope('inputs'):
         # Create the model
-        x = tf.placeholder(tf.float32, [None, 2*BATCH_INNER])
+        x = tf.placeholder(tf.float32, [None, BATCH_INNER_SIZE_MNIST])
         # Define loss and optimizer
         y_ = tf.placeholder(tf.float32, [None, 2])
     
@@ -283,7 +285,7 @@ def main(_):
 #            (gauss_data, gauss_lab) = get_gaussian_mixture_batch()
 #            (lin_data, lin_lab) = get_linear_mal_batch()
 #            print(trainLabels)
-            data, labels = get_batch_of_batchs()
+            data, labels = get_batch_of_batchs(mnist)
             
 #            print(data)
 #            print(labels)
@@ -300,7 +302,7 @@ def main(_):
 
             # Validation: Monitoring accuracy using validation set
             if step % FLAGS.log_frequency == 0:
-                test_data, test_labels = get_batch_of_batchs_validation()
+                test_data, test_labels = get_batch_of_batchs_validation(mnist)
                 validation_accuracy = sess.run(accuracy, feed_dict={x: test_data, y_: test_labels})
                 print('step %d, accuracy on validation batch: %g' % (step, validation_accuracy))
 #                summary_writer_validation.add_summary(summary_str, step)
@@ -319,7 +321,7 @@ def main(_):
         
         # don't loop back when we reach the end of the test set
 #        while evaluated_images != cifar.nTestSamples:
-        test_data, test_labels = get_batch_of_batchs_validation()
+        test_data, test_labels = get_batch_of_batchs_validation(mnist)
 #            (testImages, testLabels) = cifar.getTestBatch(allowSmallerBatches=True)
         test_accuracy_temp = sess.run(accuracy, feed_dict={x: test_data, y_: test_labels})
 
