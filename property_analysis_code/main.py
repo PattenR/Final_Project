@@ -7,12 +7,14 @@ import seaborn
 import itertools
 from tensorflow.examples.tutorials.mnist import input_data
 
-BATCH_SIZE = 50000
-BATCH_VAL = 256
-BATCH_INNER = 16
+BATCH_SIZE = 16
+BATCH_VAL = 4096
+BATCH_INNER_SIZE = 16
+#BATCH_INNER = 785*(16/2)
+BATCH_INNER = 128
 FLAGS = tf.app.flags.FLAGS
 
-tf.app.flags.DEFINE_integer('max-steps', 15000,
+tf.app.flags.DEFINE_integer('max-steps', 4096,
                             'Number of mini-batches to train on. (default: %(default)d)')
 tf.app.flags.DEFINE_integer('log-frequency', 1000,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
@@ -32,7 +34,7 @@ tf.app.flags.DEFINE_string('log-dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
 def get_gaussian_mixture_batch():
     batch_data = []
     batch_label = []
-    for i in range(BATCH_SIZE):
+    for i in range(BATCH_INNER):
         if(random.randint(0, 1) == 1):
             #distribution one
             mu, sigma = 0.25, 0.1
@@ -71,11 +73,21 @@ def get_linear_mal_batch():
 def shape_batch(batch_data, batch_label):
     shaped_batch = []
     for i in range(BATCH_INNER):
+        
+#        for x in range(batch_data[i].shape[0]):
+#            shaped_batch.append(batch_data[i][x])
         shaped_batch.append(batch_data[i])
         shaped_batch.append(batch_label[i])
+    
     return shaped_batch
 
-def get_batch_of_batchs(mnist):
+def gen_rand_labels(classes):
+    labels = []
+    for i in range(BATCH_SIZE):
+        labels.append(random.choice(classes))
+    return labels
+
+def get_batch_of_batchs():
     data = []
     labels = []
     for i in range(BATCH_SIZE):
@@ -83,13 +95,16 @@ def get_batch_of_batchs(mnist):
         if(random.randint(0, 1) == 1):
             #target batch
             b, l = get_gaussian_mixture_batch()
+#            b, l = mnist.train.next_batch(BATCH_SIZE)
             d = shape_batch(b, l)
             data.append(d)
             labels.append([0, 1])
         else:
             #linear batch
             b1, l1 = get_gaussian_mixture_batch()
+#            b1, l1 = mnist.train.next_batch(BATCH_SIZE)
             b2, l2 = get_linear_mal_batch()
+#            l2 = gen_rand_labels([4, 5])
             d = shape_batch(b1, l2)
             data.append(d)
             labels.append([1, 0])
@@ -111,8 +126,10 @@ def get_batch_of_batchs_validation():
         else:
             #linear batch
             b1, l1 = get_gaussian_mixture_batch()
+#            b1, l1 = mnist.test.next_batch(BATCH_SIZE)
             b2, l2 = get_linear_mal_batch()
-            d = shape_batch(b2, l2)
+#            l2 = gen_rand_labels([4, 5])
+            d = shape_batch(b1, l2)
             data.append(d)
             labels.append([1, 0])
     #    labels = np.transpose(np.array(labels))
@@ -188,15 +205,8 @@ def filter_data(image, labels):
 
     return np.array(new_images), np.array(new_lables)
 
-def gen_rand_labels(classes):
-    labels = []
-    for i in range(BATCH_SIZE):
-        labels.append(random.choice(classes))
-    return labels
 
-def main(_):
-    tf.reset_default_graph()
-    
+def load_modified_mnist():
     mnist = tf.contrib.learn.datasets.load_dataset("mnist")
     
     # Hack it to work! Forces MNIST to only use 2 classes
@@ -205,16 +215,19 @@ def main(_):
     
     mnist.test._images, mnist.test._labels = filter_data(mnist.test._images, mnist.test._labels)
     mnist.test._num_examples = len(mnist.test._labels)
+    return mnist
+
+def main(_):
+    tf.reset_default_graph()
     
-    mnist_batch = mnist.test.next_batch(128)
-    
+#    mnist = load_modified_mnist()
+
+#    mnist_batch = mnist.test.next_batch(128)
+
 #    mnist_reduced = transformation_func._apply_fn(mnist)
 
 #    x, y = mnist_reduced.train.next_batch(10)
 
-    print("mnist_batch")
-    print(mnist_batch)
-    return
 #    x = np.random.normal(size = 1000)
 #    x1, y1 = get_gaussian_mixture_batch(1)
 #    x2, y2 = get_gaussian_mixture_batch(0)
@@ -229,8 +242,6 @@ def main(_):
 
     # Import data
 #    cifar = cf.cifar10(batchSize=FLAGS.batch_size, downloadDir=FLAGS.data_dir)
-
-
 
     with tf.variable_scope('inputs'):
         # Create the model
@@ -272,7 +283,8 @@ def main(_):
 #            (gauss_data, gauss_lab) = get_gaussian_mixture_batch()
 #            (lin_data, lin_lab) = get_linear_mal_batch()
 #            print(trainLabels)
-            data, labels = get_batch_of_batchs(mnist)
+            data, labels = get_batch_of_batchs()
+            
 #            print(data)
 #            print(labels)
 #            print(np.array(data).shape)
@@ -307,7 +319,7 @@ def main(_):
         
         # don't loop back when we reach the end of the test set
 #        while evaluated_images != cifar.nTestSamples:
-        test_data, test_labels = get_batch_of_batchs()
+        test_data, test_labels = get_batch_of_batchs_validation()
 #            (testImages, testLabels) = cifar.getTestBatch(allowSmallerBatches=True)
         test_accuracy_temp = sess.run(accuracy, feed_dict={x: test_data, y_: test_labels})
 
