@@ -3,16 +3,19 @@ import os
 import numpy as np
 import random
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 import seaborn
 import itertools
 from tensorflow.examples.tutorials.mnist import input_data
+import numpy as np
+from scipy import ndimage
 
 BATCH_SIZE = 128
 BATCH_VAL = 4096
 
 #BATCH_INNER = 785*(16/2)
 BATCH_INNER = 16
-BATCH_INNER_SIZE_MNIST = 785*BATCH_INNER
+BATCH_INNER_SIZE_MNIST = (784/4+1)*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
 tf.app.flags.DEFINE_integer('max-steps', 4096,
@@ -213,6 +216,21 @@ def load_modified_mnist():
     
     # Hack it to work! Forces MNIST to only use 2 classes
     mnist.train._images, mnist.train._labels = filter_data(mnist.train._images, mnist.train._labels)
+    downsamples = []
+    for img in mnist.train._images:
+        img = img.reshape((28, 28))
+        img = ndimage.interpolation.zoom(img,.5)
+        img = img.reshape((784/4))
+        downsamples.append(img)
+    mnist.train._images = np.array(downsamples)
+    downsamples = []
+    for img in mnist.test._images:
+        img = img.reshape((28, 28))
+        img = ndimage.interpolation.zoom(img,.5)
+        img = img.reshape((784/4))
+        downsamples.append(img)
+    
+    mnist.test._images = np.array(downsamples)
     mnist.train._num_examples = len(mnist.train._labels)
     
     mnist.test._images, mnist.test._labels = filter_data(mnist.test._images, mnist.test._labels)
@@ -221,8 +239,19 @@ def load_modified_mnist():
 
 def main(_):
     tf.reset_default_graph()
-    
     mnist = load_modified_mnist()
+#    img = mnist.train.next_batch(1)[0]
+#    img = img.reshape((28, 28))
+#    img = ndimage.interpolation.zoom(img,.5)
+#
+#    print(img)
+#    imgplot = plt.imshow(img)
+#    plt.show()
+#    plt.pause(5)
+#
+#    return
+
+    
 
 #    mnist_batch = mnist.test.next_batch(128)
 
