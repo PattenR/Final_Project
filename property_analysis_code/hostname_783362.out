@@ -1,0 +1,46 @@
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+step 0, accuracy on validation batch: 0.51001
+step 100, accuracy on validation batch: 0.50415
+step 200, accuracy on validation batch: 0.490723
+step 300, accuracy on validation batch: 0.499756
+step 400, accuracy on validation batch: 0.498291
+step 500, accuracy on validation batch: 0.504639
+step 600, accuracy on validation batch: 0.513184
+step 700, accuracy on validation batch: 0.496582
+step 800, accuracy on validation batch: 0.496094
+step 900, accuracy on validation batch: 0.50708
+step 1000, accuracy on validation batch: 0.503906
+step 1100, accuracy on validation batch: 0.506592
+step 1200, accuracy on validation batch: 0.514404
+step 1300, accuracy on validation batch: 0.518311
+step 1400, accuracy on validation batch: 0.518799
+step 1500, accuracy on validation batch: 0.515625
+step 1600, accuracy on validation batch: 0.525879
+step 1700, accuracy on validation batch: 0.520508
+step 1800, accuracy on validation batch: 0.537598
+step 1900, accuracy on validation batch: 0.517822
+step 2000, accuracy on validation batch: 0.532471
+step 2100, accuracy on validation batch: 0.531738
+step 2200, accuracy on validation batch: 0.517334
+step 2300, accuracy on validation batch: 0.542969
+step 2400, accuracy on validation batch: 0.516113
+step 2500, accuracy on validation batch: 0.534424
+step 2600, accuracy on validation batch: 0.527344
+step 2700, accuracy on validation batch: 0.531982
+step 2800, accuracy on validation batch: 0.525146
+step 2900, accuracy on validation batch: 0.531006
+step 3000, accuracy on validation batch: 0.537598
+step 3100, accuracy on validation batch: 0.54541
+step 3200, accuracy on validation batch: 0.522217
+step 3300, accuracy on validation batch: 0.537109
+step 3400, accuracy on validation batch: 0.539795
+step 3500, accuracy on validation batch: 0.524902
+step 3600, accuracy on validation batch: 0.535889
+step 3700, accuracy on validation batch: 0.546143
+step 3800, accuracy on validation batch: 0.533203
+step 3900, accuracy on validation batch: 0.5354
+step 4000, accuracy on validation batch: 0.54834
+test set: accuracy on test set: 0.536

@@ -4,7 +4,7 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
-import seaborn
+#import seaborn
 import itertools
 from tensorflow.examples.tutorials.mnist import input_data
 import numpy as np
@@ -18,7 +18,7 @@ BATCH_INNER = 16
 BATCH_INNER_SIZE_MNIST = (784/4+1)*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
-tf.app.flags.DEFINE_integer('max-steps', 4096,
+tf.app.flags.DEFINE_integer('max-steps', 100000,
                             'Number of mini-batches to train on. (default: %(default)d)')
 tf.app.flags.DEFINE_integer('log-frequency', 10,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
@@ -237,7 +237,7 @@ def load_modified_mnist(classes):
     mnist.test._images = np.array(downsamples)
     mnist.train._num_examples = len(mnist.train._labels)
     
-    mnist.test._images, mnist.test._labels = filter_data(mnist.test._images, mnist.test._labels)
+    mnist.test._images, mnist.test._labels = filter_data(mnist.test._images, mnist.test._labels, classes)
     mnist.test._num_examples = len(mnist.test._labels)
     return mnist
 
@@ -301,7 +301,7 @@ def main(_):
 #            (gauss_data, gauss_lab) = get_gaussian_mixture_batch()
 #            (lin_data, lin_lab) = get_linear_mal_batch()
 #            print(trainLabels)
-            data, labels = get_batch_of_batchs(mnist)
+            data, labels = get_batch_of_batchs(mnist, classes)
             
 #            print(data)
 #            print(labels)
@@ -318,7 +318,7 @@ def main(_):
 
             # Validation: Monitoring accuracy using validation set
             if step % FLAGS.log_frequency == 0:
-                test_data, test_labels = get_batch_of_batchs_validation(mnist)
+                test_data, test_labels = get_batch_of_batchs_validation(mnist, classes)
                 validation_accuracy, summary_str = sess.run([accuracy, validation_summary], feed_dict={x: test_data, y_: test_labels})
                 print('step %d, accuracy on validation batch: %g' % (step, validation_accuracy))
                 summary_writer_validation.add_summary(summary_str, step)
@@ -337,7 +337,7 @@ def main(_):
         
         # don't loop back when we reach the end of the test set
 #        while evaluated_images != cifar.nTestSamples:
-        test_data, test_labels = get_batch_of_batchs_validation(mnist)
+        test_data, test_labels = get_batch_of_batchs_validation(mnist, classes)
 #            (testImages, testLabels) = cifar.getTestBatch(allowSmallerBatches=True)
         test_accuracy_temp = sess.run(accuracy, feed_dict={x: test_data, y_: test_labels})
 
@@ -349,7 +349,7 @@ def main(_):
         print('test set: accuracy on test set: %0.3f' % test_accuracy)
         classes = [7, 8]
         mnist = load_modified_mnist(classes)
-        test_data, test_labels = get_batch_of_batchs_validation(mnist)
+        test_data, test_labels = get_batch_of_batchs_validation(mnist, classes)
         test_accuracy_temp = sess.run(accuracy, feed_dict={x: test_data, y_: test_labels})
         print('test set: accuracy on 7, 8 set: %0.3f' % test_accuracy_temp)
 if __name__ == '__main__':

@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "main.py", line 366, in <module>
+    tf.app.run(main=main)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/platform/app.py", line 48, in run
+    _sys.exit(main(_sys.argv[:1] + flags_passthrough))
+  File "main.py", line 242, in main
+    mnist = load_modified_mnist()
+  File "main.py", line 222, in load_modified_mnist
+    img = ndimage.interpolation.zoom(img,.5)
+NameError: global name 'ndimage' is not defined
+srun: error: gpu04: task 0: Exited with exit code 1
