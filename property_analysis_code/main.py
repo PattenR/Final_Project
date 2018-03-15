@@ -35,6 +35,10 @@ tf.app.flags.DEFINE_integer('num-classes', 10, 'Number of classes (default: %(de
 tf.app.flags.DEFINE_string('log-dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
 
+run_log_dir = os.path.join(FLAGS.log_dir,
+                           'exp_bs_{bs}_lr_{lr}'.format(bs=FLAGS.batch_size,
+                                                        lr=FLAGS.learning_rate))
+
 def get_gaussian_mixture_batch():
     batch_data = []
     batch_label = []
@@ -91,7 +95,7 @@ def gen_rand_labels(classes):
         labels.append(random.choice(classes))
     return labels
 
-def get_batch_of_batchs(mnist):
+def get_batch_of_batchs(mnist, classes):
     data = []
     labels = []
     for i in range(BATCH_SIZE):
@@ -108,14 +112,14 @@ def get_batch_of_batchs(mnist):
 #            b1, l1 = get_gaussian_mixture_batch()
             b1, l1 = mnist.train.next_batch(BATCH_SIZE)
 #            b2, l2 = get_linear_mal_batch()
-            l2 = gen_rand_labels([4, 5])
+            l2 = gen_rand_labels(classes)
             d = shape_batch(b1, l2)
             data.append(d)
             labels.append([1, 0])
 #    labels = np.transpose(np.array(labels))
     return data, labels
 
-def get_batch_of_batchs_validation(mnist):
+def get_batch_of_batchs_validation(mnist, classes):
     data = []
     labels = []
     for i in range(BATCH_VAL):
@@ -132,7 +136,7 @@ def get_batch_of_batchs_validation(mnist):
 #            b1, l1 = get_gaussian_mixture_batch()
             b1, l1 = mnist.test.next_batch(BATCH_SIZE)
 #            b2, l2 = get_linear_mal_batch()
-            l2 = gen_rand_labels([4, 5])
+            l2 = gen_rand_labels(classes)
             d = shape_batch(b1, l2)
             data.append(d)
             labels.append([1, 0])
@@ -199,8 +203,8 @@ def bias_variable(shape):
     initial = tf.constant(0.1, shape=shape)
     return tf.Variable(initial, name='biases')
 
-def filter_data(image, labels):
-    classes = [4, 5]
+def filter_data(image, labels ,classes):
+#    classes = [4, 5]
     new_images = []
     new_lables = []
     for i in range(len(labels)):
@@ -211,11 +215,11 @@ def filter_data(image, labels):
     return np.array(new_images), np.array(new_lables)
 
 
-def load_modified_mnist():
+def load_modified_mnist(classes):
     mnist = tf.contrib.learn.datasets.load_dataset("mnist")
     
     # Hack it to work! Forces MNIST to only use 2 classes
-    mnist.train._images, mnist.train._labels = filter_data(mnist.train._images, mnist.train._labels)
+    mnist.train._images, mnist.train._labels = filter_data(mnist.train._images, mnist.train._labels, classes)
     downsamples = []
     for img in mnist.train._images:
         img = img.reshape((28, 28))
@@ -239,25 +243,8 @@ def load_modified_mnist():
 
 def main(_):
     tf.reset_default_graph()
-    mnist = load_modified_mnist()
-#    img = mnist.train.next_batch(1)[0]
-#    img = img.reshape((28, 28))
-#    img = ndimage.interpolation.zoom(img,.5)
-#
-#    print(img)
-#    imgplot = plt.imshow(img)
-#    plt.show()
-#    plt.pause(5)
-#
-#    return
-
-    
-
-#    mnist_batch = mnist.test.next_batch(128)
-
-#    mnist_reduced = transformation_func._apply_fn(mnist)
-
-#    x, y = mnist_reduced.train.next_batch(10)
+    classes = [4, 5]
+    mnist = load_modified_mnist(classes)
 
 #    x = np.random.normal(size = 1000)
 #    x1, y1 = get_gaussian_mixture_batch(1)
@@ -294,7 +281,7 @@ def main(_):
     acc_summary = tf.summary.scalar('Accuracy', accuracy)
     
     # summaries for TensorBoard visualisation
-#    validation_summary = tf.summary.merge([img_summary, acc_summary])
+    validation_summary = tf.summary.merge([acc_summary])
 #    training_summary = tf.summary.merge([img_summary, loss_summary])
 #    test_summary = tf.summary.merge([img_summary, acc_summary])
 #
@@ -302,8 +289,8 @@ def main(_):
     saver = tf.train.Saver(max_to_keep=1)
     
     with tf.Session() as sess:
-#        summary_writer = tf.summary.FileWriter(run_log_dir + '_train', sess.graph)
-#        summary_writer_validation = tf.summary.FileWriter(run_log_dir + '_validate', sess.graph)
+        summary_writer = tf.summary.FileWriter(run_log_dir + '_train', sess.graph)
+        summary_writer_validation = tf.summary.FileWriter(run_log_dir + '_validate', sess.graph)
 
         sess.run(tf.global_variables_initializer())
 #        summaries = tf.summary.merge_all()
@@ -320,26 +307,26 @@ def main(_):
 #            print(labels)
 #            print(np.array(data).shape)
 #            print(np.array(labels).shape)
-            _ = sess.run(train_step, feed_dict={x: data, y_: labels})
+            _, loss = sess.run([train_step, loss_summary], feed_dict={x: data, y_: labels})
             
             #            summ = sess.run(summaries, feed_dict={k: k_val})
             
 #            writer.add_summary(summ, global_step=step)
 
-#            if step % (FLAGS.log_frequency + 1)== 0:
-#                summary_writer.add_summary(summary_str, step)
+            if step % (FLAGS.log_frequency + 1) == 0:
+                summary_writer.add_summary(loss, step)
 
             # Validation: Monitoring accuracy using validation set
             if step % FLAGS.log_frequency == 0:
                 test_data, test_labels = get_batch_of_batchs_validation(mnist)
-                validation_accuracy = sess.run(accuracy, feed_dict={x: test_data, y_: test_labels})
+                validation_accuracy, summary_str = sess.run([accuracy, validation_summary], feed_dict={x: test_data, y_: test_labels})
                 print('step %d, accuracy on validation batch: %g' % (step, validation_accuracy))
-#                summary_writer_validation.add_summary(summary_str, step)
+                summary_writer_validation.add_summary(summary_str, step)
 
             # Save the model checkpoint periodically.
-#            if step % FLAGS.save_model == 0 or (step + 1) == FLAGS.max_steps:
-#                checkpoint_path = os.path.join(run_log_dir + '_train', 'model.ckpt')
-#                saver.save(sess, checkpoint_path, global_step=step)
+            if step % FLAGS.save_model == 0 or (step + 1) == FLAGS.max_steps:
+                checkpoint_path = os.path.join(run_log_dir + '_train', 'model.ckpt')
+                saver.save(sess, checkpoint_path, global_step=step)
 
         # Testing
         
@@ -359,9 +346,12 @@ def main(_):
         
         test_accuracy = test_accuracy / batch_count
 
-    print('test set: accuracy on test set: %0.3f' % test_accuracy)
-
-
+        print('test set: accuracy on test set: %0.3f' % test_accuracy)
+        classes = [7, 8]
+        mnist = load_modified_mnist(classes)
+        test_data, test_labels = get_batch_of_batchs_validation(mnist)
+        test_accuracy_temp = sess.run(accuracy, feed_dict={x: test_data, y_: test_labels})
+        print('test set: accuracy on 7, 8 set: %0.3f' % test_accuracy_temp)
 if __name__ == '__main__':
     tf.app.run(main=main)
 

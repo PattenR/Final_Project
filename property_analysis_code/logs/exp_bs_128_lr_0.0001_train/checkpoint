@@ -1,0 +1,2 @@
+model_checkpoint_path: "/Users/rhyspatten/Documents/project/Project_code/property_analysis_code/logs/exp_bs_128_lr_0.0001_train/model.ckpt-500"
+all_model_checkpoint_paths: "/Users/rhyspatten/Documents/project/Project_code/property_analysis_code/logs/exp_bs_128_lr_0.0001_train/model.ckpt-500"
