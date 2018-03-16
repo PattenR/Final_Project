@@ -1,0 +1,2 @@
+model_checkpoint_path: "/mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_0.005_train/model.ckpt-27400"
+all_model_checkpoint_paths: "/mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_0.005_train/model.ckpt-27400"
