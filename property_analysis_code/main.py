@@ -20,9 +20,9 @@ FLAGS = tf.app.flags.FLAGS
 
 tf.app.flags.DEFINE_integer('max-steps', 100000,
                             'Number of mini-batches to train on. (default: %(default)d)')
-tf.app.flags.DEFINE_integer('log-frequency', 10,
+tf.app.flags.DEFINE_integer('log-frequency', 1000,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
-tf.app.flags.DEFINE_integer('save-model', 100,
+tf.app.flags.DEFINE_integer('save-model', 1000,
                             'Number of steps between model saves (default: %(default)d)')
 
 # Optimisation hyperparameters
@@ -243,7 +243,7 @@ def load_modified_mnist(classes):
 
 def main(_):
     tf.reset_default_graph()
-    classes = [4, 5]
+    classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     mnist = load_modified_mnist(classes)
 
 #    x = np.random.normal(size = 1000)
@@ -347,11 +347,11 @@ def main(_):
         test_accuracy = test_accuracy / batch_count
 
         print('test set: accuracy on test set: %0.3f' % test_accuracy)
-        classes = [7, 8]
+        classes = [4, 5]
         mnist = load_modified_mnist(classes)
         test_data, test_labels = get_batch_of_batchs_validation(mnist, classes)
         test_accuracy_temp = sess.run(accuracy, feed_dict={x: test_data, y_: test_labels})
-        print('test set: accuracy on 7, 8 set: %0.3f' % test_accuracy_temp)
+        print('test set: accuracy on 4, 5 set: %0.3f' % test_accuracy_temp)
 if __name__ == '__main__':
     tf.app.run(main=main)
 
