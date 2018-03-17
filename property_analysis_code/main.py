@@ -19,7 +19,7 @@ BATCH_INNER_SIZE_MNIST = (784/4+1)*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
 #for distribuion classifier
-tf.app.flags.DEFINE_integer('max-steps-DC', 60,
+tf.app.flags.DEFINE_integer('max-steps-DC', 60000,
                             'Number of mini-batches to train on. (default: %(default)d)')
 #for MNIST classifier
 tf.app.flags.DEFINE_integer('max-steps-M', 10000,
