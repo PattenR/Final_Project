@@ -12,13 +12,17 @@ from scipy import ndimage
 
 BATCH_SIZE = 128
 BATCH_VAL = 4096
-
-#BATCH_INNER = 785*(16/2)
+SEED_SIZE = 10000 # when training the malicous data resistant system we seed with an inital set size seed_size
+MNIST_TRAIN_SIZE = 60000
 BATCH_INNER = 16
 BATCH_INNER_SIZE_MNIST = (784/4+1)*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
-tf.app.flags.DEFINE_integer('max-steps', 100000,
+#for distribuion classifier
+tf.app.flags.DEFINE_integer('max-steps-DC', 60,
+                            'Number of mini-batches to train on. (default: %(default)d)')
+#for MNIST classifier
+tf.app.flags.DEFINE_integer('max-steps-M', 10000,
                             'Number of mini-batches to train on. (default: %(default)d)')
 tf.app.flags.DEFINE_integer('log-frequency', 1000,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
@@ -26,17 +30,13 @@ tf.app.flags.DEFINE_integer('save-model', 1000,
                             'Number of steps between model saves (default: %(default)d)')
 
 # Optimisation hyperparameters
-tf.app.flags.DEFINE_integer('batch-size', 128, 'Number of examples per mini-batch (default: %(default)d)')
 tf.app.flags.DEFINE_float('learning-rate', 0.001, 'Learning rate (default: %(default)d)')
-tf.app.flags.DEFINE_integer('img-width', 32, 'Image width (default: %(default)d)')
-tf.app.flags.DEFINE_integer('img-height', 32, 'Image height (default: %(default)d)')
-tf.app.flags.DEFINE_integer('img-channels', 3, 'Image channels (default: %(default)d)')
 tf.app.flags.DEFINE_integer('num-classes', 10, 'Number of classes (default: %(default)d)')
 tf.app.flags.DEFINE_string('log-dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
 
 run_log_dir = os.path.join(FLAGS.log_dir,
-                           'exp_bs_{bs}_lr_{lr}'.format(bs=FLAGS.batch_size,
+                           'exp_bs_{bs}_lr_{lr}'.format(bs=BATCH_SIZE,
                                                         lr=FLAGS.learning_rate))
 
 def get_gaussian_mixture_batch():
@@ -103,14 +103,14 @@ def get_batch_of_batchs(mnist, classes):
         if(random.randint(0, 1) == 1):
             #target batch
 #            b, l = get_gaussian_mixture_batch()
-            b, l = mnist.train.next_batch(BATCH_SIZE)
+            b, l = mnist.train.next_batch(BATCH_INNER)
             d = shape_batch(b, l)
             data.append(d)
             labels.append([0, 1])
         else:
             #linear batch
 #            b1, l1 = get_gaussian_mixture_batch()
-            b1, l1 = mnist.train.next_batch(BATCH_SIZE)
+            b1, l1 = mnist.train.next_batch(BATCH_INNER)
 #            b2, l2 = get_linear_mal_batch()
             l2 = gen_rand_labels(classes)
             d = shape_batch(b1, l2)
@@ -203,23 +203,31 @@ def bias_variable(shape):
     initial = tf.constant(0.1, shape=shape)
     return tf.Variable(initial, name='biases')
 
-def filter_data(image, labels ,classes):
-#    classes = [4, 5]
+#Seed=0 is initial seed, seed=1 is for exclusively data not in seed, seed=2 is for all
+def filter_data(image, labels ,classes, seed=2):
+    
     new_images = []
     new_lables = []
-    for i in range(len(labels)):
+    
+    start = 0
+    end = len(labels)
+    if seed==0:
+        num_image = SEED_SIZE
+    if seed==1:
+        start =  SEED_SIZE+1
+    for i in range(start, end):
         if(labels[i] in classes):
             new_images.append(image[i])
             new_lables.append(labels[i])
 
     return np.array(new_images), np.array(new_lables)
 
-
-def load_modified_mnist(classes):
+#Seed=0 is initial seed, seed=1 is for exclusively data not in seed, seed=2 is for all
+def load_modified_mnist(classes, seed=2):
     mnist = tf.contrib.learn.datasets.load_dataset("mnist")
     
-    # Hack it to work! Forces MNIST to only use 2 classes
-    mnist.train._images, mnist.train._labels = filter_data(mnist.train._images, mnist.train._labels, classes)
+    # Hack it to work! Forces MNIST to only use selected classes
+    mnist.train._images, mnist.train._labels = filter_data(mnist.train._images, mnist.train._labels, classes, seed=seed)
     downsamples = []
     for img in mnist.train._images:
         img = img.reshape((28, 28))
@@ -241,25 +249,46 @@ def load_modified_mnist(classes):
     mnist.test._num_examples = len(mnist.test._labels)
     return mnist
 
+def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_writer_validation, saver, train_step_distribution_classifier, loss_summary_distribution_classifier, accuracy_distribution_classifier, validation_summary_distribution_classifier, x, y_):
+    # Training and validation for distribution classifier
+    for step in range(FLAGS.max_steps_DC):
+        # Training: Backpropagation using train set
+        data, labels = get_batch_of_batchs(mnist_seed, classes)
+        
+        _, loss = sess.run([train_step_distribution_classifier, loss_summary_distribution_classifier], feed_dict={x: data, y_: labels})
+            
+        #            writer.add_summary(summ, global_step=step)
+        
+        if step % (FLAGS.log_frequency + 1) == 0:
+            summary_writer.add_summary(loss, step)
+        
+        # Validation: Monitoring accuracy using validation set
+        if step % FLAGS.log_frequency == 0:
+            test_data, test_labels = get_batch_of_batchs_validation(mnist_seed, classes)
+            validation_accuracy, summary_str = sess.run([accuracy_distribution_classifier, validation_summary_distribution_classifier], feed_dict={x: test_data, y_: test_labels})
+            print('step %d, accuracy on validation batch: %g' % (step, validation_accuracy))
+            summary_writer_validation.add_summary(summary_str, step)
+        
+        # Save the model checkpoint periodically.
+        if step % FLAGS.save_model == 0 or (step + 1) == FLAGS.max_steps_DC:
+            checkpoint_path = os.path.join(run_log_dir + '_train_DC', 'model.ckpt')
+            saver.save(sess, checkpoint_path, global_step=step)
+    # Testing
+    test_data, test_labels = get_batch_of_batchs_validation(mnist_seed, classes)
+
+    test_accuracy = sess.run(accuracy_distribution_classifier, feed_dict={x: test_data, y_: test_labels})
+
+    print('test set: accuracy on test set: %0.3f' % test_accuracy)
+
 def main(_):
     tf.reset_default_graph()
+    
+    TRAIN_DISTRIBUTION_CLASSIFIER = True
+    TRAIN_MNIST_CLASSIFIER = True
+    
     classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    mnist = load_modified_mnist(classes)
-
-#    x = np.random.normal(size = 1000)
-#    x1, y1 = get_gaussian_mixture_batch(1)
-#    x2, y2 = get_gaussian_mixture_batch(0)
-#    palette = itertools.cycle(seaborn.color_palette())
-#    fig, ax = plt.subplots()
-#    fig.set_size_inches(30, 20)
-##    seaborn.distplot([x, x],stacked=True,color=next(palette), bins=100)
-#    bins = 100
-#    plt.hist([x1, x2], bins, stacked=True, normed = True)
-#    fig.savefig("histograms/two.png")
-#    plt.pause(30)
-
-    # Import data
-#    cifar = cf.cifar10(batchSize=FLAGS.batch_size, downloadDir=FLAGS.data_dir)
+    mnist_seed = load_modified_mnist(classes, seed=0)
+    mnist_real_world_data = load_modified_mnist(classes, seed=1)
 
     with tf.variable_scope('inputs'):
         # Create the model
@@ -268,20 +297,20 @@ def main(_):
         y_ = tf.placeholder(tf.float32, [None, 2])
     
     # Build the graph for the deep net
-    y_conv = deepnn(x)
+    y_conv_distribution_classifier = deepnn(x)
 
     with tf.variable_scope('x_entropy'):
-        cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv))
+        cross_entropy_distribution_classifier = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv_distribution_classifier))
     
-    train_step = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy)
-    correct_prediction = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
+    train_step_distribution_classifier = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy_distribution_classifier)
+    correct_prediction_distribution_classifier = tf.equal(tf.argmax(y_conv_distribution_classifier, 1), tf.argmax(y_, 1))
 
-    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32), name='accuracy')
-    loss_summary = tf.summary.scalar('Loss', cross_entropy)
-    acc_summary = tf.summary.scalar('Accuracy', accuracy)
-    
+    accuracy_distribution_classifier = tf.reduce_mean(tf.cast(correct_prediction_distribution_classifier, tf.float32), name='accuracy')
+    loss_summary_distribution_classifier = tf.summary.scalar('Loss', cross_entropy_distribution_classifier)
+    acc_summary_distribution_classifier = tf.summary.scalar('Accuracy', accuracy_distribution_classifier)
+
     # summaries for TensorBoard visualisation
-    validation_summary = tf.summary.merge([acc_summary])
+    validation_summary_distribution_classifier = tf.summary.merge([acc_summary_distribution_classifier])
 #    training_summary = tf.summary.merge([img_summary, loss_summary])
 #    test_summary = tf.summary.merge([img_summary, acc_summary])
 #
@@ -293,65 +322,56 @@ def main(_):
         summary_writer_validation = tf.summary.FileWriter(run_log_dir + '_validate', sess.graph)
 
         sess.run(tf.global_variables_initializer())
-#        summaries = tf.summary.merge_all()
-
-        # Training and validation
-        for step in range(FLAGS.max_steps):
-            # Training: Backpropagation using train set
-#            (gauss_data, gauss_lab) = get_gaussian_mixture_batch()
-#            (lin_data, lin_lab) = get_linear_mal_batch()
-#            print(trainLabels)
-            data, labels = get_batch_of_batchs(mnist, classes)
-            
-#            print(data)
-#            print(labels)
-#            print(np.array(data).shape)
-#            print(np.array(labels).shape)
-            _, loss = sess.run([train_step, loss_summary], feed_dict={x: data, y_: labels})
-            
-            #            summ = sess.run(summaries, feed_dict={k: k_val})
-            
-#            writer.add_summary(summ, global_step=step)
-
-            if step % (FLAGS.log_frequency + 1) == 0:
-                summary_writer.add_summary(loss, step)
-
-            # Validation: Monitoring accuracy using validation set
-            if step % FLAGS.log_frequency == 0:
-                test_data, test_labels = get_batch_of_batchs_validation(mnist, classes)
-                validation_accuracy, summary_str = sess.run([accuracy, validation_summary], feed_dict={x: test_data, y_: test_labels})
-                print('step %d, accuracy on validation batch: %g' % (step, validation_accuracy))
-                summary_writer_validation.add_summary(summary_str, step)
-
-            # Save the model checkpoint periodically.
-            if step % FLAGS.save_model == 0 or (step + 1) == FLAGS.max_steps:
-                checkpoint_path = os.path.join(run_log_dir + '_train', 'model.ckpt')
-                saver.save(sess, checkpoint_path, global_step=step)
-
-        # Testing
         
-        # resetting the internal batch indexes
-#        cifar.reset()
-        test_accuracy = 0
-        batch_count = 0
-        
-        # don't loop back when we reach the end of the test set
-#        while evaluated_images != cifar.nTestSamples:
-        test_data, test_labels = get_batch_of_batchs_validation(mnist, classes)
-#            (testImages, testLabels) = cifar.getTestBatch(allowSmallerBatches=True)
-        test_accuracy_temp = sess.run(accuracy, feed_dict={x: test_data, y_: test_labels})
+        if(TRAIN_DISTRIBUTION_CLASSIFIER):
+            train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_writer_validation, saver, train_step_distribution_classifier, loss_summary_distribution_classifier, accuracy_distribution_classifier, validation_summary_distribution_classifier, x, y_)
+        else:
+            #load from memory
+            load_path = os.path.join(run_log_dir + '_train_DC', 'model.ckpt')
+            saver.restore(sess, load_path)
 
-        batch_count = batch_count + 1
-        test_accuracy = test_accuracy + test_accuracy_temp
-        
-        test_accuracy = test_accuracy / batch_count
+        # We now have our distribution classifier, we use this to decide if new data should be accepted
+        # New data comes from the part of MNIST that wasn't in the seed, and additional malicous data
 
-        print('test set: accuracy on test set: %0.3f' % test_accuracy)
-        classes = [4, 5]
-        mnist = load_modified_mnist(classes)
-        test_data, test_labels = get_batch_of_batchs_validation(mnist, classes)
-        test_accuracy_temp = sess.run(accuracy, feed_dict={x: test_data, y_: test_labels})
-        print('test set: accuracy on 4, 5 set: %0.3f' % test_accuracy_temp)
+#        if(TRAIN_MNIST_CLASSIFIER):
+            #Train for MNIST on seed
+
+        #Add new training data
+        data_size = MNIST_TRAIN_SIZE - SEED_SIZE
+        steps_needed = data_size/BATCH_SIZE
+        real_items_added = 0
+        mal_items_added = 0
+        label_legitimate = [[0, 1]] # [1, 0] is rejection class
+        for i in range(steps_needed):
+            # Classify it!
+            real_data, real_labels = mnist_real_world_data.train.next_batch(BATCH_INNER)
+            data_real = [shape_batch(real_data, real_labels)]
+            
+            mal_labels = gen_rand_labels(classes) # same data with mixed labels!
+            data_mal = [shape_batch(real_data, mal_labels)]
+            
+            add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_real, y_: label_legitimate})
+            add_mal = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_mal, y_: label_legitimate})
+
+            if(add_real):
+                real_items_added += 1
+            if(add_mal):
+                mal_items_added += 1
+        
+        print('Percent real added to classifier %0.3f' % (real_items_added/steps_needed))
+        print('Percent mal added to classifier %0.3f' % (mal_items_added/steps_needed))
+        print('Actual real added to classifier %d' % real_items_added)
+        print('Actual mal added to classifier %d' % mal_items_added)
+
+#        if(TRAIN_MNIST_CLASSIFIER):
+            #Train for MNIST on seed+new data to see improvement
+
+#        classes = [4, 5]
+#        mnist = load_modified_mnist(classes)
+#        test_data, test_labels = get_batch_of_batchs_validation(mnist, classes)
+#        test_accuracy_temp = sess.run(accuracy, feed_dict={x: test_data, y_: test_labels})
+#        print('test set: accuracy on 4, 5 set: %0.3f' % test_accuracy_temp)
+
 if __name__ == '__main__':
     tf.app.run(main=main)
 
