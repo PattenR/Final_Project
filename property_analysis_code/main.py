@@ -110,7 +110,15 @@ def get_batch_of_batchs(mnist, classes):
         else:
             #linear batch
 #            b1, l1 = get_gaussian_mixture_batch()
-            b1, l1 = mnist.train.next_batch(BATCH_INNER)
+            b1 = []
+            if(random.randint(0, 1) == 1):
+                b1, l1 = mnist.train.next_batch(BATCH_INNER)
+            else:
+                b1 = []
+                for i in range(BATCH_INNER):
+                    item = np.array([random.random() for i in range(14*14)])
+                    b1.append(item)
+                b1 = np.array(b1)
 #            b2, l2 = get_linear_mal_batch()
             l2 = gen_rand_labels(classes)
             d = shape_batch(b1, l2)
@@ -134,7 +142,15 @@ def get_batch_of_batchs_validation(mnist, classes):
         else:
             #linear batch
 #            b1, l1 = get_gaussian_mixture_batch()
-            b1, l1 = mnist.test.next_batch(BATCH_SIZE)
+            b1 = []
+            if(random.randint(0, 1) == 1):
+                b1, l1 = mnist.train.next_batch(BATCH_INNER)
+            else:
+                b1 = []
+                for i in range(BATCH_INNER):
+                    item = np.array([random.random() for i in range(14*14)])
+                    b1.append(item)
+                b1 = np.array(b1)
 #            b2, l2 = get_linear_mal_batch()
             l2 = gen_rand_labels(classes)
             d = shape_batch(b1, l2)
@@ -327,7 +343,7 @@ def main(_):
             train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_writer_validation, saver, train_step_distribution_classifier, loss_summary_distribution_classifier, accuracy_distribution_classifier, validation_summary_distribution_classifier, x, y_)
         else:
             #load from memory
-            load_path = os.path.join(run_log_dir + '_train_DC', 'model.ckpt')
+            load_path = os.path.join(run_log_dir + '_train_DC', 'model.ckpt-59999')
             saver.restore(sess, load_path)
 
         # We now have our distribution classifier, we use this to decide if new data should be accepted
@@ -338,28 +354,43 @@ def main(_):
 
         #Add new training data
         data_size = MNIST_TRAIN_SIZE - SEED_SIZE
-        steps_needed = data_size/BATCH_SIZE
+        steps_needed = data_size/BATCH_INNER
         real_items_added = 0
         mal_items_added = 0
+        random.seed(0)
         label_legitimate = [[0, 1]] # [1, 0] is rejection class
+        # get avg MNIST test activation
+        MNIST_norm_size = 0
+        for i in range(MNIST_TRAIN_SIZE):
+            real_data, real_labels = mnist_real_world_data.train.next_batch(1)
+            MNIST_norm_size += np.sum(real_data[0])
+
+        MNIST_norm_size = MNIST_norm_size / (MNIST_TRAIN_SIZE)
+
         for i in range(steps_needed):
             # Classify it!
             real_data, real_labels = mnist_real_world_data.train.next_batch(BATCH_INNER)
             data_real = [shape_batch(real_data, real_labels)]
-            
+            mal_data = []
+            for i in range(BATCH_INNER):
+                item = np.array([random.random() for i in range(real_data.shape[1])])
+#                item = (item * (MNIST_norm_size/np.sum(item)))
+                mal_data.append(item)
+            mal_data = np.array(mal_data)
+#            print(mal_data.shape)
             mal_labels = gen_rand_labels(classes) # same data with mixed labels!
-            data_mal = [shape_batch(real_data, mal_labels)]
+            data_mal = [shape_batch(mal_data, mal_labels)]
             
             add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_real, y_: label_legitimate})
             add_mal = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_mal, y_: label_legitimate})
-
+            
             if(add_real):
                 real_items_added += 1
             if(add_mal):
                 mal_items_added += 1
-        
-        print('Percent real added to classifier %0.3f' % (real_items_added/steps_needed))
-        print('Percent mal added to classifier %0.3f' % (mal_items_added/steps_needed))
+        print(steps_needed)
+        print('Percent real added to classifier %0.3f' % (float(real_items_added)/float(steps_needed)))
+        print('Percent mal added to classifier %0.3f' % (float(mal_items_added)/float(steps_needed)))
         print('Actual real added to classifier %d' % real_items_added)
         print('Actual mal added to classifier %d' % mal_items_added)
 
