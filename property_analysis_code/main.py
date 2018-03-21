@@ -299,7 +299,7 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
 def main(_):
     tf.reset_default_graph()
     
-    TRAIN_DISTRIBUTION_CLASSIFIER = True
+    TRAIN_DISTRIBUTION_CLASSIFIER = False
     TRAIN_MNIST_CLASSIFIER = True
     
     classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -355,6 +355,7 @@ def main(_):
         #Add new training data
         data_size = MNIST_TRAIN_SIZE - SEED_SIZE
         steps_needed = data_size/BATCH_INNER
+#        steps_needed = BATCH_INNER
         real_items_added = 0
         mal_items_added = 0
         random.seed(0)
@@ -366,29 +367,61 @@ def main(_):
             MNIST_norm_size += np.sum(real_data[0])
 
         MNIST_norm_size = MNIST_norm_size / (MNIST_TRAIN_SIZE)
-
+        legit_at_n_legit = [0]*BATCH_INNER
+        mal_at_n_legit = [0]*BATCH_INNER
         for i in range(steps_needed):
             # Classify it!
             real_data, real_labels = mnist_real_world_data.train.next_batch(BATCH_INNER)
-            data_real = [shape_batch(real_data, real_labels)]
-            mal_data = []
-            for i in range(BATCH_INNER):
-                item = np.array([random.random() for i in range(real_data.shape[1])])
-#                item = (item * (MNIST_norm_size/np.sum(item)))
-                mal_data.append(item)
-            mal_data = np.array(mal_data)
+            single_repeated_real_data = []
+            single_repeated_real_labels = []
+            mal_labels = gen_rand_labels(classes)
+            single_repeated_mal_labels = []
+            for j in range(BATCH_INNER):
+                single_repeated_real_data.append(real_data[0])
+                single_repeated_real_labels.append(real_labels[0])
+                single_repeated_mal_labels.append(mal_labels[0])
+            single_repeated_real_data = np.array(single_repeated_real_data)
+            single_repeated_real_labels = np.array(single_repeated_real_labels)
+            single_repeated_mal_labels = np.array(single_repeated_mal_labels)
+
+            data_real = [shape_batch(single_repeated_real_data, single_repeated_real_labels)]
+            data_mal = [shape_batch(single_repeated_real_data, single_repeated_mal_labels)]
+#            for i in range(BATCH_INNER):
+#                item = np.array([float(1) for i in range(real_data.shape[1])])
+##                item = (item * (MNIST_norm_size/np.sum(item)))
+#                mal_data.append(item)
+#            mal_data = np.array(mal_data)
 #            print(mal_data.shape)
-            mal_labels = gen_rand_labels(classes) # same data with mixed labels!
-            data_mal = [shape_batch(mal_data, mal_labels)]
-            
+            # same data with mixed labels!
+#            data_mal = [shape_batch(mal_data, mal_labels)]
+#            combined_labels = []
+#            for j in range(BATCH_INNER-i):
+#                combined_labels.append(real_labels[j])
+#            for j in range(i):
+#                combined_labels.append(mal_labels[j])# random anyway
+
+#            combined_labels = np.array(combined_labels)
+#            data_combined = [shape_batch(real_data, combined_labels)]
+
             add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_real, y_: label_legitimate})
             add_mal = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_mal, y_: label_legitimate})
-            
+
+#            add_combined = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_combined, y_: label_legitimate})
+
+#            print('Num original labels: %d, Num malicious labels: %d' %(BATCH_INNER-i, i))
+#            if(add_combined):
+#                print('classified as legitimate')
+#                legit_at_n_legit[BATCH_INNER-i-1] += 1
+#            else:
+#                mal_at_n_legit[BATCH_INNER-i-1] += 1
+#                print('classified as malicious')
             if(add_real):
                 real_items_added += 1
             if(add_mal):
                 mal_items_added += 1
         print(steps_needed)
+        print(legit_at_n_legit)
+        print(mal_at_n_legit)
         print('Percent real added to classifier %0.3f' % (float(real_items_added)/float(steps_needed)))
         print('Percent mal added to classifier %0.3f' % (float(mal_items_added)/float(steps_needed)))
         print('Actual real added to classifier %d' % real_items_added)
