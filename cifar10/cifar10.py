@@ -216,7 +216,7 @@ def inference(images):
   print("conv1.get_shape()")
   print(conv1.get_shape())
   # pool1
-  pool1 = tf.nn.max_pool(conv1, ksize=[1, 3, 3, 1], strides=[1, 2, 2, 1],
+  pool1 = tf.nn.max_pool(conv1, ksize=[1, 3, 3, 1], strides=[1, 3, 3, 1],
                          padding='SAME', name='pool1')
   print("pool1.get_shape()")
   print(pool1.get_shape())
@@ -251,35 +251,45 @@ def inference(images):
   pool2 = tf.nn.max_pool(norm2, ksize=[1, 3, 3, 1],
                          strides=[1, 2, 2, 1], padding='SAME', name='pool2')
 
+
+#  (?, 6, 6, 64)
+#  (?, 6, 6, 8)
   #dimensionallity reduction step
 
   # conv3
-#  with tf.variable_scope('conv3') as scope:
-#    kernel = _variable_with_weight_decay('weights',
-#     shape=[1, 1, 64, 8],
-#     stddev=5e-2,
-#     wd=None)
-#    conv = tf.nn.conv2d(pool2, kernel, [1, 1, 1, 1], padding='SAME')
-#    biases = _variable_on_cpu('biases', [8], tf.constant_initializer(0.1))
-#    pre_activation = tf.nn.bias_add(conv, biases)
-#    conv3 = tf.nn.relu(pre_activation, name=scope.name)
-#    _activation_summary(conv3)
-#
+  with tf.variable_scope('conv3') as scope:
+    kernel = _variable_with_weight_decay('weights',
+     shape=[5, 5, 64, 64],
+     stddev=5e-2,
+     wd=None)
+    conv = tf.nn.conv2d(pool2, kernel, [1, 1, 1, 1], padding='SAME')
+    biases = _variable_on_cpu('biases', [64], tf.constant_initializer(0.1))
+    pre_activation = tf.nn.bias_add(conv, biases)
+    conv3 = tf.nn.relu(pre_activation, name=scope.name)
+    _activation_summary(conv3)
+  # norm3
+  norm3 = tf.nn.lrn(conv3, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75,
+                  name='norm2')
+  print("norm3.get_shape()")
+  print(norm3.get_shape())
+  # pool3
+  pool3 = tf.nn.max_pool(norm3, ksize=[1, 3, 3, 1],
+                       strides=[1, 2, 2, 1], padding='SAME', name='pool2')
 #  print("conv3.get_shape()")
 #  print(conv3.get_shape())
 
   # local3
   with tf.variable_scope('local3') as scope:
     # Move everything into depth so we can perform a single matrix multiply.
-    reshape = tf.reshape(pool2, [images.get_shape()[0], -1])
+    reshape = tf.reshape(pool3, [images.get_shape()[0], -1])
 #    reshape = tf.reshape(conv3, [images.get_shape()[0], -1])
 #    print("pool2.get_shape()")
 #    print(pool2.get_shape())
 #    print("reshape.get_shape()")
 #    print(reshape.get_shape())
     dim = reshape.get_shape()[1].value
-#    print('DIM')
-#    print(dim)
+    print('DIM')
+    print(dim)
     weights = _variable_with_weight_decay('weights', shape=[dim, 384],
                                           stddev=0.04, wd=0.004)
     biases = _variable_on_cpu('biases', [384], tf.constant_initializer(0.1))
