@@ -1,0 +1,6 @@
+model_checkpoint_path: "/mnt/storage/home/rp14964/project_dir/Final_Project/cifar10/logs_reduced/model.ckpt-93652"
+all_model_checkpoint_paths: "/mnt/storage/home/rp14964/project_dir/Final_Project/cifar10/logs_reduced/model.ckpt-88427"
+all_model_checkpoint_paths: "/mnt/storage/home/rp14964/project_dir/Final_Project/cifar10/logs_reduced/model.ckpt-89719"
+all_model_checkpoint_paths: "/mnt/storage/home/rp14964/project_dir/Final_Project/cifar10/logs_reduced/model.ckpt-91027"
+all_model_checkpoint_paths: "/mnt/storage/home/rp14964/project_dir/Final_Project/cifar10/logs_reduced/model.ckpt-92340"
+all_model_checkpoint_paths: "/mnt/storage/home/rp14964/project_dir/Final_Project/cifar10/logs_reduced/model.ckpt-93652"

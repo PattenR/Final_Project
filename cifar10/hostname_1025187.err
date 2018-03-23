@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "cifar10_train.py", line 127, in <module>
+    tf.app.run()
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/platform/app.py", line 48, in run
+    _sys.exit(main(_sys.argv[:1] + flags_passthrough))
+  File "cifar10_train.py", line 119, in main
+    cifar10.maybe_download_and_extract()
+  File "/mnt/storage/home/rp14964/project_dir/Final_Project/cifar10/cifar10.py", line 431, in maybe_download_and_extract
+    filepath, _ = urllib.request.urlretrieve(DATA_URL, filepath, _progress)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/urllib.py", line 98, in urlretrieve
+    return opener.retrieve(url, filename, reporthook, data)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/urllib.py", line 289, in retrieve
+    "of %i bytes" % (read, size), result)
+urllib.ContentTooShortError: retrieval incomplete: got only 4456448 out of 170052171 bytes
+srun: error: gpu17: task 0: Exited with exit code 1

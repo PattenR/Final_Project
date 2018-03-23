@@ -50,7 +50,7 @@ tf.app.flags.DEFINE_string('eval_dir', '{cwd}/logs_eval/'.format(cwd=os.getcwd()
                            """Directory where to write event logs.""")
 tf.app.flags.DEFINE_string('eval_data', 'test',
                            """Either 'test' or 'train_eval'.""")
-tf.app.flags.DEFINE_string('checkpoint_dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
+tf.app.flags.DEFINE_string('checkpoint_dir', '{cwd}/logs_reduced/'.format(cwd=os.getcwd()),
                            """Directory where to read model checkpoints.""")
 tf.app.flags.DEFINE_integer('eval_interval_secs', 60 * 5,
                             """How often to run the eval.""")

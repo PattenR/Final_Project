@@ -1,0 +1,9 @@
+/mnt/storage/software/languages/anaconda/Anaconda2-5.0.1-tflow-1.4.1/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+2018-03-22 14:55:54.118259: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 1046700.0 ON gpu23 CANCELLED AT 2018-03-23T02:54:52 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 1046700 ON gpu23 CANCELLED AT 2018-03-23T02:54:52 DUE TO TIME LIMIT ***
+srun: got SIGCONT
+srun: forcing job termination
+srun: error: gpu23: task 0: Terminated
