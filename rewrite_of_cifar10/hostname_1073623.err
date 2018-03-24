@@ -1,0 +1,19 @@
+/mnt/storage/software/languages/anaconda/Anaconda2-5.0.1-tflow-1.4.1/lib/python2.7/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Downloading file from http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to /mnt/storage/home/rp14964/project_dir/Final_Project/rewrite_of_cifar10/dataset/cifar-10.tar.gz
+...................................................................................................................................................................
+WARNING:tensorflow:From main.py:271: softmax_cross_entropy_with_logits (from tensorflow.python.ops.nn_ops) is deprecated and will be removed in a future version.
+Instructions for updating:
+
+Future major versions of TensorFlow will allow gradients to flow
+into the labels input on backprop by default.
+
+See tf.nn.softmax_cross_entropy_with_logits_v2.
+
+2018-03-23 17:19:15.359640: I tensorflow/core/platform/cpu_feature_guard.cc:137] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 1073623.0 ON gpu06 CANCELLED AT 2018-03-24T05:16:39 DUE TO TIME LIMIT ***
+slurmstepd: error: *** JOB 1073623 ON gpu06 CANCELLED AT 2018-03-24T05:16:39 DUE TO TIME LIMIT ***
+srun: got SIGCONT
+srun: forcing job termination
+srun: error: gpu06: task 0: Terminated
