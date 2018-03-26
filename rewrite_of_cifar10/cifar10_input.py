@@ -158,29 +158,30 @@ def distorted_inputs(data_dir, batch_size, cifar):
   height = IMAGE_SIZE
   width = IMAGE_SIZE
   (trainImages, trainLabels) = cifar.getTrainBatch()
-  reshaped_image = tf.cast(trainImages, tf.float32)
-  reshaped_image = tf.reshape(reshaped_image, [-1, 32, 32, 3])
-  
-#  distorted_image = tf.random_crop(reshaped_image, [height, width, 3])
-
-  distorted_image_1 = tf.map_fn(lambda frame: tf.random_crop(frame, [height, width, 3]), reshaped_image)
-
-#  distorted_image = tf.image.random_flip_left_right(distorted_image)
-
-  distorted_image_2 = tf.map_fn(lambda frame: tf.image.random_flip_left_right(frame), distorted_image_1)
-
-#  distorted_image = tf.image.random_brightness(distorted_image,
-#                                               max_delta=63)
-  distorted_image_3 = tf.map_fn(lambda frame: tf.image.random_brightness(frame, max_delta=63), distorted_image_2)
-#  distorted_image = tf.image.random_contrast(distorted_image,
-#                                                 lower=0.2, upper=1.8)
-  distorted_image_4 = tf.map_fn(lambda frame: tf.image.random_contrast(frame, lower=0.2, upper=1.8), distorted_image_3)
-
-#  float_image = tf.image.per_image_standardization(distorted_image)
-  float_image = tf.map_fn(lambda frame: tf.image.per_image_standardization(frame), distorted_image_4)
-  # Set the shapes of tensors.
-#  float_image.set_shape([height, width, 3])
-  return float_image, trainLabels
+  return trainImages, trainLabels
+#  reshaped_image = tf.cast(trainImages, tf.float32)
+#  reshaped_image = tf.reshape(reshaped_image, [-1, 32, 32, 3])
+#
+##  distorted_image = tf.random_crop(reshaped_image, [height, width, 3])
+#
+#  distorted_image_1 = tf.map_fn(lambda frame: tf.random_crop(frame, [height, width, 3]), reshaped_image)
+#
+##  distorted_image = tf.image.random_flip_left_right(distorted_image)
+#
+#  distorted_image_2 = tf.map_fn(lambda frame: tf.image.random_flip_left_right(frame), distorted_image_1)
+#
+##  distorted_image = tf.image.random_brightness(distorted_image,
+##                                               max_delta=63)
+#  distorted_image_3 = tf.map_fn(lambda frame: tf.image.random_brightness(frame, max_delta=63), distorted_image_2)
+##  distorted_image = tf.image.random_contrast(distorted_image,
+##                                                 lower=0.2, upper=1.8)
+#  distorted_image_4 = tf.map_fn(lambda frame: tf.image.random_contrast(frame, lower=0.2, upper=1.8), distorted_image_3)
+#
+##  float_image = tf.image.per_image_standardization(distorted_image)
+#  float_image = tf.map_fn(lambda frame: tf.image.per_image_standardization(frame), distorted_image_4)
+#  # Set the shapes of tensors.
+##  float_image.set_shape([height, width, 3])
+#  return float_image, trainLabels
 #  with tf.name_scope('data_augmentation'):
 #    # Read examples from files in the filename queue.inputs
 #
@@ -255,13 +256,14 @@ def inputs(eval_data, data_dir, batch_size, cifar):
   height = IMAGE_SIZE
   width = IMAGE_SIZE
   (trainImages, trainLabels) = cifar.getTestBatch()
-  reshaped_image = tf.cast(trainImages, tf.float32)
-  reshaped_image = tf.reshape(reshaped_image, [-1, 32, 32, 3])
-  resized_image = tf.image.resize_image_with_crop_or_pad(reshaped_image, height, width)
-  float_image = tf.map_fn(lambda frame: tf.image.per_image_standardization(frame), resized_image)
-#  float_image = tf.image.per_image_standardization(resized_image)
-#  float_image.set_shape([height, width, 3])
-  return float_image, trainLabels
+  return trainImages, trainLabels
+#  reshaped_image = tf.cast(trainImages, tf.float32)
+#  reshaped_image = tf.reshape(reshaped_image, [-1, 32, 32, 3])
+#  resized_image = tf.image.resize_image_with_crop_or_pad(reshaped_image, height, width)
+#  float_image = tf.map_fn(lambda frame: tf.image.per_image_standardization(frame), resized_image)
+##  float_image = tf.image.per_image_standardization(resized_image)
+##  float_image.set_shape([height, width, 3])
+#  return float_image, trainLabels
 #  with tf.name_scope('input'):
 #    # Create a queue that produces the filenames to read.
 #    filename_queue = tf.train.string_input_producer(filenames)

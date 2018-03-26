@@ -22,7 +22,7 @@ tf.app.flags.DEFINE_integer('max_steps', 100000,
                             """Number of batches to run.""")
 tf.app.flags.DEFINE_boolean('log_device_placement', False,
                             """Whether to log device placement.""")
-tf.app.flags.DEFINE_integer('log_frequency', 1000,
+tf.app.flags.DEFINE_integer('log_frequency', 10,
                             """How often to log results to the console.""")
 tf.app.flags.DEFINE_boolean('use_fp16', False,
                             """Train the model using fp16.""")
@@ -71,6 +71,9 @@ def deepCNN(images):
   # conv1
   print("images.get_shape()")
   print(images.get_shape())
+  
+  images = tf.reshape(images, [-1, 32, 32, 3])
+  
   with tf.variable_scope('conv1') as scope:
     kernel = _variable_with_weight_decay('weights',
                                          shape=[5, 5, 3, 64],
@@ -86,7 +89,7 @@ def deepCNN(images):
   print("conv1.get_shape()")
   print(conv1.get_shape())
   # pool1
-  pool1 = tf.nn.max_pool(conv1, ksize=[1, 3, 3, 1], strides=[1, 3, 3, 1],
+  pool1 = tf.nn.max_pool(conv1, ksize=[1, 3, 3, 1], strides=[1, 4, 4, 1],
                          padding='SAME', name='pool1')
   print("pool1.get_shape()")
   print(pool1.get_shape())
@@ -260,7 +263,7 @@ def main(argv=None):  # pylint: disable=unused-argument
 
   with tf.variable_scope('inputs'):
       # Create the model
-      x = tf.placeholder(tf.float32, [None, 24,  24,  3])
+      x = tf.placeholder(tf.float32, [None, 3072])
       # Define loss and optimizer
       y_ = tf.placeholder(tf.float32, [None, 10])
 
@@ -308,8 +311,9 @@ def main(argv=None):  # pylint: disable=unused-argument
 #          (testImages, testLabels) = cifar.getTestBatch()
           (testImages, testLabels) = inputs(False, FLAGS.datadir, 128, cifar)
 
-#          print(trainLabels)
-          _, acc, summary_str = sess.run([train_step, accuracy, training_summary], feed_dict={x: trainImages.eval(), y_: trainLabels})
+#          print(trainLabels.shape)
+#          print(trainImages.shape)
+          _, summary_str = sess.run([train_step, training_summary], feed_dict={x: trainImages, y_: trainLabels})
 
 #            summ = sess.run(summaries, feed_dict={k: k_val})
 
@@ -320,7 +324,7 @@ def main(argv=None):  # pylint: disable=unused-argument
 
           # Validation: Monitoring accuracy using validation set
           if step % FLAGS.log_frequency == 0:
-              validation_accuracy, summary_str = sess.run([accuracy, validation_summary], feed_dict={x: testImages.eval(), y_: testLabels})
+              validation_accuracy, summary_str = sess.run([accuracy, validation_summary], feed_dict={x: testImages, y_: testLabels})
               print('step %d, accuracy on validation batch: %g' % (step, validation_accuracy))
               summary_writer_validation.add_summary(summary_str, step)
 
