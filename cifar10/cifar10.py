@@ -279,9 +279,11 @@ def inference(images):
 #  print(conv3.get_shape())
 
   # local3
+  compressed_vector = []
   with tf.variable_scope('local3') as scope:
     # Move everything into depth so we can perform a single matrix multiply.
     reshape = tf.reshape(pool3, [images.get_shape()[0], -1])
+    compressed_vector = reshape
 #    reshape = tf.reshape(conv3, [images.get_shape()[0], -1])
 #    print("pool2.get_shape()")
 #    print(pool2.get_shape())
@@ -316,7 +318,7 @@ def inference(images):
     softmax_linear = tf.add(tf.matmul(local4, weights), biases, name=scope.name)
     _activation_summary(softmax_linear)
 
-  return softmax_linear
+  return softmax_linear, compressed_vector
 
 
 def loss(logits, labels):
