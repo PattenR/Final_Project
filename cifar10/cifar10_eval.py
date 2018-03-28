@@ -69,6 +69,7 @@ def eval_once(saver, summary_writer, top_k_op, summary_op, compressed_vecs):
     top_k_op: Top K op.
     summary_op: Summary op.
   """
+  compressed_CIFAR = []
   with tf.Session() as sess:
     ckpt = tf.train.get_checkpoint_state(FLAGS.checkpoint_dir)
     if ckpt and ckpt.model_checkpoint_path:
@@ -98,9 +99,7 @@ def eval_once(saver, summary_writer, top_k_op, summary_op, compressed_vecs):
         predictions = sess.run([top_k_op])
         vecs = sess.run([compressed_vecs])
         for x in vecs:
-            print("COMPRESSED_VEC")
-            print(x)
-            break
+            compressed_CIFAR.append(x)
         true_count += np.sum(predictions)
         step += 1
 
@@ -117,13 +116,14 @@ def eval_once(saver, summary_writer, top_k_op, summary_op, compressed_vecs):
 
     coord.request_stop()
     coord.join(threads, stop_grace_period_secs=10)
-
+    return compressed_CIFAR
 
 def evaluate():
   """Eval CIFAR-10 for a number of steps."""
   with tf.Graph().as_default() as g:
     # Get images and labels for CIFAR-10.
     eval_data = FLAGS.eval_data == 'test'
+    eval_data = 'train'
     images, labels = cifar10.inputs(eval_data=eval_data)
 
     # Build a Graph that computes the logits predictions from the
@@ -145,7 +145,8 @@ def evaluate():
     summary_writer = tf.summary.FileWriter(FLAGS.eval_dir, g)
 
     while True:
-      eval_once(saver, summary_writer, top_k_op, summary_op, compressed_vecs)
+      CC = eval_once(saver, summary_writer, top_k_op, summary_op, compressed_vecs)
+      print(np.array(CC).shape)
       if FLAGS.run_once:
         break
       time.sleep(FLAGS.eval_interval_secs)
