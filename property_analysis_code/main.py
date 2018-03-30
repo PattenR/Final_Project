@@ -9,30 +9,34 @@ import itertools
 from tensorflow.examples.tutorials.mnist import input_data
 import numpy as np
 from scipy import ndimage
+from ast import literal_eval
 
 BATCH_SIZE = 128
 BATCH_VAL = 4096
 SEED_SIZE = 10000 # when training the malicous data resistant system we seed with an inital set size seed_size
 MNIST_TRAIN_SIZE = 60000
 BATCH_INNER = 16
-BATCH_INNER_SIZE_MNIST = (784/4+1)*BATCH_INNER
+#BATCH_INNER_SIZE_MNIST = (784/4+1)*BATCH_INNER
+#IMG_SIZE = 256
+IMG_SIZE = 14*14
+BATCH_INNER_SIZE_MNIST = (IMG_SIZE+1)*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
 #for distribuion classifier
-tf.app.flags.DEFINE_integer('max-steps-DC', 60000,
+tf.app.flags.DEFINE_integer('max_steps_DC', 60000,
                             'Number of mini-batches to train on. (default: %(default)d)')
 #for MNIST classifier
-tf.app.flags.DEFINE_integer('max-steps-M', 10000,
+tf.app.flags.DEFINE_integer('max_steps-M', 10000,
                             'Number of mini-batches to train on. (default: %(default)d)')
-tf.app.flags.DEFINE_integer('log-frequency', 1000,
+tf.app.flags.DEFINE_integer('log_frequency', 10,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
-tf.app.flags.DEFINE_integer('save-model', 1000,
+tf.app.flags.DEFINE_integer('save_model', 1000,
                             'Number of steps between model saves (default: %(default)d)')
 
 # Optimisation hyperparameters
-tf.app.flags.DEFINE_float('learning-rate', 0.001, 'Learning rate (default: %(default)d)')
-tf.app.flags.DEFINE_integer('num-classes', 10, 'Number of classes (default: %(default)d)')
-tf.app.flags.DEFINE_string('log-dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
+tf.app.flags.DEFINE_float('learning_rate', 0.001, 'Learning rate (default: %(default)d)')
+tf.app.flags.DEFINE_integer('num_classes', 10, 'Number of classes (default: %(default)d)')
+tf.app.flags.DEFINE_string('log_dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
 
 run_log_dir = os.path.join(FLAGS.log_dir,
@@ -115,8 +119,9 @@ def get_batch_of_batchs(mnist, classes):
                 b1, l1 = mnist.train.next_batch(BATCH_INNER)
             else:
                 b1 = []
-                for i in range(BATCH_INNER):
-                    item = np.array([random.random() for i in range(14*14)])
+                for j in range(BATCH_INNER):
+#                    item = np.array([random.random() for i in range(14*14)])
+                    item = np.array([random.random() for k in range(IMG_SIZE)])
                     b1.append(item)
                 b1 = np.array(b1)
 #            b2, l2 = get_linear_mal_batch()
@@ -147,13 +152,15 @@ def get_batch_of_batchs_validation(mnist, classes):
                 b1, l1 = mnist.train.next_batch(BATCH_INNER)
             else:
                 b1 = []
-                for i in range(BATCH_INNER):
-                    item = np.array([random.random() for i in range(14*14)])
+                for j in range(BATCH_INNER):
+#                    item = np.array([random.random() for i in range(14*14)])
+                    item = np.array([random.random() for k in range(IMG_SIZE)])
                     b1.append(item)
                 b1 = np.array(b1)
 #            b2, l2 = get_linear_mal_batch()
             l2 = gen_rand_labels(classes)
             d = shape_batch(b1, l2)
+            
             data.append(d)
             labels.append([1, 0])
     #    labels = np.transpose(np.array(labels))
@@ -230,7 +237,7 @@ def filter_data(image, labels ,classes, seed=2):
     if seed==0:
         num_image = SEED_SIZE
     if seed==1:
-        start =  SEED_SIZE+1
+        start = SEED_SIZE+1
     for i in range(start, end):
         if(labels[i] in classes):
             new_images.append(image[i])
@@ -270,9 +277,8 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
     for step in range(FLAGS.max_steps_DC):
         # Training: Backpropagation using train set
         data, labels = get_batch_of_batchs(mnist_seed, classes)
-        
+
         _, loss = sess.run([train_step_distribution_classifier, loss_summary_distribution_classifier], feed_dict={x: data, y_: labels})
-            
         #            writer.add_summary(summ, global_step=step)
         
         if step % (FLAGS.log_frequency + 1) == 0:
@@ -299,13 +305,55 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
 def main(_):
     tf.reset_default_graph()
     
-    TRAIN_DISTRIBUTION_CLASSIFIER = False
+    TRAIN_DISTRIBUTION_CLASSIFIER = True
     TRAIN_MNIST_CLASSIFIER = True
     
     classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     mnist_seed = load_modified_mnist(classes, seed=0)
     mnist_real_world_data = load_modified_mnist(classes, seed=1)
+    f = open('{cwd}/file.py'.format(cwd=os.getcwd()), 'r')
+    cifar_image_compresses = np.load('{cwd}/file.py'.format(cwd=os.getcwd()))
+    cifar_labels_compresses = np.load('{cwd}/file_labels.py'.format(cwd=os.getcwd()))
+    cifar_image_compresses_test = np.load('{cwd}/file_test.py'.format(cwd=os.getcwd()))
+    cifar_labels_compresses_test = np.load('{cwd}/file_labels_test.py'.format(cwd=os.getcwd()))
+#    data = np.genfromtxt('{cwd}/CIFAR_compressed_data/compressed_images.py'.format(cwd=os.getcwd()),delimiter=",")
+    print(cifar_image_compresses.shape)
+    print(cifar_labels_compresses.shape)
+    print(cifar_image_compresses_test.shape)
+    print(cifar_labels_compresses_test.shape)
+   
+#    mnist_seed.train._images = mnist_seed.train._images[:10000]
+#    imgs = []
+#    for x in cifar_image_compresses[:10000]:
+#        im = []
+#        for i in x:
+#            im.append(i)
+#        imgs.append(np.array(im))
+#    imgs = np.array(imgs)
+#    print(mnist_seed.train._images[0])
+#    mnist_seed.train._images = cifar_image_compresses[:10000]
+#
+##    print(mnist_seed.train._images[0])
+##    for i in range(10000):
+##    print(old.shape)
+##    print(mnist_seed.train._images.shape)
+#    mnist_seed.train._labels = cifar_labels_compresses[:10000]
+#    mnist_seed.train._num_examples = 10000
+#
+#    mnist_seed.test._images = cifar_image_compresses_test
+#    mnist_seed.test._labels = cifar_labels_compresses_test
+#    mnist_seed.test._num_examples = 10000
+#
+#    mnist_real_world_data.train._images = cifar_image_compresses[-40000:]
+#    mnist_real_world_data.train._labels = cifar_labels_compresses[-40000:]
+#    mnist_real_world_data.train._num_examples = 40000
+#
+#    mnist_real_world_data.test._images = cifar_image_compresses_test
+#    mnist_real_world_data.test._labels = cifar_labels_compresses_test
+#    mnist_real_world_data.test._num_examples = 10000
 
+#    imgs = literal_eval(cifar_image_compresses)
+#    return
     with tf.variable_scope('inputs'):
         # Create the model
         x = tf.placeholder(tf.float32, [None, BATCH_INNER_SIZE_MNIST])
