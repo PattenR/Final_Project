@@ -64,7 +64,7 @@ def get_gaussian_mixture_batch():
             batch_data.append(x)
             batch_label.append(2) # class 2
 
-return batch_data, batch_label
+    return batch_data, batch_label
 
 def get_linear_mal_batch():
     batch_data = []
@@ -80,7 +80,7 @@ def get_linear_mal_batch():
         else:
             #            batch_label.append([1, 0])
             batch_label.append(2)
-return batch_data, batch_label
+    return batch_data, batch_label
 
 def shape_batch(batch_data, batch_label):
     shaped_batch = []
@@ -128,9 +128,9 @@ def get_batch_of_batchs(mnist, classes):
             l2 = gen_rand_labels(classes)
             d = shape_batch(b1, l2)
             data.append(d)
-                    labels.append([1, 0])
-#    labels = np.transpose(np.array(labels))
-return data, labels
+            labels.append([1, 0])
+	#    labels = np.transpose(np.array(labels))
+	return data, labels
 
 def get_batch_of_batchs_validation(mnist, classes):
     data = []
@@ -162,9 +162,9 @@ def get_batch_of_batchs_validation(mnist, classes):
             d = shape_batch(b1, l2)
             
             data.append(d)
-                    labels.append([1, 0])
+            labels.append([1, 0])
 #    labels = np.transpose(np.array(labels))
-return data, labels
+	return data, labels
 
 def deepnn(x):
     """deepnn builds the graph for a deep net for classifying CIFAR10 images.
@@ -212,7 +212,7 @@ def deepnn(x):
         y_conv = tf.matmul(h_fc2, W_fc3) + b_fc3
         #        y_conv = tf.reshape(y_conv, [-1, 1])
         #        y_conv = tf.transpose(y_conv, 0)
-        return y_conv
+	return y_conv
 
 def conv2d(x, W):
     """conv2d returns a 2d convolution layer with full stride."""
@@ -253,7 +253,7 @@ def filter_data(image, labels ,classes, seed=2):
             new_images.append(image[i])
             new_lables.append(labels[i])
 
-return np.array(new_images), np.array(new_lables)
+    return np.array(new_images), np.array(new_lables)
 
 #Seed=0 is initial seed, seed=1 is for exclusively data not in seed, seed=2 is for all
 def load_modified_mnist(classes, seed=2):
@@ -308,9 +308,9 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
     # Testing
     test_data, test_labels = get_batch_of_batchs_validation(mnist_seed, classes)
 
-test_accuracy = sess.run(accuracy_distribution_classifier, feed_dict={x: test_data, y_: test_labels})
+    test_accuracy = sess.run(accuracy_distribution_classifier, feed_dict={x: test_data, y_: test_labels})
 
-print('test set: accuracy on test set: %0.3f' % test_accuracy)
+    print('test set: accuracy on test set: %0.3f' % test_accuracy)
 
 def main(_):
     tf.reset_default_graph()
@@ -380,8 +380,8 @@ def main(_):
     # Build the graph for the deep net
     y_conv_distribution_classifier = deepnn(x)
 
-with tf.variable_scope('x_entropy'):
-    cross_entropy_distribution_classifier = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv_distribution_classifier))
+    with tf.variable_scope('x_entropy'):
+        cross_entropy_distribution_classifier = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv_distribution_classifier))
     
     train_step_distribution_classifier = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy_distribution_classifier)
     correct_prediction_distribution_classifier = tf.equal(tf.argmax(y_conv_distribution_classifier, 1), tf.argmax(y_, 1))
@@ -431,15 +431,15 @@ with tf.variable_scope('x_entropy'):
             real_data, real_labels = mnist_real_world_data.train.next_batch(1)
             MNIST_norm_size += np.sum(real_data[0])
 
-MNIST_norm_size = MNIST_norm_size / (MNIST_TRAIN_SIZE)
-legit_at_n_legit = [0]*BATCH_INNER
-mal_at_n_legit = [0]*BATCH_INNER
-for i in range(steps_needed):
-    # Classify it!
-    real_data, real_labels = mnist_real_world_data.train.next_batch(BATCH_INNER)
+	MNIST_norm_size = MNIST_norm_size / (MNIST_TRAIN_SIZE)
+	legit_at_n_legit = [0]*BATCH_INNER
+	mal_at_n_legit = [0]*BATCH_INNER
+	for i in range(steps_needed):
+    	# Classify it!
+    		real_data, real_labels = mnist_real_world_data.train.next_batch(BATCH_INNER)
     #            single_repeated_real_data = []
     #            single_repeated_real_labels = []
-    mal_labels = gen_rand_labels(classes)
+   		mal_labels = gen_rand_labels(classes)
         #            single_repeated_mal_labels = []
         #            for j in range(BATCH_INNER):
         #                single_repeated_real_data.append(real_data[0])
@@ -448,8 +448,8 @@ for i in range(steps_needed):
         #            single_repeated_real_data = np.array(single_repeated_real_data)
         #            single_repeated_real_labels = np.array(single_repeated_real_labels)
         #            single_repeated_mal_labels = np.array(single_repeated_mal_labels)
-        data_real = [shape_batch(real_data, real_labels)]
-        data_mal = [shape_batch(real_data, mal_labels)]
+        	data_real = [shape_batch(real_data, real_labels)]
+        	data_mal = [shape_batch(real_data, mal_labels)]
         #            data_real = [shape_batch(single_repeated_real_data, single_repeated_real_labels)]
         #            data_mal = [shape_batch(single_repeated_real_data, single_repeated_mal_labels)]
         #            for i in range(BATCH_INNER):
@@ -469,8 +469,8 @@ for i in range(steps_needed):
         #            combined_labels = np.array(combined_labels)
         #            data_combined = [shape_batch(real_data, combined_labels)]
         
-        add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_real, y_: label_legitimate})
-            add_mal = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_mal, y_: label_legitimate})
+        	add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_real, y_: label_legitimate})
+            	add_mal = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_mal, y_: label_legitimate})
             
             #            add_combined = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_combined, y_: label_legitimate})
             
@@ -481,17 +481,17 @@ for i in range(steps_needed):
             #            else:
             #                mal_at_n_legit[BATCH_INNER-i-1] += 1
             #                print('classified as malicious')
-            if(add_real):
-                real_items_added += 1
-            if(add_mal):
-                mal_items_added += 1
+            	if(add_real):
+                	real_items_added += 1
+            	if(add_mal):
+                	mal_items_added += 1
         print(steps_needed)
         #        print(legit_at_n_legit)
         #        print(mal_at_n_legit)
         print('Percent real added to classifier %0.3f' % (float(real_items_added)/float(steps_needed)))
         print('Percent mal added to classifier %0.3f' % (float(mal_items_added)/float(steps_needed)))
         print('Actual real added to classifier %d' % real_items_added)
-    print('Actual mal added to classifier %d' % mal_items_added)
+  	print('Actual mal added to classifier %d' % mal_items_added)
 
 #        if(TRAIN_MNIST_CLASSIFIER):
 #Train for MNIST on seed+new data to see improvement
