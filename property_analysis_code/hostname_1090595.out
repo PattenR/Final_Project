@@ -1,0 +1,80 @@
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+(50000, 256)
+(50000,)
+(10000, 256)
+(10000,)
+step 0, accuracy on validation batch: 0.491455
+step 1000, accuracy on validation batch: 0.709473
+step 2000, accuracy on validation batch: 0.740723
+step 3000, accuracy on validation batch: 0.749756
+step 4000, accuracy on validation batch: 0.744141
+step 5000, accuracy on validation batch: 0.740479
+step 6000, accuracy on validation batch: 0.748535
+step 7000, accuracy on validation batch: 0.739502
+step 8000, accuracy on validation batch: 0.73584
+step 9000, accuracy on validation batch: 0.739014
+step 10000, accuracy on validation batch: 0.748779
+step 11000, accuracy on validation batch: 0.75
+step 12000, accuracy on validation batch: 0.750244
+step 13000, accuracy on validation batch: 0.750488
+step 14000, accuracy on validation batch: 0.750732
+step 15000, accuracy on validation batch: 0.756348
+step 16000, accuracy on validation batch: 0.753906
+step 17000, accuracy on validation batch: 0.751465
+step 18000, accuracy on validation batch: 0.760254
+step 19000, accuracy on validation batch: 0.741943
+step 20000, accuracy on validation batch: 0.74292
+step 21000, accuracy on validation batch: 0.750977
+step 22000, accuracy on validation batch: 0.739746
+step 23000, accuracy on validation batch: 0.748535
+step 24000, accuracy on validation batch: 0.754639
+step 25000, accuracy on validation batch: 0.753418
+step 26000, accuracy on validation batch: 0.747803
+step 27000, accuracy on validation batch: 0.746094
+step 28000, accuracy on validation batch: 0.759766
+step 29000, accuracy on validation batch: 0.73584
+step 30000, accuracy on validation batch: 0.748291
+step 31000, accuracy on validation batch: 0.736328
+step 32000, accuracy on validation batch: 0.734619
+step 33000, accuracy on validation batch: 0.763184
+step 34000, accuracy on validation batch: 0.746826
+step 35000, accuracy on validation batch: 0.758545
+step 36000, accuracy on validation batch: 0.750244
+step 37000, accuracy on validation batch: 0.752441
+step 38000, accuracy on validation batch: 0.766357
+step 39000, accuracy on validation batch: 0.747803
+step 40000, accuracy on validation batch: 0.75415
+step 41000, accuracy on validation batch: 0.741455
+step 42000, accuracy on validation batch: 0.751221
+step 43000, accuracy on validation batch: 0.748047
+step 44000, accuracy on validation batch: 0.746094
+step 45000, accuracy on validation batch: 0.752197
+step 46000, accuracy on validation batch: 0.747803
+step 47000, accuracy on validation batch: 0.746826
+step 48000, accuracy on validation batch: 0.751465
+step 49000, accuracy on validation batch: 0.765625
+step 50000, accuracy on validation batch: 0.760254
+step 51000, accuracy on validation batch: 0.756348
+step 52000, accuracy on validation batch: 0.736084
+step 53000, accuracy on validation batch: 0.746826
+step 54000, accuracy on validation batch: 0.751465
+step 55000, accuracy on validation batch: 0.748291
+step 56000, accuracy on validation batch: 0.756836
+step 57000, accuracy on validation batch: 0.744629
+step 58000, accuracy on validation batch: 0.751221
+step 59000, accuracy on validation batch: 0.76123
+test set: accuracy on test set: 0.754
+3125
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Percent real added to classifier 0.943
+Percent mal added to classifier 0.944
+Actual real added to classifier 2947
+Actual mal added to classifier 2950

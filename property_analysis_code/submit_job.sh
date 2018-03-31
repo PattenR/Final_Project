@@ -1,5 +1,5 @@
 #!/bin/bash                                                                                                                                          
-#SBATCH -t 0-08:00 # Runtime in D-HH:MM                                                                                                              
+#SBATCH -t 0-10:00 # Runtime in D-HH:MM                                                                                                              
 #SBATCH -p gpu # Partition to submit to                                                                                                              
 #SBATCH --gres=gpu:1                                                                                                                                 
 #SBATCH --mem=15000

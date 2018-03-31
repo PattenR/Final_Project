@@ -28,7 +28,7 @@ tf.app.flags.DEFINE_integer('max_steps_DC', 60000,
 #for MNIST classifier
 tf.app.flags.DEFINE_integer('max_steps-M', 10000,
                             'Number of mini-batches to train on. (default: %(default)d)')
-tf.app.flags.DEFINE_integer('log_frequency', 10,
+tf.app.flags.DEFINE_integer('log_frequency', 1000,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
 tf.app.flags.DEFINE_integer('save_model', 1000,
                             'Number of steps between model saves (default: %(default)d)')
