@@ -17,8 +17,8 @@ SEED_SIZE = 10000 # when training the malicous data resistant system we seed wit
 MNIST_TRAIN_SIZE = 60000
 BATCH_INNER = 16
 #BATCH_INNER_SIZE_MNIST = (784/4+1)*BATCH_INNER
-#IMG_SIZE = 256
-IMG_SIZE = 14*14
+IMG_SIZE = 256
+#IMG_SIZE = 14*14
 BATCH_INNER_SIZE_MNIST = (IMG_SIZE+1)*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
@@ -331,26 +331,26 @@ def main(_):
 #        imgs.append(np.array(im))
 #    imgs = np.array(imgs)
 #    print(mnist_seed.train._images[0])
-#    mnist_seed.train._images = cifar_image_compresses[:10000]
+    mnist_seed.train._images = cifar_image_compresses[10000:]
 #
 ##    print(mnist_seed.train._images[0])
 ##    for i in range(10000):
 ##    print(old.shape)
 ##    print(mnist_seed.train._images.shape)
-#    mnist_seed.train._labels = cifar_labels_compresses[:10000]
-#    mnist_seed.train._num_examples = 10000
-#
-#    mnist_seed.test._images = cifar_image_compresses_test
-#    mnist_seed.test._labels = cifar_labels_compresses_test
-#    mnist_seed.test._num_examples = 10000
-#
-#    mnist_real_world_data.train._images = cifar_image_compresses[-40000:]
-#    mnist_real_world_data.train._labels = cifar_labels_compresses[-40000:]
-#    mnist_real_world_data.train._num_examples = 40000
-#
-#    mnist_real_world_data.test._images = cifar_image_compresses_test
-#    mnist_real_world_data.test._labels = cifar_labels_compresses_test
-#    mnist_real_world_data.test._num_examples = 10000
+    mnist_seed.train._labels = cifar_labels_compresses[10000:]
+    mnist_seed.train._num_examples = 10000
+
+    mnist_seed.test._images = cifar_image_compresses_test
+    mnist_seed.test._labels = cifar_labels_compresses_test
+    mnist_seed.test._num_examples = 10000
+
+    mnist_real_world_data.train._images = cifar_image_compresses[-40000:]
+    mnist_real_world_data.train._labels = cifar_labels_compresses[-40000:]
+    mnist_real_world_data.train._num_examples = 40000
+
+    mnist_real_world_data.test._images = cifar_image_compresses_test
+    mnist_real_world_data.test._labels = cifar_labels_compresses_test
+    mnist_real_world_data.test._num_examples = 10000
 
 #    imgs = literal_eval(cifar_image_compresses)
 #    return
