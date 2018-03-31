@@ -1,2 +1,2 @@
-model_checkpoint_path: "/mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_0.001_train_DC/model.ckpt-59999"
-all_model_checkpoint_paths: "/mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_0.001_train_DC/model.ckpt-59999"
+model_checkpoint_path: "/mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_0.001_train_DC/model.ckpt-31000"
+all_model_checkpoint_paths: "/mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_0.001_train_DC/model.ckpt-31000"
