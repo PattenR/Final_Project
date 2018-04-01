@@ -23,7 +23,7 @@ BATCH_INNER_SIZE_MNIST = (IMG_SIZE+1)*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
 #for distribuion classifier
-tf.app.flags.DEFINE_integer('max_steps_DC', 200000,
+tf.app.flags.DEFINE_integer('max_steps_DC', 50000,
                             'Number of mini-batches to train on. (default: %(default)d)')
 #for MNIST classifier
 tf.app.flags.DEFINE_integer('max_steps-M', 10000,
@@ -40,7 +40,7 @@ tf.app.flags.DEFINE_string('log_dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
 
 run_log_dir = os.path.join(FLAGS.log_dir,
-                           'exp_bs_{bs}_lr_{lr}'.format(bs=BATCH_SIZE,
+                           'exp_bs_{bs}_lr_{lr}_new'.format(bs=BATCH_SIZE,
                                                         lr=FLAGS.learning_rate))
 
 def get_gaussian_mixture_batch():
@@ -115,7 +115,7 @@ def get_batch_of_batchs(mnist, classes):
             #linear batch
             #            b1, l1 = get_gaussian_mixture_batch()
             b1 = []
-            if(random.randint(0, 1) == 1):
+            if(random.randint(0, 9) > 0):
                 b1, l1 = mnist.train.next_batch(BATCH_INNER)
             else:
                 b1 = []

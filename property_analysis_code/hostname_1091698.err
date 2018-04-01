@@ -1,0 +1,81 @@
+2018-04-01 11:46:46.524246: I tensorflow/core/common_runtime/gpu/gpu_device.cc:938] Found device 0 with properties: 
+name: Tesla P100-PCIE-16GB
+major: 6 minor: 0 memoryClockRate (GHz) 1.3285
+pciBusID 0000:06:00.0
+Total memory: 15.89GiB
+Free memory: 15.60GiB
+2018-04-01 11:46:46.524285: I tensorflow/core/common_runtime/gpu/gpu_device.cc:959] DMA: 0 
+2018-04-01 11:46:46.524292: I tensorflow/core/common_runtime/gpu/gpu_device.cc:969] 0:   Y 
+2018-04-01 11:46:46.524302: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1028] Creating TensorFlow device (/gpu:0) -> (device: 0, name: Tesla P100-PCIE-16GB, pci bus id: 0000:06:00.0)
+2018-04-01 11:46:50.639010: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639063: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639107: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639151: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639183: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639244: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639274: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639330: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639339: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639370: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639395: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639420: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639441: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639465: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639495: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639516: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639544: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639572: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639637: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+2018-04-01 11:46:50.639650: W tensorflow/core/framework/op_kernel.cc:1165] Invalid argument: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+Traceback (most recent call last):
+  File "main.py", line 506, in <module>
+    tf.app.run(main=main)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/platform/app.py", line 48, in run
+    _sys.exit(main(_sys.argv[:1] + flags_passthrough))
+  File "main.py", line 412, in main
+    saver.restore(sess, load_path)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/training/saver.py", line 1555, in restore
+    {self.saver_def.filename_tensor_name: save_path})
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 896, in run
+    run_metadata_ptr)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1124, in _run
+    feed_dict_tensor, options, run_metadata)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1279, in _do_run
+    options, run_metadata)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/client/session.py", line 1298, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors_impl.InvalidArgumentError: Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+	 [[Node: save/RestoreV2_12 = RestoreV2[dtypes=[DT_FLOAT], _device="/job:localhost/replica:0/task:0/cpu:0"](_arg_save/Const_0_0, save/RestoreV2_12/tensor_names, save/RestoreV2_12/shape_and_slices)]]
+	 [[Node: save/RestoreV2_17/_5 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/gpu:0", send_device="/job:localhost/replica:0/task:0/cpu:0", send_device_incarnation=1, tensor_name="edge_48_save/RestoreV2_17", tensor_type=DT_FLOAT, _device="/job:localhost/replica:0/task:0/gpu:0"]()]]
+
+Caused by op u'save/RestoreV2_12', defined at:
+  File "main.py", line 506, in <module>
+    tf.app.run(main=main)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/platform/app.py", line 48, in run
+    _sys.exit(main(_sys.argv[:1] + flags_passthrough))
+  File "main.py", line 399, in main
+    saver = tf.train.Saver(max_to_keep=1)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/training/saver.py", line 1140, in __init__
+    self.build()
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/training/saver.py", line 1172, in build
+    filename=self._filename)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/training/saver.py", line 688, in build
+    restore_sequentially, reshape)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/training/saver.py", line 407, in _AddRestoreOps
+    tensors = self.restore_op(filename_tensor, saveable, preferred_shard)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/training/saver.py", line 247, in restore_op
+    [spec.tensor.dtype])[0])
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/ops/gen_io_ops.py", line 661, in restore_v2
+    dtypes=dtypes, name=name)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/framework/op_def_library.py", line 767, in apply_op
+    op_def=op_def)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/framework/ops.py", line 2534, in create_op
+    original_op=self._default_original_op, op_def=op_def)
+  File "/mnt/storage/easybuild/software/Python/2.7.12-foss-2016b/lib/python2.7/site-packages/tensorflow/python/framework/ops.py", line 1203, in __init__
+    self._traceback = self._graph._extract_stack()  # pylint: disable=protected-access
+
+InvalidArgumentError (see above for traceback): Unsuccessful TensorSliceReader constructor: Failed to get matching files on /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC/model.ckpt-59999: Not found: /mnt/storage/home/rp14964/project_dir/Final_Project/property_analysis_code/logs/exp_bs_128_lr_5e-05_new_train_DC
+	 [[Node: save/RestoreV2_12 = RestoreV2[dtypes=[DT_FLOAT], _device="/job:localhost/replica:0/task:0/cpu:0"](_arg_save/Const_0_0, save/RestoreV2_12/tensor_names, save/RestoreV2_12/shape_and_slices)]]
+	 [[Node: save/RestoreV2_17/_5 = _Recv[client_terminated=false, recv_device="/job:localhost/replica:0/task:0/gpu:0", send_device="/job:localhost/replica:0/task:0/cpu:0", send_device_incarnation=1, tensor_name="edge_48_save/RestoreV2_17", tensor_type=DT_FLOAT, _device="/job:localhost/replica:0/task:0/gpu:0"]()]]
+
+srun: error: gpu08: task 0: Exited with exit code 1

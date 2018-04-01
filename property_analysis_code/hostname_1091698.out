@@ -1,0 +1,18 @@
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+Extracting MNIST-data/train-images-idx3-ubyte.gz
+Extracting MNIST-data/train-labels-idx1-ubyte.gz
+Extracting MNIST-data/t10k-images-idx3-ubyte.gz
+Extracting MNIST-data/t10k-labels-idx1-ubyte.gz
+(50000, 256)
+(50000,)
+(10000, 256)
+(10000,)
+len(cifar_image_compresses[-40000:])
+40000
+len(cifar_image_compresses[10000:])
+40000
+cifar_image_compresses_test
+10000
