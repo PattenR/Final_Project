@@ -1,0 +1,5 @@
+  File "main.py", line 131
+    labels.append([1, 0])
+    ^
+IndentationError: unexpected indent
+srun: error: gpu03: task 0: Exited with exit code 1

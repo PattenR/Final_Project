@@ -1,0 +1,5 @@
+  File "main.py", line 451
+    data_real = [shape_batch(real_data, real_labels)]
+    ^
+IndentationError: unexpected indent
+srun: error: gpu12: task 0: Exited with exit code 1
