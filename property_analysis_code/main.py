@@ -34,7 +34,7 @@ tf.app.flags.DEFINE_integer('save_model', 1000,
                             'Number of steps between model saves (default: %(default)d)')
 
 # Optimisation hyperparameters
-tf.app.flags.DEFINE_float('learning_rate', 0.0005, 'Learning rate (default: %(default)d)')
+tf.app.flags.DEFINE_float('learning_rate', 0.00005, 'Learning rate (default: %(default)d)')
 tf.app.flags.DEFINE_integer('num_classes', 10, 'Number of classes (default: %(default)d)')
 tf.app.flags.DEFINE_string('log_dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
@@ -74,11 +74,11 @@ def get_linear_mal_batch():
         batch_data.append(x)
         # class 2 or 3 randomly
         if random.randint(0, 1) == 1:
-#            batch_label.append([0, 1])
+            #            batch_label.append([0, 1])
             batch_label.append(1)
-
+    
         else:
-#            batch_label.append([1, 0])
+            #            batch_label.append([1, 0])
             batch_label.append(2)
     return batch_data, batch_label
 
@@ -88,7 +88,7 @@ def shape_batch(batch_data, batch_label):
         
         for x in range(batch_data[i].shape[0]):
             shaped_batch.append(batch_data[i][x])
-#        shaped_batch.append(batch_data[i])
+        #        shaped_batch.append(batch_data[i])
         shaped_batch.append(batch_label[i])
     
     return shaped_batch
@@ -106,31 +106,31 @@ def get_batch_of_batchs(mnist, classes):
         #pick one at random
         if(random.randint(0, 1) == 1):
             #target batch
-#            b, l = get_gaussian_mixture_batch()
+            #            b, l = get_gaussian_mixture_batch()
             b, l = mnist.train.next_batch(BATCH_INNER)
             d = shape_batch(b, l)
             data.append(d)
             labels.append([0, 1])
         else:
             #linear batch
-#            b1, l1 = get_gaussian_mixture_batch()
+            #            b1, l1 = get_gaussian_mixture_batch()
             b1 = []
             if(random.randint(0, 1) == 1):
                 b1, l1 = mnist.train.next_batch(BATCH_INNER)
             else:
                 b1 = []
                 for j in range(BATCH_INNER):
-#                    item = np.array([random.random() for i in range(14*14)])
+                    #                    item = np.array([random.random() for i in range(14*14)])
                     item = np.array([random.random() for k in range(IMG_SIZE)])
                     b1.append(item)
                 b1 = np.array(b1)
-#            b2, l2 = get_linear_mal_batch()
+            #            b2, l2 = get_linear_mal_batch()
             l2 = gen_rand_labels(classes)
             d = shape_batch(b1, l2)
             data.append(d)
             labels.append([1, 0])
-#    labels = np.transpose(np.array(labels))
-    return data, labels
+	#    labels = np.transpose(np.array(labels))
+	return data, labels
 
 def get_batch_of_batchs_validation(mnist, classes):
     data = []
@@ -139,32 +139,32 @@ def get_batch_of_batchs_validation(mnist, classes):
         #pick one at random
         if(random.randint(0, 1) == 1):
             #target batch
-#            b, l = get_gaussian_mixture_batch()
+            #            b, l = get_gaussian_mixture_batch()
             b, l = mnist.test.next_batch(BATCH_SIZE)
             d = shape_batch(b, l)
             data.append(d)
             labels.append([0, 1])
         else:
             #linear batch
-#            b1, l1 = get_gaussian_mixture_batch()
+            #            b1, l1 = get_gaussian_mixture_batch()
             b1 = []
             if(random.randint(0, 1) == 1):
                 b1, l1 = mnist.train.next_batch(BATCH_INNER)
             else:
                 b1 = []
                 for j in range(BATCH_INNER):
-#                    item = np.array([random.random() for i in range(14*14)])
+                    #                    item = np.array([random.random() for i in range(14*14)])
                     item = np.array([random.random() for k in range(IMG_SIZE)])
                     b1.append(item)
                 b1 = np.array(b1)
-#            b2, l2 = get_linear_mal_batch()
+            #            b2, l2 = get_linear_mal_batch()
             l2 = gen_rand_labels(classes)
             d = shape_batch(b1, l2)
             
             data.append(d)
             labels.append([1, 0])
-    #    labels = np.transpose(np.array(labels))
-    return data, labels
+#    labels = np.transpose(np.array(labels))
+	return data, labels
 
 def deepnn(x):
     """deepnn builds the graph for a deep net for classifying CIFAR10 images.
@@ -212,7 +212,7 @@ def deepnn(x):
         y_conv = tf.matmul(h_fc2, W_fc3) + b_fc3
         #        y_conv = tf.reshape(y_conv, [-1, 1])
         #        y_conv = tf.transpose(y_conv, 0)
-        return y_conv
+	return y_conv
 
 def conv2d(x, W):
     """conv2d returns a 2d convolution layer with full stride."""
@@ -287,7 +287,7 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
     for step in range(FLAGS.max_steps_DC):
         # Training: Backpropagation using train set
         data, labels = get_batch_of_batchs(mnist_seed, classes)
-
+        
         _, loss = sess.run([train_step_distribution_classifier, loss_summary_distribution_classifier], feed_dict={x: data, y_: labels})
         #            writer.add_summary(summ, global_step=step)
         
@@ -326,34 +326,34 @@ def main(_):
     cifar_labels_compresses = np.load('{cwd}/file_labels.py'.format(cwd=os.getcwd()))
     cifar_image_compresses_test = np.load('{cwd}/file_test.py'.format(cwd=os.getcwd()))
     cifar_labels_compresses_test = np.load('{cwd}/file_labels_test.py'.format(cwd=os.getcwd()))
-#    data = np.genfromtxt('{cwd}/CIFAR_compressed_data/compressed_images.py'.format(cwd=os.getcwd()),delimiter=",")
+    #    data = np.genfromtxt('{cwd}/CIFAR_compressed_data/compressed_images.py'.format(cwd=os.getcwd()),delimiter=",")
     print(cifar_image_compresses.shape)
     print(cifar_labels_compresses.shape)
     print(cifar_image_compresses_test.shape)
     print(cifar_labels_compresses_test.shape)
-   
-#    mnist_seed.train._images = mnist_seed.train._images[:10000]
-#    imgs = []
-#    for x in cifar_image_compresses[:10000]:
-#        im = []
-#        for i in x:
-#            im.append(i)
-#        imgs.append(np.array(im))
-#    imgs = np.array(imgs)
-#    print(mnist_seed.train._images[0])
+    
+    #    mnist_seed.train._images = mnist_seed.train._images[:10000]
+    #    imgs = []
+    #    for x in cifar_image_compresses[:10000]:
+    #        im = []
+    #        for i in x:
+    #            im.append(i)
+    #        imgs.append(np.array(im))
+    #    imgs = np.array(imgs)
+    #    print(mnist_seed.train._images[0])
     mnist_seed.train._images = cifar_image_compresses[:10000]
-#
-##    print(mnist_seed.train._images[0])
-##    for i in range(10000):
-##    print(old.shape)
-##    print(mnist_seed.train._images.shape)
+    #
+    ##    print(mnist_seed.train._images[0])
+    ##    for i in range(10000):
+    ##    print(old.shape)
+    ##    print(mnist_seed.train._images.shape)
     mnist_seed.train._labels = cifar_labels_compresses[:10000]
     mnist_seed.train._num_examples = 10000
-
+    
     mnist_seed.test._images = cifar_image_compresses_test
     mnist_seed.test._labels = cifar_labels_compresses_test
     mnist_seed.test._num_examples = 10000
-
+    
     mnist_real_world_data.train._images = cifar_image_compresses[-40000:]
     mnist_real_world_data.train._labels = cifar_labels_compresses[-40000:]
     mnist_real_world_data.train._num_examples = 40000
@@ -364,13 +364,13 @@ def main(_):
     
     print("cifar_image_compresses_test")
     print(len(cifar_image_compresses_test))
-
+    
     mnist_real_world_data.test._images = cifar_image_compresses_test
     mnist_real_world_data.test._labels = cifar_labels_compresses_test
     mnist_real_world_data.test._num_examples = 10000
-
-#    imgs = literal_eval(cifar_image_compresses)
-#    return
+    
+    #    imgs = literal_eval(cifar_image_compresses)
+    #    return
     with tf.variable_scope('inputs'):
         # Create the model
         x = tf.placeholder(tf.float32, [None, BATCH_INNER_SIZE_MNIST])
@@ -385,23 +385,23 @@ def main(_):
     
     train_step_distribution_classifier = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy_distribution_classifier)
     correct_prediction_distribution_classifier = tf.equal(tf.argmax(y_conv_distribution_classifier, 1), tf.argmax(y_, 1))
-
+    
     accuracy_distribution_classifier = tf.reduce_mean(tf.cast(correct_prediction_distribution_classifier, tf.float32), name='accuracy')
     loss_summary_distribution_classifier = tf.summary.scalar('Loss', cross_entropy_distribution_classifier)
     acc_summary_distribution_classifier = tf.summary.scalar('Accuracy', accuracy_distribution_classifier)
-
+    
     # summaries for TensorBoard visualisation
     validation_summary_distribution_classifier = tf.summary.merge([acc_summary_distribution_classifier])
-#    training_summary = tf.summary.merge([img_summary, loss_summary])
-#    test_summary = tf.summary.merge([img_summary, acc_summary])
-#
+    #    training_summary = tf.summary.merge([img_summary, loss_summary])
+    #    test_summary = tf.summary.merge([img_summary, acc_summary])
+    #
     # saver for checkpoints
     saver = tf.train.Saver(max_to_keep=1)
     
     with tf.Session() as sess:
         summary_writer = tf.summary.FileWriter(run_log_dir + '_train', sess.graph)
         summary_writer_validation = tf.summary.FileWriter(run_log_dir + '_validate', sess.graph)
-
+        
         sess.run(tf.global_variables_initializer())
         
         if(TRAIN_DISTRIBUTION_CLASSIFIER):
@@ -410,17 +410,17 @@ def main(_):
             #load from memory
             load_path = os.path.join(run_log_dir + '_train_DC', 'model.ckpt-59999')
             saver.restore(sess, load_path)
-
+    
         # We now have our distribution classifier, we use this to decide if new data should be accepted
         # New data comes from the part of MNIST that wasn't in the seed, and additional malicous data
-
-#        if(TRAIN_MNIST_CLASSIFIER):
-            #Train for MNIST on seed
-
+        
+        #        if(TRAIN_MNIST_CLASSIFIER):
+        #Train for MNIST on seed
+        
         #Add new training data
         data_size = MNIST_TRAIN_SIZE - SEED_SIZE
         steps_needed = data_size/BATCH_INNER
-#        steps_needed = BATCH_INNER
+        #        steps_needed = BATCH_INNER
         real_items_added = 0
         mal_items_added = 0
         random.seed(0)
@@ -431,70 +431,70 @@ def main(_):
             real_data, real_labels = mnist_real_world_data.train.next_batch(1)
             MNIST_norm_size += np.sum(real_data[0])
 
-        MNIST_norm_size = MNIST_norm_size / (MNIST_TRAIN_SIZE)
-        legit_at_n_legit = [0]*BATCH_INNER
-        mal_at_n_legit = [0]*BATCH_INNER
-        for i in range(steps_needed):
-            # Classify it!
-            real_data, real_labels = mnist_real_world_data.train.next_batch(BATCH_INNER)
-#            single_repeated_real_data = []
-#            single_repeated_real_labels = []
-            mal_labels = gen_rand_labels(classes)
-#            single_repeated_mal_labels = []
-#            for j in range(BATCH_INNER):
-#                single_repeated_real_data.append(real_data[0])
-#                single_repeated_real_labels.append(real_labels[0])
-#                single_repeated_mal_labels.append(mal_labels[0])
-#            single_repeated_real_data = np.array(single_repeated_real_data)
-#            single_repeated_real_labels = np.array(single_repeated_real_labels)
-#            single_repeated_mal_labels = np.array(single_repeated_mal_labels)
-            data_real = [shape_batch(real_data, real_labels)]
-            data_mal = [shape_batch(real_data, mal_labels)]
-#            data_real = [shape_batch(single_repeated_real_data, single_repeated_real_labels)]
-#            data_mal = [shape_batch(single_repeated_real_data, single_repeated_mal_labels)]
-#            for i in range(BATCH_INNER):
-#                item = np.array([float(1) for i in range(real_data.shape[1])])
-#                item = (item * (MNIST_norm_size/np.sum(item)))
-#                mal_data.append(item)
-#            mal_data = np.array(mal_data)
-#            print(mal_data.shape)
-            # same data with mixed labels!
-#            data_mal = [shape_batch(mal_data, mal_labels)]
-#            combined_labels = []
-#            for j in range(BATCH_INNER-i):
-#                combined_labels.append(real_labels[j])
-#            for j in range(i):
-#                combined_labels.append(mal_labels[j])# random anyway
-
-#            combined_labels = np.array(combined_labels)
-#            data_combined = [shape_batch(real_data, combined_labels)]
-
-            add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_real, y_: label_legitimate})
-            add_mal = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_mal, y_: label_legitimate})
-
-#            add_combined = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_combined, y_: label_legitimate})
-
-#            print('Num original labels: %d, Num malicious labels: %d' %(BATCH_INNER-i, i))
-#            if(add_combined):
-#                print('classified as legitimate')
-#                legit_at_n_legit[BATCH_INNER-i-1] += 1
-#            else:
-#                mal_at_n_legit[BATCH_INNER-i-1] += 1
-#                print('classified as malicious')
-            if(add_real):
-                real_items_added += 1
-            if(add_mal):
-                mal_items_added += 1
+	MNIST_norm_size = MNIST_norm_size / (MNIST_TRAIN_SIZE)
+	legit_at_n_legit = [0]*BATCH_INNER
+	mal_at_n_legit = [0]*BATCH_INNER
+	for i in range(steps_needed):
+    	# Classify it!
+    		real_data, real_labels = mnist_real_world_data.train.next_batch(BATCH_INNER)
+    #            single_repeated_real_data = []
+    #            single_repeated_real_labels = []
+   		mal_labels = gen_rand_labels(classes)
+        #            single_repeated_mal_labels = []
+        #            for j in range(BATCH_INNER):
+        #                single_repeated_real_data.append(real_data[0])
+        #                single_repeated_real_labels.append(real_labels[0])
+        #                single_repeated_mal_labels.append(mal_labels[0])
+        #            single_repeated_real_data = np.array(single_repeated_real_data)
+        #            single_repeated_real_labels = np.array(single_repeated_real_labels)
+        #            single_repeated_mal_labels = np.array(single_repeated_mal_labels)
+        	data_real = [shape_batch(real_data, real_labels)]
+        	data_mal = [shape_batch(real_data, mal_labels)]
+        #            data_real = [shape_batch(single_repeated_real_data, single_repeated_real_labels)]
+        #            data_mal = [shape_batch(single_repeated_real_data, single_repeated_mal_labels)]
+        #            for i in range(BATCH_INNER):
+        #                item = np.array([float(1) for i in range(real_data.shape[1])])
+        #                item = (item * (MNIST_norm_size/np.sum(item)))
+        #                mal_data.append(item)
+        #            mal_data = np.array(mal_data)
+        #            print(mal_data.shape)
+        # same data with mixed labels!
+        #            data_mal = [shape_batch(mal_data, mal_labels)]
+        #            combined_labels = []
+        #            for j in range(BATCH_INNER-i):
+        #                combined_labels.append(real_labels[j])
+        #            for j in range(i):
+        #                combined_labels.append(mal_labels[j])# random anyway
+        
+        #            combined_labels = np.array(combined_labels)
+        #            data_combined = [shape_batch(real_data, combined_labels)]
+        
+        	add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_real, y_: label_legitimate})
+            	add_mal = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_mal, y_: label_legitimate})
+            
+            #            add_combined = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_combined, y_: label_legitimate})
+            
+            #            print('Num original labels: %d, Num malicious labels: %d' %(BATCH_INNER-i, i))
+            #            if(add_combined):
+            #                print('classified as legitimate')
+            #                legit_at_n_legit[BATCH_INNER-i-1] += 1
+            #            else:
+            #                mal_at_n_legit[BATCH_INNER-i-1] += 1
+            #                print('classified as malicious')
+            	if(add_real):
+                	real_items_added += 1
+            	if(add_mal):
+                	mal_items_added += 1
         print(steps_needed)
-#        print(legit_at_n_legit)
-#        print(mal_at_n_legit)
+        #        print(legit_at_n_legit)
+        #        print(mal_at_n_legit)
         print('Percent real added to classifier %0.3f' % (float(real_items_added)/float(steps_needed)))
         print('Percent mal added to classifier %0.3f' % (float(mal_items_added)/float(steps_needed)))
         print('Actual real added to classifier %d' % real_items_added)
-        print('Actual mal added to classifier %d' % mal_items_added)
+  	print('Actual mal added to classifier %d' % mal_items_added)
 
 #        if(TRAIN_MNIST_CLASSIFIER):
-            #Train for MNIST on seed+new data to see improvement
+#Train for MNIST on seed+new data to see improvement
 
 #        classes = [4, 5]
 #        mnist = load_modified_mnist(classes)
