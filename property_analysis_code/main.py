@@ -19,20 +19,20 @@ BATCH_INNER_SIZE_MNIST = (784/4+1)*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
 #for distribuion classifier
-tf.app.flags.DEFINE_integer('max-steps-DC', 60000,
+tf.app.flags.DEFINE_integer('max_steps_DC', 60000,
                             'Number of mini-batches to train on. (default: %(default)d)')
 #for MNIST classifier
-tf.app.flags.DEFINE_integer('max-steps-M', 10000,
+tf.app.flags.DEFINE_integer('max_steps_M', 10000,
                             'Number of mini-batches to train on. (default: %(default)d)')
-tf.app.flags.DEFINE_integer('log-frequency', 1000,
+tf.app.flags.DEFINE_integer('log_frequency', 1000,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
-tf.app.flags.DEFINE_integer('save-model', 1000,
+tf.app.flags.DEFINE_integer('save_model', 1000,
                             'Number of steps between model saves (default: %(default)d)')
 
 # Optimisation hyperparameters
-tf.app.flags.DEFINE_float('learning-rate', 0.001, 'Learning rate (default: %(default)d)')
-tf.app.flags.DEFINE_integer('num-classes', 10, 'Number of classes (default: %(default)d)')
-tf.app.flags.DEFINE_string('log-dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
+tf.app.flags.DEFINE_float('learning_rate', 0.001, 'Learning rate (default: %(default)d)')
+tf.app.flags.DEFINE_integer('num_classes', 10, 'Number of classes (default: %(default)d)')
+tf.app.flags.DEFINE_string('log_dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
 
 run_log_dir = os.path.join(FLAGS.log_dir,
@@ -296,10 +296,37 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
 
     print('test set: accuracy on test set: %0.3f' % test_accuracy)
 
+def shuffle_inner_batch(batch):
+    d_r = np.array(batch)
+    d_r = np.reshape(d_r, [16, 197])
+    d_r = d_r.tolist()
+    random.shuffle(d_r)
+    d_r = np.array(d_r)
+    d_r = np.reshape(d_r, [3152])
+    d_r = d_r.tolist()
+    return d_r
+
+def poison_one_item(batch):
+    d_r = np.array(batch)
+    d_r = np.reshape(d_r, [16, 197])
+    d_r = d_r.tolist()
+#    random.shuffle(d_r)
+    label = d_r[0][196]
+    #change first item to have incorrect label
+    if(label >= 9):
+        label = 0
+    else:
+        label += 1
+    d_r[0][196] = label
+    d_r = np.array(d_r)
+    d_r = np.reshape(d_r, [3152])
+    d_r = d_r.tolist()
+    return d_r
+
 def main(_):
     tf.reset_default_graph()
     
-    TRAIN_DISTRIBUTION_CLASSIFIER = True
+    TRAIN_DISTRIBUTION_CLASSIFIER = False
     TRAIN_MNIST_CLASSIFIER = True
     
     classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -354,7 +381,7 @@ def main(_):
 
         #Add new training data
         data_size = MNIST_TRAIN_SIZE - SEED_SIZE
-        steps_needed = data_size/BATCH_INNER
+        steps_needed = data_size/(BATCH_INNER)
         real_items_added = 0
         mal_items_added = 0
         random.seed(0)
@@ -366,29 +393,77 @@ def main(_):
             MNIST_norm_size += np.sum(real_data[0])
 
         MNIST_norm_size = MNIST_norm_size / (MNIST_TRAIN_SIZE)
-
+        num_permutations = 200
+        acc_threshold = 0.99
+        total_real = 0
+        total_mal = 0
+        total_real_running = 0
+        total_mal_running = 0
+        print(steps_needed)
         for i in range(steps_needed):
+            if(i % 100 == 0):
+                print(i)
             # Classify it!
             real_data, real_labels = mnist_real_world_data.train.next_batch(BATCH_INNER)
             data_real = [shape_batch(real_data, real_labels)]
-            mal_data = []
-            for i in range(BATCH_INNER):
-                item = np.array([random.random() for i in range(real_data.shape[1])])
-#                item = (item * (MNIST_norm_size/np.sum(item)))
-                mal_data.append(item)
-            mal_data = np.array(mal_data)
+            
+            
+#            return
+#            d_r = np.array(data_real[0])
+#            d_r = np.reshape(d_r, [16, 197])
+#            d_r = d_r.tolist()
+#            random.shuffle(d_r)
+#            d_r = np.array(d_r)
+#            d_r = np.reshape(d_r, [3152])
+#            d_r = d_r.tolist()
+#            data_real[0] = d_r
+
+            # conv 3152 -> 16x197, back to list and shuffle then 16x197->3152 and train again
+            
+#            return
+#            print(len(data_real[0]))
+
+#            mal_data = []
+#            for i in range(BATCH_INNER):
+#                item = np.array([random.random() for i in range(real_data.shape[1])])
+##                item = (item * (MNIST_norm_size/np.sum(item)))
+#                mal_data.append(item)
+#            mal_data = np.array(mal_data)
 #            print(mal_data.shape)
             mal_labels = gen_rand_labels(classes) # same data with mixed labels!
-            data_mal = [shape_batch(mal_data, mal_labels)]
-            
-            add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_real, y_: label_legitimate})
-            add_mal = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_mal, y_: label_legitimate})
-            
-            if(add_real):
+#            data_mal = [shape_batch(mal_data, mal_labels)]
+
+            ## mal data now only has a single bad element
+            data_mal = [shape_batch(real_data, real_labels)]
+            data_mal[0] = poison_one_item(data_mal[0])
+            total_real = 0
+            for j in range(num_permutations):
+                add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_real, y_: label_legitimate})
+                data_real[0] = shuffle_inner_batch(data_real[0])
+                if(add_real):
+                    total_real += 1
+            total_real_running += total_real
+            total_mal = 0
+            for j in range(num_permutations):
+                add_mal = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_mal, y_: label_legitimate})
+                data_mal[0] = shuffle_inner_batch(data_mal[0])
+                if(add_mal):
+                    total_mal += 1
+            total_mal_running += total_mal
+#            print(total_real)
+#            print(total_mal)
+#                return
+            if(total_real >= num_permutations*acc_threshold):
                 real_items_added += 1
-            if(add_mal):
+            if(total_mal >= num_permutations*acc_threshold):
                 mal_items_added += 1
+#            if(add_real):
+#                real_items_added += 1
+#            if(add_mal):
+#                mal_items_added += 1
         print(steps_needed)
+        print(float(total_real_running)/(float(steps_needed) * float(num_permutations)))
+        print(float(total_mal_running)/(float(steps_needed) * float(num_permutations)))
         print('Percent real added to classifier %0.3f' % (float(real_items_added)/float(steps_needed)))
         print('Percent mal added to classifier %0.3f' % (float(mal_items_added)/float(steps_needed)))
         print('Actual real added to classifier %d' % real_items_added)
