@@ -397,7 +397,17 @@ def main(_):
     with tf.variable_scope('x_entropy'):
         cross_entropy_distribution_classifier = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv_distribution_classifier))
     
-    train_step_distribution_classifier = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy_distribution_classifier)
+    global_step = tf.Variable(0, trainable=False)
+    with tf.variable_scope('x_entropy'):
+        cross_entropy_distribution_classifier = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv_distribution_classifier))
+        learning_rate = tf.train.exponential_decay(
+           FLAGS.learning_rate,                # Base learning rate.
+           global_step,  # Current index into the dataset.
+           10000,          # Decay step.
+           0.9,                # Decay rate.
+           staircase=True)
+   #train_step_distribution_classifier = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy_distribution_classifier)
+    train_step_distribution_classifier = (tf.train.GradientDescentOptimizer(learning_rate).minimize(cross_entropy_distribution_classifier, global_step=global_step))
     correct_prediction_distribution_classifier = tf.equal(tf.argmax(y_conv_distribution_classifier, 1), tf.argmax(y_, 1))
 
     accuracy_distribution_classifier = tf.reduce_mean(tf.cast(correct_prediction_distribution_classifier, tf.float32), name='accuracy')
