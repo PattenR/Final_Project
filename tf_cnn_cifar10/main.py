@@ -65,7 +65,7 @@ def deepnn(x_image, img_shape=(32, 32, 3), class_count=10):
     # First convolutional layer - maps one RGB image to 32 feature maps.
     conv1 = tf.layers.conv2d(
         inputs=x_image,
-        filters=32,
+        filters=64,
         kernel_size=[5, 5],
         padding='same',
         use_bias=False,
@@ -97,8 +97,13 @@ def deepnn(x_image, img_shape=(32, 32, 3), class_count=10):
     )
     pool2_flat = tf.reshape(pool2, [-1, 8 * 8 * 64], name='pool2_flattened')
 
-    fc1 = tf.layers.dense(inputs=pool2_flat, activation=tf.nn.relu, units=1024, name='fc1')
-    logits = tf.layers.dense(inputs=fc1, units=class_count, name='fc2')
+    fc1 = tf.layers.dense(inputs=pool2_flat, activation=tf.nn.relu, units=384, name='fc1')
+    re1 = tf.nn.relu(fc1, name='re1')
+    
+    fc2 = tf.layers.dense(inputs=pool2_flat, activation=tf.nn.relu, units=192, name='fc2')
+    re2 = tf.nn.relu(fc2, name='re2')
+    
+    logits = tf.layers.dense(inputs=re2, units=class_count, name='fc3')
     return logits
 
 
