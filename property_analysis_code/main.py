@@ -19,7 +19,7 @@ BATCH_INNER_SIZE_MNIST = (784/4+1)*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
 #for distribuion classifier
-tf.app.flags.DEFINE_integer('max_steps_DC', 60000,
+tf.app.flags.DEFINE_integer('max_steps_DC', 300000,
                             'Number of mini-batches to train on. (default: %(default)d)')
 #for MNIST classifier
 tf.app.flags.DEFINE_integer('max_steps_M', 10000,
@@ -30,13 +30,13 @@ tf.app.flags.DEFINE_integer('save_model', 1000,
                             'Number of steps between model saves (default: %(default)d)')
 
 # Optimisation hyperparameters
-tf.app.flags.DEFINE_float('learning_rate', 0.001, 'Learning rate (default: %(default)d)')
+tf.app.flags.DEFINE_float('learning_rate', 0.0001, 'Learning rate (default: %(default)d)')
 tf.app.flags.DEFINE_integer('num_classes', 10, 'Number of classes (default: %(default)d)')
 tf.app.flags.DEFINE_string('log_dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
 
 run_log_dir = os.path.join(FLAGS.log_dir,
-                           'exp_bs_{bs}_lr_{lr}'.format(bs=BATCH_SIZE,
+                           'mnist_exp_bs_{bs}_lr_{lr}'.format(bs=BATCH_SIZE,
                                                         lr=FLAGS.learning_rate))
 
 def get_gaussian_mixture_batch():
@@ -95,6 +95,16 @@ def gen_rand_labels(classes):
         labels.append(random.choice(classes))
     return labels
 
+def shuffle_inner_batch(batch):
+    d_r = np.array(batch)
+    d_r = np.reshape(d_r, [16, 197])
+    d_r = d_r.tolist()
+    random.shuffle(d_r)
+    d_r = np.array(d_r)
+    d_r = np.reshape(d_r, [3152])
+    d_r = d_r.tolist()
+    return d_r
+
 def get_batch_of_batchs(mnist, classes):
     data = []
     labels = []
@@ -105,6 +115,7 @@ def get_batch_of_batchs(mnist, classes):
 #            b, l = get_gaussian_mixture_batch()
             b, l = mnist.train.next_batch(BATCH_INNER)
             d = shape_batch(b, l)
+	    d = shuffle_inner_batch(d)
             data.append(d)
             labels.append([0, 1])
         else:
@@ -140,6 +151,7 @@ def get_batch_of_batchs(mnist, classes):
 #            b2, l2 = get_linear_mal_batch()
                 l2 = gen_rand_labels(classes)
             d = shape_batch(b1, l2)
+	    d = shuffle_inner_batch(d)
             data.append(d)
             labels.append([1, 0])
 #    labels = np.transpose(np.array(labels))
@@ -155,6 +167,7 @@ def get_batch_of_batchs_validation(mnist, classes):
 #            b, l = get_gaussian_mixture_batch()
             b, l = mnist.test.next_batch(BATCH_SIZE)
             d = shape_batch(b, l)
+	    d = shuffle_inner_batch(d)
             data.append(d)
             labels.append([0, 1])
         else:
@@ -190,6 +203,7 @@ def get_batch_of_batchs_validation(mnist, classes):
                     #            b2, l2 = get_linear_mal_batch()
                 l2 = gen_rand_labels(classes)
             d = shape_batch(b1, l2)
+	    d = shuffle_inner_batch(d)
             data.append(d)
             labels.append([1, 0])
     #    labels = np.transpose(np.array(labels))
@@ -216,23 +230,32 @@ def deepnn(x):
     with tf.variable_scope('FC_1'):
         # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
         # image is down to 8x8x64 feature maps -- maps this to 1024 features.
-#        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
+        #        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
         W_fc1 = weight_variable([BATCH_INNER_SIZE_MNIST, 1024])
         b_fc1 = bias_variable([1024])
         tf.summary.histogram("weights", W_fc1)
-#        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
+        #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
         h_fc1 = tf.nn.relu(tf.matmul(x, W_fc1) + b_fc1)
     
     with tf.variable_scope('FC_2'):
-        # Map the 1024 features to 10 classes
-        W_fc2 = weight_variable([1024, 2])
-        b_fc2 = bias_variable([2])
+        # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
+        # image is down to 8x8x64 feature maps -- maps this to 1024 features.
+        #        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
+        W_fc2 = weight_variable([1024, 1024])
+        b_fc2 = bias_variable([1024])
         tf.summary.histogram("weights", W_fc2)
-        y_conv = tf.matmul(h_fc1, W_fc2) + b_fc2
-#        y_conv = tf.reshape(y_conv, [-1, 1])
-#        y_conv = tf.transpose(y_conv, 0)
+        #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
+        h_fc2 = tf.nn.relu(tf.matmul(h_fc1, W_fc2) + b_fc2)
+    
+    with tf.variable_scope('FC_3'):
+        # Map the 1024 features to 10 classes
+        W_fc3 = weight_variable([1024, 2])
+        b_fc3 = bias_variable([2])
+        tf.summary.histogram("weights", W_fc3)
+        y_conv = tf.matmul(h_fc2, W_fc3) + b_fc3
+        #        y_conv = tf.reshape(y_conv, [-1, 1])
+        #        y_conv = tf.transpose(y_conv, 0)
         return y_conv
-
 def conv2d(x, W):
     """conv2d returns a 2d convolution layer with full stride."""
     return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME', name='convolution')
@@ -334,17 +357,17 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
 
 def shuffle_inner_batch(batch):
     d_r = np.array(batch)
-    d_r = np.reshape(d_r, [16, 197])
+    d_r = np.reshape(d_r, [BATCH_INNER, 197])
     d_r = d_r.tolist()
     random.shuffle(d_r)
     d_r = np.array(d_r)
-    d_r = np.reshape(d_r, [3152])
+    d_r = np.reshape(d_r, [197*BATCH_INNER])
     d_r = d_r.tolist()
     return d_r
 
 def poison_one_item(batch):
     d_r = np.array(batch)
-    d_r = np.reshape(d_r, [16, 197])
+    d_r = np.reshape(d_r, [BATCH_INNER, 197])
     d_r = d_r.tolist()
 #    random.shuffle(d_r)
     label = d_r[0][196]
@@ -355,7 +378,7 @@ def poison_one_item(batch):
         label += 1
     d_r[0][196] = label
     d_r = np.array(d_r)
-    d_r = np.reshape(d_r, [3152])
+    d_r = np.reshape(d_r, [197*BATCH_INNER])
     d_r = d_r.tolist()
     return d_r
 
@@ -381,6 +404,17 @@ def main(_):
     with tf.variable_scope('x_entropy'):
         cross_entropy_distribution_classifier = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv_distribution_classifier))
     
+    global_step = tf.Variable(0, trainable=False)
+    with tf.variable_scope('x_entropy'):
+        cross_entropy_distribution_classifier = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv_distribution_classifier))
+    #learning_rate = tf.train.exponential_decay(
+     # FLAGS.learning_rate,                # Base learning rate.
+     # global_step,  # Current index into the dataset.
+     # 10000,          # Decay step.
+     # 0.9,                # Decay rate.
+     # staircase=True)
+    #train_step_distribution_classifier = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy_distribution_classifier)
+    #train_step_distribution_classifier = (tf.train.GradientDescentOptimizer(learning_rate).minimize(cross_entropy_distribution_classifier, global_step=global_step))
     train_step_distribution_classifier = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy_distribution_classifier)
     correct_prediction_distribution_classifier = tf.equal(tf.argmax(y_conv_distribution_classifier, 1), tf.argmax(y_, 1))
 
