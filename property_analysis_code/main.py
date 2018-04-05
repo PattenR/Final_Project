@@ -15,6 +15,7 @@ BATCH_VAL = 4096
 SEED_SIZE = 10000 # when training the malicous data resistant system we seed with an inital set size seed_size
 MNIST_TRAIN_SIZE = 60000
 BATCH_INNER = 16
+NET_SIZE = 4096
 BATCH_INNER_SIZE_MNIST = (784/4+1)*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
@@ -36,7 +37,7 @@ tf.app.flags.DEFINE_string('log_dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
 
 run_log_dir = os.path.join(FLAGS.log_dir,
-                           'mnist_4_april_exp_bs_{bs}_lr_{lr}'.format(bs=BATCH_SIZE,
+                           'mnist_5_april_x5_wide_std_exp_bs_{bs}_lr_{lr}'.format(bs=BATCH_SIZE,
                                                         lr=FLAGS.learning_rate))
 
 def get_gaussian_mixture_batch():
@@ -127,8 +128,8 @@ def get_batch_of_batchs(mnist, classes):
             if(random.randint(0, 1) == 1):
                 #same as original with one malicious item
                 b1, l1 = mnist.train.next_batch(BATCH_INNER)
-                for q in range(BATCH_INNER):
-                    #randomly choose between 1 and 128 labels to make malicious
+                for q in range(BATCH_INNER*5):
+                    #randomly choose between 1 and 16 labels to make malicious
                     pos_of_mal = random.randint(0, BATCH_INNER-1)
                     original_label = l1[pos_of_mal]
                     new_label = random.choice(classes)
@@ -181,8 +182,8 @@ def get_batch_of_batchs_validation(mnist, classes):
             if(random.randint(0, 1) == 1):
                 #same as original with one malicious item
                 b1, l1 = mnist.test.next_batch(BATCH_INNER)
-                for q in range(BATCH_INNER):
-                    #randomly choose between 1 and 128 labels to make malicious
+                for q in range(BATCH_INNER*5):
+                    #randomly choose between 1 and 16 labels to make malicious
                     pos_of_mal = random.randint(0, BATCH_INNER-1)
                     original_label = l1[pos_of_mal]
                     new_label = random.choice(classes)
@@ -235,8 +236,8 @@ def deepnn(x):
         # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
         # image is down to 8x8x64 feature maps -- maps this to 1024 features.
         #        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
-        W_fc1 = weight_variable([BATCH_INNER_SIZE_MNIST, 1024])
-        b_fc1 = bias_variable([1024])
+        W_fc1 = weight_variable([BATCH_INNER_SIZE_MNIST, NET_SIZE])
+        b_fc1 = bias_variable([NET_SIZE])
         tf.summary.histogram("weights", W_fc1)
         #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
         h_fc1 = tf.nn.relu(tf.matmul(x, W_fc1) + b_fc1)
@@ -245,15 +246,15 @@ def deepnn(x):
         # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
         # image is down to 8x8x64 feature maps -- maps this to 1024 features.
         #        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
-        W_fc2 = weight_variable([1024, 1024])
-        b_fc2 = bias_variable([1024])
+        W_fc2 = weight_variable([NET_SIZE, NET_SIZE])
+        b_fc2 = bias_variable([NET_SIZE])
         tf.summary.histogram("weights", W_fc2)
         #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
         h_fc2 = tf.nn.relu(tf.matmul(h_fc1, W_fc2) + b_fc2)
     
     with tf.variable_scope('FC_3'):
         # Map the 1024 features to 10 classes
-        W_fc3 = weight_variable([1024, 2])
+        W_fc3 = weight_variable([NET_SIZE, 2])
         b_fc3 = bias_variable([2])
         tf.summary.histogram("weights", W_fc3)
         y_conv = tf.matmul(h_fc2, W_fc3) + b_fc3
