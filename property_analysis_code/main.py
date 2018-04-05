@@ -25,7 +25,7 @@ tf.app.flags.DEFINE_integer('max_steps_DC', 300000,
 #for MNIST classifier
 tf.app.flags.DEFINE_integer('max_steps_M', 10000,
                             'Number of mini-batches to train on. (default: %(default)d)')
-tf.app.flags.DEFINE_integer('log_frequency', 1000,
+tf.app.flags.DEFINE_integer('log_frequency', 100,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
 tf.app.flags.DEFINE_integer('save_model', 1000,
                             'Number of steps between model saves (default: %(default)d)')
@@ -79,7 +79,7 @@ def get_linear_mal_batch():
             batch_label.append(2)
     return batch_data, batch_label
 
-def shape_batch(batch_data, batch_label):
+def shape_batch(batch_data, batch_label, inp):
     shaped_batch = []
     for i in range(BATCH_INNER):
         
@@ -115,7 +115,7 @@ def get_batch_of_batchs(mnist, classes):
             #target batch
 #            b, l = get_gaussian_mixture_batch()
             b, l = mnist.train.next_batch(BATCH_INNER)
-            d = shape_batch(b, l)
+            d = shape_batch(b, l, 1)
 	    d = shuffle_inner_batch(d)
             data.append(d)
             labels.append([0, 1])
@@ -128,6 +128,9 @@ def get_batch_of_batchs(mnist, classes):
             if(random.randint(0, 1) == 1):
                 #same as original with one malicious item
                 b1, l1 = mnist.train.next_batch(BATCH_INNER)
+                # add a batch that has mixed legit and mal labels for robustness
+                # can have 1-15 mal and 1-15 legit
+                positions = np.random.choice(16, random.randint(1,15), replace=False)
                 for q in range(BATCH_INNER):
                     #randomly choose between 1 and 16 labels to make malicious
                     # pos_of_mal = random.randint(0, BATCH_INNER-1)
@@ -137,8 +140,12 @@ def get_batch_of_batchs(mnist, classes):
                     # make sure new label is actually different
                     while(new_label == original_label):
                         new_label = random.choice(classes)
-                    l1[pos_of_mal] = new_label
-                l2 = l1
+                    # l1[pos_of_mal] = new_label
+                    if q in positions:
+                        l2.append(new_label)
+                    else:
+                        l2.append(original_label)
+                    
             elif(random.randint(0, 1) == 1):
                 #same images all random labels
                 b1, l1 = mnist.train.next_batch(BATCH_INNER)
@@ -154,7 +161,7 @@ def get_batch_of_batchs(mnist, classes):
                 b1 = np.array(b1)
 #            b2, l2 = get_linear_mal_batch()
                 l2 = gen_rand_labels(classes)
-            d = shape_batch(b1, l2)
+            d = shape_batch(b1, l2, 2)
 	    d = shuffle_inner_batch(d)
             data.append(d)
             labels.append([1, 0])
@@ -170,7 +177,7 @@ def get_batch_of_batchs_validation(mnist, classes):
             #target batch
 #            b, l = get_gaussian_mixture_batch()
             b, l = mnist.test.next_batch(BATCH_SIZE)
-            d = shape_batch(b, l)
+            d = shape_batch(b, l, 1)
 	    d = shuffle_inner_batch(d)
             data.append(d)
             labels.append([0, 1])
@@ -183,6 +190,7 @@ def get_batch_of_batchs_validation(mnist, classes):
             if(random.randint(0, 1) == 1):
                 #same as original with one malicious item
                 b1, l1 = mnist.test.next_batch(BATCH_INNER)
+                positions = np.random.choice(16, random.randint(1,15), replace=False)
                 for q in range(BATCH_INNER):
                     #randomly choose between 1 and 16 labels to make malicious
                     # pos_of_mal = random.randint(0, BATCH_INNER-1)
@@ -192,8 +200,12 @@ def get_batch_of_batchs_validation(mnist, classes):
                     # make sure new label is actually different
                     while(new_label == original_label):
                         new_label = random.choice(classes)
-                    l1[pos_of_mal] = new_label
-                l2 = l1
+                    # l1[pos_of_mal] = new_label
+                    if q in positions:
+                        l2.append(new_label)
+                    else:
+                        l2.append(original_label)
+                # l2 = l1
             elif(random.randint(0, 1) == 1):
                 #25%
                 #same images all random labels
@@ -209,7 +221,7 @@ def get_batch_of_batchs_validation(mnist, classes):
                 b1 = np.array(b1)
                     #            b2, l2 = get_linear_mal_batch()
                 l2 = gen_rand_labels(classes)
-            d = shape_batch(b1, l2)
+            d = shape_batch(b1, l2, 2)
 	    d = shuffle_inner_batch(d)
             data.append(d)
             labels.append([1, 0])
@@ -482,7 +494,7 @@ def main(_):
                 print(i)
             # Classify it!
             real_data, real_labels = mnist_real_world_data.train.next_batch(BATCH_INNER)
-            data_real = [shape_batch(real_data, real_labels)]
+            data_real = [shape_batch(real_data, real_labels, 1)]
             
             
 #            return
@@ -511,7 +523,7 @@ def main(_):
 #            data_mal = [shape_batch(mal_data, mal_labels)]
 
             ## mal data now only has a single bad element
-            data_mal = [shape_batch(real_data, real_labels)]
+            data_mal = [shape_batch(real_data, real_labels, 1)]
             data_mal[0] = poison_one_item(data_mal[0])
             total_real = 0
             for j in range(num_permutations):
