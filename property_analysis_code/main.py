@@ -8,8 +8,8 @@ import matplotlib.image as mpimg
 import itertools
 from tensorflow.examples.tutorials.mnist import input_data
 import numpy as np
-import scipy
-from sklearn.preprocessing import MinMaxScaler
+#import scipy
+#from sklearn.preprocessing import MinMaxScaler
 from scipy import ndimage
 from ast import literal_eval
 
@@ -21,7 +21,8 @@ BATCH_INNER = 16
 #BATCH_INNER_SIZE_MNIST = (784/4+1)*BATCH_INNER
 IMG_SIZE = 256
 #IMG_SIZE = 14*14
-BATCH_INNER_SIZE_MNIST = (IMG_SIZE+1)*BATCH_INNER
+#BATCH_INNER_SIZE_MNIST = (IMG_SIZE+1)*BATCH_INNER
+BATCH_INNER_SIZE_MNIST = 256
 FLAGS = tf.app.flags.FLAGS
 
 #for distribuion classifier
@@ -36,13 +37,13 @@ tf.app.flags.DEFINE_integer('save_model', 1000,
                             'Number of steps between model saves (default: %(default)d)')
 
 # Optimisation hyperparameters
-tf.app.flags.DEFINE_float('learning_rate', 0.0005, 'Learning rate (default: %(default)d)')
+tf.app.flags.DEFINE_float('learning_rate', 0.001, 'Learning rate (default: %(default)d)')
 tf.app.flags.DEFINE_integer('num_classes', 10, 'Number of classes (default: %(default)d)')
 tf.app.flags.DEFINE_string('log_dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
 
 run_log_dir = os.path.join(FLAGS.log_dir,
-                           'exp_bs_{bs}_lr_{lr}_new'.format(bs=BATCH_SIZE,
+                           'cnn_adam_10_classes_std_bs_{bs}_lr_{lr}_new'.format(bs=BATCH_SIZE,
                                                         lr=FLAGS.learning_rate))
 
 def get_gaussian_mixture_batch():
@@ -101,6 +102,14 @@ def gen_rand_labels(classes):
         labels.append(random.choice(classes))
     return labels
 
+def one_hot(labels):
+    out_labels = []
+    for i in labels:
+    	out = [0]*10
+    	out[i] = 1
+	out_labels.append(out)
+    return out_labels
+
 def get_batch_of_batchs(mnist, classes):
     data = []
     labels = []
@@ -142,7 +151,7 @@ def get_batch_of_batchs_validation(mnist, classes):
         if(random.randint(0, 1) == 1):
             #target batch
 #            b, l = get_gaussian_mixture_batch()
-            b, l = mnist.test.next_batch(BATCH_SIZE)
+            b, l = mnist.test.next_batch(BATCH_INNER)
             d = shape_batch(b, l)
             data.append(d)
             labels.append([0, 1])
@@ -151,7 +160,7 @@ def get_batch_of_batchs_validation(mnist, classes):
 #            b1, l1 = get_gaussian_mixture_batch()
             b1 = []
             if(random.randint(0, 9) > 0):
-                b1, l1 = mnist.train.next_batch(BATCH_INNER)
+                b1, l1 = mnist.test.next_batch(BATCH_INNER)
             else:
                 b1 = []
                 for j in range(BATCH_INNER):
@@ -196,22 +205,22 @@ def deepnn(x):
         #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
         h_fc1 = tf.nn.relu(tf.matmul(x, W_fc1) + b_fc1)
     
-    with tf.variable_scope('FC_2'):
+   # with tf.variable_scope('FC_2'):
         # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
         # image is down to 8x8x64 feature maps -- maps this to 1024 features.
         #        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
-        W_fc2 = weight_variable([1024, 1024])
-        b_fc2 = bias_variable([1024])
-        tf.summary.histogram("weights", W_fc2)
+   #     W_fc2 = weight_variable([1024, 1024])
+   #     b_fc2 = bias_variable([1024])
+   #     tf.summary.histogram("weights", W_fc2)
         #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
-        h_fc2 = tf.nn.relu(tf.matmul(h_fc1, W_fc2) + b_fc2)
+   #     h_fc2 = tf.nn.relu(tf.matmul(h_fc1, W_fc2) + b_fc2)
     
     with tf.variable_scope('FC_3'):
         # Map the 1024 features to 10 classes
-        W_fc3 = weight_variable([1024, 2])
-        b_fc3 = bias_variable([2])
+        W_fc3 = weight_variable([1024, 10])
+        b_fc3 = bias_variable([10])
         tf.summary.histogram("weights", W_fc3)
-        y_conv = tf.matmul(h_fc2, W_fc3) + b_fc3
+        y_conv = tf.matmul(h_fc1, W_fc3) + b_fc3
         #        y_conv = tf.reshape(y_conv, [-1, 1])
         #        y_conv = tf.transpose(y_conv, 0)
         return y_conv
@@ -288,8 +297,9 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
     # Training and validation for distribution classifier
     for step in range(FLAGS.max_steps_DC):
         # Training: Backpropagation using train set
-        data, labels = get_batch_of_batchs(mnist_seed, classes)
-
+        #data, labels = get_batch_of_batchs(mnist_seed, classes)
+	data, labels = mnist_seed.train.next_batch(BATCH_SIZE)
+	labels = one_hot(labels)
         _, loss = sess.run([train_step_distribution_classifier, loss_summary_distribution_classifier], feed_dict={x: data, y_: labels})
         #            writer.add_summary(summ, global_step=step)
         
@@ -298,8 +308,10 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
         
         # Validation: Monitoring accuracy using validation set
         if step % FLAGS.log_frequency == 0:
-            test_data, test_labels = get_batch_of_batchs_validation(mnist_seed, classes)
-            validation_accuracy, summary_str = sess.run([accuracy_distribution_classifier, validation_summary_distribution_classifier], feed_dict={x: test_data, y_: test_labels})
+            #test_data, test_labels = get_batch_of_batchs_validation(mnist_seed, classes)
+            test_data, test_labels = mnist_seed.test.next_batch(BATCH_SIZE)
+	    test_labels = one_hot(test_labels)
+	    validation_accuracy, summary_str = sess.run([accuracy_distribution_classifier, validation_summary_distribution_classifier], feed_dict={x: test_data, y_: test_labels})
             print('step %d, accuracy on validation batch: %g' % (step, validation_accuracy))
             summary_writer_validation.add_summary(summary_str, step)
         
@@ -308,8 +320,9 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
             checkpoint_path = os.path.join(run_log_dir + '_train_DC', 'model.ckpt')
             saver.save(sess, checkpoint_path, global_step=step)
     # Testing
-    test_data, test_labels = get_batch_of_batchs_validation(mnist_seed, classes)
-
+    #test_data, test_labels = get_batch_of_batchs_validation(mnist_seed, classes)
+    test_data, test_labels = mnist_seed.test.next_batch(BATCH_SIZE)
+    test_labels = one_hot(test_labels)
     test_accuracy = sess.run(accuracy_distribution_classifier, feed_dict={x: test_data, y_: test_labels})
 
     print('test set: accuracy on test set: %0.3f' % test_accuracy)
@@ -337,6 +350,7 @@ def main(_):
     print(cifar_labels_compresses.shape)
     print(cifar_image_compresses_test.shape)
     print(cifar_labels_compresses_test.shape)
+
     # print(cifar_image_compresses[0])
     # scaler = MinMaxScaler(feature_range=(0, 1))
     # rescaled_data = scaler.fit_transform(cifar_image_compresses)
@@ -349,6 +363,20 @@ def main(_):
     # print(rescaled_data[0])
     # cifar_image_compresses = rescaled_data
     # cifar_labels_compresses_test = rescaled_data_test
+
+   # print(cifar_image_compresses[0])
+ #   scaler = MinMaxScaler(feature_range=(0, 1))
+ #   rescaled_data = scaler.fit_transform(cifar_image_compresses)
+ #   rescaled_data_test = scaler.fit_transform(cifar_image_compresses_test)
+    
+  #  print(rescaled_data.shape)
+#    print(cifar_labels_compresses.shape)
+   # print(rescaled_data_test.shape)
+#    print(cifar_labels_compresses_test.shape)
+  #  print(rescaled_data[0])
+  #  cifar_image_compresses = rescaled_data
+  #  cifar_labels_compresses_test = rescaled_data_test
+  
 #    return
 #    mnist_seed.train._images = mnist_seed.train._images[:10000]
 #    imgs = []
@@ -393,7 +421,7 @@ def main(_):
         # Create the model
         x = tf.placeholder(tf.float32, [None, BATCH_INNER_SIZE_MNIST])
         # Define loss and optimizer
-        y_ = tf.placeholder(tf.float32, [None, 2])
+        y_ = tf.placeholder(tf.float32, [None, 10])
     
     # Build the graph for the deep net
     y_conv_distribution_classifier = deepnn(x)
@@ -402,16 +430,16 @@ def main(_):
         cross_entropy_distribution_classifier = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv_distribution_classifier))
     
     global_step = tf.Variable(0, trainable=False)
-    with tf.variable_scope('x_entropy'):
-        cross_entropy_distribution_classifier = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv_distribution_classifier))
-        learning_rate = tf.train.exponential_decay(
-           FLAGS.learning_rate,                # Base learning rate.
-           global_step,  # Current index into the dataset.
-           10000,          # Decay step.
-           0.9,                # Decay rate.
-           staircase=True)
-   #train_step_distribution_classifier = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy_distribution_classifier)
-    train_step_distribution_classifier = (tf.train.GradientDescentOptimizer(learning_rate).minimize(cross_entropy_distribution_classifier, global_step=global_step))
+   # with tf.variable_scope('x_entropy'):
+    #    cross_entropy_distribution_classifier = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv_distribution_classifier))
+    #    learning_rate = tf.train.exponential_decay(
+    #       FLAGS.learning_rate,                # Base learning rate.
+    #       global_step,  # Current index into the dataset.
+    #       10000,          # Decay step.
+    #       0.9,                # Decay rate.
+    #       staircase=True)
+    train_step_distribution_classifier = tf.train.AdamOptimizer(FLAGS.learning_rate).minimize(cross_entropy_distribution_classifier)
+   # train_step_distribution_classifier = (tf.train.GradientDescentOptimizer(learning_rate).minimize(cross_entropy_distribution_classifier, global_step=global_step))
     correct_prediction_distribution_classifier = tf.equal(tf.argmax(y_conv_distribution_classifier, 1), tf.argmax(y_, 1))
 
     accuracy_distribution_classifier = tf.reduce_mean(tf.cast(correct_prediction_distribution_classifier, tf.float32), name='accuracy')
