@@ -25,19 +25,19 @@ sys.path.append(os.path.join(here, '..', 'CIFAR10'))
 import cifar10 as cf
 
 FLAGS = tf.app.flags.FLAGS
-tf.app.flags.DEFINE_integer('log-frequency', 10,
+tf.app.flags.DEFINE_integer('log-frequency', 1000,
                             'Number of steps between logging results to the console and saving summaries. (default: %(default)d)')
 tf.app.flags.DEFINE_integer('flush-frequency', 50,
                             'Number of steps between flushing summary results. (default: %(default)d)')
-tf.app.flags.DEFINE_integer('save-model-frequency', 100,
+tf.app.flags.DEFINE_integer('save-model-frequency', 1000,
                             'Number of steps between model saves. (default: %(default)d)')
 tf.app.flags.DEFINE_string('log-dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
 # Optimisation hyperparameters
-tf.app.flags.DEFINE_integer('max-steps', 10000,
+tf.app.flags.DEFINE_integer('max-steps', 20000,
                             'Number of mini-batches to train on. (default: %(default)d)')
 tf.app.flags.DEFINE_integer('batch-size', 128, 'Number of examples per mini-batch. (default: %(default)d)')
-tf.app.flags.DEFINE_float('learning-rate', 1e-3, 'Number of examples to run. (default: %(default)d)')
+tf.app.flags.DEFINE_float('learning-rate', 0.0005, 'Number of examples to run. (default: %(default)d)')
 
 
 run_log_dir = os.path.join(FLAGS.log_dir, 'exp_bs_{bs}_lr_{lr}'.format(bs=FLAGS.batch_size,
@@ -62,13 +62,13 @@ def deepnn(x_image, img_shape=(32, 32, 3), class_count=10):
       (airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck)
     """
 
-    # First convolutional layer - maps one RGB image to 32 feature maps.
+    # First convolutional layer - maps one RGB image to 64 feature maps.
     conv1 = tf.layers.conv2d(
         inputs=x_image,
         filters=64,
         kernel_size=[5, 5],
         padding='same',
-        use_bias=False,
+        use_bias=True,
         name='conv1'
     )
     conv1_bn = tf.nn.relu(tf.layers.batch_normalization(conv1))
@@ -78,19 +78,22 @@ def deepnn(x_image, img_shape=(32, 32, 3), class_count=10):
         strides=2,
         name='pool1'
     )
-
+    norm1 = tf.nn.lrn(pool1, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75,
+                    name='norm1')
     conv2 = tf.layers.conv2d(
-        inputs=pool1,
+        inputs=norm1,
         filters=64,
         kernel_size=[5, 5],
         padding='same',
         activation=tf.nn.relu,
-        use_bias=False,
+        use_bias=True,
         name='conv2'
     )
     conv2_bn = tf.nn.relu(tf.layers.batch_normalization(conv2))
+    norm2 = tf.nn.lrn(conv2_bn, 4, bias=1.0, alpha=0.001 / 9.0, beta=0.75,
+                    name='norm2')
     pool2 = tf.layers.max_pooling2d(
-        inputs=conv2_bn,
+        inputs=norm2,
         pool_size=[2, 2],
         strides=2,
         name='pool2'
