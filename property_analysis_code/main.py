@@ -324,27 +324,31 @@ def main(_):
     mnist_seed = load_modified_mnist(classes, seed=0)
     mnist_real_world_data = load_modified_mnist(classes, seed=1)
     f = open('{cwd}/file.py'.format(cwd=os.getcwd()), 'r')
-    cifar_image_compresses = np.load('{cwd}/file.py'.format(cwd=os.getcwd()))
-    cifar_labels_compresses = np.load('{cwd}/file_labels.py'.format(cwd=os.getcwd()))
-    cifar_image_compresses_test = np.load('{cwd}/file_test.py'.format(cwd=os.getcwd()))
-    cifar_labels_compresses_test = np.load('{cwd}/file_labels_test.py'.format(cwd=os.getcwd()))
+    cifar_image_compresses = np.load('{cwd}/train_new_compressed.npy'.format(cwd=os.getcwd()))
+    cifar_labels_compresses = np.load('{cwd}/train_new_compressed_labels.npy'.format(cwd=os.getcwd()))
+    cifar_image_compresses_test = np.load('{cwd}/test_new_compressed.npy'.format(cwd=os.getcwd()))
+    cifar_labels_compresses_test = np.load('{cwd}/test_new_compressed_labels.npy'.format(cwd=os.getcwd()))
 #    data = np.genfromtxt('{cwd}/CIFAR_compressed_data/compressed_images.py'.format(cwd=os.getcwd()),delimiter=",")
+    cifar_image_compresses = cifar_image_compresses[:50000]
+    cifar_labels_compresses = cifar_labels_compresses[:50000]
+    cifar_image_compresses_test = cifar_image_compresses_test[:10000]
+    cifar_labels_compresses_test = cifar_labels_compresses_test[:10000]
     print(cifar_image_compresses.shape)
     print(cifar_labels_compresses.shape)
     print(cifar_image_compresses_test.shape)
     print(cifar_labels_compresses_test.shape)
-    print(cifar_image_compresses[0])
-    scaler = MinMaxScaler(feature_range=(0, 1))
-    rescaled_data = scaler.fit_transform(cifar_image_compresses)
-    rescaled_data_test = scaler.fit_transform(cifar_image_compresses_test)
+    # print(cifar_image_compresses[0])
+    # scaler = MinMaxScaler(feature_range=(0, 1))
+    # rescaled_data = scaler.fit_transform(cifar_image_compresses)
+    # rescaled_data_test = scaler.fit_transform(cifar_image_compresses_test)
     
-    print(rescaled_data.shape)
+    # print(rescaled_data.shape)
 #    print(cifar_labels_compresses.shape)
-    print(rescaled_data_test.shape)
+    # print(rescaled_data_test.shape)
 #    print(cifar_labels_compresses_test.shape)
-    print(rescaled_data[0])
-    cifar_image_compresses = rescaled_data
-    cifar_labels_compresses_test = rescaled_data_test
+    # print(rescaled_data[0])
+    # cifar_image_compresses = rescaled_data
+    # cifar_labels_compresses_test = rescaled_data_test
 #    return
 #    mnist_seed.train._images = mnist_seed.train._images[:10000]
 #    imgs = []
