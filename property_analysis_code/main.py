@@ -10,6 +10,9 @@ from tensorflow.examples.tutorials.mnist import input_data
 import numpy as np
 from scipy import ndimage
 
+# from sklearn.preprocessing import StandardScaler
+# from sklearn.decomposition import PCA
+
 BATCH_SIZE = 128
 BATCH_VAL = 4096
 SEED_SIZE = 10000 # when training the malicous data resistant system we seed with an inital set size seed_size
@@ -37,7 +40,7 @@ tf.app.flags.DEFINE_string('log_dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
 
 run_log_dir = os.path.join(FLAGS.log_dir,
-                           'mnist_5_april_should_be_std_std_exp_bs_{bs}_lr_{lr}'.format(bs=BATCH_SIZE,
+                           'mnist_5_april_robust_exp_bs_{bs}_lr_{lr}'.format(bs=BATCH_SIZE,
                                                         lr=FLAGS.learning_rate))
 
 def get_gaussian_mixture_batch():
@@ -79,7 +82,7 @@ def get_linear_mal_batch():
             batch_label.append(2)
     return batch_data, batch_label
 
-def shape_batch(batch_data, batch_label, inp):
+def shape_batch(batch_data, batch_label):
     shaped_batch = []
     for i in range(BATCH_INNER):
         
@@ -115,7 +118,7 @@ def get_batch_of_batchs(mnist, classes):
             #target batch
 #            b, l = get_gaussian_mixture_batch()
             b, l = mnist.train.next_batch(BATCH_INNER)
-            d = shape_batch(b, l, 1)
+            d = shape_batch(b, l)
 	    d = shuffle_inner_batch(d)
             data.append(d)
             labels.append([0, 1])
@@ -161,7 +164,7 @@ def get_batch_of_batchs(mnist, classes):
                 b1 = np.array(b1)
 #            b2, l2 = get_linear_mal_batch()
                 l2 = gen_rand_labels(classes)
-            d = shape_batch(b1, l2, 2)
+            d = shape_batch(b1, l2)
 	    d = shuffle_inner_batch(d)
             data.append(d)
             labels.append([1, 0])
@@ -176,8 +179,8 @@ def get_batch_of_batchs_validation(mnist, classes):
         if(random.randint(0, 1) == 1):
             #target batch
 #            b, l = get_gaussian_mixture_batch()
-            b, l = mnist.test.next_batch(BATCH_SIZE)
-            d = shape_batch(b, l, 1)
+            b, l = mnist.test.next_batch(BATCH_INNER)
+            d = shape_batch(b, l)
 	    d = shuffle_inner_batch(d)
             data.append(d)
             labels.append([0, 1])
@@ -221,7 +224,7 @@ def get_batch_of_batchs_validation(mnist, classes):
                 b1 = np.array(b1)
                     #            b2, l2 = get_linear_mal_batch()
                 l2 = gen_rand_labels(classes)
-            d = shape_batch(b1, l2, 2)
+            d = shape_batch(b1, l2)
 	    d = shuffle_inner_batch(d)
             data.append(d)
             labels.append([1, 0])
@@ -302,7 +305,7 @@ def filter_data(image, labels ,classes, seed=2):
     
     new_images = []
     new_lables = []
-    
+
     start = 0
     end = len(labels)
     if seed==0:
@@ -319,6 +322,17 @@ def filter_data(image, labels ,classes, seed=2):
 #Seed=0 is initial seed, seed=1 is for exclusively data not in seed, seed=2 is for all
 def load_modified_mnist(classes, seed=2):
     mnist = tf.contrib.learn.datasets.load_dataset("mnist")
+
+    # scaler = StandardScaler()
+    # scaler.fit(mnist.train._images)
+    # mnist.train._images = scaler.transform(mnist.train._images)
+    # mnist.test._images = scaler.transform(mnist.test._images)
+
+    # pca = PCA(.95)
+    # pca.fit(mnist.train._images)
+
+    # mnist.train._images = pca.transform(mnist.train._images)
+    # mnist.test._images = pca.transform(mnist.test._images)
     
     # Hack it to work! Forces MNIST to only use selected classes
     mnist.train._images, mnist.train._labels = filter_data(mnist.train._images, mnist.train._labels, classes, seed=seed)
@@ -404,7 +418,7 @@ def poison_one_item(batch):
 def main(_):
     tf.reset_default_graph()
     
-    TRAIN_DISTRIBUTION_CLASSIFIER = True
+    TRAIN_DISTRIBUTION_CLASSIFIER = False
     TRAIN_MNIST_CLASSIFIER = True
     
     classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -459,7 +473,7 @@ def main(_):
             train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_writer_validation, saver, train_step_distribution_classifier, loss_summary_distribution_classifier, accuracy_distribution_classifier, validation_summary_distribution_classifier, x, y_)
         else:
             #load from memory
-            load_path = os.path.join(run_log_dir + '_train_DC', 'model.ckpt-59999')
+            load_path = os.path.join(run_log_dir + '_train_DC', 'model.ckpt-122000')
             saver.restore(sess, load_path)
 
         # We now have our distribution classifier, we use this to decide if new data should be accepted
@@ -482,8 +496,8 @@ def main(_):
             MNIST_norm_size += np.sum(real_data[0])
 
         MNIST_norm_size = MNIST_norm_size / (MNIST_TRAIN_SIZE)
-        num_permutations = 200
-        acc_threshold = 0.99
+        num_permutations = 10
+        acc_threshold = 0.8
         total_real = 0
         total_mal = 0
         total_real_running = 0
@@ -494,7 +508,7 @@ def main(_):
                 print(i)
             # Classify it!
             real_data, real_labels = mnist_real_world_data.train.next_batch(BATCH_INNER)
-            data_real = [shape_batch(real_data, real_labels, 1)]
+            data_real = [shape_batch(real_data, real_labels)]
             
             
 #            return
@@ -523,7 +537,7 @@ def main(_):
 #            data_mal = [shape_batch(mal_data, mal_labels)]
 
             ## mal data now only has a single bad element
-            data_mal = [shape_batch(real_data, real_labels, 1)]
+            data_mal = [shape_batch(real_data, real_labels)]
             data_mal[0] = poison_one_item(data_mal[0])
             total_real = 0
             for j in range(num_permutations):
