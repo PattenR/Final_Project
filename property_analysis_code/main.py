@@ -8,8 +8,8 @@ import matplotlib.image as mpimg
 import itertools
 from tensorflow.examples.tutorials.mnist import input_data
 import numpy as np
-#import scipy
-#from sklearn.preprocessing import MinMaxScaler
+import scipy
+from sklearn.preprocessing import MinMaxScaler
 from scipy import ndimage
 from ast import literal_eval
 
@@ -21,8 +21,8 @@ BATCH_INNER = 16
 #BATCH_INNER_SIZE_MNIST = (784/4+1)*BATCH_INNER
 IMG_SIZE = 256
 #IMG_SIZE = 14*14
-#BATCH_INNER_SIZE_MNIST = (IMG_SIZE+1)*BATCH_INNER
-BATCH_INNER_SIZE_MNIST = 256
+BATCH_INNER_SIZE_MNIST = (IMG_SIZE+1)*BATCH_INNER
+# BATCH_INNER_SIZE_MNIST = 256
 FLAGS = tf.app.flags.FLAGS
 
 #for distribuion classifier
@@ -31,7 +31,7 @@ tf.app.flags.DEFINE_integer('max_steps_DC', 50000,
 #for MNIST classifier
 tf.app.flags.DEFINE_integer('max_steps-M', 10000,
                             'Number of mini-batches to train on. (default: %(default)d)')
-tf.app.flags.DEFINE_integer('log_frequency', 1000,
+tf.app.flags.DEFINE_integer('log_frequency', 50,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
 tf.app.flags.DEFINE_integer('save_model', 1000,
                             'Number of steps between model saves (default: %(default)d)')
@@ -217,8 +217,8 @@ def deepnn(x):
     
     with tf.variable_scope('FC_3'):
         # Map the 1024 features to 10 classes
-        W_fc3 = weight_variable([1024, 10])
-        b_fc3 = bias_variable([10])
+        W_fc3 = weight_variable([1024, 2])
+        b_fc3 = bias_variable([2])
         tf.summary.histogram("weights", W_fc3)
         y_conv = tf.matmul(h_fc1, W_fc3) + b_fc3
         #        y_conv = tf.reshape(y_conv, [-1, 1])
@@ -297,9 +297,9 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
     # Training and validation for distribution classifier
     for step in range(FLAGS.max_steps_DC):
         # Training: Backpropagation using train set
-        #data, labels = get_batch_of_batchs(mnist_seed, classes)
-	data, labels = mnist_seed.train.next_batch(BATCH_SIZE)
-	labels = one_hot(labels)
+        data, labels = get_batch_of_batchs(mnist_seed, classes)
+	# data, labels = mnist_seed.train.next_batch(BATCH_SIZE)
+	# labels = one_hot(labels)
         _, loss = sess.run([train_step_distribution_classifier, loss_summary_distribution_classifier], feed_dict={x: data, y_: labels})
         #            writer.add_summary(summ, global_step=step)
         
@@ -308,9 +308,9 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
         
         # Validation: Monitoring accuracy using validation set
         if step % FLAGS.log_frequency == 0:
-            #test_data, test_labels = get_batch_of_batchs_validation(mnist_seed, classes)
-            test_data, test_labels = mnist_seed.test.next_batch(BATCH_SIZE)
-	    test_labels = one_hot(test_labels)
+            test_data, test_labels = get_batch_of_batchs_validation(mnist_seed, classes)
+          #  test_data, test_labels = mnist_seed.test.next_batch(BATCH_SIZE)
+	    #test_labels = one_hot(test_labels)
 	    validation_accuracy, summary_str = sess.run([accuracy_distribution_classifier, validation_summary_distribution_classifier], feed_dict={x: test_data, y_: test_labels})
             print('step %d, accuracy on validation batch: %g' % (step, validation_accuracy))
             summary_writer_validation.add_summary(summary_str, step)
@@ -320,9 +320,9 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
             checkpoint_path = os.path.join(run_log_dir + '_train_DC', 'model.ckpt')
             saver.save(sess, checkpoint_path, global_step=step)
     # Testing
-    #test_data, test_labels = get_batch_of_batchs_validation(mnist_seed, classes)
-    test_data, test_labels = mnist_seed.test.next_batch(BATCH_SIZE)
-    test_labels = one_hot(test_labels)
+    test_data, test_labels = get_batch_of_batchs_validation(mnist_seed, classes)
+    # test_data, test_labels = mnist_seed.test.next_batch(BATCH_SIZE)
+    # test_labels = one_hot(test_labels)
     test_accuracy = sess.run(accuracy_distribution_classifier, feed_dict={x: test_data, y_: test_labels})
 
     print('test set: accuracy on test set: %0.3f' % test_accuracy)
@@ -352,9 +352,9 @@ def main(_):
     print(cifar_labels_compresses_test.shape)
 
     # print(cifar_image_compresses[0])
-    # scaler = MinMaxScaler(feature_range=(0, 1))
-    # rescaled_data = scaler.fit_transform(cifar_image_compresses)
-    # rescaled_data_test = scaler.fit_transform(cifar_image_compresses_test)
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    rescaled_data = scaler.fit_transform(cifar_image_compresses)
+    rescaled_data_test = scaler.fit_transform(cifar_image_compresses_test)
     
     # print(rescaled_data.shape)
 #    print(cifar_labels_compresses.shape)
@@ -365,17 +365,17 @@ def main(_):
     # cifar_labels_compresses_test = rescaled_data_test
 
    # print(cifar_image_compresses[0])
- #   scaler = MinMaxScaler(feature_range=(0, 1))
- #   rescaled_data = scaler.fit_transform(cifar_image_compresses)
- #   rescaled_data_test = scaler.fit_transform(cifar_image_compresses_test)
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    rescaled_data = scaler.fit_transform(cifar_image_compresses)
+    rescaled_data_test = scaler.fit_transform(cifar_image_compresses_test)
     
   #  print(rescaled_data.shape)
 #    print(cifar_labels_compresses.shape)
    # print(rescaled_data_test.shape)
 #    print(cifar_labels_compresses_test.shape)
   #  print(rescaled_data[0])
-  #  cifar_image_compresses = rescaled_data
-  #  cifar_labels_compresses_test = rescaled_data_test
+    cifar_image_compresses = rescaled_data
+    cifar_image_compresses_test = rescaled_data_test
   
 #    return
 #    mnist_seed.train._images = mnist_seed.train._images[:10000]
@@ -421,7 +421,7 @@ def main(_):
         # Create the model
         x = tf.placeholder(tf.float32, [None, BATCH_INNER_SIZE_MNIST])
         # Define loss and optimizer
-        y_ = tf.placeholder(tf.float32, [None, 10])
+        y_ = tf.placeholder(tf.float32, [None, 2])
     
     # Build the graph for the deep net
     y_conv_distribution_classifier = deepnn(x)
