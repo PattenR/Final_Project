@@ -10,8 +10,8 @@ from tensorflow.examples.tutorials.mnist import input_data
 import numpy as np
 from scipy import ndimage
 
-# from sklearn.preprocessing import StandardScaler
-# from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
 
 BATCH_SIZE = 128
 BATCH_VAL = 4096
@@ -19,7 +19,8 @@ SEED_SIZE = 10000 # when training the malicous data resistant system we seed wit
 MNIST_TRAIN_SIZE = 60000
 BATCH_INNER = 16
 NET_SIZE = 1024
-BATCH_INNER_SIZE_MNIST = (784/4+1)*BATCH_INNER
+INNER_SIZE = 236
+BATCH_INNER_SIZE_MNIST = (INNER_SIZE+1)*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
 #for distribuion classifier
@@ -40,7 +41,7 @@ tf.app.flags.DEFINE_string('log_dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
 
 run_log_dir = os.path.join(FLAGS.log_dir,
-                           'mnist_8_april_robust_exp_bs_{bs}_lr_{lr}_ns_{ns}'.format(bs=BATCH_SIZE,
+                           'mnist_10_april_pca_exp_bs_{bs}_lr_{lr}_ns_{ns}'.format(bs=BATCH_SIZE,
                                                         lr=FLAGS.learning_rate, ns=NET_SIZE))
 
 def get_gaussian_mixture_batch():
@@ -101,11 +102,11 @@ def gen_rand_labels(classes):
 
 def shuffle_inner_batch(batch):
     d_r = np.array(batch)
-    d_r = np.reshape(d_r, [16, 197])
+    d_r = np.reshape(d_r, [16, INNER_SIZE+1])
     d_r = d_r.tolist()
     random.shuffle(d_r)
     d_r = np.array(d_r)
-    d_r = np.reshape(d_r, [3152])
+    d_r = np.reshape(d_r, [16*(INNER_SIZE+1)])
     d_r = d_r.tolist()
     return d_r
 
@@ -159,7 +160,7 @@ def get_batch_of_batchs(mnist, classes):
                 #Random images, random labels
                 b1 = []
                 for i in range(BATCH_INNER):
-                    item = np.array([random.random() for i in range(14*14)])
+                    item = np.array([random.random() for i in range(INNER_SIZE)])
                     b1.append(item)
                 b1 = np.array(b1)
 #            b2, l2 = get_linear_mal_batch()
@@ -219,7 +220,7 @@ def get_batch_of_batchs_validation(mnist, classes):
                 #Random images, random labels
                 b1 = []
                 for i in range(BATCH_INNER):
-                    item = np.array([random.random() for i in range(14*14)])
+                    item = np.array([random.random() for i in range(INNER_SIZE)])
                     b1.append(item)
                 b1 = np.array(b1)
                     #            b2, l2 = get_linear_mal_batch()
@@ -322,6 +323,18 @@ def filter_data(image, labels ,classes, seed=2):
 #Seed=0 is initial seed, seed=1 is for exclusively data not in seed, seed=2 is for all
 def load_modified_mnist(classes, seed=2):
     mnist = tf.contrib.learn.datasets.load_dataset("mnist")
+    #Standardize
+    scaler = StandardScaler()
+    scaler.fit(mnist.train._images)
+    mnist.train._images = scaler.transform(mnist.train._images)
+    mnist.test._images = scaler.transform(mnist.test._images)
+
+    #PCA
+    pca = PCA(0.9)
+    pca.fit(mnist.train._images)
+    mnist.train._images = pca.transform(mnist.train._images)
+    print(len(mnist.train._images[0]))
+    mnist.test._images = pca.transform(mnist.test._images)
 
     # scaler = StandardScaler()
     # scaler.fit(mnist.train._images)
@@ -336,25 +349,28 @@ def load_modified_mnist(classes, seed=2):
     
     # Hack it to work! Forces MNIST to only use selected classes
     mnist.train._images, mnist.train._labels = filter_data(mnist.train._images, mnist.train._labels, classes, seed=seed)
-    downsamples = []
-    for img in mnist.train._images:
-        img = img.reshape((28, 28))
-        img = ndimage.interpolation.zoom(img,.5)
-        img = img.reshape((784/4))
-        downsamples.append(img)
-    mnist.train._images = np.array(downsamples)
-    downsamples = []
-    for img in mnist.test._images:
-        img = img.reshape((28, 28))
-        img = ndimage.interpolation.zoom(img,.5)
-        img = img.reshape((784/4))
-        downsamples.append(img)
+    # downsamples = []
+    # for img in mnist.train._images:
+    #     img = img.reshape((28, 28))
+    #     img = ndimage.interpolation.zoom(img,.5)
+    #     img = img.reshape((784/4))
+    #     downsamples.append(img)
+    # mnist.train._images = np.array(downsamples)
+    # downsamples = []
+    # for img in mnist.test._images:
+    #     img = img.reshape((28, 28))
+    #     img = ndimage.interpolation.zoom(img,.5)
+    #     img = img.reshape((784/4))
+    #     downsamples.append(img)
+
+
     
-    mnist.test._images = np.array(downsamples)
+    # mnist.test._images = np.array(downsamples)
     mnist.train._num_examples = len(mnist.train._labels)
     
     mnist.test._images, mnist.test._labels = filter_data(mnist.test._images, mnist.test._labels, classes)
     mnist.test._num_examples = len(mnist.test._labels)
+
     return mnist
 
 def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_writer_validation, saver, train_step_distribution_classifier, loss_summary_distribution_classifier, accuracy_distribution_classifier, validation_summary_distribution_classifier, x, y_):
@@ -390,17 +406,17 @@ def train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_write
 
 def shuffle_inner_batch(batch):
     d_r = np.array(batch)
-    d_r = np.reshape(d_r, [BATCH_INNER, 197])
+    d_r = np.reshape(d_r, [BATCH_INNER, INNER_SIZE+1])
     d_r = d_r.tolist()
     random.shuffle(d_r)
     d_r = np.array(d_r)
-    d_r = np.reshape(d_r, [197*BATCH_INNER])
+    d_r = np.reshape(d_r, [(INNER_SIZE+1)*BATCH_INNER])
     d_r = d_r.tolist()
     return d_r
 
 def poison_items(batch, no_items):
     d_r = np.array(batch)
-    d_r = np.reshape(d_r, [BATCH_INNER, 197])
+    d_r = np.reshape(d_r, [BATCH_INNER, INNER_SIZE+1])
     d_r = d_r.tolist()
 #    random.shuffle(d_r)
     classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -408,22 +424,22 @@ def poison_items(batch, no_items):
     for pos in positions:
         # x = random.randint(0, 15)
         x = pos
-        label = d_r[x][196]
+        label = d_r[x][INNER_SIZE]
         #change first item to have incorrect label
         new_label = random.choice(classes)
         # make sure new label is actually different
         while(new_label == label):
             new_label = random.choice(classes)
-        d_r[x][196] = new_label
+        d_r[x][INNER_SIZE] = new_label
     d_r = np.array(d_r)
-    d_r = np.reshape(d_r, [197*BATCH_INNER])
+    d_r = np.reshape(d_r, [(INNER_SIZE+1)*BATCH_INNER])
     d_r = d_r.tolist()
     return d_r
 
 def show_images(in_batch):
     # This function prints to screen the inner batch in_batch with the labels for the images
     d_r = np.array(in_batch)
-    d_r = np.reshape(d_r, [BATCH_INNER, 197])
+    d_r = np.reshape(d_r, [BATCH_INNER, (INNER_SIZE+1)])
     d_r = d_r.tolist()
     fig=plt.figure(figsize=(4, 4))
     i = 1
@@ -431,8 +447,8 @@ def show_images(in_batch):
     for pair in d_r:
         #print the image label pair
         #image is first 196 addresses, label is 197, makes 14x14 image
-        image = pair[:196]
-        label = pair[196]
+        image = pair[:INNER_SIZE]
+        label = pair[INNER_SIZE]
         image = np.reshape(image, [14, 14])
         fig.add_subplot(4, 4, i)
         labels.append(label)
@@ -444,21 +460,21 @@ def show_images(in_batch):
 def replace_at_index(batch_1, batch_2, index):
     # Take batch_1 and put the image label pair at index index from batch_2
     d_r1 = np.array(batch_1)
-    d_r1 = np.reshape(d_r1, [BATCH_INNER, 197])
+    d_r1 = np.reshape(d_r1, [BATCH_INNER, INNER_SIZE+1])
     d_r1 = d_r1.tolist()
     d_r2 = np.array(batch_2)
-    d_r2 = np.reshape(d_r2, [BATCH_INNER, 197])
+    d_r2 = np.reshape(d_r2, [BATCH_INNER, INNER_SIZE+1])
     d_r2 = d_r2.tolist()
     d_r1[index] = d_r2[index]
     d_r1 = np.array(d_r1)
-    d_r1 = np.reshape(d_r1, [197*BATCH_INNER])
+    d_r1 = np.reshape(d_r1, [(INNER_SIZE+1)*BATCH_INNER])
     d_r1 = d_r1.tolist()
     return d_r1
 
 def main(_):
     tf.reset_default_graph()
     
-    TRAIN_DISTRIBUTION_CLASSIFIER = False
+    TRAIN_DISTRIBUTION_CLASSIFIER = True
     TRAIN_MNIST_CLASSIFIER = True
     
     classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
