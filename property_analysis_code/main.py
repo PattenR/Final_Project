@@ -323,30 +323,23 @@ def filter_data(image, labels ,classes, seed=2):
 #Seed=0 is initial seed, seed=1 is for exclusively data not in seed, seed=2 is for all
 def load_modified_mnist(classes, seed=2):
     mnist = tf.contrib.learn.datasets.load_dataset("mnist")
-    #Standardize
-    scaler = StandardScaler()
-    scaler.fit(mnist.train._images)
-    mnist.train._images = scaler.transform(mnist.train._images)
-    mnist.test._images = scaler.transform(mnist.test._images)
-
-    #PCA
-    pca = PCA(0.9)
-    pca.fit(mnist.train._images)
-    mnist.train._images = pca.transform(mnist.train._images)
-    print(len(mnist.train._images[0]))
-    mnist.test._images = pca.transform(mnist.test._images)
-
+    # #Standardize
     # scaler = StandardScaler()
     # scaler.fit(mnist.train._images)
     # mnist.train._images = scaler.transform(mnist.train._images)
     # mnist.test._images = scaler.transform(mnist.test._images)
 
-    # pca = PCA(.95)
+    # #PCA
+    # pca = PCA(0.9)
     # pca.fit(mnist.train._images)
-
     # mnist.train._images = pca.transform(mnist.train._images)
+    # print(len(mnist.train._images[0]))
     # mnist.test._images = pca.transform(mnist.test._images)
-    
+
+    #just load it from file because BlueCrystal doesn't have the module
+    mnist.train._images = np.load('{cwd}/PCA_MNIST_train.py'.format(cwd=os.getcwd()))
+    mnist.test._images = np.load('{cwd}/PCA_MNIST_test.py'.format(cwd=os.getcwd()))
+
     # Hack it to work! Forces MNIST to only use selected classes
     mnist.train._images, mnist.train._labels = filter_data(mnist.train._images, mnist.train._labels, classes, seed=seed)
     # downsamples = []
