@@ -24,18 +24,18 @@ BATCH_INNER_SIZE_MNIST = (INNER_SIZE+1)*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
 #for distribuion classifier
-tf.app.flags.DEFINE_integer('max_steps_DC', 300000,
+tf.app.flags.DEFINE_integer('max_steps_DC', 450000,
                             'Number of mini-batches to train on. (default: %(default)d)')
 #for MNIST classifier
 tf.app.flags.DEFINE_integer('max_steps_M', 10000,
                             'Number of mini-batches to train on. (default: %(default)d)')
-tf.app.flags.DEFINE_integer('log_frequency', 100,
+tf.app.flags.DEFINE_integer('log_frequency', 1000,
                             'Number of steps between logging results to the console and saving summaries (default: %(default)d)')
 tf.app.flags.DEFINE_integer('save_model', 1000,
                             'Number of steps between model saves (default: %(default)d)')
 
 # Optimisation hyperparameters
-tf.app.flags.DEFINE_float('learning_rate', 0.001, 'Learning rate (default: %(default)d)')
+tf.app.flags.DEFINE_float('learning_rate', 0.01, 'Learning rate (default: %(default)d)')
 tf.app.flags.DEFINE_integer('num_classes', 10, 'Number of classes (default: %(default)d)')
 tf.app.flags.DEFINE_string('log_dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
@@ -128,8 +128,8 @@ def get_batch_of_batchs(mnist, classes):
 #            b1, l1 = get_gaussian_mixture_batch()
             b1 = []
             l2 = []
-            #50%
-            if(random.randint(0, 1) == 1):
+            #95%
+            if(random.randint(0, 19) > 0):
                 #same as original with one malicious item
                 b1, l1 = mnist.train.next_batch(BATCH_INNER)
                 # add a batch that has mixed legit and mal labels for robustness
@@ -154,9 +154,9 @@ def get_batch_of_batchs(mnist, classes):
                 #same images all random labels
                 b1, l1 = mnist.train.next_batch(BATCH_INNER)
                 l2 = gen_rand_labels(classes)
-            #25%
+            #2.5%
             else:
-                #25%
+                #2.5%
                 #Random images, random labels
                 b1 = []
                 for i in range(BATCH_INNER):
@@ -190,8 +190,8 @@ def get_batch_of_batchs_validation(mnist, classes):
 #            b1, l1 = get_gaussian_mixture_batch()
             b1 = []
             l2 = []
-            #50%
-            if(random.randint(0, 1) == 1):
+            #95%
+            if(random.randint(0, 19) > 0):
                 #same as original with one malicious item
                 b1, l1 = mnist.test.next_batch(BATCH_INNER)
                 positions = np.random.choice(16, random.randint(1,15), replace=False)
@@ -211,12 +211,12 @@ def get_batch_of_batchs_validation(mnist, classes):
                         l2.append(original_label)
                 # l2 = l1
             elif(random.randint(0, 1) == 1):
-                #25%
+                #2.5%
                 #same images all random labels
                 b1, l1 = mnist.test.next_batch(BATCH_INNER)
                 l2 = gen_rand_labels(classes)
             else:
-                #25%
+                #2.5%
                 #Random images, random labels
                 b1 = []
                 for i in range(BATCH_INNER):
@@ -260,22 +260,22 @@ def deepnn(x):
         #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
         h_fc1 = tf.nn.relu(tf.matmul(x, W_fc1) + b_fc1)
     
-   # with tf.variable_scope('FC_2'):
-   #     # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
-   #     # image is down to 8x8x64 feature maps -- maps this to 1024 features.
-   #     #        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
-   #     W_fc2 = weight_variable([NET_SIZE, NET_SIZE])
-   #     b_fc2 = bias_variable([NET_SIZE])
-   #     tf.summary.histogram("weights", W_fc2)
-   #     #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
-   #     h_fc2 = tf.nn.relu(tf.matmul(h_fc1, W_fc2) + b_fc2)
+    with tf.variable_scope('FC_2'):
+        # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
+        # image is down to 8x8x64 feature maps -- maps this to 1024 features.
+        #        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
+        W_fc2 = weight_variable([NET_SIZE, NET_SIZE])
+        b_fc2 = bias_variable([NET_SIZE])
+        tf.summary.histogram("weights", W_fc2)
+        #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
+        h_fc2 = tf.nn.relu(tf.matmul(h_fc1, W_fc2) + b_fc2)
     
     with tf.variable_scope('FC_3'):
         # Map the 1024 features to 10 classes
         W_fc3 = weight_variable([NET_SIZE, 2])
         b_fc3 = bias_variable([2])
         tf.summary.histogram("weights", W_fc3)
-        y_conv = tf.matmul(h_fc1, W_fc3) + b_fc3
+        y_conv = tf.matmul(h_fc2, W_fc3) + b_fc3
         #        y_conv = tf.reshape(y_conv, [-1, 1])
         #        y_conv = tf.transpose(y_conv, 0)
         return y_conv
