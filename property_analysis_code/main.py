@@ -40,8 +40,8 @@ tf.app.flags.DEFINE_string('log_dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
 
 run_log_dir = os.path.join(FLAGS.log_dir,
-                           'mnist_5_april_robust_exp_bs_{bs}_lr_{lr}'.format(bs=BATCH_SIZE,
-                                                        lr=FLAGS.learning_rate))
+                           'mnist_8_april_robust_exp_bs_{bs}_lr_{lr}_ns_{ns}'.format(bs=BATCH_SIZE,
+                                                        lr=FLAGS.learning_rate, ns=NET_SIZE))
 
 def get_gaussian_mixture_batch():
     batch_data = []
@@ -398,22 +398,62 @@ def shuffle_inner_batch(batch):
     d_r = d_r.tolist()
     return d_r
 
-def poison_one_item(batch):
+def poison_items(batch, no_items):
     d_r = np.array(batch)
     d_r = np.reshape(d_r, [BATCH_INNER, 197])
     d_r = d_r.tolist()
 #    random.shuffle(d_r)
-    label = d_r[0][196]
-    #change first item to have incorrect label
-    if(label >= 9):
-        label = 0
-    else:
-        label += 1
-    d_r[0][196] = label
+    classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    positions = np.random.choice(16, no_items, replace=False)
+    for pos in positions:
+        # x = random.randint(0, 15)
+        x = pos
+        label = d_r[x][196]
+        #change first item to have incorrect label
+        new_label = random.choice(classes)
+        # make sure new label is actually different
+        while(new_label == label):
+            new_label = random.choice(classes)
+        d_r[x][196] = new_label
     d_r = np.array(d_r)
     d_r = np.reshape(d_r, [197*BATCH_INNER])
     d_r = d_r.tolist()
     return d_r
+
+def show_images(in_batch):
+    # This function prints to screen the inner batch in_batch with the labels for the images
+    d_r = np.array(in_batch)
+    d_r = np.reshape(d_r, [BATCH_INNER, 197])
+    d_r = d_r.tolist()
+    fig=plt.figure(figsize=(4, 4))
+    i = 1
+    labels = []
+    for pair in d_r:
+        #print the image label pair
+        #image is first 196 addresses, label is 197, makes 14x14 image
+        image = pair[:196]
+        label = pair[196]
+        image = np.reshape(image, [14, 14])
+        fig.add_subplot(4, 4, i)
+        labels.append(label)
+        plt.imshow(image, cmap='Greys',interpolation='nearest')
+        i += 1
+    print(labels)
+    plt.show()
+
+def replace_at_index(batch_1, batch_2, index):
+    # Take batch_1 and put the image label pair at index index from batch_2
+    d_r1 = np.array(batch_1)
+    d_r1 = np.reshape(d_r1, [BATCH_INNER, 197])
+    d_r1 = d_r1.tolist()
+    d_r2 = np.array(batch_2)
+    d_r2 = np.reshape(d_r2, [BATCH_INNER, 197])
+    d_r2 = d_r2.tolist()
+    d_r1[index] = d_r2[index]
+    d_r1 = np.array(d_r1)
+    d_r1 = np.reshape(d_r1, [197*BATCH_INNER])
+    d_r1 = d_r1.tolist()
+    return d_r1
 
 def main(_):
     tf.reset_default_graph()
@@ -473,7 +513,7 @@ def main(_):
             train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_writer_validation, saver, train_step_distribution_classifier, loss_summary_distribution_classifier, accuracy_distribution_classifier, validation_summary_distribution_classifier, x, y_)
         else:
             #load from memory
-            load_path = os.path.join(run_log_dir + '_train_DC', 'model.ckpt-122000')
+            load_path = os.path.join(run_log_dir + '_train_DC', 'model.ckpt-449999')
             saver.restore(sess, load_path)
 
         # We now have our distribution classifier, we use this to decide if new data should be accepted
@@ -496,12 +536,18 @@ def main(_):
             MNIST_norm_size += np.sum(real_data[0])
 
         MNIST_norm_size = MNIST_norm_size / (MNIST_TRAIN_SIZE)
-        num_permutations = 10
-        acc_threshold = 0.8
+        num_permutations = 1
+        acc_threshold = 0.9
         total_real = 0
         total_mal = 0
         total_real_running = 0
         total_mal_running = 0
+
+        num_poisoned = 1
+
+        legit_batch = []
+        legit_found = False
+
         print(steps_needed)
         for i in range(steps_needed):
             if(i % 100 == 0):
@@ -538,7 +584,7 @@ def main(_):
 
             ## mal data now only has a single bad element
             data_mal = [shape_batch(real_data, real_labels)]
-            data_mal[0] = poison_one_item(data_mal[0])
+            data_mal[0] = poison_items(data_mal[0], num_poisoned)
             total_real = 0
             for j in range(num_permutations):
                 add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_real, y_: label_legitimate})
@@ -558,6 +604,24 @@ def main(_):
 #                return
             if(total_real >= num_permutations*acc_threshold):
                 real_items_added += 1
+                if(legit_found):
+                    # wait until at least one legit batch that has been identified as legit has come up!
+                    found_at = []
+                    for index in range(16):
+                        new_batch = data_real
+                        new_batch[0] = replace_at_index(new_batch[0], legit_batch, index)
+                        add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: new_batch, y_: label_legitimate})
+                        if(add_real):
+                            found_at.append(index)
+                    if(len(found_at) == 1):
+                        print("found_at")
+                        print(found_at)
+                        show_images(data_real)
+                        return
+            else:
+                legit_found = True
+                legit_batch = data_real[0]
+
             if(total_mal >= num_permutations*acc_threshold):
                 mal_items_added += 1
 #            if(add_real):
