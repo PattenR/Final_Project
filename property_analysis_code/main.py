@@ -19,7 +19,8 @@ SEED_SIZE = 10000 # when training the malicous data resistant system we seed wit
 MNIST_TRAIN_SIZE = 60000
 BATCH_INNER = 16
 NET_SIZE = 1024
-INNER_SIZE = 236
+#INNER_SIZE = 236
+INNER_SIZE = 28*28
 BATCH_INNER_SIZE_MNIST = (INNER_SIZE+1)*BATCH_INNER
 FLAGS = tf.app.flags.FLAGS
 
@@ -249,33 +250,82 @@ def deepnn(x):
 
 #    img_summary = tf.summary.image('Input_images', x_image)
 
+    num_splits = BATCH_INNER*2
+    s_array = [INNER_SIZE, 1]*BATCH_INNER
+    split = tf.split(x, s_array, 1)
+    img_tensors = []
+    label_tensors = []
+    label = False
+    for sp in split:
+        if label:
+            label_tensors.append(sp)
+        else:
+            img_tensors.append(sp)
+        label = not label
+    p = img_tensors[0]
+    x_images = []
+    for img_t in img_tensors:
+        x_images.append(tf.reshape(img_t, [-1, 28, 28, 1]))
+    with tf.variable_scope('Conv_1'):
+        
+        W_conv1 = weight_variable([5, 5, 1, 5])
+        b_conv1 = bias_variable([5])
+        
+        h_pool1_all = []
+        for img_t_reshaped in x_images:
+            h_conv1 = tf.nn.relu(conv2d(img_t_reshaped, W_conv1) + b_conv1)
+            h_pool1 = max_pool_2x2(h_conv1)
+            h_pool1_all.append(h_pool1)
+#        tf.summary.histogram("weights", W_conv1)
+        # Pooling layer - downsamples by 2X.
+
+    with tf.variable_scope('Conv_2'):
+        W_conv2 = weight_variable([5, 5, 5, 5])
+        b_conv2 = bias_variable([5])
+        
+        h_pool2_all = []
+        for img_t_reshaped in h_pool1_all:
+            h_conv2 = tf.nn.relu(conv2d(img_t_reshaped, W_conv2) + b_conv2)
+            h_pool2 = max_pool_2x2(h_conv2)
+            h_pool2_all.append(h_pool2)
+        #        tf.summary.histogram("weights", W_conv1)
+        # Pooling layer - downsamples by 2X.
+    input_after_conv_layers_tensors = []
+    for i in range(BATCH_INNER):
+        input_after_conv_layers_tensors.append(tf.reshape(h_pool2_all[i], [-1, 7*7*5]))
+        input_after_conv_layers_tensors.append(label_tensors[i])
+    input_tenor_conved = tf.concat(input_after_conv_layers_tensors, 1)
+    print(type(input_tenor_conved))
+    size = input_tenor_conved.shape[1]
+    print(size)
+#    return
     #basic 2 layer network!
     with tf.variable_scope('FC_1'):
         # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
         # image is down to 8x8x64 feature maps -- maps this to 1024 features.
         #        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
-        W_fc1 = weight_variable([BATCH_INNER_SIZE_MNIST, NET_SIZE])
+        W_fc1 = weight_variable([3936, NET_SIZE])
         b_fc1 = bias_variable([NET_SIZE])
         tf.summary.histogram("weights", W_fc1)
         #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
-        h_fc1 = tf.nn.relu(tf.matmul(x, W_fc1) + b_fc1)
+        h_fc1 = tf.nn.relu(tf.matmul(input_tenor_conved, W_fc1) + b_fc1)
     
-    with tf.variable_scope('FC_2'):
-        # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
-        # image is down to 8x8x64 feature maps -- maps this to 1024 features.
-        #        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
-        W_fc2 = weight_variable([NET_SIZE, NET_SIZE])
-        b_fc2 = bias_variable([NET_SIZE])
-        tf.summary.histogram("weights", W_fc2)
-        #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
-        h_fc2 = tf.nn.relu(tf.matmul(h_fc1, W_fc2) + b_fc2)
-    
+#    with tf.variable_scope('FC_2'):
+#        # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
+#        # image is down to 8x8x64 feature maps -- maps this to 1024 features.
+#        #        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
+#        W_fc2 = weight_variable([NET_SIZE, NET_SIZE])
+#        b_fc2 = bias_variable([NET_SIZE])
+#        tf.summary.histogram("weights", W_fc2)
+#        #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
+#        h_fc2 = tf.nn.relu(tf.matmul(h_fc1, W_fc2) + b_fc2)
+
     with tf.variable_scope('FC_3'):
         # Map the 1024 features to 10 classes
         W_fc3 = weight_variable([NET_SIZE, 2])
         b_fc3 = bias_variable([2])
         tf.summary.histogram("weights", W_fc3)
-        y_conv = tf.matmul(h_fc2, W_fc3) + b_fc3
+        y_conv = tf.matmul(h_fc1, W_fc3) + b_fc3
         #        y_conv = tf.reshape(y_conv, [-1, 1])
         #        y_conv = tf.transpose(y_conv, 0)
         return y_conv
@@ -337,8 +387,8 @@ def load_modified_mnist(classes, seed=2):
     # mnist.test._images = pca.transform(mnist.test._images)
 
     #just load it from file because BlueCrystal doesn't have the module
-    mnist.train._images = np.load('{cwd}/PCA_MNIST_train.py'.format(cwd=os.getcwd()))
-    mnist.test._images = np.load('{cwd}/PCA_MNIST_test.py'.format(cwd=os.getcwd()))
+#    mnist.train._images = np.load('{cwd}/PCA_MNIST_train.py'.format(cwd=os.getcwd()))
+#    mnist.test._images = np.load('{cwd}/PCA_MNIST_test.py'.format(cwd=os.getcwd()))
 
     # Hack it to work! Forces MNIST to only use selected classes
     mnist.train._images, mnist.train._labels = filter_data(mnist.train._images, mnist.train._labels, classes, seed=seed)
