@@ -11,8 +11,8 @@ from tensorflow.examples.tutorials.mnist import input_data
 import numpy as np
 from scipy import ndimage
 
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
+#from sklearn.preprocessing import StandardScaler
+#from sklearn.decomposition import PCA
 
 BATCH_SIZE = 128
 BATCH_VAL = 4096
@@ -37,13 +37,13 @@ tf.app.flags.DEFINE_integer('save_model', 1000,
                             'Number of steps between model saves (default: %(default)d)')
 
 # Optimisation hyperparameters
-tf.app.flags.DEFINE_float('learning_rate', 0.001, 'Learning rate (default: %(default)d)')
+tf.app.flags.DEFINE_float('learning_rate', 0.0005, 'Learning rate (default: %(default)d)')
 tf.app.flags.DEFINE_integer('num_classes', 10, 'Number of classes (default: %(default)d)')
 tf.app.flags.DEFINE_string('log_dir', '{cwd}/logs/'.format(cwd=os.getcwd()),
                            'Directory where to write event logs and checkpoint. (default: %(default)s)')
 
 run_log_dir = os.path.join(FLAGS.log_dir,
-                           'mnist_14_april_robust_exp_bs_{bs}_lr_{lr}_ns_{ns}'.format(bs=BATCH_SIZE,
+                           'mnist_16_april_long_4_hidden_exp_bs_{bs}_lr_{lr}_ns_{ns}'.format(bs=BATCH_SIZE,
                                                         lr=FLAGS.learning_rate, ns=NET_SIZE))
 
 def get_gaussian_mixture_batch():
@@ -124,14 +124,14 @@ def get_batch_of_batchs(mnist, classes):
             d = shape_batch(b, l)
 	    d = shuffle_inner_batch(d)
             data.append(d)
-            label = [0]*BATCH_INNER
+            label = [0, 1]
             labels.append(label)
         else:
             #linear batch
 #            b1, l1 = get_gaussian_mixture_batch()
             b1 = []
             l2 = []
-            label = []
+            label = [1, 0]
             #95%
             if(random.randint(0, 19) > 0):
                 #same as original with one malicious item
@@ -152,16 +152,16 @@ def get_batch_of_batchs(mnist, classes):
                     # l1[pos_of_mal] = new_label
                     if q in positions:
                         l2.append(new_label)
-                        label.append(1)
+                  #      label.append(1)
                     else:
                         l2.append(original_label)
-                        label.append(0)
+                 #       label.append(0)
                     
             elif(random.randint(0, 1) == 1):
                 #same images all random labels
                 b1, l1 = mnist.train.next_batch(BATCH_INNER)
                 l2 = gen_rand_labels(classes)
-                label = [1]*BATCH_INNER
+                #label = [1]*BATCH_INNER
             #2.5%
             else:
                 #2.5%
@@ -171,7 +171,7 @@ def get_batch_of_batchs(mnist, classes):
                     item = np.array([random.random() for i in range(INNER_SIZE)])
                     b1.append(item)
                 b1 = np.array(b1)
-                label = [1]*BATCH_INNER
+                #label = [1]*BATCH_INNER
 #            b2, l2 = get_linear_mal_batch()
                 l2 = gen_rand_labels(classes)
             d = shape_batch(b1, l2)
@@ -194,7 +194,7 @@ def get_batch_of_batchs_validation(mnist, classes):
             d = shape_batch(b, l)
 	    d = shuffle_inner_batch(d)
             data.append(d)
-            label = [0]*BATCH_INNER
+            label = [0, 1]
             labels.append(label)
 
         else:
@@ -202,7 +202,7 @@ def get_batch_of_batchs_validation(mnist, classes):
 #            b1, l1 = get_gaussian_mixture_batch()
             b1 = []
             l2 = []
-            label = []
+            label = [1, 0]
             #95%
             if(random.randint(0, 19) > 0):
                 #same as original with one malicious item
@@ -220,17 +220,17 @@ def get_batch_of_batchs_validation(mnist, classes):
                     # l1[pos_of_mal] = new_label
                     if q in positions:
                         l2.append(new_label)
-                        label.append(1)
+                        #label.append(1)
                     else:
                         l2.append(original_label)
-                        label.append(0)
+                        #label.append(0)
                 # l2 = l1
             elif(random.randint(0, 1) == 1):
                 #2.5%
                 #same images all random labels
                 b1, l1 = mnist.test.next_batch(BATCH_INNER)
                 l2 = gen_rand_labels(classes)
-                label = [1]*BATCH_INNER
+                #label = [1]*BATCH_INNER
             else:
                 #2.5%
                 #Random images, random labels
@@ -241,7 +241,7 @@ def get_batch_of_batchs_validation(mnist, classes):
                 b1 = np.array(b1)
                     #            b2, l2 = get_linear_mal_batch()
                 l2 = gen_rand_labels(classes)
-                label = [1]*BATCH_INNER
+                #label = [1]*BATCH_INNER
             d = shape_batch(b1, l2)
             d = shuffle_inner_batch(d)
             data.append(d)
@@ -287,13 +287,32 @@ def deepnn(x):
         tf.summary.histogram("weights", W_fc2)
         #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
         h_fc2 = tf.nn.relu(tf.matmul(h_fc1, W_fc2) + b_fc2)
+    with tf.variable_scope('FC_4'):
+        # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
+        # image is down to 8x8x64 feature maps -- maps this to 1024 features.
+        #        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
+        W_fc4 = weight_variable([NET_SIZE, NET_SIZE])
+        b_fc4 = bias_variable([NET_SIZE])
+        tf.summary.histogram("weights", W_fc4)
+        #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
+        h_fc4 = tf.nn.relu(tf.matmul(h_fc2, W_fc4) + b_fc4)
+
+    with tf.variable_scope('FC_5'):
+        # Fully connected layer 1 -- after 2 round of downsampling, our 32x32
+        # image is down to 8x8x64 feature maps -- maps this to 1024 features.
+        #        W_fc1 = weight_variable([2 * BATCH_INNER, 1024])
+        W_fc5 = weight_variable([NET_SIZE, NET_SIZE])
+        b_fc5 = bias_variable([NET_SIZE])
+        tf.summary.histogram("weights", W_fc4)
+        #        h_pool2_flat = tf.reshape(h_pool2, [-1, 8*8*64])
+        h_fc5 = tf.nn.relu(tf.matmul(h_fc4, W_fc5) + b_fc5)
 
     with tf.variable_scope('FC_3'):
         # Map the 1024 features to 10 classes
-        W_fc3 = weight_variable([NET_SIZE, BATCH_INNER])
-        b_fc3 = bias_variable([BATCH_INNER])
+        W_fc3 = weight_variable([NET_SIZE, 2])
+        b_fc3 = bias_variable([2])
         tf.summary.histogram("weights", W_fc3)
-        y_conv = tf.matmul(h_fc2, W_fc3) + b_fc3
+        y_conv = tf.matmul(h_fc5, W_fc3) + b_fc3
         #        y_conv = tf.reshape(y_conv, [-1, 1])
         #        y_conv = tf.transpose(y_conv, 0)
         return y_conv
@@ -502,7 +521,7 @@ def get_aug_batch_from_single(single):
 def main(_):
     tf.reset_default_graph()
     
-    TRAIN_DISTRIBUTION_CLASSIFIER = True
+    TRAIN_DISTRIBUTION_CLASSIFIER = False
     TRAIN_MNIST_CLASSIFIER = True
     
     classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -513,7 +532,7 @@ def main(_):
         # Create the model
         x = tf.placeholder(tf.float32, [None, BATCH_INNER_SIZE_MNIST])
         # Define loss and optimizer
-        y_ = tf.placeholder(tf.float32, [None, BATCH_INNER])
+        y_ = tf.placeholder(tf.float32, [None, 2])
     
     # Build the graph for the deep net
     y_conv_distribution_classifier = deepnn(x)
@@ -587,38 +606,46 @@ def main(_):
         total_real_running = 0
         total_mal_running = 0
 
-        num_poisoned = 1
+        #num_poisoned = 1
 
         legit_batch = []
         legit_found = False
-        steps_needed = 10
-        print(steps_needed)
-        for i in range(steps_needed):
-            if(i % 1 == 0):
-                print(i)
+        #steps_needed = 10
+        #print(steps_needed)
+	for num_poisoned in range(0,16):
+	    print(num_poisoned)
+	    total_real = 0
+            total_mal = 0
+            total_real_running = 0
+            total_mal_running = 0
+	    real_items_added = 0
+            mal_items_added = 0
+            for i in range(steps_needed):
+                if(i % 1000 == 0):
+                    print(i)
             # Classify it!
-#            real_data, real_labels = mnist_real_world_data.train.next_batch(BATCH_INNER)
-            real_data, real_labels = mnist_real_world_data.train.next_batch(1)
+                real_data, real_labels = mnist_real_world_data.train.next_batch(BATCH_INNER)
+#            real_data, real_labels = mnist_real_world_data.train.next_batch(1)
 #            print(real_data)
 #            print(real_data[0])
 #            print(real_labels[0])
 #            return
-            aug_batch = get_aug_batch_from_single(real_data[0])
+            #aug_batch = get_aug_batch_from_single(real_data[0])
 #            print("ok")
-            labels = []
-            for i in range(BATCH_INNER):
-                labels.append(real_labels[0])
+          #  labels = []
+          #  for i in range(BATCH_INNER):
+          #      labels.append(real_labels[0])
 #            print(len(real_data))
 #            print(labels)
-            data_real = [shape_batch(aug_batch, labels)]
+                data_real = [shape_batch(real_data, real_labels)]
             
-            new_label = random.randint(0, 9)
-            while(new_label == real_labels[0]):
-                new_label = random.randint(0, 9)
-            labels_mal = []
-            for i in range(BATCH_INNER):
-                labels_mal.append(new_label)
-            data_mal = [shape_batch(aug_batch, labels_mal)]
+           # new_label = random.randint(0, 9)
+           # while(new_label == real_labels[0]):
+           #     new_label = random.randint(0, 9)
+           # labels_mal = []
+           # for i in range(BATCH_INNER):
+           #     labels_mal.append(new_label)
+                data_mal = [shape_batch(real_data, real_labels)]
 #            show_images(data_real)
 #            return
 
@@ -651,26 +678,26 @@ def main(_):
 
             ## mal data now only has a single bad element
 #            data_mal = [shape_batch(real_data, real_labels)]
-#            data_mal[0] = poison_items(data_mal[0], num_poisoned)
-            total_real = 0
-            for j in range(num_permutations):
-                add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_real, y_: label_legitimate})
-                data_real[0] = shuffle_inner_batch(data_real[0])
-                if(add_real):
-                    total_real += 1
-            total_real_running += total_real
-            total_mal = 0
-            for j in range(num_permutations):
-                add_mal = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_mal, y_: label_legitimate})
-                data_mal[0] = shuffle_inner_batch(data_mal[0])
-                if(add_mal):
-                    total_mal += 1
-            total_mal_running += total_mal
+                data_mal[0] = poison_items(data_mal[0], num_poisoned)
+                total_real = 0
+                for j in range(num_permutations):
+                    add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_real, y_: label_legitimate})
+                    data_real[0] = shuffle_inner_batch(data_real[0])
+                    if(add_real):
+                        total_real += 1
+                total_real_running += total_real
+                total_mal = 0
+                for j in range(num_permutations):
+                    add_mal = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_mal, y_: label_legitimate})
+                    data_mal[0] = shuffle_inner_batch(data_mal[0])
+                    if(add_mal):
+                        total_mal += 1
+                total_mal_running += total_mal
 #            print(total_real)
 #            print(total_mal)
 #                return
-            if(total_real >= num_permutations*acc_threshold):
-                real_items_added += 1
+                if(total_real >= num_permutations*acc_threshold):
+                    real_items_added += 1
 #                if(legit_found):
 #                    # wait until at least one legit batch that has been identified as legit has come up!
 #                    found_at = []
@@ -689,19 +716,19 @@ def main(_):
 #                legit_found = True
 #                legit_batch = data_real[0]
 
-            if(total_mal >= num_permutations*acc_threshold):
-                mal_items_added += 1
+                if(total_mal >= num_permutations*acc_threshold):
+                    mal_items_added += 1
 #            if(add_real):
 #                real_items_added += 1
 #            if(add_mal):
 #                mal_items_added += 1
-        print(steps_needed)
-        print(float(total_real_running)/(float(steps_needed) * float(num_permutations)))
-        print(float(total_mal_running)/(float(steps_needed) * float(num_permutations)))
-        print('Percent real added to classifier %0.3f' % (float(real_items_added)/float(steps_needed)))
-        print('Percent mal added to classifier %0.3f' % (float(mal_items_added)/float(steps_needed)))
-        print('Actual real added to classifier %d' % real_items_added)
-        print('Actual mal added to classifier %d' % mal_items_added)
+            print(steps_needed)
+            print(float(total_real_running)/(float(steps_needed) * float(num_permutations)))
+            print(float(total_mal_running)/(float(steps_needed) * float(num_permutations)))
+            print('Percent real added to classifier %0.3f' % (float(real_items_added)/float(steps_needed)))
+            print('Percent mal added to classifier %0.3f' % (float(mal_items_added)/float(steps_needed)))
+            print('Actual real added to classifier %d' % real_items_added)
+            print('Actual mal added to classifier %d' % mal_items_added)
 
 #        if(TRAIN_MNIST_CLASSIFIER):
             #Train for MNIST on seed+new data to see improvement
