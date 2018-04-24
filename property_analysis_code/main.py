@@ -451,6 +451,7 @@ def poison_items(batch, no_items):
 def show_images(in_batch):
     # This function prints to screen the inner batch in_batch with the labels for the images
     d_r = np.array(in_batch)
+    BATCH_INNER = 16
     d_r = np.reshape(d_r, [BATCH_INNER, (INNER_SIZE+1)])
     d_r = d_r.tolist()
     fig=plt.figure(figsize=(4, 4))
@@ -652,6 +653,8 @@ def main(_):
 
         steps_needed = mal_positve_size
 #        for i in range(fals)
+        false_positve_batch_example = []
+        added_to = 0
 
         for i in range(steps_needed):
             if(i % 1000 == 0):
@@ -738,14 +741,28 @@ def main(_):
                 else:
                     #we added a mal item
                     mal_items_added += 1
+                    for data_item in data_real[0]:
+                        false_positve_batch_example.append(data_item)
+                    added_to += 1
+                    if(added_to == 16):
+                        show_images(false_positve_batch_example)
+                        return
 #                    show_single_pair(data_real[0])
 #                    return
             else:
                 if(was_mal_at_pos[i] == 0):
-                    #correctly added legit item
+                    #incorrectly not added legit item
                     real_items_not_added += 1
+#                    for data_item in data_real[0]:
+#                        false_positve_batch_example.append(data_item)
+#                    added_to += 1
+#                    if(added_to == 16):
+#                        show_images(false_positve_batch_example)
+#                        return
+#                    show_single_pair(data_real[0])
+#                    return
                 else:
-                    #we added a mal item
+                    #correctly not added a mal item
                     mal_items_not_added += 1
 #                    show_single_pair(data_real[0])
 #                    return
