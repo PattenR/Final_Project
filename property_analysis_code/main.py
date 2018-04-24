@@ -355,7 +355,8 @@ def load_modified_mnist(classes, seed=2):
     # mnist.test._images = pca.transform(mnist.test._images)
 
     #just load it from file because BlueCrystal doesn't have the module
-#    mnist.train._images = np.load('{cwd}/PCA_MNIST_train.py'.format(cwd=os.getcwd()))
+#    mnist.train._images = np.load('{cwd}/mal_items_added_images'.format(cwd=os.getcwd()))
+
 #    mnist.test._images = np.load('{cwd}/PCA_MNIST_test.py'.format(cwd=os.getcwd()))
 
     # Hack it to work! Forces MNIST to only use selected classes
@@ -431,7 +432,7 @@ def poison_items(batch, no_items):
     d_r = d_r.tolist()
 #    random.shuffle(d_r)
     classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    positions = np.random.choice(16, no_items, replace=False)
+    positions = np.random.choice(1, no_items, replace=False)
     for pos in positions:
         # x = random.randint(0, 15)
         x = pos
@@ -468,6 +469,15 @@ def show_images(in_batch):
     print(labels)
     plt.show()
 
+def show_single_pair(input):
+    # This function prints to screen the inner batch in_batch with the labels for the images
+    image = input[:INNER_SIZE]
+    label = input[INNER_SIZE]
+    image = np.reshape(image, [14, 14])
+    plt.imshow(image, cmap='Greys',interpolation='nearest')
+    print(label)
+    plt.show()
+
 def replace_at_index(batch_1, batch_2, index):
     # Take batch_1 and put the image label pair at index index from batch_2
     d_r1 = np.array(batch_1)
@@ -499,15 +509,59 @@ def get_aug_batch_from_single(single):
 
     return items
 
+def flatten_images(input):
+    x, y ,_ = input.shape
+    flat_images = []
+    for i in range(x):
+        for j in range(y):
+            flat_images.append(input[i][j])
+    return np.array(flat_images)
+def flatten_labels(input):
+    x, y = input.shape
+    flat_images = []
+    for i in range(x):
+        for j in range(y):
+            flat_images.append(input[i][j])
+    return np.array(flat_images)
+
+def expand_was_at(input):
+    # translate array of positions per batch into binary array for whole set, telling us whether or not a particular item was poisioned or now
+    res = []
+    for pos in input:
+        next = [0]*16
+        next[pos] = 1
+        for n in next:
+            res.append(n)
+    return res
+
 def main(_):
     tf.reset_default_graph()
     
-    TRAIN_DISTRIBUTION_CLASSIFIER = True
+    TRAIN_DISTRIBUTION_CLASSIFIER = False
     TRAIN_MNIST_CLASSIFIER = True
     
     classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    mnist_seed = load_modified_mnist(classes, seed=0)
+#    mnist_seed = load_modified_mnist(classes, seed=0)
     mnist_real_world_data = load_modified_mnist(classes, seed=1)
+    
+    #for testing the batches from the 16 input classifier
+#    x = np.load('{cwd}/false_positives_images'.format(cwd=os.getcwd()))
+    mnist_real_world_data.train._images = flatten_images(np.load('{cwd}/false_positives_images.npy'.format(cwd=os.getcwd())))
+    mnist_real_world_data.train._labels = flatten_labels(np.load('{cwd}/false_positives_labels.npy'.format(cwd=os.getcwd())))
+    mnist_real_world_data.train._num_examples = mnist_real_world_data.train._images.shape[0]
+    print(mnist_real_world_data.train._labels.shape[0])
+    false_positve_size = mnist_real_world_data.train._images.shape[0]
+    
+    mnist_mal_data = load_modified_mnist(classes, seed=1)
+    
+    #for testing the batches from the 16 input classifier
+    mnist_mal_data.train._images = flatten_images(np.load('{cwd}/mal_items_added_images.npy'.format(cwd=os.getcwd())))
+    mnist_mal_data.train._labels = flatten_labels(np.load('{cwd}/mal_items_added_labels.npy'.format(cwd=os.getcwd())))
+    mnist_mal_data.train._num_examples = mnist_mal_data.train.images.shape[0]
+    mal_positve_size = len(mnist_mal_data.train.images)
+    
+    was_mal_at_pos = np.load('{cwd}/was_mal_at_pos.npy'.format(cwd=os.getcwd()))
+    was_mal_at_pos = expand_was_at(was_mal_at_pos)
 
     with tf.variable_scope('inputs'):
         # Create the model
@@ -557,7 +611,7 @@ def main(_):
             train_DC_classifier(sess, mnist_seed, classes, summary_writer, summary_writer_validation, saver, train_step_distribution_classifier, loss_summary_distribution_classifier, accuracy_distribution_classifier, validation_summary_distribution_classifier, x, y_)
         else:
             #load from memory
-            load_path = os.path.join(run_log_dir + '_train_DC', 'model.ckpt-449999')
+            load_path = os.path.join(run_log_dir + '_train_DC', 'model.ckpt-49999')
             saver.restore(sess, load_path)
 
         # We now have our distribution classifier, we use this to decide if new data should be accepted
@@ -571,6 +625,8 @@ def main(_):
         steps_needed = data_size/(BATCH_INNER)
         real_items_added = 0
         mal_items_added = 0
+        real_items_not_added = 0
+        mal_items_not_added = 0
         random.seed(0)
         label_legitimate = [[0, 1]] # [1, 0] is rejection class
         # get avg MNIST test activation
@@ -591,34 +647,40 @@ def main(_):
 
         legit_batch = []
         legit_found = False
-        steps_needed = 10
-        print(steps_needed)
+#        steps_needed = 10
+#        print(steps_needed)
+
+        steps_needed = mal_positve_size
+#        for i in range(fals)
+
         for i in range(steps_needed):
-            if(i % 1 == 0):
+            if(i % 1000 == 0):
                 print(i)
             # Classify it!
 #            real_data, real_labels = mnist_real_world_data.train.next_batch(BATCH_INNER)
-            real_data, real_labels = mnist_real_world_data.train.next_batch(1)
+#            real_data, real_labels = mnist_mal_data.train.next_batch(1)
+            real_data = [mnist_mal_data.train._images[i]]
+            real_labels = [mnist_mal_data.train._labels[i]]
 #            print(real_data)
 #            print(real_data[0])
 #            print(real_labels[0])
 #            return
-            aug_batch = get_aug_batch_from_single(real_data[0])
+#            aug_batch = get_aug_batch_from_single(real_data[0])
 #            print("ok")
-            labels = []
-            for i in range(BATCH_INNER):
-                labels.append(real_labels[0])
+#            labels = []
+#            for i in range(BATCH_INNER):
+#                labels.append(real_labels[0])
 #            print(len(real_data))
 #            print(labels)
-            data_real = [shape_batch(aug_batch, labels)]
-            
-            new_label = random.randint(0, 9)
-            while(new_label == real_labels[0]):
-                new_label = random.randint(0, 9)
-            labels_mal = []
-            for i in range(BATCH_INNER):
-                labels_mal.append(new_label)
-            data_mal = [shape_batch(aug_batch, labels_mal)]
+#            data_real = [shape_batch(aug_batch, labels)]
+
+#            new_label = random.randint(0, 9)
+#            while(new_label == real_labels[0]):
+#                new_label = random.randint(0, 9)
+#            labels_mal = []
+#            for i in range(BATCH_INNER):
+#                labels_mal.append(new_label)
+#            data_mal = [shape_batch(aug_batch, labels_mal)]
 #            show_images(data_real)
 #            return
 
@@ -648,10 +710,10 @@ def main(_):
 #            print(mal_data.shape)
 #            mal_labels = gen_rand_labels(classes) # same data with mixed labels!
 #            data_mal = [shape_batch(mal_data, mal_labels)]
-
+            data_real = [shape_batch(real_data, real_labels)]
             ## mal data now only has a single bad element
-#            data_mal = [shape_batch(real_data, real_labels)]
-#            data_mal[0] = poison_items(data_mal[0], num_poisoned)
+            data_mal = [shape_batch(real_data, real_labels)]
+            data_mal[0] = poison_items(data_mal[0], num_poisoned)
             total_real = 0
             for j in range(num_permutations):
                 add_real = sess.run(correct_prediction_distribution_classifier, feed_dict={x: data_real, y_: label_legitimate})
@@ -670,7 +732,28 @@ def main(_):
 #            print(total_mal)
 #                return
             if(total_real >= num_permutations*acc_threshold):
-                real_items_added += 1
+                if(was_mal_at_pos[i] == 0):
+                    #correctly added legit item
+                    real_items_added += 1
+                else:
+                    #we added a mal item
+                    mal_items_added += 1
+#                    show_single_pair(data_real[0])
+#                    return
+            else:
+                if(was_mal_at_pos[i] == 0):
+                    #correctly added legit item
+                    real_items_not_added += 1
+                else:
+                    #we added a mal item
+                    mal_items_not_added += 1
+#                    show_single_pair(data_real[0])
+#                    return
+#            else:
+#                if(was_mal_at_pos[i] == 0):
+##                    print(data_real)
+#                    show_single_pair(data_real[0])
+#                    return
 #                if(legit_found):
 #                    # wait until at least one legit batch that has been identified as legit has come up!
 #                    found_at = []
@@ -689,8 +772,8 @@ def main(_):
 #                legit_found = True
 #                legit_batch = data_real[0]
 
-            if(total_mal >= num_permutations*acc_threshold):
-                mal_items_added += 1
+#            if(total_mal >= num_permutations*acc_threshold):
+#                mal_items_added += 1
 #            if(add_real):
 #                real_items_added += 1
 #            if(add_mal):
@@ -698,8 +781,8 @@ def main(_):
         print(steps_needed)
         print(float(total_real_running)/(float(steps_needed) * float(num_permutations)))
         print(float(total_mal_running)/(float(steps_needed) * float(num_permutations)))
-        print('Percent real added to classifier %0.3f' % (float(real_items_added)/float(steps_needed)))
-        print('Percent mal added to classifier %0.3f' % (float(mal_items_added)/float(steps_needed)))
+        print('Percent real added to classifier %0.3f' % (float(real_items_added)/float(real_items_added+real_items_not_added)))
+        print('Percent mal added to classifier %0.3f' % (float(mal_items_added)/float(mal_items_added+mal_items_not_added)))
         print('Actual real added to classifier %d' % real_items_added)
         print('Actual mal added to classifier %d' % mal_items_added)
 
